@@ -1,6 +1,34 @@
 {
-  "updatedAt": "2026-09-15T09:36:02.136105+00:00",
+  "updatedAt": "2026-09-15T10:30:53.515849+00:00",
   "items": [
+    {
+      "id": "839698d43c1d2578",
+      "title": "Carf mantém maior parte de cobrança bilionária de IRPJ/CSLL contra Marfrig",
+      "url": "https://www.jota.info/tributos/carf-mantem-maior-parte-de-cobranca-bilionaria-de-irpj-csll-contra-marfrig",
+      "source": "JOTA",
+      "category": "carf",
+      "summary": "Caso envolve arbitramento de lucro de controlada localizada em paraíso fiscal após supostas irregularidades",
+      "publishedAt": "2026-09-15T09:50:47+00:00",
+      "score": 45,
+      "impactTags": [
+        "risco",
+        "oportunidade"
+      ],
+      "impactLabels": [
+        "Risco fiscal",
+        "Oportunidade consultiva"
+      ],
+      "priority": "alta",
+      "opportunityScore": 65,
+      "whoAffected": "Empresas e contabilidades que acompanham rotina fiscal.",
+      "recommendedAction": "Revisar exposição fiscal, documentação de suporte e oportunidade de tese/regularização.",
+      "whyItMatters": "reduz exposição fiscal e contencioso",
+      "contentAngles": {
+        "linkedin": "Explique o impacto de 'Carf mantém maior parte de cobrança bilionária de IRPJ/CSLL contra Marfrig' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'Carf mantém maior parte de cobrança bilionária de IRPJ/CSLL contra Marfrig' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Carf mantém maior parte de cobrança bilionária de IRPJ/CSLL contra Marfrig'."
+      }
+    },
     {
       "id": "f619a4925a594ac4",
       "title": "Reforma Tributária e CSC: Impactos em Centros Compartilhados",
@@ -927,7 +955,7 @@
       "source": "JOTA",
       "url": "https://www.jota.info/feed",
       "ok": true,
-      "items": 1
+      "items": 2
     },
     {
       "source": "IBPT",
