@@ -15,9 +15,10 @@ import unicodedata
 from datetime import datetime, timezone
 from email.utils import parsedate_to_datetime
 from pathlib import Path
-from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
+from urllib.parse import parse_qsl, urlencode, urljoin, urlsplit, urlunsplit
 from urllib.request import Request, urlopen
 import xml.etree.ElementTree as ET
+import ssl
 
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ROOT / "collector" / "sources.json"
@@ -77,7 +78,20 @@ RELEVANCE_TERMS = {
     "arrecadacao": 4,
     "sonegacao": 4,
     "malha fina": 4,
+    "diario oficial": 5,
+    "dou": 5,
+    "convenio icms": 6,
+    "ajuste sinief": 6,
+    "protocolo icms": 5,
+    "itcd": 4,
+    "ipva": 3,
+    "taxa": 3,
+    "municipios": 3,
+    "minas gerais": 3,
+    "regularize": 4,
 }
+
+SSL_CONTEXT = ssl._create_unverified_context()
 
 GLOBAL_EXCLUDE_TERMS = {
     "eleicao",
@@ -97,6 +111,9 @@ GLOBAL_EXCLUDE_TERMS = {
     "carreira",
     "gestao de pessoas",
     "contabilidade e ia",
+    "futebol",
+    "loteria",
+    "celebridade",
 }
 
 CATEGORY_TERMS = [
@@ -356,6 +373,55 @@ def parse_feed(raw: bytes, source: dict) -> list[dict]:
     return result
 
 
+
+def parse_html_links(raw: bytes, source: dict) -> list[dict]:
+    """Extrai links de páginas HTML sem depender de BeautifulSoup.
+
+    Serve para fontes oficiais sem RSS público (CONFAZ, PGFN, páginas de legislação),
+    mantendo o mesmo filtro fiscal/tributário. Não substitui raspadores dedicados para
+    portais protegidos (ex.: DOU/Diários com bloqueio), mas permite monitorar listagens
+    públicas e registrar falhas quando houver bloqueio.
+    """
+    page_url = source["url"]
+    html_text = raw.decode(source.get("encoding", "utf-8"), "replace")
+    html_text = re.sub(r"<script[\s\S]*?</script>|<style[\s\S]*?</style>", " ", html_text, flags=re.I)
+    links = re.findall(r"<a\b([^>]*?)href=[\"']([^\"']+)[\"']([^>]*)>([\s\S]*?)</a>", html_text, flags=re.I)
+    result = []
+    seen = set()
+    allow = source.get("urlAllowRegex")
+    deny = source.get("urlDenyRegex")
+    for before, href, after, inner in links[: int(source.get("scanLimit", 450))]:
+        title = clean(inner)
+        if not title or len(title) < int(source.get("minTitleLength", 8)):
+            continue
+        if title.lower() in {"brasil", "serviços", "legislação", "notícias", "rss", "voltar", "próxima", "anterior"}:
+            continue
+        url = canonical_url(urljoin(page_url, href))
+        if url in seen or url == canonical_url(page_url):
+            continue
+        if allow and not re.search(allow, url, flags=re.I):
+            continue
+        if deny and re.search(deny, url, flags=re.I):
+            continue
+        summary = clean(f"Publicação monitorada em {source['name']}: {title}")
+        score = relevance_score(title, summary, source)
+        if score < int(source.get("minScore", 5)):
+            continue
+        seen.add(url)
+        result.append({
+            "id": hashlib.sha256(url.encode()).hexdigest()[:16],
+            "title": title[:220],
+            "url": url,
+            "source": source["name"],
+            "category": classify(title, summary, source),
+            "summary": summary[:360],
+            "publishedAt": datetime.now(timezone.utc).isoformat(),
+            "score": score,
+        })
+        if len(result) >= int(source.get("htmlLimit", PER_SOURCE_LIMIT)):
+            break
+    return result
+
 def load_old() -> dict:
     if not OUTPUT.exists():
         return {"items": []}
@@ -401,9 +467,12 @@ def main():
                     "Accept": "application/rss+xml, application/atom+xml, application/xml, text/xml;q=0.9, */*;q=0.8",
                 },
             )
-            with urlopen(req, timeout=int(source.get("timeout", TIMEOUT))) as response:
+            with urlopen(req, timeout=int(source.get("timeout", TIMEOUT)), context=SSL_CONTEXT) as response:
                 raw = response.read()
-            found = parse_feed(raw, source)
+            if source.get("type") == "html":
+                found = parse_html_links(raw, source)
+            else:
+                found = parse_feed(raw, source)
             for item in found:
                 by_id[item["id"]] = item
             ok += 1
@@ -426,7 +495,7 @@ def main():
         "sources": statuses,
         "meta": {
             "collector": "collector/collect.py",
-            "policy": "RSS/Atom com filtro fiscal/tributário, deduplicação por URL canônica e fallback do histórico local.",
+            "policy": "RSS/Atom e páginas HTML públicas com filtro fiscal/tributário, deduplicação por URL canônica e fallback do histórico local.",
             "maxItems": MAX_ITEMS,
         },
     }

@@ -5,8 +5,53 @@
     "category": "receita",
     "baseScore": 2,
     "minScore": 4,
-    "includeKeywords": ["tribut", "fiscal", "imposto", "receita federal", "simples nacional", "mei", "irpf", "malha fina", "arrecadação", "aduaneir", "nota fiscal", "sped", "reforma tributária", "ibs", "cbs", "carf", "pgfn"],
-    "excludeKeywords": ["medicamento", "aeroporto", "doação", "campanha institucional"]
+    "includeKeywords": [
+      "tribut",
+      "fiscal",
+      "imposto",
+      "receita federal",
+      "simples nacional",
+      "mei",
+      "irpf",
+      "malha fina",
+      "arrecadação",
+      "aduaneir",
+      "nota fiscal",
+      "sped",
+      "reforma tributária",
+      "ibs",
+      "cbs",
+      "carf",
+      "pgfn"
+    ],
+    "excludeKeywords": [
+      "medicamento",
+      "aeroporto",
+      "doação",
+      "campanha institucional"
+    ]
+  },
+  {
+    "name": "Portal Reforma Tributária",
+    "url": "https://reformatributaria.com/feed/",
+    "category": "reforma",
+    "baseScore": 4,
+    "minScore": 5,
+    "includeKeywords": [
+      "reforma tributária",
+      "ibs",
+      "cbs",
+      "imposto seletivo",
+      "split payment",
+      "comitê gestor",
+      "contribuinte",
+      "tribut"
+    ],
+    "excludeKeywords": [
+      "curso",
+      "webinar",
+      "evento"
+    ]
   },
   {
     "name": "Agência Senado",
@@ -14,8 +59,35 @@
     "category": "legislacao",
     "baseScore": 0,
     "minScore": 6,
-    "includeKeywords": ["reforma tributária", "tribut", "imposto", "ICMS", "ISS", "CBS", "IBS", "Simples Nacional", "contribuinte", "fiscal", "contábil"],
-    "excludeKeywords": ["eleição", "votar", "urna", "vídeo", "áudio", "homenagem", "sessão especial", "política partidária", "segurança pública", "saúde", "educação", "plataformas digitais", "festival", "administrador"]
+    "includeKeywords": [
+      "reforma tributária",
+      "tribut",
+      "imposto",
+      "ICMS",
+      "ISS",
+      "CBS",
+      "IBS",
+      "Simples Nacional",
+      "contribuinte",
+      "fiscal",
+      "contábil"
+    ],
+    "excludeKeywords": [
+      "eleição",
+      "votar",
+      "urna",
+      "vídeo",
+      "áudio",
+      "homenagem",
+      "sessão especial",
+      "política partidária",
+      "segurança pública",
+      "saúde",
+      "educação",
+      "plataformas digitais",
+      "festival",
+      "administrador"
+    ]
   },
   {
     "name": "JOTA",
@@ -23,8 +95,32 @@
     "category": "reforma",
     "baseScore": 0,
     "minScore": 7,
-    "includeKeywords": ["tribut", "reforma tributária", "CARF", "STF", "STJ", "ICMS", "ISS", "PIS", "Cofins", "IRPJ", "CSLL", "IBS", "CBS", "imposto seletivo", "fiscal"],
-    "excludeKeywords": ["eleição", "partido", "Lula", "Bolsonaro", "Congresso em Foco", "polícia", "internacional"]
+    "includeKeywords": [
+      "tribut",
+      "reforma tributária",
+      "CARF",
+      "STF",
+      "STJ",
+      "ICMS",
+      "ISS",
+      "PIS",
+      "Cofins",
+      "IRPJ",
+      "CSLL",
+      "IBS",
+      "CBS",
+      "imposto seletivo",
+      "fiscal"
+    ],
+    "excludeKeywords": [
+      "eleição",
+      "partido",
+      "Lula",
+      "Bolsonaro",
+      "Congresso em Foco",
+      "polícia",
+      "internacional"
+    ]
   },
   {
     "name": "IBPT",
@@ -32,8 +128,24 @@
     "category": "receita",
     "baseScore": 3,
     "minScore": 4,
-    "includeKeywords": ["tribut", "imposto", "fiscal", "contribuinte", "reforma tributária", "empres", "arrecadação"],
-    "excludeKeywords": ["curso", "evento", "webinar", "palestra", "congresso", "CONBCON", "consignado"]
+    "includeKeywords": [
+      "tribut",
+      "imposto",
+      "fiscal",
+      "contribuinte",
+      "reforma tributária",
+      "empres",
+      "arrecadação"
+    ],
+    "excludeKeywords": [
+      "curso",
+      "evento",
+      "webinar",
+      "palestra",
+      "congresso",
+      "CONBCON",
+      "consignado"
+    ]
   },
   {
     "name": "Portal Contábeis",
@@ -41,7 +153,309 @@
     "category": "receita",
     "baseScore": 0,
     "minScore": 6,
-    "includeKeywords": ["tribut", "fiscal", "contábil", "contabilidade", "imposto", "IRPF", "Simples Nacional", "MEI", "eSocial", "FGTS", "INSS", "nota fiscal", "reforma tributária", "ICMS", "ISS", "PIS", "Cofins"],
-    "excludeKeywords": ["carreira", "comportamento", "tecnologia", "gestão de pessoas", "palestra", "congresso", "CONBCON", "consignado"]
+    "includeKeywords": [
+      "tribut",
+      "fiscal",
+      "contábil",
+      "contabilidade",
+      "imposto",
+      "IRPF",
+      "Simples Nacional",
+      "MEI",
+      "eSocial",
+      "FGTS",
+      "INSS",
+      "nota fiscal",
+      "reforma tributária",
+      "ICMS",
+      "ISS",
+      "PIS",
+      "Cofins"
+    ],
+    "excludeKeywords": [
+      "carreira",
+      "comportamento",
+      "tecnologia",
+      "gestão de pessoas",
+      "palestra",
+      "congresso",
+      "CONBCON",
+      "consignado"
+    ]
+  },
+  {
+    "name": "PGFN Notícias",
+    "type": "html",
+    "url": "https://www.gov.br/pgfn/pt-br/assuntos/noticias",
+    "category": "receita",
+    "baseScore": 3,
+    "minScore": 5,
+    "urlAllowRegex": "gov\\.br/pgfn/pt-br/(assuntos/)?noticias|gov\\.br/pgfn/pt-br/.*(regularize|transacao|divida|tribut)",
+    "includeKeywords": [
+      "PGFN",
+      "dívida ativa",
+      "transação tributária",
+      "regularize",
+      "contribuinte",
+      "fiscal",
+      "tribut"
+    ],
+    "excludeKeywords": [
+      "institucional",
+      "posse",
+      "homenagem"
+    ],
+    "htmlLimit": 15
+  },
+  {
+    "name": "CONFAZ — Convênios ICMS",
+    "type": "html",
+    "url": "https://www.confaz.fazenda.gov.br/legislacao/convenios",
+    "category": "icms",
+    "baseScore": 5,
+    "minScore": 5,
+    "urlAllowRegex": "confaz\\.fazenda\\.gov\\.br/legislacao/convenios",
+    "includeKeywords": [
+      "convênio icms",
+      "ICMS",
+      "CONFAZ",
+      "substituição tributária",
+      "benefício fiscal"
+    ],
+    "excludeKeywords": [],
+    "htmlLimit": 25
+  },
+  {
+    "name": "CONFAZ — Ajustes SINIEF",
+    "type": "html",
+    "url": "https://www.confaz.fazenda.gov.br/legislacao/ajustes",
+    "category": "icms",
+    "baseScore": 5,
+    "minScore": 5,
+    "urlAllowRegex": "confaz\\.fazenda\\.gov\\.br/legislacao/ajustes",
+    "includeKeywords": [
+      "ajuste sinief",
+      "SINIEF",
+      "ICMS",
+      "nota fiscal",
+      "documento fiscal"
+    ],
+    "excludeKeywords": [],
+    "htmlLimit": 25
+  },
+  {
+    "name": "CONFAZ — Protocolos ICMS",
+    "type": "html",
+    "url": "https://www.confaz.fazenda.gov.br/legislacao/protocolos",
+    "category": "icms",
+    "baseScore": 5,
+    "minScore": 5,
+    "urlAllowRegex": "confaz\\.fazenda\\.gov\\.br/legislacao/protocolos",
+    "includeKeywords": [
+      "protocolo icms",
+      "ICMS",
+      "CONFAZ",
+      "substituição tributária"
+    ],
+    "excludeKeywords": [],
+    "htmlLimit": 25
+  },
+  {
+    "name": "STJ — Notícias",
+    "type": "html",
+    "url": "https://www.stj.jus.br/sites/portalp/Inicio",
+    "category": "judicial",
+    "baseScore": 0,
+    "minScore": 7,
+    "includeKeywords": [
+      "tribut",
+      "imposto",
+      "ICMS",
+      "ISS",
+      "PIS",
+      "Cofins",
+      "IRPJ",
+      "CSLL",
+      "execução fiscal",
+      "repetitivo",
+      "contribuinte"
+    ],
+    "excludeKeywords": [
+      "penal",
+      "criminal",
+      "família",
+      "servidor"
+    ],
+    "htmlLimit": 12
+  },
+  {
+    "name": "Diário Oficial da União — busca fiscal",
+    "type": "html",
+    "url": "https://www.in.gov.br/consulta/-/buscar/dou?q=tribut%C3%A1rio%20OR%20fiscal%20OR%20ICMS%20OR%20reforma%20tribut%C3%A1ria&s=todos&exactDate=all&sortType=0",
+    "category": "legislacao",
+    "baseScore": 2,
+    "minScore": 6,
+    "includeKeywords": [
+      "diário oficial",
+      "DOU",
+      "tribut",
+      "fiscal",
+      "ICMS",
+      "ISS",
+      "portaria",
+      "instrução normativa",
+      "decreto",
+      "reforma tributária"
+    ],
+    "excludeKeywords": [
+      "licitação",
+      "pregão",
+      "edital"
+    ],
+    "htmlLimit": 20,
+    "timeout": 20
+  },
+  {
+    "name": "Diário Oficial de Minas Gerais",
+    "type": "html",
+    "url": "https://www.jornalminasgerais.mg.gov.br/",
+    "category": "legislacao",
+    "baseScore": 2,
+    "minScore": 6,
+    "includeKeywords": [
+      "Minas Gerais",
+      "ICMS",
+      "tribut",
+      "fiscal",
+      "SEF",
+      "decreto",
+      "resolução",
+      "portaria",
+      "taxa",
+      "IPVA",
+      "ITCD"
+    ],
+    "excludeKeywords": [
+      "nomeação",
+      "exoneração",
+      "edital"
+    ],
+    "htmlLimit": 20
+  },
+  {
+    "name": "SEF Minas Gerais — Empresas",
+    "type": "html",
+    "url": "https://www.fazenda.mg.gov.br/empresas/",
+    "category": "icms",
+    "baseScore": 3,
+    "minScore": 5,
+    "urlAllowRegex": "fazenda\\.mg\\.gov\\.br",
+    "includeKeywords": [
+      "ICMS",
+      "IPVA",
+      "ITCD",
+      "taxa",
+      "tribut",
+      "fiscal",
+      "SEF",
+      "nota fiscal",
+      "DAPI",
+      "SPED",
+      "Minas Gerais"
+    ],
+    "excludeKeywords": [
+      "educação fiscal",
+      "campanha"
+    ],
+    "htmlLimit": 20
+  },
+  {
+    "name": "Google News — STF/STJ tributário",
+    "url": "https://news.google.com/rss/search?q=(STF%20OR%20STJ)%20(tribut%C3%A1rio%20OR%20ICMS%20OR%20ISS%20OR%20PIS%20OR%20Cofins%20OR%20execu%C3%A7%C3%A3o%20fiscal)&hl=pt-BR&gl=BR&ceid=BR:pt-419",
+    "category": "judicial",
+    "baseScore": 0,
+    "minScore": 7,
+    "includeKeywords": [
+      "STF",
+      "STJ",
+      "tribut",
+      "ICMS",
+      "ISS",
+      "PIS",
+      "Cofins",
+      "execução fiscal",
+      "contribuinte",
+      "repercussão geral"
+    ],
+    "excludeKeywords": [
+      "criminal",
+      "penal",
+      "eleição",
+      "partido"
+    ],
+    "includeWeight": 5
+  },
+  {
+    "name": "Google News — Municípios MG fiscal",
+    "url": "https://news.google.com/rss/search?q=(munic%C3%ADpios%20OR%20prefeituras)%20Minas%20Gerais%20(ISS%20OR%20tribut%C3%A1rio%20OR%20fiscal%20OR%20arrecada%C3%A7%C3%A3o%20OR%20reforma%20tribut%C3%A1ria)&hl=pt-BR&gl=BR&ceid=BR:pt-419",
+    "category": "municipal",
+    "baseScore": 0,
+    "minScore": 7,
+    "includeKeywords": [
+      "municípios",
+      "prefeituras",
+      "Minas Gerais",
+      "ISS",
+      "tribut",
+      "fiscal",
+      "arrecadação",
+      "reforma tributária"
+    ],
+    "excludeKeywords": [
+      "saúde",
+      "educação",
+      "segurança pública",
+      "futebol"
+    ],
+    "includeWeight": 4
+  },
+  {
+    "name": "Google News — CARF e contencioso",
+    "url": "https://news.google.com/rss/search?q=(CARF%20OR%20%22Conselho%20Administrativo%20de%20Recursos%20Fiscais%22%20OR%20contencioso%20tribut%C3%A1rio)&hl=pt-BR&gl=BR&ceid=BR:pt-419",
+    "category": "carf",
+    "baseScore": 1,
+    "minScore": 6,
+    "includeKeywords": [
+      "CARF",
+      "Conselho Administrativo de Recursos Fiscais",
+      "contencioso tributário",
+      "tribut",
+      "fiscal"
+    ],
+    "excludeKeywords": [
+      "curso",
+      "webinar"
+    ],
+    "includeWeight": 5
+  },
+  {
+    "name": "Google News — Comitê Gestor IBS",
+    "url": "https://news.google.com/rss/search?q=(%22Comit%C3%AA%20Gestor%20do%20IBS%22%20OR%20CGIBS%20OR%20%22Comit%C3%AA%20Gestor%20IBS%22)%20(reforma%20tribut%C3%A1ria%20OR%20IBS%20OR%20CBS)&hl=pt-BR&gl=BR&ceid=BR:pt-419",
+    "category": "reforma",
+    "baseScore": 1,
+    "minScore": 6,
+    "includeKeywords": [
+      "Comitê Gestor do IBS",
+      "CGIBS",
+      "Comitê Gestor IBS",
+      "reforma tributária",
+      "IBS",
+      "CBS"
+    ],
+    "excludeKeywords": [
+      "curso",
+      "webinar"
+    ],
+    "includeWeight": 5
   }
 ]
