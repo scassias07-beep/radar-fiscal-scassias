@@ -1,0 +1,47 @@
+[
+  {
+    "name": "Receita Federal",
+    "url": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/RSS",
+    "category": "receita",
+    "baseScore": 2,
+    "minScore": 4,
+    "includeKeywords": ["tribut", "fiscal", "imposto", "receita federal", "simples nacional", "mei", "irpf", "malha fina", "arrecadação", "aduaneir", "nota fiscal", "sped", "reforma tributária", "ibs", "cbs", "carf", "pgfn"],
+    "excludeKeywords": ["medicamento", "aeroporto", "doação", "campanha institucional"]
+  },
+  {
+    "name": "Agência Senado",
+    "url": "https://www12.senado.leg.br/noticias/rss",
+    "category": "legislacao",
+    "baseScore": 0,
+    "minScore": 6,
+    "includeKeywords": ["reforma tributária", "tribut", "imposto", "ICMS", "ISS", "CBS", "IBS", "Simples Nacional", "contribuinte", "fiscal", "contábil"],
+    "excludeKeywords": ["eleição", "votar", "urna", "vídeo", "áudio", "homenagem", "sessão especial", "política partidária", "segurança pública", "saúde", "educação", "plataformas digitais", "festival", "administrador"]
+  },
+  {
+    "name": "JOTA",
+    "url": "https://www.jota.info/feed",
+    "category": "reforma",
+    "baseScore": 0,
+    "minScore": 7,
+    "includeKeywords": ["tribut", "reforma tributária", "CARF", "STF", "STJ", "ICMS", "ISS", "PIS", "Cofins", "IRPJ", "CSLL", "IBS", "CBS", "imposto seletivo", "fiscal"],
+    "excludeKeywords": ["eleição", "partido", "Lula", "Bolsonaro", "Congresso em Foco", "polícia", "internacional"]
+  },
+  {
+    "name": "IBPT",
+    "url": "https://ibpt.org.br/feed/",
+    "category": "receita",
+    "baseScore": 3,
+    "minScore": 4,
+    "includeKeywords": ["tribut", "imposto", "fiscal", "contribuinte", "reforma tributária", "empres", "arrecadação"],
+    "excludeKeywords": ["curso", "evento", "webinar", "palestra", "congresso", "CONBCON", "consignado"]
+  },
+  {
+    "name": "Portal Contábeis",
+    "url": "https://www.contabeis.com.br/rss/noticias/",
+    "category": "receita",
+    "baseScore": 0,
+    "minScore": 6,
+    "includeKeywords": ["tribut", "fiscal", "contábil", "contabilidade", "imposto", "IRPF", "Simples Nacional", "MEI", "eSocial", "FGTS", "INSS", "nota fiscal", "reforma tributária", "ICMS", "ISS", "PIS", "Cofins"],
+    "excludeKeywords": ["carreira", "comportamento", "tecnologia", "gestão de pessoas", "palestra", "congresso", "CONBCON", "consignado"]
+  }
+]

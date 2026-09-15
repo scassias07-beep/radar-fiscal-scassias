@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Radar Fiscal — Monitor Tributário ao Vivo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#080d1a;
+    --bg-2:#0d1424;
+    --panel:#111a2e;
+    --panel-2:#16203a;
+    --line:#233150;
+    --line-soft:#1a2540;
+    --txt:#eaf0fb;
+    --txt-2:#9dabc7;
+    --txt-3:#6b7a99;
+    --amber:#f5b13d;
+    --amber-dim:#a97a20;
+    --teal:#37d6b0;
+    --red:#ff6b6b;
+    --blue:#5aa9ff;
+    --violet:#a78bfa;
+    --pink:#f472b6;
+    --radius:14px;
+    --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:
+      radial-gradient(1100px 620px at 12% -10%, #16233f 0%, transparent 60%),
+      radial-gradient(900px 520px at 92% 0%, #1d1a2e 0%, transparent 55%),
+      var(--bg);
+    color:var(--txt);
+    font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+  }
+  a{color:inherit}
+  .wrap{max-width:1420px;margin:0 auto;padding:22px 22px 60px}
+
+  /* ---------- HEADER ---------- */
+  header.top{
+    display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between;
+    padding:18px 20px;border:1px solid var(--line);border-radius:var(--radius);
+    background:linear-gradient(180deg,#131d33 0%,#0f1729 100%);
+    position:relative;overflow:hidden;
+  }
+  header.top::after{
+    content:"";position:absolute;left:0;right:0;top:0;height:2px;
+    background:linear-gradient(90deg,var(--amber),#f5b13d00 45%,var(--teal),#37d6b000);
+  }
+  .brand{display:flex;align-items:center;gap:14px;min-width:0}
+  .mark{
+    width:46px;height:46px;flex:0 0 46px;border-radius:12px;
+    background:linear-gradient(145deg,#f5b13d,#c9821a);
+    display:grid;place-items:center;box-shadow:0 6px 22px #f5b13d33;
+  }
+  .mark svg{width:24px;height:24px}
+  .brand h1{margin:0;font-size:19px;letter-spacing:-.3px;font-weight:700}
+  .brand p{margin:3px 0 0;font-size:12.5px;color:var(--txt-2)}
+  .hdr-right{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .live{
+    display:inline-flex;align-items:center;gap:8px;padding:7px 13px;border-radius:999px;
+    background:#37d6b014;border:1px solid #37d6b040;color:var(--teal);font-size:12px;font-weight:600;
+    letter-spacing:.4px;text-transform:uppercase;
+  }
+  .live.off{background:#ff6b6b12;border-color:#ff6b6b44;color:var(--red)}
+  .dot{width:7px;height:7px;border-radius:50%;background:currentColor;animation:pulse 1.6s infinite}
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.75)}}
+  .clock{text-align:right;line-height:1.25}
+  .clock .t{font-family:var(--mono);font-size:20px;font-weight:500;letter-spacing:.5px}
+  .clock .d{font-size:11.5px;color:var(--txt-3)}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;cursor:pointer;
+    background:var(--panel-2);border:1px solid var(--line);color:var(--txt);
+    padding:9px 15px;border-radius:10px;font-size:13px;font-weight:600;font-family:inherit;
+    transition:.15s;
+  }
+  .btn:hover{border-color:var(--amber-dim);background:#1b2743}
+  .btn.spin svg{animation:rot .9s linear infinite}
+  @keyframes rot{to{transform:rotate(360deg)}}
+  .scanbar{
+    margin-top:10px;height:3px;border-radius:2px;background:#1b2540;overflow:hidden;
+  }
+  .scanbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--amber),var(--teal));transition:width .4s}
+
+  /* ---------- KPIs ---------- */
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:14px;margin:18px 0}
+  .kpi{
+    border:1px solid var(--line);border-radius:var(--radius);padding:15px 16px;
+    background:linear-gradient(180deg,#121b2f,#0e1626);position:relative;overflow:hidden;
+  }
+  .kpi b{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.9px;color:var(--txt-3);font-weight:600}
+  .kpi .v{font-size:23px;font-weight:700;margin-top:8px;letter-spacing:-.5px}
+  .kpi .s{font-size:12px;color:var(--txt-2);margin-top:5px;line-height:1.45}
+  .kpi .bar{height:4px;border-radius:2px;background:#1b2540;margin-top:11px;overflow:hidden}
+  .kpi .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--amber),#f5b13d66)}
+  .kpi.amber .v{color:var(--amber)} .kpi.teal .v{color:var(--teal)}
+  .kpi.blue .v{color:var(--blue)} .kpi.red .v{color:var(--red)}
+
+  /* ---------- LAYOUT ---------- */
+  .grid{display:grid;grid-template-columns:minmax(0,1fr) 350px;gap:18px;align-items:start}
+  @media(max-width:1080px){.grid{grid-template-columns:minmax(0,1fr)}}
+  .card{border:1px solid var(--line);border-radius:var(--radius);background:var(--panel);overflow:hidden}
+  .card > .hd{
+    display:flex;align-items:center;justify-content:space-between;gap:12px;
+    padding:13px 16px;border-bottom:1px solid var(--line-soft);background:#0f182a;
+  }
+  .card > .hd h2{margin:0;font-size:13.5px;text-transform:uppercase;letter-spacing:.8px;color:var(--txt-2)}
+  .card > .bd{padding:14px 16px}
+
+  /* filters */
+  .filters{padding:14px 16px;border-bottom:1px solid var(--line-soft);background:#0e1728}
+  .search{position:relative;margin-bottom:12px}
+  .search svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:15px;height:15px;color:var(--txt-3)}
+  .search input{
+    width:100%;padding:11px 13px 11px 36px;border-radius:10px;border:1px solid var(--line);
+    background:#0a1120;color:var(--txt);font-family:inherit;font-size:13.5px;outline:none;
+  }
+  .search input:focus{border-color:var(--amber-dim);box-shadow:0 0 0 3px #f5b13d18}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{
+    cursor:pointer;font-size:12px;font-weight:600;padding:6px 12px;border-radius:999px;
+    border:1px solid var(--line);background:#111c31;color:var(--txt-2);transition:.15s;font-family:inherit;
+    display:inline-flex;align-items:center;gap:7px;
+  }
+  .chip:hover{border-color:var(--amber-dim);color:var(--txt)}
+  .chip.on{background:#f5b13d1c;border-color:#f5b13d66;color:var(--amber)}
+  .chip .n{font-family:var(--mono);font-size:10.5px;opacity:.75}
+  .tools{display:flex;gap:10px;align-items:center;margin-top:12px;flex-wrap:wrap;justify-content:space-between}
+  .tool-r{display:flex;gap:8px;align-items:center}
+  select{
+    background:#0a1120;border:1px solid var(--line);color:var(--txt-2);border-radius:9px;
+    padding:7px 10px;font-size:12.5px;font-family:inherit;outline:none;
+  }
+  .switch{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;color:var(--txt-2);cursor:pointer;user-select:none}
+  .switch input{appearance:none;width:34px;height:19px;border-radius:999px;background:#22304d;position:relative;cursor:pointer;transition:.2s;margin:0}
+  .switch input::after{content:"";position:absolute;top:2.5px;left:3px;width:14px;height:14px;border-radius:50%;background:#8fa0bf;transition:.2s}
+  .switch input:checked{background:#f5b13d44}
+  .switch input:checked::after{left:17px;background:var(--amber)}
+
+  /* feed */
+  #feed{list-style:none;margin:0;padding:0}
+  .item{
+    display:block;padding:15px 16px 15px 18px;border-left:3px solid transparent;
+    border-bottom:1px solid var(--line-soft);transition:.15s;position:relative;
+  }
+  .item:last-child{border-bottom:none}
+  .item:hover{background:#131f36;border-left-color:var(--amber)}
+  .item.fresh{animation:slideIn .5s ease}
+  @keyframes slideIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+  .i-meta{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-bottom:7px}
+  .cat{
+    font-size:10.5px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;
+    padding:3px 9px;border-radius:6px;border:1px solid;
+  }
+  .c-reforma{color:var(--amber);border-color:#f5b13d4d;background:#f5b13d12}
+  .c-receita{color:var(--blue);border-color:#5aa9ff4d;background:#5aa9ff12}
+  .c-judicial{color:var(--violet);border-color:#a78bfa4d;background:#a78bfa12}
+  .c-icms{color:var(--teal);border-color:#37d6b04d;background:#37d6b012}
+  .c-aduaneiro{color:var(--pink);border-color:#f472b64d;background:#f472b612}
+  .c-cgibs{color:#e879f9;border-color:#e879f94d;background:#e879f912}
+  .c-carf{color:#fb923c;border-color:#fb923c4d;background:#fb923c12}
+  .c-municipal{color:#7dd3fc;border-color:#7dd3fc4d;background:#7dd3fc12}
+  .c-legislacao{color:#94a3b8;border-color:#94a3b84d;background:#94a3b812}
+  .i-date{font-family:var(--mono);font-size:11.5px;color:var(--txt-3)}
+  .i-ago{font-size:11.5px;color:var(--txt-3)}
+  .novo{
+    font-size:10px;font-weight:700;letter-spacing:.7px;padding:2.5px 7px;border-radius:5px;
+    background:var(--teal);color:#04241d;
+  }
+  .prazo{
+    font-size:10.5px;font-weight:700;padding:2.5px 7px;border-radius:5px;
+    background:#ff6b6b1c;color:var(--red);border:1px solid #ff6b6b44;
+  }
+  .item h3{margin:0 0 6px;font-size:15px;line-height:1.4;font-weight:600;letter-spacing:-.15px}
+  .item h3 a{text-decoration:none}
+  .item h3 a:hover{color:var(--amber);text-decoration:underline;text-underline-offset:3px}
+  .item p{margin:0;font-size:13.2px;line-height:1.6;color:var(--txt-2)}
+  .i-src{margin-top:8px;font-size:11.5px;color:var(--txt-3);display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .i-src a{color:var(--txt-3);text-decoration:none;border-bottom:1px dotted var(--line)}
+  .i-src a:hover{color:var(--amber)}
+  .empty{padding:44px 20px;text-align:center;color:var(--txt-3);font-size:13.5px}
+
+  /* sidebar */
+  .side{display:grid;gap:18px;position:sticky;top:18px}
+  .prazo-row{display:flex;gap:12px;padding:11px 0;border-bottom:1px dashed var(--line-soft)}
+  .prazo-row:last-child{border-bottom:none}
+  .cd{
+    flex:0 0 54px;text-align:center;border-radius:10px;padding:7px 4px;
+    background:#0c1526;border:1px solid var(--line);
+  }
+  .cd b{display:block;font-family:var(--mono);font-size:17px;color:var(--amber);line-height:1.1}
+  .cd span{font-size:9.5px;color:var(--txt-3);text-transform:uppercase;letter-spacing:.6px}
+  .cd.hot b{color:var(--red)}
+  .cd.done b{color:var(--txt-3)}
+  .pr-txt{min-width:0}
+  .pr-txt h4{margin:0 0 3px;font-size:13px;font-weight:600;line-height:1.4}
+  .pr-txt span{font-size:11.5px;color:var(--txt-3);font-family:var(--mono)}
+  .pr-txt p{margin:4px 0 0;font-size:11.8px;color:var(--txt-2);line-height:1.5}
+
+  .src-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px dashed var(--line-soft);font-size:12.5px}
+  .src-row:last-child{border-bottom:none}
+  .src-l{display:flex;align-items:center;gap:9px;min-width:0}
+  .src-l b{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .src-l{text-decoration:none;color:inherit}
+  .src-l:hover b{color:var(--amber)}
+  .src-l .host{font-size:10.5px;color:var(--txt-3);font-family:var(--mono);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .src-grp{font-size:10.5px;text-transform:uppercase;letter-spacing:.8px;color:var(--txt-3);font-weight:700;margin:14px 0 4px;padding-bottom:5px;border-bottom:1px solid var(--line-soft)}
+  .src-grp:first-child{margin-top:0}
+  .pill{font-size:10.5px;padding:2.5px 8px;border-radius:999px;border:1px solid;white-space:nowrap;font-weight:600}
+  .p-ok{color:var(--teal);border-color:#37d6b044;background:#37d6b010}
+  .p-wait{color:var(--amber);border-color:#f5b13d44;background:#f5b13d10}
+  .p-off{color:var(--txt-3);border-color:var(--line);background:#0c1526}
+
+  .dist{margin-top:4px}
+  .dist-row{margin-bottom:11px}
+  .dist-top{display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px;color:var(--txt-2)}
+  .dist-top b{font-family:var(--mono);color:var(--txt)}
+  .dist-bar{height:7px;border-radius:4px;background:#0c1526;overflow:hidden;border:1px solid var(--line-soft)}
+  .dist-bar i{display:block;height:100%;border-radius:4px;transition:width .5s}
+
+  footer{margin-top:26px;padding:16px 18px;border:1px solid var(--line);border-radius:var(--radius);background:#0d1526}
+  footer p{margin:0 0 7px;font-size:12px;color:var(--txt-3);line-height:1.65}
+  footer p:last-child{margin:0}
+  .log{
+    font-family:var(--mono);font-size:11.5px;color:var(--txt-3);background:#0a1120;
+    border:1px solid var(--line-soft);border-radius:9px;padding:10px 12px;max-height:120px;overflow:auto;
+    line-height:1.7;
+  }
+  .log b{color:var(--teal);font-weight:500}
+  .log i{color:var(--txt-3);font-style:normal}
+  .log u{color:var(--amber);text-decoration:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="brand">
+      <div class="mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#241703" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 12a9 9 0 1 0 9-9"/><path d="M12 3v6l4 2"/><circle cx="12" cy="12" r="1.6" fill="#241703"/>
+        </svg>
+      </div>
+      <div>
+        <h1>Radar Fiscal</h1>
+        <p>Monitor tributário contínuo · Reforma Tributária, CGIBS, Receita Federal, CARF, Judiciário, ICMS/ISS e Aduaneiro</p>
+      </div>
+    </div>
+    <div class="hdr-right">
+      <span class="live" id="livePill"><span class="dot"></span> <span id="liveTxt">Ao vivo</span></span>
+      <div class="clock">
+        <div class="t" id="clock">--:--:--</div>
+        <div class="d" id="clockDate">agora</div>
+      </div>
+      <button class="btn" id="scanBtn" title="Varrer fontes agora">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 3v6h-6"/></svg>
+        Varrer agora
+      </button>
+    </div>
+  </header>
+  <div class="scanbar"><i id="scanFill"></i></div>
+
+  <section class="kpis" id="kpis"></section>
+
+  <div class="grid">
+    <!-- ============ FEED ============ -->
+    <main class="card">
+      <div class="filters">
+        <div class="search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input id="q" type="search" placeholder="Buscar por tema, tributo, órgão, número de processo ou norma…" autocomplete="off">
+        </div>
+        <div class="chips" id="chips"></div>
+        <div class="tools">
+          <label class="switch">
+            <input type="checkbox" id="onlyPrazo">
+            <span>Somente itens com prazo em aberto</span>
+          </label>
+          <div class="tool-r">
+            <select id="sort">
+              <option value="recent">Mais recentes</option>
+              <option value="prazo">Prazo mais próximo</option>
+              <option value="cat">Por área</option>
+            </select>
+            <span style="font-size:12px;color:var(--txt-3)" id="count">—</span>
+          </div>
+        </div>
+      </div>
+      <ul id="feed"></ul>
+    </main>
+
+    <!-- ============ SIDEBAR ============ -->
+    <aside class="side">
+
+      <div class="card">
+        <div class="hd"><h2>Radar de prazos</h2><span class="pill p-wait" id="prazoCount">—</span></div>
+        <div class="bd" id="prazos"></div>
+      </div>
+
+      <div class="card">
+        <div class="hd"><h2>Fontes monitoradas</h2><span class="pill p-off" id="srcCount">—</span></div>
+        <div class="bd" id="fontes"></div>
+      </div>
+
+      <div class="card">
+        <div class="hd"><h2>Catálogo de fontes</h2><span class="pill p-ok" id="catCount">—</span></div>
+        <div class="bd" id="catalogo"></div>
+      </div>
+
+      <div class="card">
+        <div class="hd"><h2>Volume por área</h2></div>
+        <div class="bd dist" id="dist"></div>
+      </div>
+
+      <div class="card">
+        <div class="hd"><h2>Log de varredura</h2></div>
+        <div class="bd"><div class="log" id="log"></div></div>
+      </div>
+
+    </aside>
+  </div>
+
+  <footer>
+    <p><b style="color:var(--txt-2)">Instantâneo base coletado em 14/09/2026.</b> O painel acompanha autoridades fiscais (Receita Federal, CGIBS, CONFAZ, CARF e Diário Oficial da União), o Judiciário (STF e STJ), a imprensa especializada (JOTA e Valor Econômico) e a esfera estadual e municipal (SEFAZ, CNM e Serpro), tentando uma nova leitura a cada 60 segundos. Quando o navegador bloqueia a leitura externa, o painel avisa no log e no selo do topo e mantém o último instantâneo — o relógio e as contagens seguem em tempo real.</p>
+    <p>Conteúdo informativo de apoio ao acompanhamento fiscal. Não substitui a consulta ao texto oficial publicado no Diário Oficial ou nos canais das autoridades fiscais.</p>
+  </footer>
+</div>
+
+<script>
+/* =========================================================
+   RADAR FISCAL — instantâneo base (coletado em 14/09/2026)
+   ========================================================= */
+const CAT = {
+  reforma:   { nome:"Reforma Tributária", cor:"#f5b13d", cls:"c-reforma" },
+  cgibs:     { nome:"CGIBS",              cor:"#e879f9", cls:"c-cgibs" },
+  receita:   { nome:"Receita Federal",    cor:"#5aa9ff", cls:"c-receita" },
+  judicial:  { nome:"Judiciário",         cor:"#a78bfa", cls:"c-judicial" },
+  carf:      { nome:"CARF",               cor:"#fb923c", cls:"c-carf" },
+  icms:      { nome:"ICMS / Estados",     cor:"#37d6b0", cls:"c-icms" },
+  municipal: { nome:"Municipal / ISS",    cor:"#7dd3fc", cls:"c-municipal" },
+  aduaneiro: { nome:"Aduaneiro",          cor:"#f472b6", cls:"c-aduaneiro" },
+  legislacao:{ nome:"Legislação / DOU",   cor:"#94a3b8", cls:"c-legislacao" }
+};
+
+let SEQ = 0;
+const N = (o) => Object.assign({ id:"n"+(++SEQ), novo:false, prazo:null }, o);
+
+const SNAPSHOT = [
+  N({ data:"2026-09-14", cat:"reforma", fonte:"CGIBS · Comitê Gestor do IBS",
+     titulo:"Regulamento do IBS e da CBS deve ganhar nova versão até outubro",
+     resumo:"Ajustes em discussão abrangem créditos de CBS sobre estoques no período de transição — ponto sensível para empresas que carregam inventário de exercícios anteriores sob o regime antigo.",
+     url:"https://www.jota.info/coberturas-especiais/pulso-da-reforma", novo:true }),
+
+  N({ data:"2026-09-10", cat:"carf", fonte:"CARF · Contencioso Administrativo",
+     titulo:"Súmulas do CARF ganham efeito vinculante para a administração tributária federal",
+     resumo:"Portaria MF nº 1.785/2026 atribuiu efeito vinculante a súmulas do Conselho, que passam a obrigar a administração tributária federal — muda o cálculo de risco em autuações e defesas administrativas.",
+     url:"https://www.in.gov.br/web/dou/-/portaria-mf-n-1.785-de-19-de-junho-de-2026-713842832", novo:true }),
+
+  N({ data:"2026-09-08", cat:"carf", fonte:"JOTA · Tributos",
+     titulo:"CARF: tributação de propina não é exclusiva na fonte pagadora",
+     resumo:"Decisão firmou que valores ilícitos recebidos por pessoa física podem ser tributados como rendimento na esfera de quem recebe, ampliando o debate sobre IRPF em valores de origem ilícita.",
+     url:"https://www.jota.info/tributos/tributacao-de-propina-nao-e-exclusiva-na-fonte-pagadora-decide-carf" }),
+
+  N({ data:"2026-09-03", cat:"reforma", fonte:"JOTA · Pulso da Reforma",
+     titulo:"Empresas enfrentam insegurança com alíquotas da reforma ainda indefinidas",
+     resumo:"A CBS e o Imposto Seletivo passam a ser cobrados em 2027, mas os percentuais definitivos podem sair apenas em dezembro — o que dificulta precificação e contratos de longo prazo.",
+     url:"https://www.jota.info/coberturas-especiais/pulso-da-reforma/empresas-enfrentam-inseguranca-com-aliquotas-da-reforma-tributaria-indefinidas" }),
+
+  N({ data:"2026-09-01", cat:"receita", fonte:"Serpro · Simples Nacional",
+     titulo:"Simples híbrido: optar por recolher IBS e CBS fora do regime unificado",
+     resumo:"Empresas do Simples Nacional podem escolher recolher IBS e CBS pelo regime regular entre 1º e 30 de setembro de 2026, com efeitos a partir de janeiro de 2027. A escolha é facultativa e a análise de vantajosidade é do contribuinte.",
+     url:"https://www.serpro.gov.br/menu/noticias/noticias-2026/simples-no-regime-regular",
+     prazo:"2026-09-30" }),
+
+  N({ data:"2026-08-24", cat:"reforma", fonte:"JOTA · Pulso da Reforma",
+     titulo:"Alíquotas do Imposto Seletivo devem ir ao Congresso na primeira quinzena de setembro",
+     resumo:"Proposta com as alíquotas do IS — tributo que incide sobre bens e serviços prejudiciais à saúde e ao meio ambiente — segue para apreciação no Legislativo.",
+     url:"https://www.jota.info/coberturas-especiais/pulso-da-reforma" }),
+
+  N({ data:"2026-08-26", cat:"cgibs", fonte:"Receita Federal · CGIBS",
+     titulo:"Receita e CGIBS regulamentam programa de conformidade para adaptação à reforma",
+     resumo:"Programa de conformidade conjunto cria trilha de adequação acompanhada para contribuintes na transição ao IBS e à CBS, com incentivo a quem regularizar documentos e leiautes.",
+     url:"https://www.jota.info/coberturas-especiais/pulso-da-reforma" }),
+
+  N({ data:"2026-08-10", cat:"reforma", fonte:"JOTA · Tributos",
+     titulo:"Governo estuda remuneração de bancos por operação do split payment",
+     resumo:"Discussão em torno do custo por transação na coleta automática de tributos, com estimativa de R$ 0,39 por operação — tema com impacto direto em instituições financeiras e no varejo.",
+     url:"https://www.jota.info/coberturas-especiais/pulso-da-reforma" }),
+
+  N({ data:"2026-08-03", cat:"cgibs", fonte:"CGIBS · Documento fiscal",
+     titulo:"Emissão de nota fiscal passa a exigir os campos de IBS e CBS para o regime regular",
+     resumo:"A partir de 03/08/2026, documentos fiscais eletrônicos sem os campos de IBS e CBS são rejeitados no regime regular. A alíquota de teste é de 1% (0,1% de IBS e 0,9% de CBS), com apuração apenas informativa em 2026.",
+     url:"https://cgibs.gov.br/novo-marco-da-reforma-tributaria-inicia-em-03-de-agosto-com-preenchimento-obrigatorio-dos-campos-relativos-ao-ibs-e-a-cbs" }),
+
+  N({ data:"2026-09-14", cat:"reforma", fonte:"Receita Federal",
+     titulo:"Receita Federal publica nova documentação técnica das APIs de apuração da CBS",
+     resumo:"Nova versão das interfaces permite consultas incrementais, reduzindo tempo de resposta e volume de dados trafegados na apuração da contribuição.",
+     url:"https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026", novo:true }),
+
+  N({ data:"2026-09-12", cat:"receita", fonte:"Receita Federal",
+     titulo:"Atuação integrada entre Receita Federal e Anvisa garante liberação emergencial de medicamento em Guarulhos",
+     resumo:"Fiscalização e liberação conjunta em aeroporto viabilizaram a entrada emergencial de medicamento no país.",
+     url:"https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026" }),
+
+  N({ data:"2026-09-11", cat:"judicial", fonte:"STF · Repercussão Geral",
+     titulo:"STF mantém créditos de ICMS em operações interestaduais de combustíveis",
+     resumo:"Por 6 votos a favor, o Supremo confirmou a manutenção dos créditos de ICMS sobre a operação interna anterior à destinação do combustível derivado de petróleo a outro estado. Tese firmada em repercussão geral orienta o Judiciário e a esfera administrativa em todo o país.",
+     url:"https://cnbsp.org.br/2026/09/11/jota-supremo-mantem-creditos-de-icms-em-operacoes-interestaduais-de-combustiveis" }),
+
+  N({ data:"2026-09-10", cat:"judicial", fonte:"STF",
+     titulo:"Sessão plenária do STF cancelada pelo segundo dia consecutivo",
+     resumo:"Estavam na pauta o julgamento sobre ITBI em operações imobiliárias, a exclusão de créditos de ICMS da base do PIS/Cofins e a validade da SecexConsenso do TCU.",
+     url:"https://www.jota.info/stf/do-supremo/stf-imposto-de-tranferencia-de-bens-imoveis-e-icms-sessao-de-10-09-2026" }),
+
+  N({ data:"2026-09-09", cat:"receita", fonte:"Receita Federal",
+     titulo:"Painel Receita ganha indicadores mensais e regionais de arrecadação",
+     resumo:"Novos indicadores mostram a evolução da receita bruta e a participação por setor, estado, região e país.",
+     url:"https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026" }),
+
+  N({ data:"2026-09-09", cat:"reforma", fonte:"Receita Federal · DeRE",
+     titulo:"Documentação técnica da DeRE chega à versão 1.2.0",
+     resumo:"Atualização incorpora leiautes de eventos transacionais e regras de controle de deduções na Declaração de Regimes Específicos, estrutura ligada à transição da reforma do consumo.",
+     url:"https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026" }),
+
+  N({ data:"2026-09-08", cat:"receita", fonte:"Receita Federal",
+     titulo:"Receita intercepta fraude bilionária em salário-maternidade",
+     resumo:"Ações de fiscalização evitaram prejuízo aos cofres públicos e envolvem devolução de valores, multas e sanções aos responsáveis.",
+     url:"https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026" }),
+
+  N({ data:"2026-09-04", cat:"receita", fonte:"PGFN / Receita Federal",
+     titulo:"Edital PGFN/RFB nº 4/2026 abre transação sobre IRRF de investidores não residentes",
+     resumo:"Contribuintes podem regularizar débitos com descontos de até 65%, com adesão aberta até 29 de dezembro de 2026.",
+     url:"https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026",
+     prazo:"2026-12-29" }),
+
+  N({ data:"2026-09-04", cat:"aduaneiro", fonte:"Receita Federal",
+     titulo:"Consulta pública sobre regimes aduaneiros de depósito de mercadorias",
+     resumo:"Receita Federal recebe contribuições sobre a consolidação e a modernização das normas de regimes aduaneiros especiais entre 4 e 23 de setembro de 2026.",
+     url:"https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026",
+     prazo:"2026-09-23" }),
+
+  N({ data:"2026-09-04", cat:"aduaneiro", fonte:"Receita Federal",
+     titulo:"Publicado edital do Exame de Qualificação Técnica para Despachante Aduaneiro 2026",
+     resumo:"Inscrições de 8 a 30 de setembro e prova em 15 de novembro de 2026, em formato remoto.",
+     url:"https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026",
+     prazo:"2026-09-30" }),
+
+  N({ data:"2026-09-03", cat:"judicial", fonte:"STF · Tema 1309",
+     titulo:"STF derruba PIS/Cofins sobre aplicações das reservas técnicas de seguradoras",
+     resumo:"Relator Luiz Fux foi acompanhado por Toffoli, André Mendonça, Nunes Marques, Cármen Lúcia e Fachin: receitas financeiras das reservas técnicas não integram o faturamento. A LDO de 2026 estimava impacto de R$ 5,3 bilhões em caso de derrota da União. Tese com repercussão geral.",
+     url:"https://www.jota.info/tributos/stf-derruba-pis-cofins-sobre-aplicacoes-de-reservas-tecnicas-de-seguradoras" }),
+
+  N({ data:"2026-09-02", cat:"receita", fonte:"Receita Federal · Instrução Normativa",
+     titulo:"Regras de acompanhamento da fruição de benefícios fiscais são aperfeiçoadas",
+     resumo:"Instrução Normativa ajusta o monitoramento de benefícios e concede período de adaptação até o fim de 2026.",
+     url:"https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026" }),
+
+  N({ data:"2026-09-01", cat:"reforma", fonte:"Receita Federal · Simples Nacional",
+     titulo:"Começa o prazo para opção pelo Simples Nacional e escolha do modelo de recolhimento de IBS e CBS",
+     resumo:"Contribuintes têm até 30 de setembro de 2026 para ingressar no Simples Nacional e definir o modelo de recolhimento do IBS e da CBS aplicável a 2027 — decisão estruturante para o fluxo de caixa do próximo exercício.",
+     url:"https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026",
+     prazo:"2026-09-30" }),
+
+  N({ data:"2026-09-01", cat:"receita", fonte:"Receita Federal",
+     titulo:"Receita disponibiliza Perguntas e Respostas do ITR 2026",
+     resumo:"Material consolida respostas atualizadas sobre o Imposto Territorial Rural para contribuintes e servidores.",
+     url:"https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026" }),
+
+  N({ data:"2026-08-31", cat:"reforma", fonte:"Receita Federal · Curso Reforma Tributária",
+     titulo:"Módulo 15 do Curso Reforma Tributária do Consumo trata da Zona Franca de Manaus",
+     resumo:"Transmissão ao vivo abordou a tributação na Zona Franca de Manaus e nas áreas de livre comércio dentro do novo modelo de consumo.",
+     url:"https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2026" }),
+
+  N({ data:"2026-07-02", cat:"icms", fonte:"CONFAZ · Despacho 27/26",
+     titulo:"CONFAZ publica pacote de protocolos ICMS sobre substituição tributária",
+     resumo:"Despacho nº 27, de 2 de julho de 2026, publica os protocolos ICMS 53 a 82, celebrados entre estados e DF, alterando a substituição tributária em materiais de construção, acabamento, bricolagem e congêneres, com efeitos a partir de 1º de agosto de 2026.",
+     url:"https://www.confaz.fazenda.gov.br/legislacao/despacho/2026/despacho-27-26" }),
+
+  N({ data:"2026-06-10", cat:"icms", fonte:"SEFAZ-PE",
+     titulo:"Sefaz-PE esclarece que IBS e CBS não compõem a base de cálculo do ICMS em 2026",
+     resumo:"Nota de esclarecimento confirma que, na fase de testes da reforma, os valores de IBS e CBS não integram o valor total da nota fiscal nem repercutem na base do imposto estadual.",
+     url:"https://www.sefaz.pe.gov.br/Noticias-Destaque/Paginas/NOTA-DE-ESCLARECIMENTO.aspx" }),
+
+  N({ data:"2026-02-23", cat:"icms", fonte:"CONFAZ · Protocolo ICMS 15/26",
+     titulo:"Protocolo ICMS 15/26 revoga substituição tributária de cosméticos e higiene pessoal",
+     resumo:"Protocolo revoga o Protocolo ICMS nº 7/2008, que dispunha sobre substituição tributária em cosméticos, perfumaria e artigos de higiene, com efeitos a partir de 1º de abril de 2026.",
+     url:"https://www.confaz.fazenda.gov.br/legislacao/protocolos/2026/pt015_26" }),
+
+  N({ data:"2026-09-05", cat:"legislacao", fonte:"Diário Oficial da União",
+     titulo:"Atos tributários federais publicados na semana no Diário Oficial",
+     resumo:"A Seção 1 do DOU concentra portarias, instruções normativas e atos conjuntos com efeitos sobre contribuintes federais. Acompanhamento diário é recomendado para não perder prazos de vigência.",
+     url:"https://www.in.gov.br/consulta/-/buscar/dou?q=tribut%C3%A1rio&s=todos" }),
+
+  N({ data:"2026-08-28", cat:"municipal", fonte:"CNM · Conselho Técnico (CTAT)",
+     titulo:"Municípios debatem se IBS e CBS integram a base de cálculo do ISS na transição",
+     resumo:"Análise do Conselho Técnico das Administrações Tributárias sustenta que, durante a transição, os valores de IBS e CBS compõem a base de cálculo de ISS e ICMS, por não haver fundamento legal para excluí-los antes de 2033.",
+     url:"https://cnm.org.br/comunicacao/noticias/artigo-ctat-analisa-como-ibs-e-cbs-integram-a-base-de-calculo-do-iss-e-do-icms-durante-a-transicao-tributaria" }),
+
+  N({ data:"2026-04-07", cat:"legislacao", fonte:"TV Senado · Agenda Econômica",
+     titulo:"Fase de testes: notas fiscais já trazem espaço para declaração de CBS e IBS",
+     resumo:"Médios e grandes empresários iniciaram os testes de implantação da reforma. As alíquotas de 0,9% de CBS e 0,1% de IBS presentes nas notas de 2026 têm função de medição de arrecadação, sem cobrança efetiva no ano.",
+     url:"https://www12.senado.leg.br/tv/programas/agenda-economica/2026/04/reforma-tributaria-comeca-fase-de-testes-notas-fiscais-trazem-espaco-para-declaracao-de-cbs-e-ibs" })
+];
+
+/* ---------- Prazos / agenda ---------- */
+const PRAZOS = [
+  { data:"2026-09-23", t:"Fim da consulta pública aduaneira", d:"Contribuições sobre regimes aduaneiros de depósito de mercadorias.", cat:"aduaneiro" },
+  { data:"2026-09-30", t:"Opção pelo Simples Nacional + modelo IBS/CBS", d:"Definição do modelo de recolhimento aplicável a 2027 (Simples híbrido).", cat:"reforma" },
+  { data:"2026-09-30", t:"Inscrições no EQTD 2026", d:"Exame de Qualificação Técnica para Despachante Aduaneiro.", cat:"aduaneiro" },
+  { data:"2026-09-30", t:"Imposto Seletivo: alíquotas em discussão no Congresso", d:"Proposta com as alíquotas do IS estava prevista para a primeira quinzena de setembro.", cat:"reforma" },
+  { data:"2026-10-31", t:"Nova versão do regulamento do IBS e da CBS", d:"Ajustes em créditos de estoque na transição e consolidação do regulamento.", cat:"cgibs" },
+  { data:"2026-11-15", t:"Prova do EQTD 2026", d:"Aplicação remota do exame para despachante aduaneiro.", cat:"aduaneiro" },
+  { data:"2026-12-29", t:"Adesão à transação de IRRF (Edital 4/2026)", d:"Descontos de até 65% sobre débitos de investidores não residentes.", cat:"receita" },
+  { data:"2026-12-31", t:"Fim do período de adaptação da IN de benefícios fiscais", d:"Ajuste ao novo acompanhamento da fruição de benefícios.", cat:"receita" },
+  { data:"2026-12-31", t:"Definição das alíquotas da CBS e do Imposto Seletivo", d:"Percentuais podem ser conhecidos apenas em dezembro, conforme a cobertura da imprensa especializada.", cat:"reforma" }
+];
+
+const FONTES = [
+  { g:"Autoridades fiscais" },
+  { n:"Receita Federal",    u:"https://www.gov.br/receitafederal/pt-br/assuntos/noticias", h:"gov.br/receitafederal",  s:"noticias" },
+  { n:"CGIBS",              u:"https://cgibs.gov.br/",                                      h:"cgibs.gov.br",          s:"comite gestor do IBS" },
+  { n:"CONFAZ",             u:"https://www.confaz.fazenda.gov.br/legislacao",               h:"confaz.fazenda.gov.br", s:"legislacao" },
+  { n:"CARF",               u:"https://www.gov.br/carf/pt-br/assuntos/avisos-comunicados/2026", h:"gov.br/carf",       s:"pautas e acordaos" },
+
+  { g:"Judiciário e contencioso" },
+  { n:"STF · Jurisprudência", u:"https://jurisprudencia.stf.jus.br/",                       h:"jurisprudencia.stf.jus.br", s:"decisoes e teses" },
+  { n:"STJ · Jurisprudência", u:"https://scon.stj.jus.br/SCON/",                            h:"scon.stj.jus.br",       s:"pesquisa de julgados" },
+  { n:"JOTA · Jurisprudência", u:"https://www.jota.info/tributos",                          h:"jota.info",             s:"STF, STJ e CARF" },
+
+  { g:"Imprensa especializada" },
+  { n:"JOTA · Tributos",    u:"https://www.jota.info/tributos",                             h:"jota.info",             s:"tributos" },
+  { n:"JOTA · Pulso da Reforma", u:"https://www.jota.info/coberturas-especiais/pulso-da-reforma", h:"jota.info",        s:"reforma tributaria" },
+  { n:"Valor Econômico",    u:"https://valor.globo.com/legislacao/",                        h:"valor.globo.com",       s:"legislacao e tributos" },
+  { n:"Diário Oficial da União", u:"https://www.in.gov.br/consulta/-/buscar/dou?q=tribut%C3%A1rio&s=todos", h:"in.gov.br", s:"atos federais" },
+
+  { g:"Estados e municípios" },
+  { n:"SEFAZ estaduais",    u:"SEFAZ de cada estado · notas e resolucoes",                  h:"sefaz.**.gov.br",       s:"ICMS e IBS estadual" },
+  { n:"CNM · Reforma",      u:"https://cnm.org.br/comunicacao/noticias",                    h:"cnm.org.br",            s:"ISS e IBS municipal" },
+  { n:"Serpro",             u:"https://www.serpro.gov.br/menu/noticias/noticias-2026",      h:"serpro.gov.br",         s:"sistemas e obrigacoes" }
+];
+
+/* =========================================================
+   ESTADO
+   ========================================================= */
+const state = {
+  itens: SNAPSHOT.slice(),
+  cat: "todas",
+  q: "",
+  onlyPrazo: false,
+  sort: "recent",
+  bytes: 0,
+  ultima: null,
+  varrendo: false,
+  online: false
+};
+
+const $  = (s) => document.querySelector(s);
+const el = (t,c,h) => { const e=document.createElement(t); if(c) e.className=c; if(h!=null) e.innerHTML=h; return e; };
+
+const norm = (s) => (s||"").toLowerCase()
+  .normalize("NFD").replace(/[̀-ͯ]/g,"");
+
+function fmtBR(iso){
+  if(!iso) return "—";
+  const [y,m,d] = iso.split("-");
+  return `${d}/${m}/${y}`;
+}
+function diffDias(iso){
+  const hoje = new Date(); hoje.setHours(0,0,0,0);
+  const alvo = new Date(iso+"T00:00:00");
+  return Math.round((alvo - hoje)/86400000);
+}
+function ago(iso){
+  if(!iso) return "";
+  const h = new Date(); h.setHours(0,0,0,0);
+  const t = new Date(iso+"T00:00:00");
+  const d = Math.round((h-t)/86400000);
+  if(d === 0) return "hoje";
+  if(d === 1) return "ontem";
+  if(d < 30)  return `há ${d} dias`;
+  const m = Math.round(d/30);
+  return `há ${m} ${m===1?"mês":"meses"}`;
+}
+
+/* =========================================================
+   KPIs
+   ========================================================= */
+function renderKPIs(){
+  const abertos = PRAZOS.filter(p => diffDias(p.data) >= 0 && diffDias(p.data) <= 45);
+  const novos   = state.itens.filter(i => i.novo);
+  const amanha  = PRAZOS.map(p=>diffDias(p.data)).filter(d=>d>=0).sort((a,b)=>a-b)[0];
+  const total   = state.itens.length;
+
+  $("#kpis").innerHTML = "";
+  const cards = [
+    { cls:"amber", b:"Fase da reforma", v:"Transição 2026",
+      s:"Ano de teste do IBS e da CBS, com alíquotas reduzidas e ajuste de leiautes nas obrigações acessórias.",
+      bar:32 },
+    { cls:"red", b:"Prazos abertos (45 dias)", v:String(abertos.length),
+      s: amanha != null ? `A janela mais próxima fecha em ${amanha} ${amanha===1?"dia":"dias"}.` : "Nenhum prazo na janela.",
+      bar: Math.min(100,(abertos.length/6)*100) },
+    { cls:"teal", b:"Itens no radar", v:String(total),
+      s:`${novos.length} ${novos.length===1?"item novo":"itens novos"} desde o último ciclo · ${abertos.length} com prazo.`,
+      bar:100 },
+    { cls:"blue", b:"Última varredura",
+      v: state.ultima ? state.ultima.toLocaleTimeString("pt-BR") : "--:--:--",
+      s: state.online ? `Conexão ativa · ${state.bytes} bytes recebidos.` : "Modo instantâneo: leitura externa bloqueada pelo navegador.",
+      bar: state.ultima ? 100 : 0 }
+  ];
+  cards.forEach(c=>{
+    const k = el("div","kpi "+c.cls);
+    k.appendChild(el("b",null,c.b));
+    k.appendChild(el("div","v",c.v));
+    k.appendChild(el("div","s",c.s));
+    const bar = el("div","bar"); bar.appendChild(el("i"));
+    bar.firstChild.style.width = c.bar+"%";
+    k.appendChild(bar);
+    $("#kpis").appendChild(k);
+  });
+}
+
+/* =========================================================
+   FEED
+   ========================================================= */
+function counts(){
+  const c = { todas: state.itens.length };
+  Object.keys(CAT).forEach(k => c[k] = 0);
+  state.itens.forEach(i => { c[i.cat] = (c[i.cat]||0)+1; });
+  return c;
+}
+
+function renderChips(){
+  const c = counts();
+  const box = $("#chips"); box.innerHTML = "";
+  const mk = (key,label,n) => {
+    const b = el("button","chip"+(state.cat===key?" on":""),
+      `${label}<span class="n">${n}</span>`);
+    b.onclick = () => { state.cat = key; renderChips(); renderFeed(); };
+    box.appendChild(b);
+  };
+  mk("todas","Todas", c.todas);
+  Object.keys(CAT).forEach(k => { if(c[k]) mk(k, CAT[k].nome, c[k]); });
+}
+
+function filtrados(){
+  const q = norm(state.q);
+  let arr = state.itens.filter(i => {
+    if(state.cat !== "todas" && i.cat !== state.cat) return false;
+    if(state.onlyPrazo){
+      if(!i.prazo) return false;
+      if(diffDias(i.prazo) < 0) return false;
+    }
+    if(q){
+      const blob = norm(`${i.titulo} ${i.resumo} ${i.fonte} ${CAT[i.cat].nome} ${i.data}`);
+      if(!blob.includes(q)) return false;
+    }
+    return true;
+  });
+  if(state.sort === "recent") arr.sort((a,b) => b.data.localeCompare(a.data) || (b.novo?1:0)-(a.novo?1:0));
+  if(state.sort === "prazo") arr.sort((a,b) => {
+    const da = a.prazo && diffDias(a.prazo) >= 0 ? diffDias(a.prazo) : 99999;
+    const db = b.prazo && diffDias(b.prazo) >= 0 ? diffDias(b.prazo) : 99999;
+    return da - db;
+  });
+  if(state.sort === "cat") arr.sort((a,b) => a.cat.localeCompare(b.cat) || b.data.localeCompare(a.data));
+  return arr;
+}
+
+function renderFeed(){
+  const arr = filtrados();
+  const ul = $("#feed"); ul.innerHTML = "";
+  $("#count").textContent = `${arr.length} de ${state.itens.length} itens`;
+
+  if(!arr.length){
+    ul.appendChild(el("li","empty","Nenhum item corresponde aos filtros aplicados. Ajuste a busca ou as áreas monitoradas."));
+    return;
+  }
+  arr.forEach(i => {
+    const li = el("li","item"+(i.novo?" fresh":""));
+    const d = diffDias(i.prazo || "9999-12-31");
+    const meta = el("div","i-meta");
+    meta.appendChild(el("span","cat "+CAT[i.cat].cls, CAT[i.cat].nome));
+    meta.appendChild(el("span","i-date", fmtBR(i.data)));
+    meta.appendChild(el("span","i-ago", ago(i.data)));
+    if(i.novo) meta.appendChild(el("span","novo","NOVO"));
+    if(i.prazo && d >= 0) meta.appendChild(el("span","prazo", `PRAZO ${fmtBR(i.prazo)} · ${d}d`));
+    li.appendChild(meta);
+
+    const h = el("h3");
+    const a = el("a", null, i.titulo);
+    a.href = i.url; a.target = "_blank"; a.rel = "noopener noreferrer";
+    h.appendChild(a);
+    li.appendChild(h);
+    li.appendChild(el("p", null, i.resumo));
+
+    const src = el("div","i-src");
+    src.appendChild(el("span", null, "Fonte: "+i.fonte));
+    const lk = el("a", null, "abrir original ↗");
+    lk.href = i.url; lk.target = "_blank"; lk.rel = "noopener noreferrer";
+    src.appendChild(lk);
+    li.appendChild(src);
+    ul.appendChild(li);
+  });
+}
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+function renderPrazos(){
+  const box = $("#prazos"); box.innerHTML = "";
+  const arr = PRAZOS.slice().sort((a,b)=>diffDias(a.data)-diffDias(b.data));
+  const abertos = arr.filter(p => diffDias(p.data) >= 0);
+  $("#prazoCount").textContent = `${abertos.length} em aberto`;
+
+  arr.forEach(p => {
+    const d = diffDias(p.data);
+    const row = el("div","prazo-row");
+    const cd = el("div","cd"+(d<0?" done":(d<=7?" hot":"")));
+    cd.appendChild(el("b", null, d < 0 ? "✓" : String(d)));
+    cd.appendChild(el("span", null, d < 0 ? "vencido" : (d===1?"dia":"dias")));
+    row.appendChild(cd);
+    const t = el("div","pr-txt");
+    t.appendChild(el("h4", null, p.t));
+    t.appendChild(el("span", null, fmtBR(p.data) + (d < 0 ? " · encerrado" : "")));
+    t.appendChild(el("p", null, p.d));
+    row.appendChild(t);
+    box.appendChild(row);
+  });
+}
+
+function renderFontes(){
+  const box = $("#fontes"); box.innerHTML = "";
+  FONTES.filter(f => f.n).forEach(f => {
+    const row = el("div","src-row");
+    const a = el("a","src-l");
+    a.href = f.u; a.target = "_blank"; a.rel = "noopener noreferrer";
+    a.appendChild(el("span","dot"));
+    const txt = el("div", null, "");
+    txt.appendChild(el("b", null, f.n));
+    txt.appendChild(el("div","host", f.h));
+    a.appendChild(txt);
+    row.appendChild(a);
+    let cls = "p-off", label = "instantâneo";
+    if(state.varrendo)    { cls = "p-wait"; label = "varrendo…"; }
+    else if(state.online) { cls = "p-ok";   label = "conectada"; }
+    row.appendChild(el("span","pill "+cls, label));
+    box.appendChild(row);
+  });
+}
+
+function renderFontesCatalogo(){
+  const box = $("#catalogo"); if(!box) return; box.innerHTML = "";
+  FONTES.forEach(f => {
+    if(f.g){ box.appendChild(el("div","src-grp", f.g)); return; }
+    const row = el("div","src-row");
+    const a = el("a","src-l");
+    a.href = f.u; a.target = "_blank"; a.rel = "noopener noreferrer";
+    a.appendChild(el("span","dot"));
+    const txt = el("div", null, "");
+    txt.appendChild(el("b", null, f.n));
+    txt.appendChild(el("div","host", f.h + " · " + f.s));
+    a.appendChild(txt);
+    row.appendChild(a);
+    box.appendChild(row);
+  });
+}
+
+function renderDist(){
+  const c = counts();
+  const max = Math.max(1, ...Object.keys(CAT).map(k => c[k]||0));
+  const box = $("#dist"); box.innerHTML = "";
+  Object.keys(CAT).forEach(k => {
+    const n = c[k]||0;
+    const r = el("div","dist-row");
+    const top = el("div","dist-top");
+    top.appendChild(el("span", null, CAT[k].nome));
+    top.appendChild(el("b", null, String(n)));
+    r.appendChild(top);
+    const bar = el("div","dist-bar");
+    bar.appendChild(el("i"));
+    bar.firstChild.style.width = ((n/max)*100)+"%";
+    bar.firstChild.style.background = CAT[k].cor;
+    r.appendChild(bar);
+    box.appendChild(r);
+  });
+}
+
+function log(msg, tone){
+  const box = $("#log");
+  const t = new Date().toLocaleTimeString("pt-BR");
+  const line = el("div", null, `<i>${t}</i> ${tone === "ok" ? "<b>"+msg+"</b>" : tone === "wait" ? "<u>"+msg+"</u>" : msg}`);
+  box.appendChild(line);
+  box.scrollTop = box.scrollHeight;
+  while(box.children.length > 40) box.removeChild(box.firstChild);
+}
+
+/* =========================================================
+   RELÓGIO + CONTAGEM AO VIVO
+   ========================================================= */
+const DIAS = ["domingo","segunda-feira","terça-feira","quarta-feira","quinta-feira","sexta-feira","sábado"];
+const MESES = ["janeiro","fevereiro","março","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"];
+
+function tick(){
+  const n = new Date();
+  $("#clock").textContent = n.toLocaleTimeString("pt-BR");
+  $("#clockDate").textContent = `${DIAS[n.getDay()]}, ${n.getDate()} de ${MESES[n.getMonth()]} de ${n.getFullYear()}`;
+}
+
+/* =========================================================
+   VARREDURA DE FONTES
+   ========================================================= */
+const PROXIES = [
+  (u) => u,
+  (u) => "https://api.allorigins.win/raw?url="+encodeURIComponent(u),
+  (u) => "https://api.codetabs.com/v1/proxy?quest="+encodeURIComponent(u)
+];
+const ALVOS = [
+  "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
+  "https://www.confaz.fazenda.gov.br/legislacao",
+  "https://cgibs.gov.br/",
+  "https://www.gov.br/carf/pt-br/assuntos/avisos-comunicados/2026",
+  "https://www.jota.info/coberturas-especiais/pulso-da-reforma",
+  "https://cnm.org.br/comunicacao/noticias",
+  "https://www.serpro.gov.br/menu/noticias/noticias-2026",
+  "https://valor.globo.com/legislacao/"
+];
+
+async function tentar(url){
+  for(const p of PROXIES){
+    try{
+      const ctl = new AbortController();
+      const to = setTimeout(()=>ctl.abort(), 9000);
+      const r = await fetch(p(url), { signal: ctl.signal, redirect:"follow" });
+      clearTimeout(to);
+      if(!r.ok) continue;
+      const txt = await r.text();
+      if(txt && txt.length > 800) return txt;
+    }catch(e){ /* próximo espelho */ }
+  }
+  return null;
+}
+
+function extrair(html){
+  const achados = [];
+  const vistos = new Set();
+  // datas no formato dd/mm/aaaa seguidas de um trecho de título
+  const re = /(\d{2}\/\d{2}\/20\d{2})[\s\S]{0,120}?([A-ZÁÉÍÓÚÂÊÔÃÕÇ][^<>|{}\n]{25,170})/g;
+  let m;
+  while((m = re.exec(html)) && achados.length < 12){
+    const chave = norm(m[2]).slice(0,45);
+    if(vistos.has(chave)) continue;
+    vistos.add(chave);
+    const [d,mo,y] = m[1].split("/");
+    const titulo = m[2].replace(/\s+/g," ").replace(/[*#_`]/g,"").trim().replace(/[.,;:-\s]+$/,"");
+    if(titulo.split(" ").length < 4) continue;
+    if(/^(Edital|Publicado|Compartilhe|Ir para|Você está)/i.test(titulo)) continue;
+    achados.push({ data:`${y}-${mo}-${d}`, titulo });
+  }
+  return achados;
+}
+
+const CAT_POR_ALVO = [
+  { re:/receitafederal/i,               cat:"receita",   nome:"Receita Federal · varredura" },
+  { re:/confaz/i,                       cat:"icms",      nome:"CONFAZ · varredura" },
+  { re:/cgibs/i,                        cat:"cgibs",     nome:"CGIBS · varredura" },
+  { re:/carf/i,                         cat:"carf",      nome:"CARF · varredura" },
+  { re:/jota.*pulso-da-reforma/i,       cat:"reforma",   nome:"JOTA · Pulso da Reforma" },
+  { re:/jota/i,                         cat:"judicial",  nome:"JOTA · Tributos" },
+  { re:/cnm\.org/i,                     cat:"municipal", nome:"CNM · varredura" },
+  { re:/serpro/i,                       cat:"receita",   nome:"Serpro · varredura" },
+  { re:/in\.gov\.br/i,                  cat:"legislacao",nome:"DOU · varredura" }
+];
+function classificar(url, titulo){
+  const blob = url + " " + titulo;
+  for(const c of CAT_POR_ALVO) if(c.re.test(blob)) return c;
+  return { cat:"receita", nome:"Imprensa especializada · varredura" };
+}
+
+async function scan(manual){
+  if(state.varrendo) return;
+  state.varrendo = true;
+  const btn = $("#scanBtn");
+  btn.classList.add("spin");
+  $("#scanFill").style.width = "15%";
+  renderFontes();
+  log(manual ? "Varredura manual iniciada." : "Varredura automática iniciada.", "wait");
+
+  let bytes = 0, novos = 0, respondeu = false;
+
+  for(const alvo of ALVOS){
+    const txt = await tentar(alvo);
+    $("#scanFill").style.width = "60%";
+    if(!txt) continue;
+    respondeu = true;
+    bytes += txt.length;
+    const achados = extrair(txt);
+    achados.forEach(a => {
+      const dup = state.itens.some(i => norm(i.titulo).slice(0,40) === norm(a.titulo).slice(0,40));
+      if(dup) return;
+      const cls = classificar(alvo, a.titulo);
+      state.itens.unshift(N({
+        data: a.data,
+        cat: cls.cat,
+        fonte: cls.nome,
+        titulo: a.titulo,
+        resumo: "Item capturado automaticamente na varredura das fontes públicas. Confirme o teor na publicação oficial antes de tomar decisões.",
+        url: alvo,
+        novo: true
+      }));
+      novos++;
+    });
+  }
+
+  state.bytes = bytes;
+  state.online = respondeu;
+  state.varrendo = false;
+  state.ultima = new Date();
+  btn.classList.remove("spin");
+  $("#scanFill").style.width = "100%";
+  setTimeout(()=>{ $("#scanFill").style.width = "0"; }, 900);
+
+  const pill = $("#livePill");
+  pill.classList.toggle("off", !respondeu);
+  $("#liveTxt").textContent = respondeu ? "Ao vivo" : "Instantâneo";
+
+  if(respondeu) log(`Conexão estabelecida · ${bytes.toLocaleString("pt-BR")} bytes · ${novos} ${novos===1?"item novo":"itens novos"}.`, "ok");
+  else log("Leitura externa bloqueada pelo navegador. Mantendo o instantâneo de 14/09/2026.", "off");
+
+  renderKPIs(); renderChips(); renderFeed(); renderFontes(); renderFontesCatalogo(); renderDist();
+}
+
+/* =========================================================
+   EVENTOS
+   ========================================================= */
+$("#q").addEventListener("input", e => { state.q = e.target.value; renderFeed(); });
+$("#onlyPrazo").addEventListener("change", e => { state.onlyPrazo = e.target.checked; renderFeed(); });
+$("#sort").addEventListener("change", e => { state.sort = e.target.value; renderFeed(); });
+$("#scanBtn").addEventListener("click", () => scan(true));
+
+
+/* ---------- DADOS GERADOS PELO COLETOR ---------- */
+async function carregarFeedPublico(){
+  try{
+    const r = await fetch('data/news.json?ts=' + Date.now(), { cache:'no-store' });
+    if(!r.ok) return;
+    const payload = await r.json();
+    const externos = Array.isArray(payload.items) ? payload.items : [];
+    externos.forEach(item => {
+      if(!item || !item.title || !item.url) return;
+      const dup = state.itens.some(i => i.url === item.url || norm(i.titulo).slice(0,50) === norm(item.title).slice(0,50));
+      if(dup) return;
+      const cat = item.category || 'receita';
+      state.itens.unshift(N({
+        data: (item.publishedAt || '').slice(0,10) || new Date().toISOString().slice(0,10),
+        cat: CAT[cat] ? cat : 'receita',
+        fonte: item.source || 'Fonte monitorada',
+        titulo: item.title,
+        resumo: item.summary || 'Publicação coletada automaticamente. Confirme o teor na fonte oficial.',
+        url: item.url,
+        novo: false
+      }));
+    });
+    if(payload.updatedAt){
+      state.ultima = new Date(payload.updatedAt);
+      state.online = true;
+      $('#livePill').classList.remove('off');
+      $('#liveTxt').textContent = 'Feed atualizado';
+      log(`Feed diário carregado · ${externos.length} itens disponíveis.`, 'ok');
+      renderKPIs(); renderChips(); renderFeed(); renderDist();
+    }
+  }catch(e){
+    log('Feed diário indisponível. Mantendo o instantâneo local.', 'off');
+  }
+}
+
+/* ---------- BOOT ---------- */
+tick(); setInterval(tick, 1000);
+carregarFeedPublico();
+renderKPIs(); renderChips(); renderFeed(); renderPrazos(); renderFontes(); renderFontesCatalogo(); renderDist();
+const nFontes = FONTES.filter(f => f.n).length;
+$("#srcCount").textContent = nFontes + " fontes";
+$("#catCount").textContent = nFontes + " no catálogo";
+log(`Painel iniciado com instantâneo de 14/09/2026 · ${state.itens.length} itens · ${nFontes} fontes monitoradas.`, "ok");
+log("Próxima varredura automática em 60 segundos.", "wait");
+setInterval(() => { renderPrazos(); }, 60000);
+setTimeout(() => scan(false), 2500);
+setInterval(() => scan(false), 60000);
+</script>
+</body>
+</html>

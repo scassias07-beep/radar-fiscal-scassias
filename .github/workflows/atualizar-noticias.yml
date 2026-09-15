@@ -1,0 +1,25 @@
+name: Atualizar notícias fiscais
+
+on:
+  schedule:
+    - cron: '17 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  atualizar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar o projeto
+        uses: actions/checkout@v4
+      - name: Coletar notícias
+        run: python3 collector/collect.py
+      - name: Publicar atualização
+        run: |
+          git config user.name 'radar-fiscal-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add data/news.json
+          git diff --cached --quiet || git commit -m 'Atualiza notícias fiscais'
+          git push
