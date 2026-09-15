@@ -113,6 +113,25 @@ CATEGORY_TERMS = [
 TRACKING_PARAMS_PREFIXES = ("utm_",)
 TRACKING_PARAMS = {"fbclid", "gclid", "mc_cid", "mc_eid"}
 
+IMPACT_RULES = {
+    "caixa": ("split payment", "fluxo de caixa", "caixa", "credito", "crédito", "ressarcimento", "aliquota", "alíquota", "precificacao", "precificação"),
+    "obrigacao": ("efd", "reinf", "dctf", "pgdas", "nfe", "nf-e", "nota fiscal", "sped", "declaracao", "declaração", "obrigacao", "obrigação", "ditr", "dirbi"),
+    "risco": ("stf", "stj", "carf", "multa", "autuacao", "autuação", "debito", "débito", "cobranca", "cobrança", "risco", "rejeicao", "rejeição"),
+    "reforma": ("reforma tributaria", "ibs", "cbs", "imposto seletivo", "split payment", "comite gestor", "comitê gestor"),
+    "judicial": ("stf", "stj", "tribunal", "tese", "repercussao geral", "repercussão geral"),
+    "prazo": ("vence", "prazo", "ate ", "até ", "amanha", "amanhã"),
+}
+
+IMPACT_LABELS = {
+    "caixa": "Impacto no caixa",
+    "obrigacao": "Obrigação acessória",
+    "risco": "Risco fiscal",
+    "oportunidade": "Oportunidade consultiva",
+    "reforma": "Reforma Tributária",
+    "judicial": "Decisão judicial",
+    "prazo": "Prazo urgente",
+}
+
 
 def clean(value: str | None) -> str:
     value = html.unescape(value or "")
@@ -218,6 +237,84 @@ def classify(title: str, summary: str, source: dict) -> str:
     return source.get("category", "receita")
 
 
+
+def strategic_analysis(title: str, summary: str, category: str, score: int) -> dict:
+    blob = norm(f"{title} {summary} {category}")
+    tags: list[str] = []
+    for key, terms in IMPACT_RULES.items():
+        if any(term_matches(blob, term) if term.strip() == term else term in blob for term in terms):
+            tags.append(key)
+    if category in {"reforma", "cgibs"} and "reforma" not in tags:
+        tags.append("reforma")
+    if category == "judicial" and "judicial" not in tags:
+        tags.append("judicial")
+    if tags or any(term_matches(blob, term) for term in ("simples nacional", "mei", "empresas", "contabilidade", "contabil", "governanca", "governança")):
+        tags.append("oportunidade")
+    tags = list(dict.fromkeys(tags))
+
+    opportunity_score = score + len(tags) * 5
+    if "prazo" in tags:
+        opportunity_score += 18
+    if "caixa" in tags:
+        opportunity_score += 12
+    if "risco" in tags:
+        opportunity_score += 10
+    if "reforma" in tags:
+        opportunity_score += 8
+
+    if opportunity_score >= 55 or "prazo" in tags:
+        priority = "alta"
+    elif opportunity_score >= 32 or "caixa" in tags or "risco" in tags:
+        priority = "media"
+    else:
+        priority = "baixa"
+
+    who = "Empresas e contabilidades que acompanham rotina fiscal."
+    if "reforma" in tags:
+        who = "Empresas no regime regular, contabilidades e áreas fiscal/financeira em adaptação ao IBS/CBS."
+    if "obrigacao" in tags:
+        who = "Contabilidades, financeiro e empresas com obrigações acessórias no período."
+    if "caixa" in tags:
+        who = "Empresas com vendas B2B, estoque, créditos tributários ou necessidade de precificação."
+    if "judicial" in tags:
+        who = "Empresas com teses tributárias, créditos, autuações ou operações similares."
+
+    action = "Ler a fonte original, salvar evidências e avaliar se há impacto em clientes ativos."
+    if "prazo" in tags:
+        action = "Checar o calendário fiscal, responsáveis e documentos necessários antes do vencimento."
+    elif "caixa" in tags:
+        action = "Simular impacto no fluxo de caixa, preços, créditos e contratos antes de 2027."
+    elif "reforma" in tags:
+        action = "Mapear processos, documentos fiscais, sistemas e decisões comerciais afetadas pela transição IBS/CBS."
+    elif "risco" in tags:
+        action = "Revisar exposição fiscal, documentação de suporte e oportunidade de tese/regularização."
+
+    if "prazo" in tags:
+        why = "há risco de perda de prazo ou multa"
+    elif "caixa" in tags:
+        why = "pode alterar fluxo de caixa e precificação"
+    elif "reforma" in tags:
+        why = "antecipa adaptação à Reforma Tributária"
+    elif "risco" in tags:
+        why = "reduz exposição fiscal e contencioso"
+    else:
+        why = "gera pauta consultiva para orientar clientes"
+
+    return {
+        "impactTags": tags,
+        "impactLabels": [IMPACT_LABELS[t] for t in tags if t in IMPACT_LABELS],
+        "priority": priority,
+        "opportunityScore": opportunity_score,
+        "whoAffected": who,
+        "recommendedAction": action,
+        "whyItMatters": why,
+        "contentAngles": {
+            "linkedin": f"Explique o impacto de '{title}' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+            "reels": f"Use '{title}' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+            "whatsapp": f"Alerta curto para clientes: resumo, impacto e próximo passo sobre '{title}'.",
+        },
+    }
+
 def iter_entries(root: ET.Element) -> list[ET.Element]:
     entries = []
     for node in root.iter():
@@ -243,18 +340,19 @@ def parse_feed(raw: bytes, source: dict) -> list[dict]:
             continue
         url = canonical_url(link)
         category = classify(title, summary, source)
-        result.append(
-            {
-                "id": hashlib.sha256(url.encode()).hexdigest()[:16],
-                "title": title[:220],
-                "url": url,
-                "source": source["name"],
-                "category": category,
-                "summary": (summary or "Publicação coletada automaticamente. Confirme o teor na fonte original.")[:360],
-                "publishedAt": parse_date(published),
-                "score": score,
-            }
-        )
+        item_summary = (summary or "Publicação coletada automaticamente. Confirme o teor na fonte original.")[:360]
+        item = {
+            "id": hashlib.sha256(url.encode()).hexdigest()[:16],
+            "title": title[:220],
+            "url": url,
+            "source": source["name"],
+            "category": category,
+            "summary": item_summary,
+            "publishedAt": parse_date(published),
+            "score": score,
+        }
+        item.update(strategic_analysis(title, item_summary, category, score))
+        result.append(item)
     return result
 
 
@@ -316,6 +414,9 @@ def main():
             source_status["error"] = error
         statuses.append(source_status)
 
+    for item in by_id.values():
+        if not item.get("impactTags"):
+            item.update(strategic_analysis(item.get("title", ""), item.get("summary", ""), item.get("category", "receita"), int(item.get("score", 0))))
     items = sorted(by_id.values(), key=lambda x: x.get("publishedAt", ""), reverse=True)[:MAX_ITEMS]
     payload = {
         "updatedAt": datetime.now(timezone.utc).isoformat(),
