@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-15T07:33:14.458877+00:00",
+  "updatedAt": "2026-09-15T08:34:11.800980+00:00",
   "items": [
     {
       "id": "f619a4925a594ac4",
@@ -357,7 +357,7 @@
       "category": "judicial",
       "summary": "Selic recebida por bancos corresponde a juros e correção monetária, devendo integrar o lucro operacional",
       "publishedAt": "2026-09-14T10:12:47+00:00",
-      "score": 26,
+      "score": 8,
       "impactTags": [
         "risco",
         "judicial",
@@ -927,7 +927,7 @@
       "source": "JOTA",
       "url": "https://www.jota.info/feed",
       "ok": true,
-      "items": 2
+      "items": 1
     },
     {
       "source": "IBPT",
