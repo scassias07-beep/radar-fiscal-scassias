@@ -468,7 +468,8 @@ def main():
                 },
             )
             with urlopen(req, timeout=int(source.get("timeout", TIMEOUT)), context=SSL_CONTEXT) as response:
-                raw = response.read()
+                max_bytes = int(source.get("maxBytes", 900_000 if source.get("type") == "html" else 0))
+                raw = response.read(max_bytes) if max_bytes > 0 else response.read()
             if source.get("type") == "html":
                 found = parse_html_links(raw, source)
             else:
