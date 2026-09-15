@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
 <style>
   :root{
     /* Painel executivo: grafite neutro, contraste AA+ e poucas cores semânticas. */
@@ -291,6 +292,45 @@
   .mini-btn:hover{border-color:#7a8593;background:#424a55;color:#fff}
   @media(max-width:900px){.exec-grid{grid-template-columns:1fr}.exec-box{border-right:0;border-bottom:1px solid var(--line-soft)}.strategic{grid-template-columns:1fr}.exec-hd{flex-direction:column}.tool-r{width:100%}.tool-r select,.impact-filter{flex:1 1 190px}.brand h1{font-size:24px}.kpi .v{font-size:34px}}
 
+
+
+  /* ---------- FILTROS AVANÇADOS + GRÁFICOS ---------- */
+  .filter-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:12px}
+  .filter-chip{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:#2d333a;color:var(--txt-2);border-radius:999px;min-height:38px;padding:6px 11px;font-size:13px;font-weight:700}
+  .filter-chip select,.filter-chip input{border:0;background:transparent;color:var(--txt);font:700 13px var(--font);min-height:24px;padding:0;outline:0;max-width:220px}
+  .filter-chip input[type="date"]{color-scheme:dark;max-width:145px}
+  .filter-chip.custom-range{display:none}
+  .filter-chip.custom-range.on{display:inline-flex}
+  .filter-status{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:14px;padding-top:13px;border-top:1px solid var(--line-soft)}
+  .filter-summary{font-size:14px;color:var(--txt-2);font-weight:700}
+  .clear-filters{display:none;cursor:pointer;border:1px solid #7a8593;background:#38404a;color:var(--txt);border-radius:999px;padding:8px 12px;font:800 13px var(--font)}
+  .clear-filters.on{display:inline-flex}
+  .clear-filters:hover{background:#454e59;color:#fff}
+  .charts-grid{display:grid;grid-template-columns:1fr;gap:18px;margin:24px 0}
+  .chart-card{border:1px solid var(--line);border-radius:var(--radius);background:var(--panel);overflow:hidden;min-height:270px}
+  .chart-hd{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;padding:16px 18px;border-bottom:1px solid var(--line-soft);background:var(--panel-2)}
+  .chart-hd h2{margin:0;font-size:14px;text-transform:uppercase;letter-spacing:.6px;color:var(--txt);font-weight:800}
+  .chart-hd p{margin:4px 0 0;color:var(--txt-2);font-size:13px;line-height:1.4}
+  .chart-body{height:250px;padding:16px 18px;position:relative}
+  .chart-body.sm{height:230px}
+  .chart-body canvas{width:100%!important;height:100%!important}
+  .chart-empty{display:grid;place-items:center;height:100%;color:var(--txt-2);font-size:14px;text-align:center}
+  .executive-shell{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:0;border-top:0}
+  .executive-main{min-width:0}
+  .exec-donut{border-left:1px solid var(--line-soft);background:#2b3036;display:flex;flex-direction:column;min-height:100%}
+  .exec-donut .chart-hd{background:transparent;border-bottom:1px solid var(--line-soft)}
+  .exec-donut .chart-body{height:238px;padding:14px 18px 18px}
+  .timeline{position:relative;margin:4px 0 16px;padding:24px 4px 8px;min-height:58px;border-bottom:1px solid var(--line-soft)}
+  .timeline-line{position:absolute;left:8px;right:8px;top:31px;height:4px;background:#3b414a;border-radius:999px}
+  .tl-marker{position:absolute;top:21px;width:22px;height:22px;border-radius:50%;border:3px solid var(--panel);transform:translateX(-50%);background:var(--neutral);cursor:pointer}
+  .tl-marker.hot{background:var(--danger)}
+  .tl-marker.warn{background:var(--warn)}
+  .tl-marker.neutral{background:var(--neutral)}
+  .tl-marker:hover{outline:3px solid #ffffff30}
+  .tl-caption{display:flex;justify-content:space-between;color:var(--txt-3);font:700 12px var(--mono);padding-top:28px}
+  .dist .chart-body{height:300px;padding:6px 0 0}
+  @media(max-width:1120px){.charts-grid,.executive-shell{grid-template-columns:1fr}.exec-donut{border-left:0;border-top:1px solid var(--line-soft)}}
+
   /* ---------- MODAL ---------- */
   .modal-backdrop{position:fixed;inset:0;background:#101215d9;backdrop-filter:blur(4px);z-index:50;display:none;align-items:center;justify-content:center;padding:18px}
   .modal-backdrop.on{display:flex}
@@ -349,11 +389,26 @@
       </div>
       <span class="pill p-wait" id="execPriority">prioridade —</span>
     </div>
-    <div class="exec-grid">
-      <div class="exec-box"><b>O que mudou hoje</b><ul id="execMudou"></ul></div>
-      <div class="exec-box"><b>Atenção imediata</b><p id="execAtencao">—</p></div>
-      <div class="exec-box"><b>Impacto comercial</b><p id="execImpacto">—</p></div>
-      <div class="exec-box"><b>Ação recomendada</b><p id="execAcao">—</p></div>
+    <div class="executive-shell">
+      <div class="executive-main">
+        <div class="exec-grid">
+          <div class="exec-box"><b>O que mudou hoje</b><ul id="execMudou"></ul></div>
+          <div class="exec-box"><b>Atenção imediata</b><p id="execAtencao">—</p></div>
+          <div class="exec-box"><b>Impacto comercial</b><p id="execImpacto">—</p></div>
+          <div class="exec-box"><b>Ação recomendada</b><p id="execAcao">—</p></div>
+        </div>
+      </div>
+      <aside class="exec-donut">
+        <div class="chart-hd"><div><h2>Prioridade atual</h2><p>Alta, média e baixa nos filtros ativos.</p></div></div>
+        <div class="chart-body"><canvas id="priorityChart"></canvas></div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="charts-grid">
+    <div class="chart-card">
+      <div class="chart-hd"><div><h2>Volume do radar</h2><p>Itens por dia nos últimos 90 dias, com destaque para hoje.</p></div></div>
+      <div class="chart-body"><canvas id="volumeChart"></canvas></div>
     </div>
   </section>
 
@@ -367,12 +422,12 @@
         </div>
         <div class="chips" id="chips"></div>
         <div class="tools">
-          <label class="switch">
+          <label class="switch filter-chip">
             <input type="checkbox" id="onlyPrazo">
-            <span>Somente itens com prazo em aberto</span>
+            <span>Somente prazos em aberto</span>
           </label>
           <div class="tool-r">
-            <label class="impact-filter">Impacto
+            <label class="filter-chip">Impacto
               <select id="impact">
                 <option value="todos">Todos</option>
                 <option value="caixa">Caixa</option>
@@ -382,20 +437,45 @@
                 <option value="prazo">Prazo urgente</option>
               </select>
             </label>
-            <select id="priorityFilter" title="Filtrar por prioridade">
-              <option value="todas">Todas as prioridades</option>
-              <option value="alta">Prioridade alta</option>
-              <option value="media">Prioridade média</option>
-              <option value="baixa">Prioridade baixa</option>
-            </select>
-            <select id="sort">
-              <option value="recent">Mais recentes</option>
-              <option value="prazo">Prazo mais próximo</option>
-              <option value="cat">Por área</option>
-              <option value="oportunidade">Oportunidade comercial</option>
-            </select>
-            <span style="font-size:12px;color:var(--txt-3)" id="count">—</span>
+            <label class="filter-chip">Prioridade
+              <select id="priorityFilter" title="Filtrar por prioridade">
+                <option value="todas">Todas</option>
+                <option value="alta">Alta</option>
+                <option value="media">Média</option>
+                <option value="baixa">Baixa</option>
+              </select>
+            </label>
+            <label class="filter-chip">Ordenar
+              <select id="sort">
+                <option value="recent">Mais recentes</option>
+                <option value="prazo">Prazo mais próximo</option>
+                <option value="cat">Por área</option>
+                <option value="oportunidade">Oportunidade comercial</option>
+              </select>
+            </label>
           </div>
+        </div>
+        <div class="filter-row">
+          <label class="filter-chip">Período
+            <select id="periodFilter">
+              <option value="todos">Todos</option>
+              <option value="hoje">Hoje</option>
+              <option value="7">Últimos 7 dias</option>
+              <option value="30">Últimos 30 dias</option>
+              <option value="90">Últimos 90 dias</option>
+              <option value="custom">Personalizado</option>
+            </select>
+          </label>
+          <label class="filter-chip custom-range" id="customStartWrap">De <input type="date" id="periodStart"></label>
+          <label class="filter-chip custom-range" id="customEndWrap">Até <input type="date" id="periodEnd"></label>
+          <label class="filter-chip">Fonte
+            <select id="sourceFilter"><option value="todas">Todas</option></select>
+          </label>
+        </div>
+        <div class="filter-status">
+          <span class="filter-summary" id="filterSummary">Nenhum filtro ativo</span>
+          <span style="font-size:13px;color:var(--txt-3)" id="count">—</span>
+          <button class="clear-filters" id="clearFilters" type="button">Limpar filtros</button>
         </div>
       </div>
       <ul id="feed"></ul>
@@ -406,7 +486,7 @@
 
       <div class="card">
         <div class="hd"><h2>Radar de prazos</h2><span class="pill p-wait" id="prazoCount">—</span></div>
-        <div class="bd" id="prazos"></div>
+        <div class="bd"><div class="timeline" id="prazoTimeline"></div><div id="prazos"></div></div>
       </div>
 
       <div class="card">
@@ -421,7 +501,7 @@
 
       <div class="card">
         <div class="hd"><h2>Volume por área</h2></div>
-        <div class="bd dist" id="dist"></div>
+        <div class="bd dist" id="dist"><div class="chart-body"><canvas id="areaChart"></canvas></div></div>
       </div>
 
       <div class="card">
@@ -683,6 +763,10 @@ const state = {
   prioridade: "todas",
   onlyPrazo: false,
   impact: "todos",
+  periodo: "todos",
+  periodStart: "",
+  periodEnd: "",
+  fonte: "todas",
   sort: "recent",
   bytes: 0,
   ultima: null,
@@ -981,17 +1065,26 @@ function prioridadeNome(p){
 function prioridadeCls(p){ return p === "alta" ? "p-alta" : p === "media" ? "p-media" : "p-baixa"; }
 
 
+function progressoTransicao2026(){
+  const inicio = new Date("2026-01-01T00:00:00");
+  const fim = new Date("2026-12-31T23:59:59");
+  const hoje = new Date();
+  const pct = Math.max(0, Math.min(100, ((hoje - inicio) / (fim - inicio)) * 100));
+  return Math.round(pct);
+}
+
 function renderKPIs(){
   const abertos = PRAZOS.filter(p => diffDias(p.data) >= 0 && diffDias(p.data) <= 45);
   const novos   = state.itens.filter(i => i.novo);
   const amanha  = PRAZOS.map(p=>diffDias(p.data)).filter(d=>d>=0).sort((a,b)=>a-b)[0];
   const total   = state.itens.length;
+  const fasePct = progressoTransicao2026();
 
   $("#kpis").innerHTML = "";
   const cards = [
-    { cls:"amber", b:"Fase da reforma", v:"Transição 2026",
-      s:"Ano de teste do IBS e da CBS, com alíquotas reduzidas e ajuste de leiautes nas obrigações acessórias.",
-      bar:32 },
+    { cls:"amber", b:"Fase da reforma", v:`${fasePct}%`,
+      s:"Progresso real de 2026, ano de teste do IBS/CBS e ajuste de leiautes.",
+      bar:fasePct },
     { cls:"red", b:"Prazos abertos (45 dias)", v:String(abertos.length),
       s: amanha != null ? `A janela mais próxima fecha em ${amanha} ${amanha===1?"dia":"dias"}.` : "Nenhum prazo na janela.",
       bar: Math.min(100,(abertos.length/6)*100) },
@@ -1018,10 +1111,55 @@ function renderKPIs(){
 /* =========================================================
    FEED
    ========================================================= */
+function mesmoDiaISO(a,b){ return (a||"").slice(0,10) === (b||"").slice(0,10); }
+function hojeISO(){ return new Date().toISOString().slice(0,10); }
+function diasDesde(iso){
+  if(!iso) return 999999;
+  const h = new Date(); h.setHours(0,0,0,0);
+  const d = new Date(iso.slice(0,10)+"T00:00:00");
+  return Math.round((h-d)/86400000);
+}
+function passaPeriodo(i){
+  if(state.periodo === "todos") return true;
+  if(!i.data) return false;
+  if(state.periodo === "hoje") return mesmoDiaISO(i.data, hojeISO());
+  if(["7","30","90"].includes(state.periodo)){
+    const d = diasDesde(i.data);
+    return d >= 0 && d <= Number(state.periodo);
+  }
+  if(state.periodo === "custom"){
+    const data = i.data.slice(0,10);
+    if(state.periodStart && data < state.periodStart) return false;
+    if(state.periodEnd && data > state.periodEnd) return false;
+    return true;
+  }
+  return true;
+}
+function itemFonteKey(i){ return norm(i.fonte || ""); }
+function passaFiltros(i, opts={}){
+  enriquecer(i);
+  const q = norm(state.q);
+  if(!opts.ignoreCat && state.cat !== "todas" && i.cat !== state.cat) return false;
+  if(state.impact !== "todos" && !(i.impactos||[]).includes(state.impact)) return false;
+  if(state.onlyPrazo){
+    if(!i.prazo) return false;
+    if(diffDias(i.prazo) < 0) return false;
+  }
+  if(state.prioridade !== "todas" && prioridadeItem(i) !== state.prioridade) return false;
+  if(state.fonte !== "todas" && !itemFonteKey(i).includes(state.fonte) && !state.fonte.includes(itemFonteKey(i))) return false;
+  if(!passaPeriodo(i)) return false;
+  if(q){
+    const blob = norm(`${i.titulo} ${i.resumo} ${i.fonte} ${CAT[i.cat]?.nome || ""} ${i.data} ${(i.impactos||[]).map(k=>IMPACT_LABELS[k]).join(" ")} ${i.quemAfeta||""} ${i.acaoRecomendada||""}`);
+    if(!blob.includes(q)) return false;
+  }
+  return true;
+}
+function baseFiltrada(ignoreCat=false){ return state.itens.filter(i => passaFiltros(i, {ignoreCat})); }
 function counts(){
-  const c = { todas: state.itens.length };
+  const arr = baseFiltrada(true);
+  const c = { todas: arr.length };
   Object.keys(CAT).forEach(k => c[k] = 0);
-  state.itens.forEach(i => { c[i.cat] = (c[i.cat]||0)+1; });
+  arr.forEach(i => { c[i.cat] = (c[i.cat]||0)+1; });
   return c;
 }
 
@@ -1031,30 +1169,61 @@ function renderChips(){
   const mk = (key,label,n) => {
     const b = el("button","chip"+(state.cat===key?" on":""),
       `${label}<span class="n">${n}</span>`);
-    b.onclick = () => { state.cat = key; renderChips(); renderFeed(); };
+    b.type = "button";
+    b.disabled = n === 0 && state.cat !== key;
+    b.onclick = () => { state.cat = key; refreshViews(); };
     box.appendChild(b);
   };
   mk("todas","Todas", c.todas);
-  Object.keys(CAT).forEach(k => { if(c[k]) mk(k, CAT[k].nome, c[k]); });
+  Object.keys(CAT).forEach(k => mk(k, CAT[k].nome, c[k]||0));
+}
+
+function filtrosAtivos(){
+  const ativos = [];
+  if(state.q.trim()) ativos.push("busca");
+  if(state.cat !== "todas") ativos.push("área");
+  if(state.prioridade !== "todas") ativos.push("prioridade");
+  if(state.impact !== "todos") ativos.push("impacto");
+  if(state.onlyPrazo) ativos.push("prazo");
+  if(state.periodo !== "todos") ativos.push("período");
+  if(state.fonte !== "todas") ativos.push("fonte");
+  return ativos;
+}
+function renderFilterSummary(arr){
+  const ativos = filtrosAtivos();
+  const txt = ativos.length ? `${ativos.length} ${ativos.length===1?"filtro ativo":"filtros ativos"}: ${ativos.join(", ")}` : "Nenhum filtro ativo";
+  $("#filterSummary").textContent = txt;
+  $("#clearFilters").classList.toggle("on", ativos.length > 0);
+  $("#count").textContent = `${arr.length} de ${state.itens.length} itens`;
+  const custom = state.periodo === "custom";
+  $("#customStartWrap").classList.toggle("on", custom);
+  $("#customEndWrap").classList.toggle("on", custom);
+}
+function limparFiltros(){
+  state.cat = "todas"; state.q = ""; state.prioridade = "todas"; state.impact = "todos";
+  state.onlyPrazo = false; state.periodo = "todos"; state.periodStart = ""; state.periodEnd = ""; state.fonte = "todas";
+  $("#q").value = ""; $("#priorityFilter").value = "todas"; $("#impact").value = "todos"; $("#onlyPrazo").checked = false;
+  $("#periodFilter").value = "todos"; $("#periodStart").value = ""; $("#periodEnd").value = ""; $("#sourceFilter").value = "todas";
+  refreshViews();
+}
+function popularFontesFiltro(){
+  const sel = $("#sourceFilter");
+  if(!sel) return;
+  const atual = sel.value || state.fonte;
+  const fontes = uniq([...FONTES.filter(f => f.n).map(f => f.n), ...state.itens.map(i => i.fonte).filter(Boolean)]).sort((a,b)=>a.localeCompare(b,"pt-BR"));
+  sel.innerHTML = '<option value="todas">Todas</option>';
+  fontes.forEach(f => {
+    const opt = document.createElement("option");
+    opt.value = norm(f);
+    opt.textContent = f;
+    sel.appendChild(opt);
+  });
+  if([...sel.options].some(o => o.value === atual)) sel.value = atual;
+  else { state.fonte = "todas"; sel.value = "todas"; }
 }
 
 function filtrados(){
-  const q = norm(state.q);
-  let arr = state.itens.filter(i => {
-    enriquecer(i);
-    if(state.cat !== "todas" && i.cat !== state.cat) return false;
-    if(state.impact !== "todos" && !(i.impactos||[]).includes(state.impact)) return false;
-    if(state.onlyPrazo){
-      if(!i.prazo) return false;
-      if(diffDias(i.prazo) < 0) return false;
-    }
-    if(state.prioridade !== "todas" && prioridadeItem(i) !== state.prioridade) return false;
-    if(q){
-      const blob = norm(`${i.titulo} ${i.resumo} ${i.fonte} ${CAT[i.cat].nome} ${i.data} ${(i.impactos||[]).map(k=>IMPACT_LABELS[k]).join(" ")} ${i.quemAfeta||""} ${i.acaoRecomendada||""}`);
-      if(!blob.includes(q)) return false;
-    }
-    return true;
-  });
+  let arr = baseFiltrada(false);
   if(state.sort === "recent") arr.sort((a,b) => b.data.localeCompare(a.data) || (b.novo?1:0)-(a.novo?1:0));
   if(state.sort === "prazo") arr.sort((a,b) => {
     const da = a.prazo && diffDias(a.prazo) >= 0 ? diffDias(a.prazo) : 99999;
@@ -1069,7 +1238,7 @@ function filtrados(){
 function renderFeed(){
   const arr = filtrados();
   const ul = $("#feed"); ul.innerHTML = "";
-  $("#count").textContent = `${arr.length} de ${state.itens.length} itens`;
+  renderFilterSummary(arr);
 
   if(!arr.length){
     ul.appendChild(el("li","empty","Nenhum item corresponde aos filtros aplicados. Ajuste a busca ou as áreas monitoradas."));
@@ -1130,6 +1299,7 @@ function renderPrazos(){
   const arr = PRAZOS.slice().sort((a,b)=>diffDias(a.data)-diffDias(b.data));
   const abertos = arr.filter(p => diffDias(p.data) >= 0);
   $("#prazoCount").textContent = `${abertos.length} em aberto`;
+  renderPrazoTimeline(arr);
 
   arr.forEach(p => {
     const d = diffDias(p.data);
@@ -1145,6 +1315,24 @@ function renderPrazos(){
     row.appendChild(t);
     box.appendChild(row);
   });
+}
+
+function renderPrazoTimeline(arr){
+  const box = $("#prazoTimeline"); if(!box) return;
+  box.innerHTML = "";
+  box.appendChild(el("div","timeline-line"));
+  arr.filter(p => diffDias(p.data) >= 0 && diffDias(p.data) <= 60).forEach(p => {
+    const d = diffDias(p.data);
+    const marker = el("span", "tl-marker "+(d<=7?"hot":d<=30?"warn":"neutral"));
+    marker.style.left = Math.max(2, Math.min(98, (d/60)*100)) + "%";
+    marker.title = `${p.t} · ${fmtBR(p.data)} · ${d} ${d===1?"dia":"dias"}`;
+    box.appendChild(marker);
+  });
+  const cap = el("div","tl-caption");
+  cap.appendChild(el("span", null, "Hoje"));
+  cap.appendChild(el("span", null, "+30 dias"));
+  cap.appendChild(el("span", null, "+60 dias"));
+  box.appendChild(cap);
 }
 
 function renderFontes(){
@@ -1184,24 +1372,92 @@ function renderFontesCatalogo(){
   });
 }
 
-function renderDist(){
+function renderDist(){ renderAreaChart(); }
+
+const charts = { volume:null, priority:null, area:null };
+function chartDefaults(){
+  if(!window.Chart) return;
+  Chart.defaults.color = "#d7dde4";
+  Chart.defaults.font.family = "IBM Plex Sans, system-ui, sans-serif";
+  Chart.defaults.font.size = 13;
+  Chart.defaults.borderColor = "#565d68";
+}
+function chartReady(id){
+  const canvas = $("#"+id);
+  if(!canvas) return null;
+  if(window.Chart) return canvas;
+  const body = canvas.parentElement;
+  if(body && !body.querySelector(".chart-empty")) body.innerHTML = '<div class="chart-empty">Gráfico indisponível: Chart.js não carregou.</div>';
+  return null;
+}
+function chartOptions(extra={}){
+  return Object.assign({
+    responsive:true,
+    maintainAspectRatio:false,
+    plugins:{
+      legend:{labels:{boxWidth:12,boxHeight:12,color:"#d7dde4"}},
+      tooltip:{backgroundColor:"#202327",titleColor:"#f4f6f8",bodyColor:"#d7dde4",borderColor:"#565d68",borderWidth:1,padding:10}
+    },
+    scales:{
+      x:{grid:{color:"#444b55"},ticks:{color:"#c1c9d2",maxRotation:0,autoSkip:true}},
+      y:{grid:{color:"#444b55"},ticks:{color:"#c1c9d2",precision:0}}
+    }
+  }, extra);
+}
+function datasUltimosDias(n=90){
+  const out=[]; const hoje=new Date(); hoje.setHours(0,0,0,0);
+  for(let i=n-1;i>=0;i--){ const d=new Date(hoje); d.setDate(hoje.getDate()-i); out.push(d.toISOString().slice(0,10)); }
+  return out;
+}
+function renderVolumeChart(){
+  const canvas = chartReady("volumeChart"); if(!canvas) return;
+  const dias = datasUltimosDias(90);
+  const cont = Object.fromEntries(dias.map(d=>[d,0]));
+  state.itens.forEach(i => { if(cont[i.data] != null && passaFiltros(i,{ignoreCat:false})) cont[i.data]++; });
+  const labels = dias.map(d => d.slice(5).split('-').reverse().join('/'));
+  const data = dias.map(d => cont[d]);
+  const today = hojeISO();
+  const pointColors = dias.map(d => d===today ? "#ff8a80" : "#7fb4ff");
+  const cfg = {
+    type:"line",
+    data:{labels,datasets:[{label:"Itens por dia",data,fill:true,tension:.28,borderColor:"#7fb4ff",backgroundColor:"rgba(127,180,255,.16)",pointRadius:dias.map(d=>d===today?5:2),pointHoverRadius:6,pointBackgroundColor:pointColors,pointBorderColor:pointColors,borderWidth:2}]},
+    options:chartOptions({plugins:{legend:{display:false},tooltip:chartOptions().plugins.tooltip},scales:{x:{grid:{display:false},ticks:{color:"#c1c9d2",maxTicksLimit:10}},y:{beginAtZero:true,grid:{color:"#444b55"},ticks:{color:"#c1c9d2",precision:0}}}})
+  };
+  if(charts.volume) charts.volume.destroy();
+  charts.volume = new Chart(canvas, cfg);
+}
+function prioridadeDistribuicao(arr){
+  const c={alta:0,media:0,baixa:0};
+  arr.forEach(i => c[prioridadeItem(i)]++);
+  return c;
+}
+function renderPriorityChart(){
+  const canvas = chartReady("priorityChart"); if(!canvas) return;
+  const c = prioridadeDistribuicao(filtrados());
+  const cfg = {type:"doughnut",data:{labels:["Alta","Média","Baixa"],datasets:[{data:[c.alta,c.media,c.baixa],backgroundColor:["#ff8a80","#f2c14e","#86d39a"],borderColor:"#2c3036",borderWidth:3,hoverOffset:4}]},options:chartOptions({cutout:"62%",plugins:{legend:{position:"bottom",labels:{color:"#d7dde4",boxWidth:12,boxHeight:12}},tooltip:chartOptions().plugins.tooltip},scales:{}})};
+  if(charts.priority) charts.priority.destroy();
+  charts.priority = new Chart(canvas, cfg);
+}
+function renderAreaChart(){
+  const canvas = chartReady("areaChart"); if(!canvas) return;
   const c = counts();
-  const max = Math.max(1, ...Object.keys(CAT).map(k => c[k]||0));
-  const box = $("#dist"); box.innerHTML = "";
-  Object.keys(CAT).forEach(k => {
-    const n = c[k]||0;
-    const r = el("div","dist-row");
-    const top = el("div","dist-top");
-    top.appendChild(el("span", null, CAT[k].nome));
-    top.appendChild(el("b", null, String(n)));
-    r.appendChild(top);
-    const bar = el("div","dist-bar");
-    bar.appendChild(el("i"));
-    bar.firstChild.style.width = ((n/max)*100)+"%";
-    bar.firstChild.style.background = CAT[k].cor;
-    r.appendChild(bar);
-    box.appendChild(r);
-  });
+  const labels = Object.keys(CAT).filter(k => c[k] > 0).map(k => CAT[k].nome);
+  const data = Object.keys(CAT).filter(k => c[k] > 0).map(k => c[k]);
+  const cfg = {type:"bar",data:{labels,datasets:[{label:"Itens",data,backgroundColor:"#7fb4ff",borderColor:"#9fc7ff",borderWidth:1,borderRadius:5}]},options:chartOptions({indexAxis:"y",plugins:{legend:{display:false},tooltip:chartOptions().plugins.tooltip},scales:{x:{beginAtZero:true,grid:{color:"#444b55"},ticks:{color:"#c1c9d2",precision:0}},y:{grid:{display:false},ticks:{color:"#d7dde4"}}}})};
+  if(charts.area) charts.area.destroy();
+  charts.area = new Chart(canvas, cfg);
+}
+function renderCharts(){
+  chartDefaults();
+  renderVolumeChart();
+  renderPriorityChart();
+  renderAreaChart();
+}
+function refreshViews(){
+  popularFontesFiltro();
+  renderChips();
+  renderFeed();
+  renderCharts();
 }
 
 function log(msg, tone){
@@ -1345,17 +1601,22 @@ async function scan(manual){
   if(respondeu) log(`Conexão estabelecida · ${bytes.toLocaleString("pt-BR")} bytes · ${novos} ${novos===1?"item novo":"itens novos"}.`, "ok");
   else log("Leitura externa bloqueada pelo navegador. Mantendo o instantâneo de 14/09/2026.", "off");
 
-  renderKPIs(); renderExecutive(); renderChips(); renderFeed(); renderFontes(); renderFontesCatalogo(); renderDist();
+  renderKPIs(); renderExecutive(); refreshViews(); renderFontes(); renderFontesCatalogo();
 }
 
 /* =========================================================
    EVENTOS
    ========================================================= */
-$("#q").addEventListener("input", e => { state.q = e.target.value; renderFeed(); });
-$("#onlyPrazo").addEventListener("change", e => { state.onlyPrazo = e.target.checked; renderFeed(); renderExecutive(); });
-$("#impact").addEventListener("change", e => { state.impact = e.target.value; renderFeed(); });
-$("#priorityFilter").addEventListener("change", e => { state.prioridade = e.target.value; renderFeed(); });
-$("#sort").addEventListener("change", e => { state.sort = e.target.value; renderFeed(); });
+$("#q").addEventListener("input", e => { state.q = e.target.value; refreshViews(); });
+$("#onlyPrazo").addEventListener("change", e => { state.onlyPrazo = e.target.checked; renderExecutive(); refreshViews(); });
+$("#impact").addEventListener("change", e => { state.impact = e.target.value; refreshViews(); });
+$("#priorityFilter").addEventListener("change", e => { state.prioridade = e.target.value; refreshViews(); });
+$("#periodFilter").addEventListener("change", e => { state.periodo = e.target.value; refreshViews(); });
+$("#periodStart").addEventListener("change", e => { state.periodStart = e.target.value; state.periodo = "custom"; $("#periodFilter").value = "custom"; refreshViews(); });
+$("#periodEnd").addEventListener("change", e => { state.periodEnd = e.target.value; state.periodo = "custom"; $("#periodFilter").value = "custom"; refreshViews(); });
+$("#sourceFilter").addEventListener("change", e => { state.fonte = e.target.value; refreshViews(); });
+$("#clearFilters").addEventListener("click", limparFiltros);
+$("#sort").addEventListener("change", e => { state.sort = e.target.value; refreshViews(); });
 $("#scanBtn").addEventListener("click", () => scan(true));
 $("#modalClose").addEventListener("click", fecharModalConteudo);
 $("#contentModal").addEventListener("click", e => { if(e.target.id === "contentModal") fecharModalConteudo(); });
@@ -1399,7 +1660,7 @@ async function carregarFeedPublico(){
       $('#livePill').classList.remove('off');
       $('#liveTxt').textContent = 'Feed atualizado';
       log(`Feed diário carregado · ${externos.length} itens disponíveis.`, 'ok');
-      renderKPIs(); renderExecutive(); renderChips(); renderFeed(); renderDist();
+      renderKPIs(); renderExecutive(); refreshViews();
     }
   }catch(e){
     log('Feed diário indisponível. Mantendo o instantâneo local.', 'off');
@@ -1409,7 +1670,7 @@ async function carregarFeedPublico(){
 /* ---------- BOOT ---------- */
 tick(); setInterval(tick, 1000);
 carregarFeedPublico();
-renderKPIs(); renderExecutive(); renderChips(); renderFeed(); renderPrazos(); renderFontes(); renderFontesCatalogo(); renderDist();
+renderKPIs(); renderExecutive(); renderPrazos(); renderFontes(); renderFontesCatalogo(); refreshViews();
 const nFontes = FONTES.filter(f => f.n).length;
 $("#srcCount").textContent = nFontes + " fontes";
 $("#catCount").textContent = nFontes + " no catálogo";
