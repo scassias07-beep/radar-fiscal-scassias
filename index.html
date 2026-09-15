@@ -270,10 +270,41 @@
   .exec-hd h2{margin:0;font-size:14px;text-transform:uppercase;letter-spacing:.65px;color:var(--txt-3);font-weight:800}
   .exec-hd p{margin:7px 0 0;color:var(--txt);font-size:24px;font-weight:700;letter-spacing:-.45px;line-height:1.25;max-width:980px}
   .exec-grid{display:grid;grid-template-columns:1.25fr repeat(3,1fr);gap:0;border-top:none}
-  .exec-box{padding:18px 18px 20px;border-right:1px solid var(--line-soft);min-height:128px;background:#2b3036}
-  .exec-box:nth-child(even){background:#30353c}
+  .exec-box{
+    --exec-accent:var(--accent);
+    --exec-bg:#2b3036;
+    --exec-bg-hover:#343d49;
+    --exec-glow:rgba(127,180,255,.22);
+    padding:20px 20px 22px;border-right:1px solid var(--line-soft);min-height:132px;
+    background:
+      linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,0)),
+      linear-gradient(90deg,color-mix(in srgb,var(--exec-accent) 18%,transparent),transparent 34%),
+      var(--exec-bg);
+    border-top:3px solid var(--exec-accent);
+    position:relative;isolation:isolate;
+    transition:background .18s ease,border-color .18s ease,box-shadow .18s ease,transform .18s ease;
+  }
+  .exec-box:nth-child(1){--exec-accent:#7fb4ff;--exec-bg:#293441;--exec-bg-hover:#33455a;--exec-glow:rgba(127,180,255,.26)}
+  .exec-box:nth-child(2){--exec-accent:#ff8a80;--exec-bg:#3a2b2b;--exec-bg-hover:#4b3332;--exec-glow:rgba(255,138,128,.24)}
+  .exec-box:nth-child(3){--exec-accent:#f2c14e;--exec-bg:#383322;--exec-bg-hover:#494128;--exec-glow:rgba(242,193,78,.22)}
+  .exec-box:nth-child(4){--exec-accent:#86d39a;--exec-bg:#28382e;--exec-bg-hover:#334a3a;--exec-glow:rgba(134,211,154,.22)}
+  .exec-box::after{
+    content:"";position:absolute;inset:0;z-index:-1;opacity:0;
+    background:radial-gradient(460px 150px at 50% 0%,var(--exec-glow),transparent 68%);
+    transition:opacity .18s ease;
+  }
+  .exec-box:hover,.exec-box:focus-within{
+    background:
+      linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.01)),
+      linear-gradient(90deg,color-mix(in srgb,var(--exec-accent) 26%,transparent),transparent 42%),
+      var(--exec-bg-hover);
+    box-shadow:0 0 0 1px color-mix(in srgb,var(--exec-accent) 46%,transparent),0 14px 34px rgba(0,0,0,.22),0 0 28px var(--exec-glow);
+    transform:translateY(-2px);
+  }
+  .exec-box:hover::after,.exec-box:focus-within::after{opacity:1}
   .exec-box:last-child{border-right:0}
   .exec-box b{display:block;font-size:13px;color:var(--txt);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;font-weight:800}
+  .exec-box b::before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--exec-accent);margin-right:8px;box-shadow:0 0 0 3px color-mix(in srgb,var(--exec-accent) 20%,transparent)}
   .exec-box p,.exec-box ul{margin:0;color:var(--txt-2);font-size:15px;line-height:1.55;padding-left:0}
   .exec-box li{margin:0 0 7px 18px}
   .impact-filter{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--txt-2);font-weight:700}
@@ -290,7 +321,7 @@
   .content-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}
   .mini-btn{cursor:pointer;border:1px solid var(--line);background:#38404a;color:var(--txt);border-radius:var(--radius-sm);padding:8px 10px;font:700 13px var(--font)}
   .mini-btn:hover{border-color:#7a8593;background:#424a55;color:#fff}
-  @media(max-width:900px){.exec-grid{grid-template-columns:1fr}.exec-box{border-right:0;border-bottom:1px solid var(--line-soft)}.strategic{grid-template-columns:1fr}.exec-hd{flex-direction:column}.tool-r{width:100%}.tool-r select,.impact-filter{flex:1 1 190px}.brand h1{font-size:24px}.kpi .v{font-size:34px}}
+  @media(max-width:900px){.exec-grid{grid-template-columns:1fr}.exec-box{border-right:0;border-bottom:1px solid var(--line-soft);border-top-width:0;border-left:4px solid var(--exec-accent);transform:none}.exec-box:hover,.exec-box:focus-within{transform:none;box-shadow:0 0 0 1px color-mix(in srgb,var(--exec-accent) 44%,transparent),0 0 20px var(--exec-glow)}.strategic{grid-template-columns:1fr}.exec-hd{flex-direction:column}.tool-r{width:100%}.tool-r select,.impact-filter{flex:1 1 190px}.brand h1{font-size:24px}.kpi .v{font-size:34px}}
 
 
 
