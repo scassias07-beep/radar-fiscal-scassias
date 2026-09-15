@@ -266,6 +266,16 @@
   .mini-btn{cursor:pointer;border:1px solid var(--line);background:#101a2d;color:var(--txt-2);border-radius:8px;padding:6px 9px;font:600 11.5px inherit}
   .mini-btn:hover{border-color:var(--amber-dim);color:var(--txt)}
   @media(max-width:900px){.exec-grid{grid-template-columns:1fr}.exec-box{border-right:0;border-bottom:1px solid var(--line-soft)}.strategic{grid-template-columns:1fr}}
+
+  .modal-backdrop{position:fixed;inset:0;background:#020617cc;backdrop-filter:blur(8px);z-index:50;display:none;align-items:center;justify-content:center;padding:18px}
+  .modal-backdrop.on{display:flex}
+  .modal{width:min(980px,100%);max-height:92vh;overflow:auto;border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,#121b2f,#090f1c);box-shadow:0 24px 80px #0008}
+  .modal-hd{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding:18px 20px;border-bottom:1px solid var(--line-soft);background:#0f182a;position:sticky;top:0;z-index:2}
+  .modal-hd h2{margin:0;font-size:16px;letter-spacing:-.2px}.modal-hd p{margin:5px 0 0;color:var(--txt-2);font-size:12.5px;line-height:1.45}
+  .modal-close{border:1px solid var(--line);background:#0a1120;color:var(--txt-2);border-radius:10px;width:36px;height:36px;cursor:pointer;font-size:20px;line-height:1}.modal-close:hover{color:var(--txt);border-color:var(--amber-dim)}
+  .modal-tabs{display:flex;gap:8px;flex-wrap:wrap;padding:14px 20px 0}.modal-tab{cursor:pointer;border:1px solid var(--line);background:#101a2d;color:var(--txt-2);border-radius:999px;padding:7px 12px;font:700 12px inherit}.modal-tab.on{background:#f5b13d1c;border-color:#f5b13d66;color:var(--amber)}
+  .modal-body{padding:16px 20px 20px}.content-output{width:100%;min-height:290px;resize:vertical;border:1px solid var(--line);border-radius:12px;background:#070d19;color:var(--txt);padding:14px;font:13px/1.55 var(--mono);outline:none}.content-output:focus{border-color:var(--amber-dim);box-shadow:0 0 0 3px #f5b13d18}
+  .modal-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}.modal-actions .btn{font-size:12px;padding:8px 12px;text-decoration:none}.modal-note{margin-top:10px;color:var(--txt-3);font-size:12px;line-height:1.45}
 </style>
 </head>
 <body>
@@ -388,6 +398,28 @@
     <p><b style="color:var(--txt-2)">Instantâneo base coletado em 14/09/2026.</b> O painel acompanha autoridades fiscais (Receita Federal, CGIBS, CONFAZ, CARF e Diário Oficial da União), o Judiciário (STF e STJ), a imprensa especializada (JOTA e Valor Econômico) e a esfera estadual e municipal (SEFAZ, CNM e Serpro), tentando uma nova leitura a cada 60 segundos. Quando o navegador bloqueia a leitura externa, o painel avisa no log e no selo do topo e mantém o último instantâneo — o relógio e as contagens seguem em tempo real.</p>
     <p>Conteúdo informativo de apoio ao acompanhamento fiscal. Não substitui a consulta ao texto oficial publicado no Diário Oficial ou nos canais das autoridades fiscais.</p>
   </footer>
+</div>
+
+<div class="modal-backdrop" id="contentModal" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-hd">
+      <div>
+        <h2 id="modalTitle">Central de conteúdo SCASSIAS</h2>
+        <p id="modalSubtitle">Escolha o formato, revise o texto e copie para publicar ou editar.</p>
+      </div>
+      <button class="modal-close" id="modalClose" type="button" aria-label="Fechar">×</button>
+    </div>
+    <div class="modal-tabs" id="modalTabs"></div>
+    <div class="modal-body">
+      <textarea class="content-output" id="modalOutput" spellcheck="true"></textarea>
+      <div class="modal-actions">
+        <button class="btn" id="copyModal" type="button">Copiar texto</button>
+        <a class="btn" href="https://www.canva.com/" target="_blank" rel="noopener noreferrer">Abrir Canva ↗</a>
+        <a class="btn" href="https://chat.openai.com/" target="_blank" rel="noopener noreferrer">Abrir ChatGPT ↗</a>
+      </div>
+      <div class="modal-note">Dica: o botão já deixa o texto pronto aqui dentro do Radar. Use Canva/ChatGPT só se quiser transformar em arte, carrossel ou refinar a linguagem.</div>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -726,20 +758,163 @@ function renderExecutive(){
   $("#execAcao").textContent = r.top[0] ? r.top[0].acaoRecomendada : "Selecionar um tema prioritário e transformar em orientação para clientes.";
 }
 
-function copiarTexto(txt){
-  if(navigator.clipboard) navigator.clipboard.writeText(txt);
-  log("Texto de conteúdo gerado e copiado para a área de transferência.", "ok");
-}
+const MODAL_FORMATS = [
+  ["linkedin", "LinkedIn"],
+  ["carrossel", "Carrossel"],
+  ["reels", "Reels"],
+  ["whatsapp", "WhatsApp"],
+  ["email", "E-mail"]
+];
+let modalItem = null;
+let modalTipo = "linkedin";
+
 function textoPost(i,tipo){
   enriquecer(i);
-  if(tipo === "reels") return `Roteiro Reels SCASSIAS\nGancho: ${i.titulo}\nContexto: ${i.resumo}\nPor que importa: ${i.porqueImporta}.\nAção: ${i.acaoRecomendada}\nCTA: Quer entender o impacto disso na sua empresa? Fale com a SCASSIAS.`;
-  if(tipo === "whatsapp") return `Alerta fiscal SCASSIAS: ${i.titulo}\n\nResumo: ${i.resumo}\n\nImpacto: ${i.porqueImporta}.\nAção recomendada: ${i.acaoRecomendada}\n\nFonte: ${i.url}`;
-  return `Post LinkedIn SCASSIAS\n\n${i.titulo}\n\n${i.resumo}\n\nPor que isso importa: ${i.porqueImporta}.\nQuem deve olhar: ${i.quemAfeta}\nPróximo passo: ${i.acaoRecomendada}\n\n#ReformaTributaria #GestaoFiscal #SCASSIAS`;
+  if(tipo === "carrossel") return `Carrossel Instagram SCASSIAS
+
+Slide 1 — Gancho
+${i.titulo}
+
+Slide 2 — O que aconteceu
+${i.resumo}
+
+Slide 3 — Por que importa
+${i.porqueImporta}.
+
+Slide 4 — Quem precisa olhar
+${i.quemAfeta}
+
+Slide 5 — Próximo passo
+${i.acaoRecomendada}
+
+Slide 6 — CTA
+Quer entender como isso afeta sua empresa ou seus clientes? Fale com a SCASSIAS.
+
+Legenda:
+Tema fiscal importante no radar. Antes de decidir, confirme a fonte oficial e avalie o impacto no processo fiscal, financeiro e comercial.
+
+Fonte: ${i.url}`;
+  if(tipo === "reels") return `Roteiro Reels SCASSIAS
+
+Gancho inicial:
+Atenção: ${i.titulo}
+
+Cena 1 — Contexto:
+${i.resumo}
+
+Cena 2 — Por que importa:
+${i.porqueImporta}.
+
+Cena 3 — Quem deve prestar atenção:
+${i.quemAfeta}
+
+Cena 4 — Ação prática:
+${i.acaoRecomendada}
+
+Fechamento/CTA:
+Salve este vídeo e acompanhe a SCASSIAS para não perder mudanças fiscais que impactam empresas e contabilidades.
+
+Fonte: ${i.url}`;
+  if(tipo === "whatsapp") return `Alerta fiscal SCASSIAS
+
+${i.titulo}
+
+Resumo: ${i.resumo}
+
+Impacto: ${i.porqueImporta}.
+
+Quem deve olhar: ${i.quemAfeta}
+
+Ação recomendada: ${i.acaoRecomendada}
+
+Fonte: ${i.url}`;
+  if(tipo === "email") return `Assunto: Alerta fiscal — ${i.titulo}
+
+Olá,
+
+Identificamos uma atualização fiscal relevante no Radar SCASSIAS:
+
+${i.titulo}
+
+Resumo:
+${i.resumo}
+
+Por que isso importa:
+${i.porqueImporta}.
+
+Quem pode ser afetado:
+${i.quemAfeta}
+
+Próximo passo recomendado:
+${i.acaoRecomendada}
+
+Fonte original:
+${i.url}
+
+Atenciosamente,
+SCASSIAS ADVISORS`;
+  return `Post LinkedIn SCASSIAS
+
+${i.titulo}
+
+${i.resumo}
+
+Por que isso importa:
+${i.porqueImporta}.
+
+Quem deve olhar:
+${i.quemAfeta}
+
+Próximo passo:
+${i.acaoRecomendada}
+
+Na prática, esse é o tipo de mudança que empresas e contabilidades não podem acompanhar só “quando sobrar tempo”. Monitorar antes ajuda a reduzir risco, organizar processo e transformar obrigação fiscal em decisão estratégica.
+
+Fonte: ${i.url}
+
+#ReformaTributaria #GestaoFiscal #Contabilidade #SCASSIAS`;
 }
 
-/* =========================================================
-   KPIs
-   ========================================================= */
+function renderModalTabs(){
+  const box = $("#modalTabs"); if(!box) return;
+  box.innerHTML = "";
+  MODAL_FORMATS.forEach(([tipo,label])=>{
+    const b = el("button", "modal-tab"+(tipo===modalTipo?" on":""), label);
+    b.type = "button";
+    b.addEventListener("click", () => { modalTipo = tipo; atualizarModal(); });
+    box.appendChild(b);
+  });
+}
+
+function atualizarModal(){
+  if(!modalItem) return;
+  renderModalTabs();
+  $("#modalTitle").textContent = MODAL_FORMATS.find(([t])=>t===modalTipo)?.[1] + " — conteúdo SCASSIAS";
+  $("#modalSubtitle").textContent = modalItem.titulo;
+  $("#modalOutput").value = textoPost(modalItem, modalTipo);
+}
+
+function abrirModalConteudo(i,tipo){
+  modalItem = i;
+  modalTipo = tipo || "linkedin";
+  atualizarModal();
+  const m = $("#contentModal");
+  m.classList.add("on");
+  m.setAttribute("aria-hidden", "false");
+  setTimeout(()=>$("#modalOutput").focus(), 50);
+}
+
+function fecharModalConteudo(){
+  const m = $("#contentModal");
+  m.classList.remove("on");
+  m.setAttribute("aria-hidden", "true");
+}
+
+function copiarTexto(txt){
+  if(navigator.clipboard) navigator.clipboard.writeText(txt);
+  log("Texto de conteúdo copiado para a área de transferência.", "ok");
+}
+
 function renderKPIs(){
   const abertos = PRAZOS.filter(p => diffDias(p.data) >= 0 && diffDias(p.data) <= 45);
   const novos   = state.itens.filter(i => i.novo);
@@ -861,10 +1036,10 @@ function renderFeed(){
     strategic.appendChild(el("div", null, `<b>Ação recomendada</b><span>${i.acaoRecomendada}</span>`));
     li.appendChild(strategic);
     const actions = el("div","content-actions");
-    [["linkedin","Gerar post"],["reels","Gerar Reels"],["whatsapp","WhatsApp"]].forEach(([tipo,label])=>{
+    [["linkedin","Gerar post"],["carrossel","Carrossel"],["reels","Reels"],["whatsapp","WhatsApp"]].forEach(([tipo,label])=>{
       const b = el("button","mini-btn",label);
       b.type = "button";
-      b.addEventListener("click", () => copiarTexto(textoPost(i,tipo)));
+      b.addEventListener("click", () => abrirModalConteudo(i,tipo));
       actions.appendChild(b);
     });
     li.appendChild(actions);
@@ -1113,6 +1288,10 @@ $("#onlyPrazo").addEventListener("change", e => { state.onlyPrazo = e.target.che
 $("#impact").addEventListener("change", e => { state.impact = e.target.value; renderFeed(); });
 $("#sort").addEventListener("change", e => { state.sort = e.target.value; renderFeed(); });
 $("#scanBtn").addEventListener("click", () => scan(true));
+$("#modalClose").addEventListener("click", fecharModalConteudo);
+$("#contentModal").addEventListener("click", e => { if(e.target.id === "contentModal") fecharModalConteudo(); });
+$("#copyModal").addEventListener("click", () => copiarTexto($("#modalOutput").value));
+document.addEventListener("keydown", e => { if(e.key === "Escape") fecharModalConteudo(); });
 
 
 /* ---------- DADOS GERADOS PELO COLETOR ---------- */
