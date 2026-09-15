@@ -1,6 +1,68 @@
 {
-  "updatedAt": "2026-09-15T11:29:56.155863+00:00",
+  "updatedAt": "2026-09-15T12:36:09.277681+00:00",
   "items": [
+    {
+      "id": "e5f64f97557805af",
+      "title": "Receita apresenta modelo de cálculo da CBS ao TCU sem estimar alíquota",
+      "url": "https://www.contabeis.com.br/noticias/79408/receita-apresenta-modelo-de-calculo-da-cbs-ao-tcu-sem-estimar-aliquota",
+      "source": "Portal Contábeis",
+      "category": "reforma",
+      "summary": "Receita envia modelo de cálculo da CBS ao TCU; tribunal tem até 30 de outubro para propor alíquota que valerá a partir de 2027. Leia mais em https://www.contabeis.com.br/noticias/79408/receita-apresenta-modelo-de-calculo-da-cbs-ao-tcu-sem-estimar-aliquota/",
+      "publishedAt": "2026-09-15T12:30:01+00:00",
+      "score": 10,
+      "impactTags": [
+        "caixa",
+        "reforma",
+        "judicial",
+        "prazo",
+        "oportunidade"
+      ],
+      "impactLabels": [
+        "Impacto no caixa",
+        "Reforma Tributária",
+        "Decisão judicial",
+        "Prazo urgente",
+        "Oportunidade consultiva"
+      ],
+      "priority": "alta",
+      "opportunityScore": 73,
+      "whoAffected": "Empresas com teses tributárias, créditos, autuações ou operações similares.",
+      "recommendedAction": "Checar o calendário fiscal, responsáveis e documentos necessários antes do vencimento.",
+      "whyItMatters": "há risco de perda de prazo ou multa",
+      "contentAngles": {
+        "linkedin": "Explique o impacto de 'Receita apresenta modelo de cálculo da CBS ao TCU sem estimar alíquota' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'Receita apresenta modelo de cálculo da CBS ao TCU sem estimar alíquota' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Receita apresenta modelo de cálculo da CBS ao TCU sem estimar alíquota'."
+      }
+    },
+    {
+      "id": "fd4e80ef0bc147f5",
+      "title": "Receita publica APIs para apuração da CBS",
+      "url": "https://www.contabeis.com.br/noticias/79409/receita-publica-apis-para-apuracao-da-cbs",
+      "source": "Portal Contábeis",
+      "category": "reforma",
+      "summary": "Receita Federal divulga documentação técnica de novas APIs gratuitas para consulta de débitos, créditos e pagamentos da CBS . Leia mais em https://www.contabeis.com.br/noticias/79409/receita-publica-apis-para-apuracao-da-cbs/",
+      "publishedAt": "2026-09-15T12:00:01+00:00",
+      "score": 15,
+      "impactTags": [
+        "reforma",
+        "oportunidade"
+      ],
+      "impactLabels": [
+        "Reforma Tributária",
+        "Oportunidade consultiva"
+      ],
+      "priority": "media",
+      "opportunityScore": 33,
+      "whoAffected": "Empresas no regime regular, contabilidades e áreas fiscal/financeira em adaptação ao IBS/CBS.",
+      "recommendedAction": "Mapear processos, documentos fiscais, sistemas e decisões comerciais afetadas pela transição IBS/CBS.",
+      "whyItMatters": "antecipa adaptação à Reforma Tributária",
+      "contentAngles": {
+        "linkedin": "Explique o impacto de 'Receita publica APIs para apuração da CBS' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'Receita publica APIs para apuração da CBS' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Receita publica APIs para apuração da CBS'."
+      }
+    },
     {
       "id": "839698d43c1d2578",
       "title": "Carf mantém maior parte de cobrança bilionária de IRPJ/CSLL contra Marfrig",
@@ -505,11 +567,11 @@
       "category": "legislacao",
       "summary": "Nova tributação mínima para alta renda muda a comparação entre CDB e LCI. Entenda como o IR pode influenciar a escolha entre os investimentos. Leia mais em https://www.contabeis.com.br/noticias/79370/cdb-ou-lci-nova-regra-do-ir-muda-escolha/",
       "publishedAt": "2026-09-11T20:30:01+00:00",
-      "score": 15,
+      "score": 9,
       "impactTags": [],
       "impactLabels": [],
       "priority": "baixa",
-      "opportunityScore": 15,
+      "opportunityScore": 9,
       "whoAffected": "Empresas e contabilidades que acompanham rotina fiscal.",
       "recommendedAction": "Ler a fonte original, salvar evidências e avaliar se há impacto em clientes ativos.",
       "whyItMatters": "gera pauta consultiva para orientar clientes",
@@ -967,7 +1029,7 @@
       "source": "Portal Contábeis",
       "url": "https://www.contabeis.com.br/rss/noticias/",
       "ok": true,
-      "items": 15
+      "items": 16
     }
   ],
   "meta": {
