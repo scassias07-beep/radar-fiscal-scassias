@@ -198,6 +198,13 @@
     font-size:10.5px;font-weight:700;padding:2.5px 7px;border-radius:5px;
     background:#ff6b6b1c;color:var(--red);border:1px solid #ff6b6b44;
   }
+  .prio{
+    font-size:10.5px;font-weight:800;padding:2.5px 7px;border-radius:5px;
+    text-transform:uppercase;letter-spacing:.55px;border:1px solid;
+  }
+  .p-alta{background:#ff6b6b1c;color:var(--red);border-color:#ff6b6b55}
+  .p-media{background:#f5b13d18;color:var(--amber);border-color:#f5b13d55}
+  .p-baixa{background:#37d6b014;color:var(--teal);border-color:#37d6b055}
   .item h3{margin:0 0 6px;font-size:15px;line-height:1.4;font-weight:600;letter-spacing:-.15px}
   .item h3 a{text-decoration:none}
   .item h3 a:hover{color:var(--amber);text-decoration:underline;text-underline-offset:3px}
@@ -370,6 +377,12 @@
                 <option value="prazo">Prazo urgente</option>
               </select>
             </label>
+            <select id="priorityFilter" title="Filtrar por prioridade">
+              <option value="todas">Todas as prioridades</option>
+              <option value="alta">Prioridade alta</option>
+              <option value="media">Prioridade média</option>
+              <option value="baixa">Prioridade baixa</option>
+            </select>
             <select id="sort">
               <option value="recent">Mais recentes</option>
               <option value="prazo">Prazo mais próximo</option>
@@ -662,6 +675,7 @@ const state = {
   itens: SNAPSHOT.slice(),
   cat: "todas",
   q: "",
+  prioridade: "todas",
   onlyPrazo: false,
   impact: "todos",
   sort: "recent",
@@ -935,6 +949,33 @@ function copiarTexto(txt){
   log("Texto de conteúdo copiado para a área de transferência.", "ok");
 }
 
+function prioridadeItem(i){
+  enriquecer(i);
+  const raw = norm(i.prioridade || i.priority || "");
+  if(["alta","media","baixa"].includes(raw)) return raw;
+
+  const score = Number(i.oportunidadeScore || i.score || 0);
+  const prazo = i.prazo ? diffDias(i.prazo) : null;
+  const blob = norm(`${i.titulo} ${i.resumo} ${i.fonte} ${i.cat}`);
+
+  if((prazo !== null && prazo >= 0 && prazo <= 15) || score >= 55 || i.novo ||
+     /(vence|prazo|urgente|carf|stf|repercussao geral|autuacao|transacao tributaria|obrigacao acessoria|reforma tributaria|ibs|cbs|split payment)/.test(blob)){
+    return "alta";
+  }
+  if((prazo !== null && prazo >= 0 && prazo <= 45) || score >= 32 ||
+     ["reforma","cgibs","judicial","carf","icms","legislacao"].includes(i.cat)){
+    return "media";
+  }
+  return "baixa";
+}
+
+function prioridadeNome(p){
+  return p === "alta" ? "Alta" : p === "media" ? "Média" : "Baixa";
+}
+
+function prioridadeCls(p){ return p === "alta" ? "p-alta" : p === "media" ? "p-media" : "p-baixa"; }
+
+
 function renderKPIs(){
   const abertos = PRAZOS.filter(p => diffDias(p.data) >= 0 && diffDias(p.data) <= 45);
   const novos   = state.itens.filter(i => i.novo);
@@ -1002,6 +1043,7 @@ function filtrados(){
       if(!i.prazo) return false;
       if(diffDias(i.prazo) < 0) return false;
     }
+    if(state.prioridade !== "todas" && prioridadeItem(i) !== state.prioridade) return false;
     if(q){
       const blob = norm(`${i.titulo} ${i.resumo} ${i.fonte} ${CAT[i.cat].nome} ${i.data} ${(i.impactos||[]).map(k=>IMPACT_LABELS[k]).join(" ")} ${i.quemAfeta||""} ${i.acaoRecomendada||""}`);
       if(!blob.includes(q)) return false;
@@ -1032,12 +1074,13 @@ function renderFeed(){
     enriquecer(i);
     const li = el("li","item"+(i.novo?" fresh":""));
     const d = diffDias(i.prazo || "9999-12-31");
+    const prio = prioridadeItem(i);
     const meta = el("div","i-meta");
     meta.appendChild(el("span","cat "+CAT[i.cat].cls, CAT[i.cat].nome));
+    meta.appendChild(el("span","prio "+prioridadeCls(prio), "Prioridade "+prioridadeNome(prio)));
     meta.appendChild(el("span","i-date", fmtBR(i.data)));
     meta.appendChild(el("span","i-ago", ago(i.data)));
     if(i.novo) meta.appendChild(el("span","novo","NOVO"));
-    meta.appendChild(el("span","priority "+i.prioridade, `Prioridade ${i.prioridade}`));
     if(i.prazo && d >= 0) meta.appendChild(el("span","prazo", `PRAZO ${fmtBR(i.prazo)} · ${d}d`));
     li.appendChild(meta);
 
@@ -1306,6 +1349,7 @@ async function scan(manual){
 $("#q").addEventListener("input", e => { state.q = e.target.value; renderFeed(); });
 $("#onlyPrazo").addEventListener("change", e => { state.onlyPrazo = e.target.checked; renderFeed(); renderExecutive(); });
 $("#impact").addEventListener("change", e => { state.impact = e.target.value; renderFeed(); });
+$("#priorityFilter").addEventListener("change", e => { state.prioridade = e.target.value; renderFeed(); });
 $("#sort").addEventListener("change", e => { state.sort = e.target.value; renderFeed(); });
 $("#scanBtn").addEventListener("click", () => scan(true));
 $("#modalClose").addEventListener("click", fecharModalConteudo);
@@ -1335,8 +1379,9 @@ async function carregarFeedPublico(){
         url: item.url,
         novo: false,
         score: item.score || 0,
-        impactos: item.impactTags || item.impactos || [],
+        priority: item.priority || item.prioridade || null,
         prioridade: item.priority || item.prioridade || null,
+        impactos: item.impactTags || item.impactTypes || item.impactos || [],
         quemAfeta: item.whoAffected || item.quemAfeta || null,
         acaoRecomendada: item.recommendedAction || item.acaoRecomendada || null,
         porqueImporta: item.whyItMatters || item.porqueImporta || null,
