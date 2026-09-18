@@ -1,526 +1,6 @@
 {
-  "updatedAt": "2026-09-18T18:33:26.194650+00:00",
+  "updatedAt": "2026-09-18T19:29:37.631323+00:00",
   "items": [
-    {
-      "id": "b388af50ba14061c",
-      "title": "Acompanhamento Sociofuncional",
-      "url": "https://www.fazenda.mg.gov.br/servidores/acompanhamento_sociofuncional",
-      "source": "SEF Minas Gerais — Empresas",
-      "category": "icms",
-      "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: Acompanhamento Sociofuncional",
-      "publishedAt": "2026-09-18T18:33:24.071772+00:00",
-      "score": 18,
-      "impactTags": [
-        "oportunidade"
-      ],
-      "impactLabels": [
-        "Oportunidade consultiva"
-      ],
-      "priority": "baixa",
-      "opportunityScore": 23,
-      "whoAffected": "Empresas e contabilidades que acompanham rotina fiscal.",
-      "recommendedAction": "Ler a fonte original, salvar evidências e avaliar se há impacto em clientes ativos.",
-      "whyItMatters": "gera pauta consultiva para orientar clientes",
-      "contentAngles": {
-        "linkedin": "Explique o impacto de 'Acompanhamento Sociofuncional' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'Acompanhamento Sociofuncional' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Acompanhamento Sociofuncional'."
-      }
-    },
-    {
-      "id": "aaf7534780326e6f",
-      "title": "Cartilha Direitos e Benefícios Servidores Fazendários",
-      "url": "https://www.fazenda.mg.gov.br/servidores/cartilha-direitos-e-beneficios-servidores-fazendarios",
-      "source": "SEF Minas Gerais — Empresas",
-      "category": "icms",
-      "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: Cartilha Direitos e Benefícios Servidores Fazendários",
-      "publishedAt": "2026-09-18T18:33:24.071029+00:00",
-      "score": 18,
-      "impactTags": [
-        "oportunidade"
-      ],
-      "impactLabels": [
-        "Oportunidade consultiva"
-      ],
-      "priority": "baixa",
-      "opportunityScore": 23,
-      "whoAffected": "Empresas e contabilidades que acompanham rotina fiscal.",
-      "recommendedAction": "Ler a fonte original, salvar evidências e avaliar se há impacto em clientes ativos.",
-      "whyItMatters": "gera pauta consultiva para orientar clientes",
-      "contentAngles": {
-        "linkedin": "Explique o impacto de 'Cartilha Direitos e Benefícios Servidores Fazendários' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'Cartilha Direitos e Benefícios Servidores Fazendários' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Cartilha Direitos e Benefícios Servidores Fazendários'."
-      }
-    },
-    {
-      "id": "ce47c4b9d89c25d8",
-      "title": "Processo de Reopção",
-      "url": "https://www.fazenda.mg.gov.br/servidores/processo-de-reopcao",
-      "source": "SEF Minas Gerais — Empresas",
-      "category": "icms",
-      "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: Processo de Reopção",
-      "publishedAt": "2026-09-18T18:33:24.070187+00:00",
-      "score": 18,
-      "impactTags": [
-        "oportunidade"
-      ],
-      "impactLabels": [
-        "Oportunidade consultiva"
-      ],
-      "priority": "baixa",
-      "opportunityScore": 23,
-      "whoAffected": "Empresas e contabilidades que acompanham rotina fiscal.",
-      "recommendedAction": "Ler a fonte original, salvar evidências e avaliar se há impacto em clientes ativos.",
-      "whyItMatters": "gera pauta consultiva para orientar clientes",
-      "contentAngles": {
-        "linkedin": "Explique o impacto de 'Processo de Reopção' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'Processo de Reopção' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Processo de Reopção'."
-      }
-    },
-    {
-      "id": "1fc6012d536b1f59",
-      "title": "Servidores",
-      "url": "https://www.fazenda.mg.gov.br/servidores",
-      "source": "SEF Minas Gerais — Empresas",
-      "category": "icms",
-      "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: Servidores",
-      "publishedAt": "2026-09-18T18:33:24.069468+00:00",
-      "score": 18,
-      "impactTags": [
-        "oportunidade"
-      ],
-      "impactLabels": [
-        "Oportunidade consultiva"
-      ],
-      "priority": "baixa",
-      "opportunityScore": 23,
-      "whoAffected": "Empresas e contabilidades que acompanham rotina fiscal.",
-      "recommendedAction": "Ler a fonte original, salvar evidências e avaliar se há impacto em clientes ativos.",
-      "whyItMatters": "gera pauta consultiva para orientar clientes",
-      "contentAngles": {
-        "linkedin": "Explique o impacto de 'Servidores' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'Servidores' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Servidores'."
-      }
-    },
-    {
-      "id": "92fc8b757d4de97a",
-      "title": "Transparência",
-      "url": "https://www.fazenda.mg.gov.br/secretaria/index-00001.html",
-      "source": "SEF Minas Gerais — Empresas",
-      "category": "icms",
-      "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: Transparência",
-      "publishedAt": "2026-09-18T18:33:24.068773+00:00",
-      "score": 18,
-      "impactTags": [
-        "oportunidade"
-      ],
-      "impactLabels": [
-        "Oportunidade consultiva"
-      ],
-      "priority": "baixa",
-      "opportunityScore": 23,
-      "whoAffected": "Empresas e contabilidades que acompanham rotina fiscal.",
-      "recommendedAction": "Ler a fonte original, salvar evidências e avaliar se há impacto em clientes ativos.",
-      "whyItMatters": "gera pauta consultiva para orientar clientes",
-      "contentAngles": {
-        "linkedin": "Explique o impacto de 'Transparência' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'Transparência' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Transparência'."
-      }
-    },
-    {
-      "id": "abdbc86585f0d4f8",
-      "title": "Documento Oficial do Auditor Fiscal da Receita Estadual",
-      "url": "https://www.fazenda.mg.gov.br/secretaria/CIF_AuditorFiscal",
-      "source": "SEF Minas Gerais — Empresas",
-      "category": "icms",
-      "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: Documento Oficial do Auditor Fiscal da Receita Estadual",
-      "publishedAt": "2026-09-18T18:33:24.068086+00:00",
-      "score": 29,
-      "impactTags": [
-        "oportunidade"
-      ],
-      "impactLabels": [
-        "Oportunidade consultiva"
-      ],
-      "priority": "media",
-      "opportunityScore": 34,
-      "whoAffected": "Empresas e contabilidades que acompanham rotina fiscal.",
-      "recommendedAction": "Ler a fonte original, salvar evidências e avaliar se há impacto em clientes ativos.",
-      "whyItMatters": "gera pauta consultiva para orientar clientes",
-      "contentAngles": {
-        "linkedin": "Explique o impacto de 'Documento Oficial do Auditor Fiscal da Receita Estadual' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'Documento Oficial do Auditor Fiscal da Receita Estadual' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Documento Oficial do Auditor Fiscal da Receita Estadual'."
-      }
-    },
-    {
-      "id": "c35f23044962a846",
-      "title": "Política de Segurança da Informação",
-      "url": "https://www.fazenda.mg.gov.br/secretaria/politica-de-seguranca-da-informacao-",
-      "source": "SEF Minas Gerais — Empresas",
-      "category": "icms",
-      "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: Política de Segurança da Informação",
-      "publishedAt": "2026-09-18T18:33:24.067245+00:00",
-      "score": 18,
-      "impactTags": [
-        "oportunidade"
-      ],
-      "impactLabels": [
-        "Oportunidade consultiva"
-      ],
-      "priority": "baixa",
-      "opportunityScore": 23,
-      "whoAffected": "Empresas e contabilidades que acompanham rotina fiscal.",
-      "recommendedAction": "Ler a fonte original, salvar evidências e avaliar se há impacto em clientes ativos.",
-      "whyItMatters": "gera pauta consultiva para orientar clientes",
-      "contentAngles": {
-        "linkedin": "Explique o impacto de 'Política de Segurança da Informação' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'Política de Segurança da Informação' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Política de Segurança da Informação'."
-      }
-    },
-    {
-      "id": "abbe2e6028a558e7",
-      "title": "Programa de Integridade SEF",
-      "url": "https://www.fazenda.mg.gov.br/secretaria/Plano_de_Integridade_SEF",
-      "source": "SEF Minas Gerais — Empresas",
-      "category": "icms",
-      "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: Programa de Integridade SEF",
-      "publishedAt": "2026-09-18T18:33:24.066469+00:00",
-      "score": 18,
-      "impactTags": [
-        "oportunidade"
-      ],
-      "impactLabels": [
-        "Oportunidade consultiva"
-      ],
-      "priority": "baixa",
-      "opportunityScore": 23,
-      "whoAffected": "Empresas e contabilidades que acompanham rotina fiscal.",
-      "recommendedAction": "Ler a fonte original, salvar evidências e avaliar se há impacto em clientes ativos.",
-      "whyItMatters": "gera pauta consultiva para orientar clientes",
-      "contentAngles": {
-        "linkedin": "Explique o impacto de 'Programa de Integridade SEF' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'Programa de Integridade SEF' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Programa de Integridade SEF'."
-      }
-    },
-    {
-      "id": "cd6f8951c3c0eff8",
-      "title": "Plano de Gestão de Riscos",
-      "url": "https://www.fazenda.mg.gov.br/secretaria/plano-de-gestao-de-riscos",
-      "source": "SEF Minas Gerais — Empresas",
-      "category": "icms",
-      "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: Plano de Gestão de Riscos",
-      "publishedAt": "2026-09-18T18:33:24.065726+00:00",
-      "score": 18,
-      "impactTags": [
-        "oportunidade"
-      ],
-      "impactLabels": [
-        "Oportunidade consultiva"
-      ],
-      "priority": "baixa",
-      "opportunityScore": 23,
-      "whoAffected": "Empresas e contabilidades que acompanham rotina fiscal.",
-      "recommendedAction": "Ler a fonte original, salvar evidências e avaliar se há impacto em clientes ativos.",
-      "whyItMatters": "gera pauta consultiva para orientar clientes",
-      "contentAngles": {
-        "linkedin": "Explique o impacto de 'Plano de Gestão de Riscos' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'Plano de Gestão de Riscos' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Plano de Gestão de Riscos'."
-      }
-    },
-    {
-      "id": "5cd119375fec0ad9",
-      "title": "Plano de Comunicação Institucional",
-      "url": "https://www.fazenda.mg.gov.br/secretaria/plano-de-comunicacao-institucional",
-      "source": "SEF Minas Gerais — Empresas",
-      "category": "icms",
-      "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: Plano de Comunicação Institucional",
-      "publishedAt": "2026-09-18T18:33:24.065002+00:00",
-      "score": 18,
-      "impactTags": [
-        "oportunidade"
-      ],
-      "impactLabels": [
-        "Oportunidade consultiva"
-      ],
-      "priority": "baixa",
-      "opportunityScore": 23,
-      "whoAffected": "Empresas e contabilidades que acompanham rotina fiscal.",
-      "recommendedAction": "Ler a fonte original, salvar evidências e avaliar se há impacto em clientes ativos.",
-      "whyItMatters": "gera pauta consultiva para orientar clientes",
-      "contentAngles": {
-        "linkedin": "Explique o impacto de 'Plano de Comunicação Institucional' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'Plano de Comunicação Institucional' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Plano de Comunicação Institucional'."
-      }
-    },
-    {
-      "id": "1f515a5d3ca0a6e5",
-      "title": "Comissão de Ética",
-      "url": "https://www.fazenda.mg.gov.br/secretaria/comissao_etica",
-      "source": "SEF Minas Gerais — Empresas",
-      "category": "municipal",
-      "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: Comissão de Ética",
-      "publishedAt": "2026-09-18T18:33:24.064218+00:00",
-      "score": 18,
-      "impactTags": [
-        "oportunidade"
-      ],
-      "impactLabels": [
-        "Oportunidade consultiva"
-      ],
-      "priority": "baixa",
-      "opportunityScore": 23,
-      "whoAffected": "Empresas e contabilidades que acompanham rotina fiscal.",
-      "recommendedAction": "Ler a fonte original, salvar evidências e avaliar se há impacto em clientes ativos.",
-      "whyItMatters": "gera pauta consultiva para orientar clientes",
-      "contentAngles": {
-        "linkedin": "Explique o impacto de 'Comissão de Ética' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'Comissão de Ética' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Comissão de Ética'."
-      }
-    },
-    {
-      "id": "f80d105de5dccdbf",
-      "title": "Endereços",
-      "url": "https://www.fazenda.mg.gov.br/secretaria/enderecos",
-      "source": "SEF Minas Gerais — Empresas",
-      "category": "icms",
-      "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: Endereços",
-      "publishedAt": "2026-09-18T18:33:24.063513+00:00",
-      "score": 18,
-      "impactTags": [
-        "oportunidade"
-      ],
-      "impactLabels": [
-        "Oportunidade consultiva"
-      ],
-      "priority": "baixa",
-      "opportunityScore": 23,
-      "whoAffected": "Empresas e contabilidades que acompanham rotina fiscal.",
-      "recommendedAction": "Ler a fonte original, salvar evidências e avaliar se há impacto em clientes ativos.",
-      "whyItMatters": "gera pauta consultiva para orientar clientes",
-      "contentAngles": {
-        "linkedin": "Explique o impacto de 'Endereços' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'Endereços' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Endereços'."
-      }
-    },
-    {
-      "id": "fe7b6dbb4938bfb4",
-      "title": "Quem é Quem",
-      "url": "https://www.fazenda.mg.gov.br/secretaria/quem_e_quem",
-      "source": "SEF Minas Gerais — Empresas",
-      "category": "icms",
-      "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: Quem é Quem",
-      "publishedAt": "2026-09-18T18:33:24.062856+00:00",
-      "score": 18,
-      "impactTags": [
-        "oportunidade"
-      ],
-      "impactLabels": [
-        "Oportunidade consultiva"
-      ],
-      "priority": "baixa",
-      "opportunityScore": 23,
-      "whoAffected": "Empresas e contabilidades que acompanham rotina fiscal.",
-      "recommendedAction": "Ler a fonte original, salvar evidências e avaliar se há impacto em clientes ativos.",
-      "whyItMatters": "gera pauta consultiva para orientar clientes",
-      "contentAngles": {
-        "linkedin": "Explique o impacto de 'Quem é Quem' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'Quem é Quem' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Quem é Quem'."
-      }
-    },
-    {
-      "id": "2c356b53b68795a0",
-      "title": "Legislação Institucional",
-      "url": "https://www.fazenda.mg.gov.br/secretaria/legislacao_institucional",
-      "source": "SEF Minas Gerais — Empresas",
-      "category": "icms",
-      "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: Legislação Institucional",
-      "publishedAt": "2026-09-18T18:33:24.062162+00:00",
-      "score": 18,
-      "impactTags": [
-        "oportunidade"
-      ],
-      "impactLabels": [
-        "Oportunidade consultiva"
-      ],
-      "priority": "baixa",
-      "opportunityScore": 23,
-      "whoAffected": "Empresas e contabilidades que acompanham rotina fiscal.",
-      "recommendedAction": "Ler a fonte original, salvar evidências e avaliar se há impacto em clientes ativos.",
-      "whyItMatters": "gera pauta consultiva para orientar clientes",
-      "contentAngles": {
-        "linkedin": "Explique o impacto de 'Legislação Institucional' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'Legislação Institucional' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Legislação Institucional'."
-      }
-    },
-    {
-      "id": "f66ee3715543955a",
-      "title": "História",
-      "url": "https://www.fazenda.mg.gov.br/secretaria/historia",
-      "source": "SEF Minas Gerais — Empresas",
-      "category": "icms",
-      "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: História",
-      "publishedAt": "2026-09-18T18:33:24.061428+00:00",
-      "score": 18,
-      "impactTags": [
-        "oportunidade"
-      ],
-      "impactLabels": [
-        "Oportunidade consultiva"
-      ],
-      "priority": "baixa",
-      "opportunityScore": 23,
-      "whoAffected": "Empresas e contabilidades que acompanham rotina fiscal.",
-      "recommendedAction": "Ler a fonte original, salvar evidências e avaliar se há impacto em clientes ativos.",
-      "whyItMatters": "gera pauta consultiva para orientar clientes",
-      "contentAngles": {
-        "linkedin": "Explique o impacto de 'História' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'História' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'História'."
-      }
-    },
-    {
-      "id": "c2b3f0d71e7f1ef8",
-      "title": "Organograma",
-      "url": "https://www.fazenda.mg.gov.br/secretaria/Organograma",
-      "source": "SEF Minas Gerais — Empresas",
-      "category": "icms",
-      "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: Organograma",
-      "publishedAt": "2026-09-18T18:33:24.060732+00:00",
-      "score": 18,
-      "impactTags": [
-        "oportunidade"
-      ],
-      "impactLabels": [
-        "Oportunidade consultiva"
-      ],
-      "priority": "baixa",
-      "opportunityScore": 23,
-      "whoAffected": "Empresas e contabilidades que acompanham rotina fiscal.",
-      "recommendedAction": "Ler a fonte original, salvar evidências e avaliar se há impacto em clientes ativos.",
-      "whyItMatters": "gera pauta consultiva para orientar clientes",
-      "contentAngles": {
-        "linkedin": "Explique o impacto de 'Organograma' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'Organograma' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Organograma'."
-      }
-    },
-    {
-      "id": "3e5a7e4ad562c667",
-      "title": "A Secretaria",
-      "url": "https://www.fazenda.mg.gov.br/secretaria",
-      "source": "SEF Minas Gerais — Empresas",
-      "category": "icms",
-      "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: A Secretaria",
-      "publishedAt": "2026-09-18T18:33:24.060061+00:00",
-      "score": 18,
-      "impactTags": [
-        "oportunidade"
-      ],
-      "impactLabels": [
-        "Oportunidade consultiva"
-      ],
-      "priority": "baixa",
-      "opportunityScore": 23,
-      "whoAffected": "Empresas e contabilidades que acompanham rotina fiscal.",
-      "recommendedAction": "Ler a fonte original, salvar evidências e avaliar se há impacto em clientes ativos.",
-      "whyItMatters": "gera pauta consultiva para orientar clientes",
-      "contentAngles": {
-        "linkedin": "Explique o impacto de 'A Secretaria' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'A Secretaria' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'A Secretaria'."
-      }
-    },
-    {
-      "id": "244fb318c5622f48",
-      "title": "Acessibilidade",
-      "url": "https://www.fazenda.mg.gov.br/export/utilidades/acessibilidade.html",
-      "source": "SEF Minas Gerais — Empresas",
-      "category": "icms",
-      "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: Acessibilidade",
-      "publishedAt": "2026-09-18T18:33:24.059309+00:00",
-      "score": 18,
-      "impactTags": [
-        "oportunidade"
-      ],
-      "impactLabels": [
-        "Oportunidade consultiva"
-      ],
-      "priority": "baixa",
-      "opportunityScore": 23,
-      "whoAffected": "Empresas e contabilidades que acompanham rotina fiscal.",
-      "recommendedAction": "Ler a fonte original, salvar evidências e avaliar se há impacto em clientes ativos.",
-      "whyItMatters": "gera pauta consultiva para orientar clientes",
-      "contentAngles": {
-        "linkedin": "Explique o impacto de 'Acessibilidade' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'Acessibilidade' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Acessibilidade'."
-      }
-    },
-    {
-      "id": "addee30067f26834",
-      "title": "Mapa do Site",
-      "url": "https://www.fazenda.mg.gov.br/export/utilidades/mapa.html",
-      "source": "SEF Minas Gerais — Empresas",
-      "category": "icms",
-      "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: Mapa do Site",
-      "publishedAt": "2026-09-18T18:33:24.058602+00:00",
-      "score": 18,
-      "impactTags": [
-        "oportunidade"
-      ],
-      "impactLabels": [
-        "Oportunidade consultiva"
-      ],
-      "priority": "baixa",
-      "opportunityScore": 23,
-      "whoAffected": "Empresas e contabilidades que acompanham rotina fiscal.",
-      "recommendedAction": "Ler a fonte original, salvar evidências e avaliar se há impacto em clientes ativos.",
-      "whyItMatters": "gera pauta consultiva para orientar clientes",
-      "contentAngles": {
-        "linkedin": "Explique o impacto de 'Mapa do Site' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'Mapa do Site' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Mapa do Site'."
-      }
-    },
-    {
-      "id": "890c5fe5b5a0feae",
-      "title": "Intranet",
-      "url": "http://portalintranet.fazenda.mg.gov.br/openintranet/opencms",
-      "source": "SEF Minas Gerais — Empresas",
-      "category": "icms",
-      "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: Intranet",
-      "publishedAt": "2026-09-18T18:33:24.057889+00:00",
-      "score": 18,
-      "impactTags": [
-        "oportunidade"
-      ],
-      "impactLabels": [
-        "Oportunidade consultiva"
-      ],
-      "priority": "baixa",
-      "opportunityScore": 23,
-      "whoAffected": "Empresas e contabilidades que acompanham rotina fiscal.",
-      "recommendedAction": "Ler a fonte original, salvar evidências e avaliar se há impacto em clientes ativos.",
-      "whyItMatters": "gera pauta consultiva para orientar clientes",
-      "contentAngles": {
-        "linkedin": "Explique o impacto de 'Intranet' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'Intranet' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Intranet'."
-      }
-    },
     {
       "id": "4728815622380f18",
       "title": "Verificação de autenticidade",
@@ -528,7 +8,7 @@
       "source": "Diário Oficial da União — busca fiscal",
       "category": "legislacao",
       "summary": "Publicação monitorada em Diário Oficial da União — busca fiscal: Verificação de autenticidade",
-      "publishedAt": "2026-09-18T18:33:16.186577+00:00",
+      "publishedAt": "2026-09-18T19:29:08.805827+00:00",
       "score": 24,
       "impactTags": [],
       "impactLabels": [],
@@ -550,7 +30,7 @@
       "source": "Diário Oficial da União — busca fiscal",
       "category": "legislacao",
       "summary": "Publicação monitorada em Diário Oficial da União — busca fiscal: PESQUISA AVANÇADA Ícone",
-      "publishedAt": "2026-09-18T18:33:16.185729+00:00",
+      "publishedAt": "2026-09-18T19:29:08.805031+00:00",
       "score": 24,
       "impactTags": [],
       "impactLabels": [],
@@ -572,7 +52,7 @@
       "source": "Diário Oficial da União — busca fiscal",
       "category": "legislacao",
       "summary": "Publicação monitorada em Diário Oficial da União — busca fiscal: Portal da Imprensa Nacional",
-      "publishedAt": "2026-09-18T18:33:16.184884+00:00",
+      "publishedAt": "2026-09-18T19:29:08.804198+00:00",
       "score": 24,
       "impactTags": [],
       "impactLabels": [],
@@ -594,7 +74,7 @@
       "source": "Diário Oficial da União — busca fiscal",
       "category": "legislacao",
       "summary": "Publicação monitorada em Diário Oficial da União — busca fiscal: Termo de Uso e Política de Privacidade",
-      "publishedAt": "2026-09-18T18:33:16.184045+00:00",
+      "publishedAt": "2026-09-18T19:29:08.803390+00:00",
       "score": 24,
       "impactTags": [],
       "impactLabels": [],
@@ -616,7 +96,7 @@
       "source": "Diário Oficial da União — busca fiscal",
       "category": "legislacao",
       "summary": "Publicação monitorada em Diário Oficial da União — busca fiscal: Tutorial INCom",
-      "publishedAt": "2026-09-18T18:33:16.183162+00:00",
+      "publishedAt": "2026-09-18T19:29:08.802537+00:00",
       "score": 24,
       "impactTags": [],
       "impactLabels": [],
@@ -638,7 +118,7 @@
       "source": "Diário Oficial da União — busca fiscal",
       "category": "legislacao",
       "summary": "Publicação monitorada em Diário Oficial da União — busca fiscal: Tutorial do APP DOU",
-      "publishedAt": "2026-09-18T18:33:16.182373+00:00",
+      "publishedAt": "2026-09-18T19:29:08.801778+00:00",
       "score": 35,
       "impactTags": [],
       "impactLabels": [],
@@ -660,7 +140,7 @@
       "source": "Diário Oficial da União — busca fiscal",
       "category": "legislacao",
       "summary": "Publicação monitorada em Diário Oficial da União — busca fiscal: Concursos e Seleções",
-      "publishedAt": "2026-09-18T18:33:16.181569+00:00",
+      "publishedAt": "2026-09-18T19:29:08.801017+00:00",
       "score": 24,
       "impactTags": [],
       "impactLabels": [],
@@ -682,7 +162,7 @@
       "source": "Diário Oficial da União — busca fiscal",
       "category": "legislacao",
       "summary": "Publicação monitorada em Diário Oficial da União — busca fiscal: Acesso ao sistema de envio de matérias INCom",
-      "publishedAt": "2026-09-18T18:33:16.180775+00:00",
+      "publishedAt": "2026-09-18T19:29:08.800226+00:00",
       "score": 24,
       "impactTags": [],
       "impactLabels": [],
@@ -704,7 +184,7 @@
       "source": "Diário Oficial da União — busca fiscal",
       "category": "legislacao",
       "summary": "Publicação monitorada em Diário Oficial da União — busca fiscal: Verificação de autenticidade",
-      "publishedAt": "2026-09-18T18:33:16.179868+00:00",
+      "publishedAt": "2026-09-18T19:29:08.799347+00:00",
       "score": 24,
       "impactTags": [],
       "impactLabels": [],
@@ -726,7 +206,7 @@
       "source": "Diário Oficial da União — busca fiscal",
       "category": "legislacao",
       "summary": "Publicação monitorada em Diário Oficial da União — busca fiscal: Base de Dados de Publicações do DOU",
-      "publishedAt": "2026-09-18T18:33:16.179025+00:00",
+      "publishedAt": "2026-09-18T19:29:08.798536+00:00",
       "score": 35,
       "impactTags": [],
       "impactLabels": [],
@@ -748,7 +228,7 @@
       "source": "Diário Oficial da União — busca fiscal",
       "category": "legislacao",
       "summary": "Publicação monitorada em Diário Oficial da União — busca fiscal: Destaques do Diário Oficial da União",
-      "publishedAt": "2026-09-18T18:33:16.178137+00:00",
+      "publishedAt": "2026-09-18T19:29:08.797685+00:00",
       "score": 24,
       "impactTags": [],
       "impactLabels": [],
@@ -770,7 +250,7 @@
       "source": "Diário Oficial da União — busca fiscal",
       "category": "legislacao",
       "summary": "Publicação monitorada em Diário Oficial da União — busca fiscal: Leitura do Jornal",
-      "publishedAt": "2026-09-18T18:33:16.177262+00:00",
+      "publishedAt": "2026-09-18T19:29:08.796825+00:00",
       "score": 24,
       "impactTags": [],
       "impactLabels": [],
@@ -792,7 +272,7 @@
       "source": "Diário Oficial da União — busca fiscal",
       "category": "legislacao",
       "summary": "Publicação monitorada em Diário Oficial da União — busca fiscal: Diário Oficial da União",
-      "publishedAt": "2026-09-18T18:33:16.176455+00:00",
+      "publishedAt": "2026-09-18T19:29:08.796063+00:00",
       "score": 24,
       "impactTags": [],
       "impactLabels": [],
@@ -814,7 +294,7 @@
       "source": "Diário Oficial da União — busca fiscal",
       "category": "legislacao",
       "summary": "Publicação monitorada em Diário Oficial da União — busca fiscal: Diário Oficial da União",
-      "publishedAt": "2026-09-18T18:33:16.175620+00:00",
+      "publishedAt": "2026-09-18T19:29:08.795243+00:00",
       "score": 24,
       "impactTags": [],
       "impactLabels": [],
@@ -836,7 +316,7 @@
       "source": "Diário Oficial da União — busca fiscal",
       "category": "legislacao",
       "summary": "Publicação monitorada em Diário Oficial da União — busca fiscal: Imprensa Nacional",
-      "publishedAt": "2026-09-18T18:33:16.174667+00:00",
+      "publishedAt": "2026-09-18T19:29:08.794323+00:00",
       "score": 24,
       "impactTags": [],
       "impactLabels": [],
@@ -858,7 +338,7 @@
       "source": "Diário Oficial da União — busca fiscal",
       "category": "legislacao",
       "summary": "Publicação monitorada em Diário Oficial da União — busca fiscal: Acesso GOV.BR",
-      "publishedAt": "2026-09-18T18:33:16.173767+00:00",
+      "publishedAt": "2026-09-18T19:29:08.793430+00:00",
       "score": 24,
       "impactTags": [],
       "impactLabels": [],
@@ -880,7 +360,7 @@
       "source": "Diário Oficial da União — busca fiscal",
       "category": "legislacao",
       "summary": "Publicação monitorada em Diário Oficial da União — busca fiscal: Mudar para o modo de alto contraste",
-      "publishedAt": "2026-09-18T18:33:16.172986+00:00",
+      "publishedAt": "2026-09-18T19:29:08.792663+00:00",
       "score": 24,
       "impactTags": [],
       "impactLabels": [],
@@ -902,7 +382,7 @@
       "source": "Diário Oficial da União — busca fiscal",
       "category": "legislacao",
       "summary": "Publicação monitorada em Diário Oficial da União — busca fiscal: Acessibilidade",
-      "publishedAt": "2026-09-18T18:33:16.172054+00:00",
+      "publishedAt": "2026-09-18T19:29:08.791761+00:00",
       "score": 24,
       "impactTags": [],
       "impactLabels": [],
@@ -924,7 +404,7 @@
       "source": "Diário Oficial da União — busca fiscal",
       "category": "legislacao",
       "summary": "Publicação monitorada em Diário Oficial da União — busca fiscal: Acesso à Informação",
-      "publishedAt": "2026-09-18T18:33:16.171252+00:00",
+      "publishedAt": "2026-09-18T19:29:08.790997+00:00",
       "score": 24,
       "impactTags": [],
       "impactLabels": [],
@@ -946,7 +426,7 @@
       "source": "Diário Oficial da União — busca fiscal",
       "category": "legislacao",
       "summary": "Publicação monitorada em Diário Oficial da União — busca fiscal: Órgãos do Governo",
-      "publishedAt": "2026-09-18T18:33:16.170397+00:00",
+      "publishedAt": "2026-09-18T19:29:08.790175+00:00",
       "score": 24,
       "impactTags": [],
       "impactLabels": [],
@@ -968,7 +448,7 @@
       "source": "PGFN Notícias",
       "category": "receita",
       "summary": "Publicação monitorada em PGFN Notícias: Simples Nacional",
-      "publishedAt": "2026-09-18T18:31:58.104593+00:00",
+      "publishedAt": "2026-09-18T19:27:46.414042+00:00",
       "score": 20,
       "impactTags": [
         "oportunidade"
@@ -994,7 +474,7 @@
       "source": "PGFN Notícias",
       "category": "receita",
       "summary": "Publicação monitorada em PGFN Notícias: Imposto sobre a renda das pessoas jurídicas (IRPJ)",
-      "publishedAt": "2026-09-18T18:31:58.103939+00:00",
+      "publishedAt": "2026-09-18T19:27:46.413375+00:00",
       "score": 24,
       "impactTags": [],
       "impactLabels": [],
@@ -1016,7 +496,7 @@
       "source": "PGFN Notícias",
       "category": "receita",
       "summary": "Publicação monitorada em PGFN Notícias: Imposto de Renda Pessoa Física (IRPF)",
-      "publishedAt": "2026-09-18T18:31:58.103146+00:00",
+      "publishedAt": "2026-09-18T19:27:46.412555+00:00",
       "score": 24,
       "impactTags": [],
       "impactLabels": [],
@@ -1038,7 +518,7 @@
       "source": "PGFN Notícias",
       "category": "receita",
       "summary": "Publicação monitorada em PGFN Notícias: Pareceres PGFN, Súmulas e decisões judiciais por assunto",
-      "publishedAt": "2026-09-18T18:31:58.102402+00:00",
+      "publishedAt": "2026-09-18T19:27:46.411819+00:00",
       "score": 14,
       "impactTags": [],
       "impactLabels": [],
@@ -1060,7 +540,7 @@
       "source": "PGFN Notícias",
       "category": "receita",
       "summary": "Publicação monitorada em PGFN Notícias: Cidadania Tributária",
-      "publishedAt": "2026-09-18T18:31:58.101587+00:00",
+      "publishedAt": "2026-09-18T19:27:46.411033+00:00",
       "score": 25,
       "impactTags": [],
       "impactLabels": [],
@@ -1082,7 +562,7 @@
       "source": "PGFN Notícias",
       "category": "receita",
       "summary": "Publicação monitorada em PGFN Notícias: Dívida ativa do FGTS",
-      "publishedAt": "2026-09-18T18:31:58.099513+00:00",
+      "publishedAt": "2026-09-18T19:27:46.408985+00:00",
       "score": 28,
       "impactTags": [],
       "impactLabels": [],
@@ -1104,7 +584,7 @@
       "source": "PGFN Notícias",
       "category": "receita",
       "summary": "Publicação monitorada em PGFN Notícias: Estudos sobre a dívida ativa",
-      "publishedAt": "2026-09-18T18:31:58.098853+00:00",
+      "publishedAt": "2026-09-18T19:27:46.408325+00:00",
       "score": 25,
       "impactTags": [],
       "impactLabels": [],
@@ -1126,7 +606,7 @@
       "source": "PGFN Notícias",
       "category": "receita",
       "summary": "Publicação monitorada em PGFN Notícias: Estratégias de cobrança",
-      "publishedAt": "2026-09-18T18:31:58.098142+00:00",
+      "publishedAt": "2026-09-18T19:27:46.407618+00:00",
       "score": 14,
       "impactTags": [
         "risco",
@@ -1154,7 +634,7 @@
       "source": "PGFN Notícias",
       "category": "receita",
       "summary": "Publicação monitorada em PGFN Notícias: Combate à fraude fiscal",
-      "publishedAt": "2026-09-18T18:31:58.097453+00:00",
+      "publishedAt": "2026-09-18T19:27:46.406929+00:00",
       "score": 25,
       "impactTags": [
         "prazo",
@@ -1182,7 +662,7 @@
       "source": "PGFN Notícias",
       "category": "receita",
       "summary": "Publicação monitorada em PGFN Notícias: Transparência fiscal",
-      "publishedAt": "2026-09-18T18:31:58.096780+00:00",
+      "publishedAt": "2026-09-18T19:27:46.406264+00:00",
       "score": 25,
       "impactTags": [],
       "impactLabels": [],
@@ -1204,7 +684,7 @@
       "source": "PGFN Notícias",
       "category": "receita",
       "summary": "Publicação monitorada em PGFN Notícias: Dívida Ativa da União e do FGTS",
-      "publishedAt": "2026-09-18T18:31:58.095993+00:00",
+      "publishedAt": "2026-09-18T19:27:46.405428+00:00",
       "score": 28,
       "impactTags": [],
       "impactLabels": [],
@@ -1226,7 +706,7 @@
       "source": "PGFN Notícias",
       "category": "receita",
       "summary": "Publicação monitorada em PGFN Notícias: Painel dos Parcelamentos e Transações",
-      "publishedAt": "2026-09-18T18:31:58.094352+00:00",
+      "publishedAt": "2026-09-18T19:27:46.403810+00:00",
       "score": 14,
       "impactTags": [],
       "impactLabels": [],
@@ -1248,7 +728,7 @@
       "source": "PGFN Notícias",
       "category": "receita",
       "summary": "Publicação monitorada em PGFN Notícias: Lista de Devedores",
-      "publishedAt": "2026-09-18T18:31:58.093607+00:00",
+      "publishedAt": "2026-09-18T19:27:46.403094+00:00",
       "score": 14,
       "impactTags": [],
       "impactLabels": [],
@@ -1270,7 +750,7 @@
       "source": "PGFN Notícias",
       "category": "receita",
       "summary": "Publicação monitorada em PGFN Notícias: Dados Abertos",
-      "publishedAt": "2026-09-18T18:31:58.092949+00:00",
+      "publishedAt": "2026-09-18T19:27:46.402417+00:00",
       "score": 14,
       "impactTags": [],
       "impactLabels": [],
@@ -1292,7 +772,7 @@
       "source": "PGFN Notícias",
       "category": "receita",
       "summary": "Publicação monitorada em PGFN Notícias: Aplicativo Dívida Aberta",
-      "publishedAt": "2026-09-18T18:31:58.092254+00:00",
+      "publishedAt": "2026-09-18T19:27:46.401729+00:00",
       "score": 14,
       "impactTags": [],
       "impactLabels": [],
@@ -1305,6 +785,32 @@
         "linkedin": "Explique o impacto de 'Aplicativo Dívida Aberta' para empresas e contabilidades, com orientação prática e CTA consultivo.",
         "reels": "Use 'Aplicativo Dívida Aberta' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
         "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Aplicativo Dívida Aberta'."
+      }
+    },
+    {
+      "id": "abdbc86585f0d4f8",
+      "title": "Documento Oficial do Auditor Fiscal da Receita Estadual",
+      "url": "https://www.fazenda.mg.gov.br/secretaria/CIF_AuditorFiscal",
+      "source": "SEF Minas Gerais — Empresas",
+      "category": "icms",
+      "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: Documento Oficial do Auditor Fiscal da Receita Estadual",
+      "publishedAt": "2026-09-18T18:33:24+00:00",
+      "score": 8,
+      "impactTags": [
+        "oportunidade"
+      ],
+      "impactLabels": [
+        "Oportunidade consultiva"
+      ],
+      "priority": "media",
+      "opportunityScore": 34,
+      "whoAffected": "Empresas e contabilidades que acompanham rotina fiscal.",
+      "recommendedAction": "Ler a fonte original, salvar evidências e avaliar se há impacto em clientes ativos.",
+      "whyItMatters": "gera pauta consultiva para orientar clientes",
+      "contentAngles": {
+        "linkedin": "Explique o impacto de 'Documento Oficial do Auditor Fiscal da Receita Estadual' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'Documento Oficial do Auditor Fiscal da Receita Estadual' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Documento Oficial do Auditor Fiscal da Receita Estadual'."
       }
     },
     {
@@ -2363,11 +1869,11 @@
     },
     {
       "id": "36bd4626e13628b8",
-      "title": "CARF afasta IRPJ e CSLL sobre lucros de controlada indireta no exterior apurados antes da Lei nº 12.973/2014 - Contadores.cnt.br",
+      "title": "CARF afasta IRPJ e CSLL sobre lucros de controlada indireta no exterior apurados antes da Lei nº 12.973/2014 - contadores.cnt.br",
       "url": "https://news.google.com/rss/articles/CBMiggJBVV95cUxOU2RKU2hoWFNHbmliQ1ZMUFpnNzBwZ0dWX1dGVElfd2czdkxBNV94ZlA3VFpzM3Q0a3JZVmVVZ0duYlhCTWZ2Qi1UYVlrLVZEMXhhakZTajhEb19mNXBPV09XSi1LQmZhRHBHM0x2bnFCRWZYMldpQmlpN0g3d3FtTDktWVpBVThSRWN6WnRQdjkxSkZxLVZNT0U2YWRSM09VWWRWRG1JUXBSYnczS2kwc3pNZEhOUXFYc0kwdmw2dm5rWld0a2U2dmZJOHVUZ2hfSUl0UWZrT3Nxa3d5OXNiQVpEaEdoRG9nUGdiU3pkQm1vNlpCV0k0SEFsSkZUcm85UUE?oc=5",
       "source": "Google News — CARF e contencioso",
       "category": "carf",
-      "summary": "CARF afasta IRPJ e CSLL sobre lucros de controlada indireta no exterior apurados antes da Lei nº 12.973/2014 Contadores.cnt.br",
+      "summary": "CARF afasta IRPJ e CSLL sobre lucros de controlada indireta no exterior apurados antes da Lei nº 12.973/2014 contadores.cnt.br",
       "publishedAt": "2026-09-17T12:57:00+00:00",
       "score": 22,
       "impactTags": [
@@ -2384,9 +1890,9 @@
       "recommendedAction": "Revisar exposição fiscal, documentação de suporte e oportunidade de tese/regularização.",
       "whyItMatters": "reduz exposição fiscal e contencioso",
       "contentAngles": {
-        "linkedin": "Explique o impacto de 'CARF afasta IRPJ e CSLL sobre lucros de controlada indireta no exterior apurados antes da Lei nº 12.973/2014 - Contadores.cnt.br' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'CARF afasta IRPJ e CSLL sobre lucros de controlada indireta no exterior apurados antes da Lei nº 12.973/2014 - Contadores.cnt.br' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'CARF afasta IRPJ e CSLL sobre lucros de controlada indireta no exterior apurados antes da Lei nº 12.973/2014 - Contadores.cnt.br'."
+        "linkedin": "Explique o impacto de 'CARF afasta IRPJ e CSLL sobre lucros de controlada indireta no exterior apurados antes da Lei nº 12.973/2014 - contadores.cnt.br' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'CARF afasta IRPJ e CSLL sobre lucros de controlada indireta no exterior apurados antes da Lei nº 12.973/2014 - contadores.cnt.br' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'CARF afasta IRPJ e CSLL sobre lucros de controlada indireta no exterior apurados antes da Lei nº 12.973/2014 - contadores.cnt.br'."
       }
     },
     {
@@ -2487,12 +1993,12 @@
     },
     {
       "id": "841c4a80ed735a0e",
-      "title": "Carf derruba cobrança contra hospital por terceirização de médicos - JOTA Info",
+      "title": "Carf derruba cobrança contra hospital por terceirização de médicos - jota.info",
       "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxPUVdnZ3ZpT0FiU01MSzNBX1NkRFc1Q1NmbXB5T1YyV1B5ZzVkb0lKVHpyS0cycHVNeXF1RUFhM2NxVkJ5SzlSQlF3SFFsVnE1MzZVNHh6dkx4a2I3c0g4Z1dmdlBrS3RxLWZOVzNZUHVMQVZET25zWUJ6QURDa3FpVWhVRzRqdndHUHFiSFVkS1p4RWU5czNqRmw5SVJnUQ?oc=5",
       "source": "Google News — CARF e contencioso",
       "category": "carf",
-      "summary": "Carf derruba cobrança contra hospital por terceirização de médicos JOTA Info",
-      "publishedAt": "2026-09-17T09:48:27+00:00",
+      "summary": "Carf derruba cobrança contra hospital por terceirização de médicos jota.info",
+      "publishedAt": "2026-09-17T09:47:09+00:00",
       "score": 12,
       "impactTags": [
         "risco",
@@ -2508,9 +2014,9 @@
       "recommendedAction": "Revisar exposição fiscal, documentação de suporte e oportunidade de tese/regularização.",
       "whyItMatters": "reduz exposição fiscal e contencioso",
       "contentAngles": {
-        "linkedin": "Explique o impacto de 'Carf derruba cobrança contra hospital por terceirização de médicos - JOTA Info' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'Carf derruba cobrança contra hospital por terceirização de médicos - JOTA Info' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Carf derruba cobrança contra hospital por terceirização de médicos - JOTA Info'."
+        "linkedin": "Explique o impacto de 'Carf derruba cobrança contra hospital por terceirização de médicos - jota.info' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'Carf derruba cobrança contra hospital por terceirização de médicos - jota.info' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Carf derruba cobrança contra hospital por terceirização de médicos - jota.info'."
       }
     },
     {
@@ -2991,11 +2497,11 @@
     },
     {
       "id": "1af58cfea7ff3a26",
-      "title": "8ª edição do ‘Questões controvertidas no Carf’ discutirá subvenções e outros temas - JOTA Info",
+      "title": "8ª edição do ‘Questões controvertidas no Carf’ discutirá subvenções e outros temas - jota.info",
       "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxQTm5RdWc3X3U3d1JMMWVVQnpzSm1TVFJWekVnTFhIcktraGtvQWhQQkNDckp4QTdtcmI2ekVXM3ZYNEIyMXZPU2NmT0M1Nk5yZGVZbjY1dWY4X2xhVHRKUHdXMnZEeVBOVXI3OFJLbTFYT25YUzdKLUFLa1p5MFFfNXlHa3NCQ0hNWVFvTTN4cmZ3bl9TV3lHTkczZ0pxWVBVNExzVmM5c1kxeTh2WnZKNQ?oc=5",
       "source": "Google News — CARF e contencioso",
       "category": "carf",
-      "summary": "8ª edição do ‘Questões controvertidas no Carf’ discutirá subvenções e outros temas JOTA Info",
+      "summary": "8ª edição do ‘Questões controvertidas no Carf’ discutirá subvenções e outros temas jota.info",
       "publishedAt": "2026-09-16T14:22:26+00:00",
       "score": 12,
       "impactTags": [
@@ -3012,9 +2518,9 @@
       "recommendedAction": "Revisar exposição fiscal, documentação de suporte e oportunidade de tese/regularização.",
       "whyItMatters": "reduz exposição fiscal e contencioso",
       "contentAngles": {
-        "linkedin": "Explique o impacto de '8ª edição do ‘Questões controvertidas no Carf’ discutirá subvenções e outros temas - JOTA Info' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use '8ª edição do ‘Questões controvertidas no Carf’ discutirá subvenções e outros temas - JOTA Info' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre '8ª edição do ‘Questões controvertidas no Carf’ discutirá subvenções e outros temas - JOTA Info'."
+        "linkedin": "Explique o impacto de '8ª edição do ‘Questões controvertidas no Carf’ discutirá subvenções e outros temas - jota.info' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use '8ª edição do ‘Questões controvertidas no Carf’ discutirá subvenções e outros temas - jota.info' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre '8ª edição do ‘Questões controvertidas no Carf’ discutirá subvenções e outros temas - jota.info'."
       }
     },
     {
@@ -3193,11 +2699,11 @@
     },
     {
       "id": "afa620fad8c7c8f8",
-      "title": "Legaltech Iter leva automação ao contencioso tributário sem substituir o advogado - Economic News Brasil",
+      "title": "Legaltech Iter leva automação ao contencioso tributário sem substituir o advogado - economicnewsbrasil.com.br",
       "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxNdS1WV3VaemlmaDJ0S3Z4MVZmeWQ1dnRPVFJULXdRZVFrNG1OYzZ1U3IxeGFKOGUtNExqRm9EeE1HXzNIT1ItVXVoRFVPdGt5dzZSRlBXMVd5V1NDV0J6NHhjYVlLNkFZekVLTmVBRXA1WkFHWnozVWZpQmgzX25zWV90bmV0V3N0Y3A0?oc=5",
       "source": "Google News — CARF e contencioso",
       "category": "carf",
-      "summary": "Legaltech Iter leva automação ao contencioso tributário sem substituir o advogado Economic News Brasil",
+      "summary": "Legaltech Iter leva automação ao contencioso tributário sem substituir o advogado economicnewsbrasil.com.br",
       "publishedAt": "2026-09-16T10:25:00+00:00",
       "score": 20,
       "impactTags": [
@@ -3214,9 +2720,9 @@
       "recommendedAction": "Revisar exposição fiscal, documentação de suporte e oportunidade de tese/regularização.",
       "whyItMatters": "reduz exposição fiscal e contencioso",
       "contentAngles": {
-        "linkedin": "Explique o impacto de 'Legaltech Iter leva automação ao contencioso tributário sem substituir o advogado - Economic News Brasil' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'Legaltech Iter leva automação ao contencioso tributário sem substituir o advogado - Economic News Brasil' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Legaltech Iter leva automação ao contencioso tributário sem substituir o advogado - Economic News Brasil'."
+        "linkedin": "Explique o impacto de 'Legaltech Iter leva automação ao contencioso tributário sem substituir o advogado - economicnewsbrasil.com.br' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'Legaltech Iter leva automação ao contencioso tributário sem substituir o advogado - economicnewsbrasil.com.br' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Legaltech Iter leva automação ao contencioso tributário sem substituir o advogado - economicnewsbrasil.com.br'."
       }
     },
     {
@@ -4651,11 +4157,11 @@
     },
     {
       "id": "6d69671f853fa7c9",
-      "title": "O novo Fisco digital: como o Comitê Gestor do IBS vai unificar os dados da sua empresa - Omie",
+      "title": "O novo Fisco digital: como o Comitê Gestor do IBS vai unificar os dados da sua empresa - omie.com.br",
       "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxNWVdiYXd1QUE0NjE2SGVGSllqTzFqODdQZUhpMnpUTk94d0JDN1lhZkdLdHEzSC1WdThRbkczRkl4eV9pVWRZQ2NXei0wQi1PT2dBNFpqZGFFeVlVNG55NHE0RlFuUUl3eTJZSTBrZGNXeEhQZTItc1BUbnZmRThGWFFKelpoZkN2UF9EV3o2SDg1dHhqZ0E?oc=5",
       "source": "Google News — Comitê Gestor IBS",
       "category": "reforma",
-      "summary": "O novo Fisco digital: como o Comitê Gestor do IBS vai unificar os dados da sua empresa Omie",
+      "summary": "O novo Fisco digital: como o Comitê Gestor do IBS vai unificar os dados da sua empresa omie.com.br",
       "publishedAt": "2026-09-14T17:52:08+00:00",
       "score": 17,
       "impactTags": [
@@ -4672,9 +4178,9 @@
       "recommendedAction": "Mapear processos, documentos fiscais, sistemas e decisões comerciais afetadas pela transição IBS/CBS.",
       "whyItMatters": "antecipa adaptação à Reforma Tributária",
       "contentAngles": {
-        "linkedin": "Explique o impacto de 'O novo Fisco digital: como o Comitê Gestor do IBS vai unificar os dados da sua empresa - Omie' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'O novo Fisco digital: como o Comitê Gestor do IBS vai unificar os dados da sua empresa - Omie' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'O novo Fisco digital: como o Comitê Gestor do IBS vai unificar os dados da sua empresa - Omie'."
+        "linkedin": "Explique o impacto de 'O novo Fisco digital: como o Comitê Gestor do IBS vai unificar os dados da sua empresa - omie.com.br' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'O novo Fisco digital: como o Comitê Gestor do IBS vai unificar os dados da sua empresa - omie.com.br' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'O novo Fisco digital: como o Comitê Gestor do IBS vai unificar os dados da sua empresa - omie.com.br'."
       }
     },
     {
@@ -5733,32 +5239,30 @@
     },
     {
       "id": "883999b4a30933d0",
-      "title": "A reforma necessária do contencioso tributário - Debate Jurídico",
+      "title": "A reforma necessária do contencioso tributário - debatejuridico.com.br",
       "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxPMHB5cFg0NEdaWVM0b3BFbXlJMTBxVmVsLXRLbnV1TTQ0MmpfbTZpOUdyRUxJWDlmRWl0TkZRd28tWGJFbWhSYzA5Vk1zc3JLNEowcWVCZUVReldYdGc0UDhoeldzc0ozYW5FSk5KQ0xiRURYNVZ2eE5BdU5TR3RueHpQVQ?oc=5",
       "source": "Google News — CARF e contencioso",
       "category": "carf",
-      "summary": "A reforma necessária do contencioso tributário Debate Jurídico",
+      "summary": "A reforma necessária do contencioso tributário debatejuridico.com.br",
       "publishedAt": "2026-09-04T15:00:00+00:00",
       "score": 20,
       "impactTags": [
         "risco",
-        "prazo",
         "oportunidade"
       ],
       "impactLabels": [
         "Risco fiscal",
-        "Prazo urgente",
         "Oportunidade consultiva"
       ],
-      "priority": "alta",
-      "opportunityScore": 63,
+      "priority": "media",
+      "opportunityScore": 40,
       "whoAffected": "Empresas e contabilidades que acompanham rotina fiscal.",
-      "recommendedAction": "Checar o calendário fiscal, responsáveis e documentos necessários antes do vencimento.",
-      "whyItMatters": "há risco de perda de prazo ou multa",
+      "recommendedAction": "Revisar exposição fiscal, documentação de suporte e oportunidade de tese/regularização.",
+      "whyItMatters": "reduz exposição fiscal e contencioso",
       "contentAngles": {
-        "linkedin": "Explique o impacto de 'A reforma necessária do contencioso tributário - Debate Jurídico' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'A reforma necessária do contencioso tributário - Debate Jurídico' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'A reforma necessária do contencioso tributário - Debate Jurídico'."
+        "linkedin": "Explique o impacto de 'A reforma necessária do contencioso tributário - debatejuridico.com.br' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'A reforma necessária do contencioso tributário - debatejuridico.com.br' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'A reforma necessária do contencioso tributário - debatejuridico.com.br'."
       }
     },
     {
@@ -6017,11 +5521,11 @@
     },
     {
       "id": "a3eaff6f5175aa0e",
-      "title": "Contencioso do IBS e da CBS: Tributos gêmeos, decisões opostas - Migalhas",
+      "title": "Contencioso do IBS e da CBS: Tributos gêmeos, decisões opostas - migalhas.com.br",
       "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxNbGExX3VEdmpyTGgzcU5xOGpZekR2bU9PT2tLc2lZY1ZJcGZVWkZ3Z0R6MTJUa3BDOWRFUm5RSDRKaTVJcEszRzdhVmxyQWNDbkdSRmtmM3h3bFN1TktDQm9ZSEtmbUZpc0JYdmlLY0FITWs1cW5QZ1RVamRFM05lU0JpZ0FNNlBoNVJUOHpTRTl5bmxWSzNWQnRldjJyMFd2QVM2Vw?oc=5",
       "source": "Google News — CARF e contencioso",
       "category": "reforma",
-      "summary": "Contencioso do IBS e da CBS: Tributos gêmeos, decisões opostas Migalhas",
+      "summary": "Contencioso do IBS e da CBS: Tributos gêmeos, decisões opostas migalhas.com.br",
       "publishedAt": "2026-09-01T07:00:00+00:00",
       "score": 27,
       "impactTags": [
@@ -6038,9 +5542,9 @@
       "recommendedAction": "Mapear processos, documentos fiscais, sistemas e decisões comerciais afetadas pela transição IBS/CBS.",
       "whyItMatters": "antecipa adaptação à Reforma Tributária",
       "contentAngles": {
-        "linkedin": "Explique o impacto de 'Contencioso do IBS e da CBS: Tributos gêmeos, decisões opostas - Migalhas' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'Contencioso do IBS e da CBS: Tributos gêmeos, decisões opostas - Migalhas' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Contencioso do IBS e da CBS: Tributos gêmeos, decisões opostas - Migalhas'."
+        "linkedin": "Explique o impacto de 'Contencioso do IBS e da CBS: Tributos gêmeos, decisões opostas - migalhas.com.br' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'Contencioso do IBS e da CBS: Tributos gêmeos, decisões opostas - migalhas.com.br' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Contencioso do IBS e da CBS: Tributos gêmeos, decisões opostas - migalhas.com.br'."
       }
     },
     {
@@ -6073,11 +5577,11 @@
     },
     {
       "id": "4c8f199f89f132d0",
-      "title": "Receita Federal e CGIBS publicam norma que estabelece dispensas para o nanoempreendedor na reforma - Contadores.cnt.br",
+      "title": "Receita Federal e CGIBS publicam norma que estabelece dispensas para o nanoempreendedor na reforma - contadores.cnt.br",
       "url": "https://news.google.com/rss/articles/CBMi9AFBVV95cUxPdlRtRS1zczczSVlKS2F1a09JZ2VYWjVXYkxmYVVGMkNoeVZkQ2E2dHB6bENOQjRPUzd0ZGxSMEwtaWRWQkNHcXNIaEs4UGZfRmdUNk0tME11dFRyVXVQTVN4cDZSYUs4eGNWd09qLTFJa2QyTUFYQTliOU1UZDVfUmluNFNfWnRZeExWWGloclJDZFg2ZHVYTl9DV3V1Yl95M3BlTy1OZWNTeURRZjRpc09RdW5kaEZpNmttRlg2SHRDQnF3ZUk1NUl3dUtFV3dETFBEMDFacmVPS0RvMXRVaGRWeThKcDZDNkQwek0xcURpS1h6?oc=5",
       "source": "Google News — Comitê Gestor IBS",
       "category": "reforma",
-      "summary": "Receita Federal e CGIBS publicam norma que estabelece dispensas para o nanoempreendedor na reforma Contadores.cnt.br",
+      "summary": "Receita Federal e CGIBS publicam norma que estabelece dispensas para o nanoempreendedor na reforma contadores.cnt.br",
       "publishedAt": "2026-08-31T12:27:00+00:00",
       "score": 11,
       "impactTags": [
@@ -6094,18 +5598,18 @@
       "recommendedAction": "Mapear processos, documentos fiscais, sistemas e decisões comerciais afetadas pela transição IBS/CBS.",
       "whyItMatters": "antecipa adaptação à Reforma Tributária",
       "contentAngles": {
-        "linkedin": "Explique o impacto de 'Receita Federal e CGIBS publicam norma que estabelece dispensas para o nanoempreendedor na reforma - Contadores.cnt.br' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'Receita Federal e CGIBS publicam norma que estabelece dispensas para o nanoempreendedor na reforma - Contadores.cnt.br' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Receita Federal e CGIBS publicam norma que estabelece dispensas para o nanoempreendedor na reforma - Contadores.cnt.br'."
+        "linkedin": "Explique o impacto de 'Receita Federal e CGIBS publicam norma que estabelece dispensas para o nanoempreendedor na reforma - contadores.cnt.br' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'Receita Federal e CGIBS publicam norma que estabelece dispensas para o nanoempreendedor na reforma - contadores.cnt.br' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Receita Federal e CGIBS publicam norma que estabelece dispensas para o nanoempreendedor na reforma - contadores.cnt.br'."
       }
     },
     {
       "id": "c420cdf741ad5d83",
-      "title": "O ponto cego no debate sobre o fim do contencioso tributário - JOTA Info",
+      "title": "O ponto cego no debate sobre o fim do contencioso tributário - jota.info",
       "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQajBtb0tjQzRlVENWbnlhTERCNGdDbHpIVFRwN3pkYVpyMi1fN2JBVXR3alY5Rk8yQlVzSWxSbWJjVWhvVWxPclA3RndiQ3I0VHRaTi1jUUJzUUh4cHJJUWRSTHlPMGtfRXVZSlZ0eVRtN0hoTlR4Nml2dnVpQVhXX0xmdFZTR0RpMUdxSDJvQW1XY29DSzFnNzdfWGNzdzRRbGVaaWdqaWszUlFu?oc=5",
       "source": "Google News — CARF e contencioso",
       "category": "carf",
-      "summary": "O ponto cego no debate sobre o fim do contencioso tributário JOTA Info",
+      "summary": "O ponto cego no debate sobre o fim do contencioso tributário jota.info",
       "publishedAt": "2026-08-31T07:00:00+00:00",
       "score": 20,
       "impactTags": [
@@ -6124,9 +5628,9 @@
       "recommendedAction": "Checar o calendário fiscal, responsáveis e documentos necessários antes do vencimento.",
       "whyItMatters": "há risco de perda de prazo ou multa",
       "contentAngles": {
-        "linkedin": "Explique o impacto de 'O ponto cego no debate sobre o fim do contencioso tributário - JOTA Info' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'O ponto cego no debate sobre o fim do contencioso tributário - JOTA Info' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'O ponto cego no debate sobre o fim do contencioso tributário - JOTA Info'."
+        "linkedin": "Explique o impacto de 'O ponto cego no debate sobre o fim do contencioso tributário - jota.info' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'O ponto cego no debate sobre o fim do contencioso tributário - jota.info' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'O ponto cego no debate sobre o fim do contencioso tributário - jota.info'."
       }
     },
     {
@@ -6159,11 +5663,11 @@
     },
     {
       "id": "1b67824da5336e0b",
-      "title": "Programa Nacional de Conformidade Tributária: Guia do Ato RFB/CGIBS 5/2026 - Omie",
+      "title": "Programa Nacional de Conformidade Tributária: Guia do Ato RFB/CGIBS 5/2026 - omie.com.br",
       "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPbGtDTHRadUVIQlZnaWliNWdlTkxYYjN4b2gweG1tNENMWkE0N2l2NWxoajZVeGprVUF0OFlfc3I5M3ZrYnNRVC1qOWVRVFRiUzZDcVowcWV5NVVNTlEtaHBjbUZzMGFna1hORHQxRVlpa3M5aFhORUMxbUxOVUI0UDFYaGpFOXlfRTAyN19UUjl6VmN5R0Rj?oc=5",
       "source": "Google News — Comitê Gestor IBS",
       "category": "reforma",
-      "summary": "Programa Nacional de Conformidade Tributária: Guia do Ato RFB/CGIBS 5/2026 Omie",
+      "summary": "Programa Nacional de Conformidade Tributária: Guia do Ato RFB/CGIBS 5/2026 omie.com.br",
       "publishedAt": "2026-08-31T07:00:00+00:00",
       "score": 11,
       "impactTags": [
@@ -6180,9 +5684,9 @@
       "recommendedAction": "Mapear processos, documentos fiscais, sistemas e decisões comerciais afetadas pela transição IBS/CBS.",
       "whyItMatters": "antecipa adaptação à Reforma Tributária",
       "contentAngles": {
-        "linkedin": "Explique o impacto de 'Programa Nacional de Conformidade Tributária: Guia do Ato RFB/CGIBS 5/2026 - Omie' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'Programa Nacional de Conformidade Tributária: Guia do Ato RFB/CGIBS 5/2026 - Omie' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Programa Nacional de Conformidade Tributária: Guia do Ato RFB/CGIBS 5/2026 - Omie'."
+        "linkedin": "Explique o impacto de 'Programa Nacional de Conformidade Tributária: Guia do Ato RFB/CGIBS 5/2026 - omie.com.br' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'Programa Nacional de Conformidade Tributária: Guia do Ato RFB/CGIBS 5/2026 - omie.com.br' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Programa Nacional de Conformidade Tributária: Guia do Ato RFB/CGIBS 5/2026 - omie.com.br'."
       }
     },
     {
@@ -6271,11 +5775,11 @@
     },
     {
       "id": "c93e2310465a936b",
-      "title": "STJ: execução fiscal contra espólio e sucessores depende de citação do devedor antes da morte - JOTA Info",
+      "title": "STJ: execução fiscal contra espólio e sucessores depende de citação do devedor antes da morte - jota.info",
       "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxObjRfTnZVOFE5eFBQMVFCQ2xnM0pSWEYycnBVUnFJYkNXYlc3MmhrVWtyQnMtY2dSdFRwZTRLd285ZVdIZmV5WEY4TTNzUGp0TGU4cjdjQXBnMHE1UnhyZ1JHeHoyRUJfcjVwZmFQTUFtQ2ZXUlNPYUR4Rnk3bmczQmRtbE9xMW5TNEpKZU5TVVhXVmN5ZmhGcFhiZXZXR21YSWNxMEVRalJzbmNtM09QSEdHRktvcjdBRkNibGxINVY?oc=5",
       "source": "Google News — STF/STJ tributário",
       "category": "judicial",
-      "summary": "STJ: execução fiscal contra espólio e sucessores depende de citação do devedor antes da morte JOTA Info",
+      "summary": "STJ: execução fiscal contra espólio e sucessores depende de citação do devedor antes da morte jota.info",
       "publishedAt": "2026-08-26T10:02:32+00:00",
       "score": 15,
       "impactTags": [
@@ -6294,9 +5798,9 @@
       "recommendedAction": "Revisar exposição fiscal, documentação de suporte e oportunidade de tese/regularização.",
       "whyItMatters": "reduz exposição fiscal e contencioso",
       "contentAngles": {
-        "linkedin": "Explique o impacto de 'STJ: execução fiscal contra espólio e sucessores depende de citação do devedor antes da morte - JOTA Info' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'STJ: execução fiscal contra espólio e sucessores depende de citação do devedor antes da morte - JOTA Info' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'STJ: execução fiscal contra espólio e sucessores depende de citação do devedor antes da morte - JOTA Info'."
+        "linkedin": "Explique o impacto de 'STJ: execução fiscal contra espólio e sucessores depende de citação do devedor antes da morte - jota.info' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'STJ: execução fiscal contra espólio e sucessores depende de citação do devedor antes da morte - jota.info' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'STJ: execução fiscal contra espólio e sucessores depende de citação do devedor antes da morte - jota.info'."
       }
     },
     {
@@ -6359,11 +5863,11 @@
     },
     {
       "id": "2a99e41be6462b07",
-      "title": "Receita e CGIBS regulamentam programa de conformidade para adaptação à reforma - JOTA Info",
+      "title": "Receita e CGIBS regulamentam programa de conformidade para adaptação à reforma - jota.info",
       "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxNZkZ0RmVvdjl5dlVjenQ2T0FhTzhhaVU1UkEzeUxhV3Q3VjFXbXB1bFRYOTVUNTNlZWc2ZjlndFhjWW1IOHM5WTJpcmRkOWt3UGtKLVNaY3FEOWkxMmxpTkdpcVZCOVFDcDhsU0szUXFjSFJmcnhtbFhzZGRkVWV3ZFhIU1JaVEFPSnV2ckdCTUs4Z0hYQmtGV3lBa0Q5Q2ZVZVFjV1RmMURBY3haU21yLWJmVHNJVWxrS3E5a3FKdGJZZ1NHM1NERDRESVdIVGI3bWdQdA?oc=5",
       "source": "Google News — Comitê Gestor IBS",
       "category": "reforma",
-      "summary": "Receita e CGIBS regulamentam programa de conformidade para adaptação à reforma JOTA Info",
+      "summary": "Receita e CGIBS regulamentam programa de conformidade para adaptação à reforma jota.info",
       "publishedAt": "2026-08-26T07:00:00+00:00",
       "score": 6,
       "impactTags": [
@@ -6380,9 +5884,9 @@
       "recommendedAction": "Mapear processos, documentos fiscais, sistemas e decisões comerciais afetadas pela transição IBS/CBS.",
       "whyItMatters": "antecipa adaptação à Reforma Tributária",
       "contentAngles": {
-        "linkedin": "Explique o impacto de 'Receita e CGIBS regulamentam programa de conformidade para adaptação à reforma - JOTA Info' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'Receita e CGIBS regulamentam programa de conformidade para adaptação à reforma - JOTA Info' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Receita e CGIBS regulamentam programa de conformidade para adaptação à reforma - JOTA Info'."
+        "linkedin": "Explique o impacto de 'Receita e CGIBS regulamentam programa de conformidade para adaptação à reforma - jota.info' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'Receita e CGIBS regulamentam programa de conformidade para adaptação à reforma - jota.info' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Receita e CGIBS regulamentam programa de conformidade para adaptação à reforma - jota.info'."
       }
     },
     {
@@ -6417,11 +5921,11 @@
     },
     {
       "id": "8e42116894cd46ca",
-      "title": "A reforma tributária vai acabar com o contencioso? - JOTA Info",
+      "title": "A reforma tributária vai acabar com o contencioso? - jota.info",
       "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxQeEpjMXp1RWZiNFpQNHBvcE1PeUMwcU5RTDAtVVNjeG4xbUFjc29kWVd1ME0yUWFvdHU0dm1nVmQ5VEgzWGIwdUYzTzdCbU1lckM0MlYxZ2YyX3d6RlFYaTlETkxsaGVqX1hiS2ttdTBkVl9PTFhKQVRXYlRJOTdpR1pLNzRSYlNmeGRQV0hiTXppb2hiaU82OFZCY3RQdWdBUEhMTGE5ckhTemx6TDFLN0IwaTNocUE3U1lIRXlNaw?oc=5",
       "source": "Google News — CARF e contencioso",
       "category": "reforma",
-      "summary": "A reforma tributária vai acabar com o contencioso? JOTA Info",
+      "summary": "A reforma tributária vai acabar com o contencioso? jota.info",
       "publishedAt": "2026-08-25T07:00:00+00:00",
       "score": 22,
       "impactTags": [
@@ -6438,9 +5942,9 @@
       "recommendedAction": "Mapear processos, documentos fiscais, sistemas e decisões comerciais afetadas pela transição IBS/CBS.",
       "whyItMatters": "antecipa adaptação à Reforma Tributária",
       "contentAngles": {
-        "linkedin": "Explique o impacto de 'A reforma tributária vai acabar com o contencioso? - JOTA Info' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'A reforma tributária vai acabar com o contencioso? - JOTA Info' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'A reforma tributária vai acabar com o contencioso? - JOTA Info'."
+        "linkedin": "Explique o impacto de 'A reforma tributária vai acabar com o contencioso? - jota.info' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'A reforma tributária vai acabar com o contencioso? - jota.info' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'A reforma tributária vai acabar com o contencioso? - jota.info'."
       }
     },
     {
@@ -6673,11 +6177,11 @@
     },
     {
       "id": "1e2fce5f501b8969",
-      "title": "Só é possível redirecionar execução fiscal se falecido já foi citado, decide STJ - Migalhas",
+      "title": "Só é possível redirecionar execução fiscal se falecido já foi citado, decide STJ - migalhas.com.br",
       "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxQeXNDdEMyY01ubUZmN0ZZVWlfMGlmcDFGVnpad281ZlhFVFJsOUZiWU53QzVIOURkcjVYb2xvRDRjVE9RQmRWYUxyd1E5cU02RFFtclFZX2V5QmpQOGpqUFRtdjBpcE5QWlNXMXpqbWpFWUZWS0tIRm1SMjBpVTBRUEtWYTdIenVhQmF0MENfaUI4bnBSd1d1UzdxektQbXJnQkRHN1l4X0h3Q3M4UXVjZQ?oc=5",
       "source": "Google News — STF/STJ tributário",
       "category": "judicial",
-      "summary": "Só é possível redirecionar execução fiscal se falecido já foi citado, decide STJ Migalhas",
+      "summary": "Só é possível redirecionar execução fiscal se falecido já foi citado, decide STJ migalhas.com.br",
       "publishedAt": "2026-08-20T07:00:00+00:00",
       "score": 15,
       "impactTags": [
@@ -6696,18 +6200,18 @@
       "recommendedAction": "Revisar exposição fiscal, documentação de suporte e oportunidade de tese/regularização.",
       "whyItMatters": "reduz exposição fiscal e contencioso",
       "contentAngles": {
-        "linkedin": "Explique o impacto de 'Só é possível redirecionar execução fiscal se falecido já foi citado, decide STJ - Migalhas' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'Só é possível redirecionar execução fiscal se falecido já foi citado, decide STJ - Migalhas' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Só é possível redirecionar execução fiscal se falecido já foi citado, decide STJ - Migalhas'."
+        "linkedin": "Explique o impacto de 'Só é possível redirecionar execução fiscal se falecido já foi citado, decide STJ - migalhas.com.br' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'Só é possível redirecionar execução fiscal se falecido já foi citado, decide STJ - migalhas.com.br' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Só é possível redirecionar execução fiscal se falecido já foi citado, decide STJ - migalhas.com.br'."
       }
     },
     {
       "id": "7caf68752eed3d06",
-      "title": "Tema 1.210 do STJ e a relação com as dívidas tributárias - Migalhas",
+      "title": "Tema 1.210 do STJ e a relação com as dívidas tributárias - migalhas.com.br",
       "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQaUkzYTBQUzc2eDNpWXU2a2tGYjF0S2lSaG5PS3JlcHlsdnQtQmVrMWxQYko3WFgzNktJa3ZzOVAzWE5aM0w5X3psT1BDeS1abTlnNUNFdGFSaUZsTnFFclR5c3hSOWQxQ01FLUlMSm00ckE2eGM5MEV1N2R1cmdvUTdzcXB1Q1J4cS05ZjhIVmd4aVNwSGJTWGZ6dGQwMHM?oc=5",
       "source": "Google News — STF/STJ tributário",
       "category": "judicial",
-      "summary": "Tema 1.210 do STJ e a relação com as dívidas tributárias Migalhas",
+      "summary": "Tema 1.210 do STJ e a relação com as dívidas tributárias migalhas.com.br",
       "publishedAt": "2026-08-20T07:00:00+00:00",
       "score": 15,
       "impactTags": [
@@ -6726,18 +6230,18 @@
       "recommendedAction": "Revisar exposição fiscal, documentação de suporte e oportunidade de tese/regularização.",
       "whyItMatters": "reduz exposição fiscal e contencioso",
       "contentAngles": {
-        "linkedin": "Explique o impacto de 'Tema 1.210 do STJ e a relação com as dívidas tributárias - Migalhas' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'Tema 1.210 do STJ e a relação com as dívidas tributárias - Migalhas' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Tema 1.210 do STJ e a relação com as dívidas tributárias - Migalhas'."
+        "linkedin": "Explique o impacto de 'Tema 1.210 do STJ e a relação com as dívidas tributárias - migalhas.com.br' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'Tema 1.210 do STJ e a relação com as dívidas tributárias - migalhas.com.br' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Tema 1.210 do STJ e a relação com as dívidas tributárias - migalhas.com.br'."
       }
     },
     {
       "id": "004ebb32ca34aacc",
-      "title": "Receita Federal, Comitê Gestor do IBS e CFC alinham diretrizes do Plano Nacional de Conformidade Tributária - www.gov.br",
+      "title": "Receita Federal, Comitê Gestor do IBS e CFC alinham diretrizes do Plano Nacional de Conformidade Tributária - gov.br",
       "url": "https://news.google.com/rss/articles/CBMi9wFBVV95cUxNazNqMTBBek9KeGtDT2JkM2hVRk9CRjVlUmdoUEhZREhPSHM4VVBfbDZzVmtKdW8tOG1RRnlDVjVGYUZTOEhHc3M5THVZSDRyVm81dUVpRjFKVmozcUxodHUxaGpJZUt5Z050dHYwdm5rc1RNSXFpeVk5Z1FLQ0hwTUFYQzFVVUcxS1dzdTN6RkV5bnJ1elI1RzRKN3A2Z0lLTFJKUVJBeEdvbE1XMGd1T09XY3FsVm1UWkdGQm8tbUc3REcxNFFyYTNrNkswRm5Fbml4cXpQRkZFM2dsdm9nVDJpT2VFM0dlYkF4RGVsU2NvXzhBcTU0?oc=5",
       "source": "Google News — Comitê Gestor IBS",
       "category": "reforma",
-      "summary": "Receita Federal, Comitê Gestor do IBS e CFC alinham diretrizes do Plano Nacional de Conformidade Tributária www.gov.br",
+      "summary": "Receita Federal, Comitê Gestor do IBS e CFC alinham diretrizes do Plano Nacional de Conformidade Tributária gov.br",
       "publishedAt": "2026-08-19T07:00:00+00:00",
       "score": 27,
       "impactTags": [
@@ -6754,9 +6258,9 @@
       "recommendedAction": "Mapear processos, documentos fiscais, sistemas e decisões comerciais afetadas pela transição IBS/CBS.",
       "whyItMatters": "antecipa adaptação à Reforma Tributária",
       "contentAngles": {
-        "linkedin": "Explique o impacto de 'Receita Federal, Comitê Gestor do IBS e CFC alinham diretrizes do Plano Nacional de Conformidade Tributária - www.gov.br' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'Receita Federal, Comitê Gestor do IBS e CFC alinham diretrizes do Plano Nacional de Conformidade Tributária - www.gov.br' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Receita Federal, Comitê Gestor do IBS e CFC alinham diretrizes do Plano Nacional de Conformidade Tributária - www.gov.br'."
+        "linkedin": "Explique o impacto de 'Receita Federal, Comitê Gestor do IBS e CFC alinham diretrizes do Plano Nacional de Conformidade Tributária - gov.br' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'Receita Federal, Comitê Gestor do IBS e CFC alinham diretrizes do Plano Nacional de Conformidade Tributária - gov.br' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Receita Federal, Comitê Gestor do IBS e CFC alinham diretrizes do Plano Nacional de Conformidade Tributária - gov.br'."
       }
     },
     {
@@ -6903,11 +6407,11 @@
     },
     {
       "id": "bc1dda0edcf8a099",
-      "title": "Receita Federal e CGIBS regulamentam Programa Nacional de Conformidade Tributária para apoiar adaptação à Reforma Tributária no ano de 2026 - www.gov.br",
+      "title": "Receita Federal e CGIBS regulamentam Programa Nacional de Conformidade Tributária para apoiar adaptação à Reforma Tributária no ano de 2026 - gov.br",
       "url": "https://news.google.com/rss/articles/CBMiswJBVV95cUxNanJsRWFNdm5zekZic053RkI1QWhrR0ptZXJjR0J0aHp2VV9IbW1kQnB1RnE1N3lCY2o2d192TWZXN3JndTlpTE9RVVlxVHlYcmc5eVF1cjIwR2p2Ty1Jcmhhb2lES1lSeFNFeXpINjIweDdHWTlzTGc0T2Q1amxWSlprcGEtQmxOM2NCS1N4MFpZS214QnZETG42ZkdFekpYOXVhN19TbVRhRXVBQmNzeWJ2aGkwMmhaR2dRR1MzZUVpVUZLVmFjQzV6MG9EVkpwaFpJRVBfOVpWbGF6VVBRTS1ob3ZoNm0yV3FYZlNoaTdmb0UtcUU2eGFWNVRRYV8xS2xGNEttZl9wOVhOcGRaTzdFeEZ1cHN2RUxBbkJFTjdtbC1WemN5NjFDMzQtZGk3c0Y0?oc=5",
       "source": "Google News — Comitê Gestor IBS",
       "category": "reforma",
-      "summary": "Receita Federal e CGIBS regulamentam Programa Nacional de Conformidade Tributária para apoiar adaptação à Reforma Tributária no ano de 2026 www.gov.br",
+      "summary": "Receita Federal e CGIBS regulamentam Programa Nacional de Conformidade Tributária para apoiar adaptação à Reforma Tributária no ano de 2026 gov.br",
       "publishedAt": "2026-08-13T07:00:00+00:00",
       "score": 28,
       "impactTags": [
@@ -6924,18 +6428,18 @@
       "recommendedAction": "Mapear processos, documentos fiscais, sistemas e decisões comerciais afetadas pela transição IBS/CBS.",
       "whyItMatters": "antecipa adaptação à Reforma Tributária",
       "contentAngles": {
-        "linkedin": "Explique o impacto de 'Receita Federal e CGIBS regulamentam Programa Nacional de Conformidade Tributária para apoiar adaptação à Reforma Tributária no ano de 2026 - www.gov.br' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'Receita Federal e CGIBS regulamentam Programa Nacional de Conformidade Tributária para apoiar adaptação à Reforma Tributária no ano de 2026 - www.gov.br' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Receita Federal e CGIBS regulamentam Programa Nacional de Conformidade Tributária para apoiar adaptação à Reforma Tributária no ano de 2026 - www.gov.br'."
+        "linkedin": "Explique o impacto de 'Receita Federal e CGIBS regulamentam Programa Nacional de Conformidade Tributária para apoiar adaptação à Reforma Tributária no ano de 2026 - gov.br' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'Receita Federal e CGIBS regulamentam Programa Nacional de Conformidade Tributária para apoiar adaptação à Reforma Tributária no ano de 2026 - gov.br' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Receita Federal e CGIBS regulamentam Programa Nacional de Conformidade Tributária para apoiar adaptação à Reforma Tributária no ano de 2026 - gov.br'."
       }
     },
     {
       "id": "9c24166db1667de8",
-      "title": "Nova versão do regulamento do IBS e da CBS pode sair até outubro - JOTA Info",
+      "title": "Nova versão do regulamento do IBS e da CBS pode sair até outubro - jota.info",
       "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxNbHFBc0hYTUdheEVLRkNzZlV5QW1lMG9iQ2pjOHN4Z2J6eTcxdXBKYUhSNE1QZ0dEd2dZZUZISl8tSVljTlpTVUUtb1AzNWh0MEVnR2JyblJpQm5IN0N4bnBkeTFBVWZOazVrM2JNcTk2bU94NGpDZXlqN3g2bjludHNsQkZxS3ZuSGM1dzBTSXlOMng3NTlySTFQNEdNWThzVlhFcG42T040azNTa2RzVEVxZkFKQ01nMC02XzVvWUYyUQ?oc=5",
       "source": "Google News — Comitê Gestor IBS",
       "category": "reforma",
-      "summary": "Nova versão do regulamento do IBS e da CBS pode sair até outubro JOTA Info",
+      "summary": "Nova versão do regulamento do IBS e da CBS pode sair até outubro jota.info",
       "publishedAt": "2026-08-13T07:00:00+00:00",
       "score": 23,
       "impactTags": [
@@ -6954,9 +6458,9 @@
       "recommendedAction": "Checar o calendário fiscal, responsáveis e documentos necessários antes do vencimento.",
       "whyItMatters": "há risco de perda de prazo ou multa",
       "contentAngles": {
-        "linkedin": "Explique o impacto de 'Nova versão do regulamento do IBS e da CBS pode sair até outubro - JOTA Info' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'Nova versão do regulamento do IBS e da CBS pode sair até outubro - JOTA Info' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Nova versão do regulamento do IBS e da CBS pode sair até outubro - JOTA Info'."
+        "linkedin": "Explique o impacto de 'Nova versão do regulamento do IBS e da CBS pode sair até outubro - jota.info' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'Nova versão do regulamento do IBS e da CBS pode sair até outubro - jota.info' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Nova versão do regulamento do IBS e da CBS pode sair até outubro - jota.info'."
       }
     },
     {
@@ -7131,11 +6635,11 @@
     },
     {
       "id": "d406e2a988c86c08",
-      "title": "1ª seção do STJ valida benefício fiscal com efeito retroativo - Migalhas",
+      "title": "1ª seção do STJ valida benefício fiscal com efeito retroativo - migalhas.com.br",
       "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxOeXJMblZpc0ZvcFhQa0NFY2gwQzNyellHZmVYWEFrRkszWWtaNDRxTm1SS3I0V0NEeG5rZmR4ZVl4cXVHTDlrb25HRjN2WHZpb1QtalFuWXYxRGN6UTBfdTRWVTlrWDBQMlBxOE9zUi1ZVHd2YzJIRnpKUWplN2poM1ZSYUlUZXJQVlV3bXMzbFlnV1QycVp1VUVQcXlqWGw4R0JjMzZB?oc=5",
       "source": "Google News — STF/STJ tributário",
       "category": "judicial",
-      "summary": "1ª seção do STJ valida benefício fiscal com efeito retroativo Migalhas",
+      "summary": "1ª seção do STJ valida benefício fiscal com efeito retroativo migalhas.com.br",
       "publishedAt": "2026-08-12T07:00:00+00:00",
       "score": 15,
       "impactTags": [
@@ -7154,18 +6658,18 @@
       "recommendedAction": "Revisar exposição fiscal, documentação de suporte e oportunidade de tese/regularização.",
       "whyItMatters": "reduz exposição fiscal e contencioso",
       "contentAngles": {
-        "linkedin": "Explique o impacto de '1ª seção do STJ valida benefício fiscal com efeito retroativo - Migalhas' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use '1ª seção do STJ valida benefício fiscal com efeito retroativo - Migalhas' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre '1ª seção do STJ valida benefício fiscal com efeito retroativo - Migalhas'."
+        "linkedin": "Explique o impacto de '1ª seção do STJ valida benefício fiscal com efeito retroativo - migalhas.com.br' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use '1ª seção do STJ valida benefício fiscal com efeito retroativo - migalhas.com.br' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre '1ª seção do STJ valida benefício fiscal com efeito retroativo - migalhas.com.br'."
       }
     },
     {
       "id": "1a34847a51a3df60",
-      "title": "Os desafios do novo contencioso tributário do IBS e da CBS - JOTA Info",
+      "title": "Os desafios do novo contencioso tributário do IBS e da CBS - jota.info",
       "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxQY29PMjdXTnRmWHUta1hibjZvb1lrT1VYZWRXVzFiZ1ByNzVMcU1YMXZQeVhJV1R6eDU4Z1B5MmpnNjlMNXdRc0dUOUo4dUVJbk5remxuTk16UGptYlhpRzd0Yk5rY3JnQW5JT3J5RmZXQjBGemt6UnZ4REgzY0JxNDBrX3Q4Mm5rSHB4LW9HRVA1dnFBcnpUd1RZcDZNbmNaM24tQ0pEZHN2Ylk4LVJuTVh1NTBtQ0EtbFE?oc=5",
       "source": "Google News — CARF e contencioso",
       "category": "reforma",
-      "summary": "Os desafios do novo contencioso tributário do IBS e da CBS JOTA Info",
+      "summary": "Os desafios do novo contencioso tributário do IBS e da CBS jota.info",
       "publishedAt": "2026-08-11T07:00:00+00:00",
       "score": 32,
       "impactTags": [
@@ -7182,18 +6686,18 @@
       "recommendedAction": "Mapear processos, documentos fiscais, sistemas e decisões comerciais afetadas pela transição IBS/CBS.",
       "whyItMatters": "antecipa adaptação à Reforma Tributária",
       "contentAngles": {
-        "linkedin": "Explique o impacto de 'Os desafios do novo contencioso tributário do IBS e da CBS - JOTA Info' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'Os desafios do novo contencioso tributário do IBS e da CBS - JOTA Info' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Os desafios do novo contencioso tributário do IBS e da CBS - JOTA Info'."
+        "linkedin": "Explique o impacto de 'Os desafios do novo contencioso tributário do IBS e da CBS - jota.info' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'Os desafios do novo contencioso tributário do IBS e da CBS - jota.info' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Os desafios do novo contencioso tributário do IBS e da CBS - jota.info'."
       }
     },
     {
       "id": "bfce6b609dbf81e1",
-      "title": "Honorários advocatícios em execução fiscal extinta antes da citação: Uma crítica ao Tema 1.413 do STJ - Migalhas",
+      "title": "Honorários advocatícios em execução fiscal extinta antes da citação: Uma crítica ao Tema 1.413 do STJ - migalhas.com.br",
       "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxQbzNKQ2o1X2JKbUwtVFRRMWc3N3pTZEMyVUNER19iUHRFVk1Tenpxc1NTSUpBcWxHNkxjWVJsbHJOaTl2OXd1TTc4MHIyRUNxQl9fRXJTazl6VEl4UTkxUDFmaWROS2JiVVU1SzAwbjZHZnhGNlU3RkZGUlU0MkUtZjJBMllGX1RPcVVWNDFpdm5iQWpOelVabll0MlpKNGV5bEE?oc=5",
       "source": "Google News — STF/STJ tributário",
       "category": "judicial",
-      "summary": "Honorários advocatícios em execução fiscal extinta antes da citação: Uma crítica ao Tema 1.413 do STJ Migalhas",
+      "summary": "Honorários advocatícios em execução fiscal extinta antes da citação: Uma crítica ao Tema 1.413 do STJ migalhas.com.br",
       "publishedAt": "2026-08-10T07:00:00+00:00",
       "score": 15,
       "impactTags": [
@@ -7212,9 +6716,9 @@
       "recommendedAction": "Revisar exposição fiscal, documentação de suporte e oportunidade de tese/regularização.",
       "whyItMatters": "reduz exposição fiscal e contencioso",
       "contentAngles": {
-        "linkedin": "Explique o impacto de 'Honorários advocatícios em execução fiscal extinta antes da citação: Uma crítica ao Tema 1.413 do STJ - Migalhas' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'Honorários advocatícios em execução fiscal extinta antes da citação: Uma crítica ao Tema 1.413 do STJ - Migalhas' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Honorários advocatícios em execução fiscal extinta antes da citação: Uma crítica ao Tema 1.413 do STJ - Migalhas'."
+        "linkedin": "Explique o impacto de 'Honorários advocatícios em execução fiscal extinta antes da citação: Uma crítica ao Tema 1.413 do STJ - migalhas.com.br' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'Honorários advocatícios em execução fiscal extinta antes da citação: Uma crítica ao Tema 1.413 do STJ - migalhas.com.br' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Honorários advocatícios em execução fiscal extinta antes da citação: Uma crítica ao Tema 1.413 do STJ - migalhas.com.br'."
       }
     },
     {
@@ -7247,11 +6751,11 @@
     },
     {
       "id": "9161ee290536e7ae",
-      "title": "Receita e Comitê Gestor do IBS devem lançar programa de conformidade em 15 dias - JOTA Info",
+      "title": "Receita e Comitê Gestor do IBS devem lançar programa de conformidade em 15 dias - jota.info",
       "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxPR3RLVjZTU2YwSDVsWnpQdTlpRzdGOVcwdlpfWWxBSEpJNDZXdXBzZWJhXzVKMkdZbEJZQjNGcVdhSmo3a3lHcjhKVDJJTEhLRjNPakljdkNrTEdFMnVBaloxQ2xhTE8tRWxpbVl5U2JQMTdoTFZHUWpvTDJaSFA0T1FMdld2ZVNYYm9KbGtVR1hZdEw5RkhLUWNqUFRKMlFXM1lKczExb05ETnZLSUVNclpBYXdVMnNjWmdlaUtVdERpRVllYzYxYmdYYlVsN3NsXzBqREFn?oc=5",
       "source": "Google News — Comitê Gestor IBS",
       "category": "reforma",
-      "summary": "Receita e Comitê Gestor do IBS devem lançar programa de conformidade em 15 dias JOTA Info",
+      "summary": "Receita e Comitê Gestor do IBS devem lançar programa de conformidade em 15 dias jota.info",
       "publishedAt": "2026-08-07T07:00:00+00:00",
       "score": 17,
       "impactTags": [
@@ -7268,9 +6772,9 @@
       "recommendedAction": "Mapear processos, documentos fiscais, sistemas e decisões comerciais afetadas pela transição IBS/CBS.",
       "whyItMatters": "antecipa adaptação à Reforma Tributária",
       "contentAngles": {
-        "linkedin": "Explique o impacto de 'Receita e Comitê Gestor do IBS devem lançar programa de conformidade em 15 dias - JOTA Info' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'Receita e Comitê Gestor do IBS devem lançar programa de conformidade em 15 dias - JOTA Info' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Receita e Comitê Gestor do IBS devem lançar programa de conformidade em 15 dias - JOTA Info'."
+        "linkedin": "Explique o impacto de 'Receita e Comitê Gestor do IBS devem lançar programa de conformidade em 15 dias - jota.info' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'Receita e Comitê Gestor do IBS devem lançar programa de conformidade em 15 dias - jota.info' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Receita e Comitê Gestor do IBS devem lançar programa de conformidade em 15 dias - jota.info'."
       }
     },
     {
@@ -7449,11 +6953,11 @@
     },
     {
       "id": "9e4e52a223ca8c65",
-      "title": "Receita Federal e CGIBS flexibilizarão obrigatoriedade de informações em documentos fiscais - www.gov.br",
+      "title": "Receita Federal e CGIBS flexibilizarão obrigatoriedade de informações em documentos fiscais - gov.br",
       "url": "https://news.google.com/rss/articles/CBMi8gFBVV95cUxNOHQweDBseVQyU1pyTUdFYjlWV00yREpYNXEyWVBsNzR4Y1Q0QjFRVmRkYUVyWUVzbUkxTWdaYm1sR0h2eXZiOGNBVjNUYlhla2lXYzVmSlRvMXpFMWxxX1BxdWU1MV9BT0xVbUItdkoyZHVYbWttcWdINGMwM1RGWEtJYXFTSy14WWJ3U3lOM1p2dGpSdUVhTncxemxYZ21vOFR4VWVyQ3YwMFFSa0lRX0hDZEZOaGkyY0RxWFZ4d2JSRXZXWUZTT2FScmpCOGE1YXUwT0piTExmcHVGcjRPbk9CWVBrU0JRRE83UV8wQlFoUQ?oc=5",
       "source": "Google News — Comitê Gestor IBS",
       "category": "reforma",
-      "summary": "Receita Federal e CGIBS flexibilizarão obrigatoriedade de informações em documentos fiscais www.gov.br",
+      "summary": "Receita Federal e CGIBS flexibilizarão obrigatoriedade de informações em documentos fiscais gov.br",
       "publishedAt": "2026-08-01T07:00:00+00:00",
       "score": 11,
       "impactTags": [
@@ -7470,9 +6974,9 @@
       "recommendedAction": "Mapear processos, documentos fiscais, sistemas e decisões comerciais afetadas pela transição IBS/CBS.",
       "whyItMatters": "antecipa adaptação à Reforma Tributária",
       "contentAngles": {
-        "linkedin": "Explique o impacto de 'Receita Federal e CGIBS flexibilizarão obrigatoriedade de informações em documentos fiscais - www.gov.br' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'Receita Federal e CGIBS flexibilizarão obrigatoriedade de informações em documentos fiscais - www.gov.br' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Receita Federal e CGIBS flexibilizarão obrigatoriedade de informações em documentos fiscais - www.gov.br'."
+        "linkedin": "Explique o impacto de 'Receita Federal e CGIBS flexibilizarão obrigatoriedade de informações em documentos fiscais - gov.br' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'Receita Federal e CGIBS flexibilizarão obrigatoriedade de informações em documentos fiscais - gov.br' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Receita Federal e CGIBS flexibilizarão obrigatoriedade de informações em documentos fiscais - gov.br'."
       }
     },
     {
@@ -7505,11 +7009,11 @@
     },
     {
       "id": "2e4ea2006a376140",
-      "title": "Receita Federal e Comitê Gestor do IBS publicam o Cronograma de Implementação dos Documentos Fiscais Eletrônicos da Reforma Tributária do Consumo - www.gov.br",
+      "title": "Receita Federal e Comitê Gestor do IBS publicam o Cronograma de Implementação dos Documentos Fiscais Eletrônicos da Reforma Tributária do Consumo - gov.br",
       "url": "https://news.google.com/rss/articles/CBMiugJBVV95cUxNSGhoS2Z6bGF5YlZnWV9ISEJHc2lUdWd0YkJnWEZYLVdLbWhzc3BUQkhQUFJQRjBkUlZod1VVQzNwak1qNHc4SnFFck95a0VhYUFmLW1mZ0pOa3hkby1SWkhOMzNQVy0ybGtmNTBZS1lBSERnTXplQW9RY2Q4OVJrY3oxdDJjRmg0ZnZSdk5rRlBURGhLblJ0THpBSHNPZkNKUHhQbnhmSnk3XzVtRC1fV01ZUUtLZGE4b0J0SDZibWNUandhWVJ4TGc4dTFsdkNxNkNfeE1zbWdvQktGejhKaWRRaW5TdWRwTWk0UXVsV1cxTThxN2JGUjFnS2VRV1VMVllwRDdSQzJQMmpXMUxFc0dRV3YtSWlveHNhQ01TUzczak1ZSThRcjUwcHo2aU9LcFg3aWJwS3JpZw?oc=5",
       "source": "Google News — Comitê Gestor IBS",
       "category": "reforma",
-      "summary": "Receita Federal e Comitê Gestor do IBS publicam o Cronograma de Implementação dos Documentos Fiscais Eletrônicos da Reforma Tributária do Consumo www.gov.br",
+      "summary": "Receita Federal e Comitê Gestor do IBS publicam o Cronograma de Implementação dos Documentos Fiscais Eletrônicos da Reforma Tributária do Consumo gov.br",
       "publishedAt": "2026-07-31T07:00:00+00:00",
       "score": 39,
       "impactTags": [
@@ -7526,9 +7030,9 @@
       "recommendedAction": "Mapear processos, documentos fiscais, sistemas e decisões comerciais afetadas pela transição IBS/CBS.",
       "whyItMatters": "antecipa adaptação à Reforma Tributária",
       "contentAngles": {
-        "linkedin": "Explique o impacto de 'Receita Federal e Comitê Gestor do IBS publicam o Cronograma de Implementação dos Documentos Fiscais Eletrônicos da Reforma Tributária do Consumo - www.gov.br' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'Receita Federal e Comitê Gestor do IBS publicam o Cronograma de Implementação dos Documentos Fiscais Eletrônicos da Reforma Tributária do Consumo - www.gov.br' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Receita Federal e Comitê Gestor do IBS publicam o Cronograma de Implementação dos Documentos Fiscais Eletrônicos da Reforma Tributária do Consumo - www.gov.br'."
+        "linkedin": "Explique o impacto de 'Receita Federal e Comitê Gestor do IBS publicam o Cronograma de Implementação dos Documentos Fiscais Eletrônicos da Reforma Tributária do Consumo - gov.br' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'Receita Federal e Comitê Gestor do IBS publicam o Cronograma de Implementação dos Documentos Fiscais Eletrônicos da Reforma Tributária do Consumo - gov.br' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Receita Federal e Comitê Gestor do IBS publicam o Cronograma de Implementação dos Documentos Fiscais Eletrônicos da Reforma Tributária do Consumo - gov.br'."
       }
     },
     {
@@ -7679,7 +7183,7 @@
       "category": "reforma",
       "summary": "IBS pode gerar nova onda de disputas tributárias entre estados e municípios Brasil 61",
       "publishedAt": "2026-07-27T07:00:00+00:00",
-      "score": 22,
+      "score": 14,
       "impactTags": [
         "reforma",
         "oportunidade"
@@ -7701,11 +7205,11 @@
     },
     {
       "id": "11bfed44f5607350",
-      "title": "Receita Federal e Comitê Gestor do IBS divulgarão cronograma para emissão dos documentos fiscais eletrônicos da Reforma Tributária - www.gov.br",
+      "title": "Receita Federal e Comitê Gestor do IBS divulgarão cronograma para emissão dos documentos fiscais eletrônicos da Reforma Tributária - gov.br",
       "url": "https://news.google.com/rss/articles/CBMipgJBVV95cUxOcTVCSXlaNW1jOEdabXNTZ2s5TWxIRGNuSjVrZkZKeFg4d0s3Ym1vOUlCVS1mWW5pTFhGdVdFR1RQbGZndkhSaldfYlphaGFnbmVOZjAyWTgwSlpwNFFWdGtKd1VtdTZXWFQ1VGdha2RISlRjUXEzeXlydC1zUDBRLU43VDQzZG02V2s5WjBmellQUFBqYlpGOVhibkNQcmphV1lTVVN0U0gwMVYxalNSbDQtY005WXVOVkItaUo0aGxpckoyZFdXV0k0VGVDUXhCaXNRZVRmQWk0X2hsVHNWdzNoSlBTTjFrREQ4ZWp4dWRRRjhPdS1PUE1xNUtXSGJublBaQWVIQ2RRRHhJT2w5cGktVEZwdmRiUVUzeUF3MFQzRUtEOFE?oc=5",
       "source": "Google News — Comitê Gestor IBS",
       "category": "reforma",
-      "summary": "Receita Federal e Comitê Gestor do IBS divulgarão cronograma para emissão dos documentos fiscais eletrônicos da Reforma Tributária www.gov.br",
+      "summary": "Receita Federal e Comitê Gestor do IBS divulgarão cronograma para emissão dos documentos fiscais eletrônicos da Reforma Tributária gov.br",
       "publishedAt": "2026-07-27T07:00:00+00:00",
       "score": 39,
       "impactTags": [
@@ -7722,9 +7226,9 @@
       "recommendedAction": "Mapear processos, documentos fiscais, sistemas e decisões comerciais afetadas pela transição IBS/CBS.",
       "whyItMatters": "antecipa adaptação à Reforma Tributária",
       "contentAngles": {
-        "linkedin": "Explique o impacto de 'Receita Federal e Comitê Gestor do IBS divulgarão cronograma para emissão dos documentos fiscais eletrônicos da Reforma Tributária - www.gov.br' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'Receita Federal e Comitê Gestor do IBS divulgarão cronograma para emissão dos documentos fiscais eletrônicos da Reforma Tributária - www.gov.br' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Receita Federal e Comitê Gestor do IBS divulgarão cronograma para emissão dos documentos fiscais eletrônicos da Reforma Tributária - www.gov.br'."
+        "linkedin": "Explique o impacto de 'Receita Federal e Comitê Gestor do IBS divulgarão cronograma para emissão dos documentos fiscais eletrônicos da Reforma Tributária - gov.br' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'Receita Federal e Comitê Gestor do IBS divulgarão cronograma para emissão dos documentos fiscais eletrônicos da Reforma Tributária - gov.br' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Receita Federal e Comitê Gestor do IBS divulgarão cronograma para emissão dos documentos fiscais eletrônicos da Reforma Tributária - gov.br'."
       }
     },
     {
@@ -7735,7 +7239,7 @@
       "category": "reforma",
       "summary": "IBS pode gerar nova onda de disputas tributárias entre estados e municípios Notícia Exata",
       "publishedAt": "2026-07-27T07:00:00+00:00",
-      "score": 14,
+      "score": 22,
       "impactTags": [
         "reforma",
         "oportunidade"
@@ -7815,11 +7319,11 @@
     },
     {
       "id": "1c96abeade8152ea",
-      "title": "STJ mantém ISS sobre honorários sucumbenciais de escritório no Simples - Migalhas",
+      "title": "STJ mantém ISS sobre honorários sucumbenciais de escritório no Simples - migalhas.com.br",
       "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQZ1VvRmRfUkV4TGJTdFY5QVk1NWFPTEFzVHVpMDBPX2lsd2pYMWZEVERURlZRZEZnVGhnZDNYRGlxaXYzMW9rNjdfV090SkR2VkFKRlRGQk9WZC1FbS1wOXpxZ0hwMENLeVFMLTg0VUFFalpOaHo4S3dfbDF6b3Ewa3F0MmJNWGt2NE41SzF2U2RKdVItbXFJMHRHRjIxc2hTY1dzQTE4UGxkYnBjNVNwckwycw?oc=5",
       "source": "Google News — STF/STJ tributário",
       "category": "municipal",
-      "summary": "STJ mantém ISS sobre honorários sucumbenciais de escritório no Simples Migalhas",
+      "summary": "STJ mantém ISS sobre honorários sucumbenciais de escritório no Simples migalhas.com.br",
       "publishedAt": "2026-07-24T07:00:00+00:00",
       "score": 16,
       "impactTags": [
@@ -7838,9 +7342,9 @@
       "recommendedAction": "Revisar exposição fiscal, documentação de suporte e oportunidade de tese/regularização.",
       "whyItMatters": "reduz exposição fiscal e contencioso",
       "contentAngles": {
-        "linkedin": "Explique o impacto de 'STJ mantém ISS sobre honorários sucumbenciais de escritório no Simples - Migalhas' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'STJ mantém ISS sobre honorários sucumbenciais de escritório no Simples - Migalhas' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'STJ mantém ISS sobre honorários sucumbenciais de escritório no Simples - Migalhas'."
+        "linkedin": "Explique o impacto de 'STJ mantém ISS sobre honorários sucumbenciais de escritório no Simples - migalhas.com.br' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'STJ mantém ISS sobre honorários sucumbenciais de escritório no Simples - migalhas.com.br' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'STJ mantém ISS sobre honorários sucumbenciais de escritório no Simples - migalhas.com.br'."
       }
     },
     {
@@ -7933,11 +7437,11 @@
     },
     {
       "id": "1633a6a814c2d444",
-      "title": "Após episódio de machismo, Comitê Gestor do IBS cria comitê de ética - JOTA Info",
+      "title": "Após episódio de machismo, Comitê Gestor do IBS cria comitê de ética - jota.info",
       "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxOaGZCTGZHdWtDd2V0QjR5Q2lmM0NQWmtsNmJyckRLSjRvRFZqUjA5c1JrUjVMSWxuQmxNNTdYN3Rjd2FuTFBjLWlmTGx0RnJJOXhMYXVCYXdVbDBkcWE0cjMwSzM5Ulk3ZjFkYzE4dTJGM0M4OGRKcDRkY080U0ZtOE01T2Ita2tVSkh6YjBVa3oyYTBRdU10VS1YUW9oQ01oaUx1akpJMTg5cmVaSE40QUxpT2x2dHhsLWxrN1FHUGdjMjFaTGc?oc=5",
       "source": "Google News — Comitê Gestor IBS",
       "category": "reforma",
-      "summary": "Após episódio de machismo, Comitê Gestor do IBS cria comitê de ética JOTA Info",
+      "summary": "Após episódio de machismo, Comitê Gestor do IBS cria comitê de ética jota.info",
       "publishedAt": "2026-07-22T07:00:00+00:00",
       "score": 17,
       "impactTags": [
@@ -7954,9 +7458,9 @@
       "recommendedAction": "Mapear processos, documentos fiscais, sistemas e decisões comerciais afetadas pela transição IBS/CBS.",
       "whyItMatters": "antecipa adaptação à Reforma Tributária",
       "contentAngles": {
-        "linkedin": "Explique o impacto de 'Após episódio de machismo, Comitê Gestor do IBS cria comitê de ética - JOTA Info' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'Após episódio de machismo, Comitê Gestor do IBS cria comitê de ética - JOTA Info' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Após episódio de machismo, Comitê Gestor do IBS cria comitê de ética - JOTA Info'."
+        "linkedin": "Explique o impacto de 'Após episódio de machismo, Comitê Gestor do IBS cria comitê de ética - jota.info' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'Após episódio de machismo, Comitê Gestor do IBS cria comitê de ética - jota.info' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Após episódio de machismo, Comitê Gestor do IBS cria comitê de ética - jota.info'."
       }
     },
     {
@@ -7991,11 +7495,11 @@
     },
     {
       "id": "64f27d1430492389",
-      "title": "Após repercussão negativa, Comitê Gestor do IBS suspende proposta de remuneração - JOTA Info",
+      "title": "Após repercussão negativa, Comitê Gestor do IBS suspende proposta de remuneração - jota.info",
       "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxQNGJ5VlZrWXVDRzl3WHI2SGNpb1doWFF4T0RsaHRJR2RPTXRDbzUwejB3c1FGQjBmTWVKdGJoUld1ZVluNEJMQUZGTTRmTm9OTTVGZm1mLTFpdm9IaFlrQTRFNm1mRWkzOGZnZk8tYm11U2NrV1Jsanl2VVZkaTJpZFJlTDdqU3RDZExuVzZ4dG9zLTlPTW1HZVFVcU1mVXJLNlBfM1E4VjdSUEVaLUxfamJRd1Yza2llaWF5Tm9KLW1SS2dRMFNLV0NZaUVGend4RzYtc3lR?oc=5",
       "source": "Google News — Comitê Gestor IBS",
       "category": "reforma",
-      "summary": "Após repercussão negativa, Comitê Gestor do IBS suspende proposta de remuneração JOTA Info",
+      "summary": "Após repercussão negativa, Comitê Gestor do IBS suspende proposta de remuneração jota.info",
       "publishedAt": "2026-07-21T07:00:00+00:00",
       "score": 17,
       "impactTags": [
@@ -8012,9 +7516,9 @@
       "recommendedAction": "Mapear processos, documentos fiscais, sistemas e decisões comerciais afetadas pela transição IBS/CBS.",
       "whyItMatters": "antecipa adaptação à Reforma Tributária",
       "contentAngles": {
-        "linkedin": "Explique o impacto de 'Após repercussão negativa, Comitê Gestor do IBS suspende proposta de remuneração - JOTA Info' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'Após repercussão negativa, Comitê Gestor do IBS suspende proposta de remuneração - JOTA Info' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Após repercussão negativa, Comitê Gestor do IBS suspende proposta de remuneração - JOTA Info'."
+        "linkedin": "Explique o impacto de 'Após repercussão negativa, Comitê Gestor do IBS suspende proposta de remuneração - jota.info' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'Após repercussão negativa, Comitê Gestor do IBS suspende proposta de remuneração - jota.info' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Após repercussão negativa, Comitê Gestor do IBS suspende proposta de remuneração - jota.info'."
       }
     },
     {
@@ -8025,7 +7529,7 @@
       "category": "reforma",
       "summary": "Sicredi Conexão leva orientações sobre a Reforma Tributária aos associados O Alto Uruguai",
       "publishedAt": "2026-07-21T07:00:00+00:00",
-      "score": 20,
+      "score": 12,
       "impactTags": [
         "reforma",
         "oportunidade"
@@ -8047,11 +7551,11 @@
     },
     {
       "id": "20218dd9d081b6cb",
-      "title": "Reforma tributária aumenta participação dos municípios na divisão do IBS - Brasil 61",
+      "title": "Reforma tributária aumenta participação dos municípios na divisão do IBS - brasil61.com",
       "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxONWI3TURmOUJESGlhTk45MnQ4b3E0RHdGeGk2ckN2RkpWNzY5NTVsdDNpMTd3UEZ1SjBRbDZReFFIQTNrdVFWcm9MR29zQ2M2OHBndU1xY29pMHFEM0JNX19WUmw1UnFKYXVKNnV4aGYxdjd5SGwtTnhNME1YM0FORmVjczVHTTFQLUQwRGwwQUFiZmNHZlBkUWxnLVh4c1puelhhRXByNnZCaGfSAbABQVVfeXFMTzVERGs0N0M2bEhwRldPZXAyTEhjTXlpSlJEWkZGbjFuZ1FlSzFpYlJpbnoyWWxDZ2FmeENBeGc2eUotVk1UaGZpUzZMWktCY0ZIMnp3YTB2NV9RcVVGZVpLR2p1enEyUnE5SVRrbExRTzJiS0hVNTJFNXpyMUR5S1VheTFtN05JUlZ5OElwQ0xlOWh6elprM3FIcUxsTU5aZzNZem1UQzd3QjZBcHdPaFc?oc=5",
       "source": "Google News — Municípios MG fiscal",
       "category": "reforma",
-      "summary": "Reforma tributária aumenta participação dos municípios na divisão do IBS Brasil 61",
+      "summary": "Reforma tributária aumenta participação dos municípios na divisão do IBS brasil61.com",
       "publishedAt": "2026-07-21T07:00:00+00:00",
       "score": 33,
       "impactTags": [
@@ -8068,9 +7572,9 @@
       "recommendedAction": "Mapear processos, documentos fiscais, sistemas e decisões comerciais afetadas pela transição IBS/CBS.",
       "whyItMatters": "antecipa adaptação à Reforma Tributária",
       "contentAngles": {
-        "linkedin": "Explique o impacto de 'Reforma tributária aumenta participação dos municípios na divisão do IBS - Brasil 61' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'Reforma tributária aumenta participação dos municípios na divisão do IBS - Brasil 61' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Reforma tributária aumenta participação dos municípios na divisão do IBS - Brasil 61'."
+        "linkedin": "Explique o impacto de 'Reforma tributária aumenta participação dos municípios na divisão do IBS - brasil61.com' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'Reforma tributária aumenta participação dos municípios na divisão do IBS - brasil61.com' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Reforma tributária aumenta participação dos municípios na divisão do IBS - brasil61.com'."
       }
     },
     {
@@ -8155,11 +7659,11 @@
     },
     {
       "id": "6acd2cf3ee5ad7b6",
-      "title": "Adicionais de até R$ 64 mil e jetons de R$ 46 mil dividem Comitê Gestor do IBS - JOTA Info",
+      "title": "Adicionais de até R$ 64 mil e jetons de R$ 46 mil dividem Comitê Gestor do IBS - jota.info",
       "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxObWFvb3FXTUV1c3ZNbTZEbWFjOHhqU2MtWklxbkFvc0JhTy1naERoZTQ3N2R3ajZDS3VBLWVrQ3NhODNPQThyazBhWTZjeHFxWkxaZEktc0dlQkwtM19sN21BMzFadWJ6akxGS2JHaDIyd2p5SWlUdU9KOE9UcjZpMU8zVjJsQV9FenpOVjVuNW95b1gweFlIMThvWlNXM3FRTHFTRklKUFlmQ2taTzJYOGVzNVVBQThhLVp5S1YtVERYUXRrUXNQODNnUU5pMHY1eGc?oc=5",
       "source": "Google News — Comitê Gestor IBS",
       "category": "reforma",
-      "summary": "Adicionais de até R$ 64 mil e jetons de R$ 46 mil dividem Comitê Gestor do IBS JOTA Info",
+      "summary": "Adicionais de até R$ 64 mil e jetons de R$ 46 mil dividem Comitê Gestor do IBS jota.info",
       "publishedAt": "2026-07-17T09:48:21+00:00",
       "score": 17,
       "impactTags": [
@@ -8178,13 +7682,559 @@
       "recommendedAction": "Checar o calendário fiscal, responsáveis e documentos necessários antes do vencimento.",
       "whyItMatters": "há risco de perda de prazo ou multa",
       "contentAngles": {
-        "linkedin": "Explique o impacto de 'Adicionais de até R$ 64 mil e jetons de R$ 46 mil dividem Comitê Gestor do IBS - JOTA Info' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'Adicionais de até R$ 64 mil e jetons de R$ 46 mil dividem Comitê Gestor do IBS - JOTA Info' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Adicionais de até R$ 64 mil e jetons de R$ 46 mil dividem Comitê Gestor do IBS - JOTA Info'."
+        "linkedin": "Explique o impacto de 'Adicionais de até R$ 64 mil e jetons de R$ 46 mil dividem Comitê Gestor do IBS - jota.info' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'Adicionais de até R$ 64 mil e jetons de R$ 46 mil dividem Comitê Gestor do IBS - jota.info' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Adicionais de até R$ 64 mil e jetons de R$ 46 mil dividem Comitê Gestor do IBS - jota.info'."
+      }
+    },
+    {
+      "id": "90b534f53a21d2bf",
+      "title": "STJ pauta julgamento de relevantes temas tributários sob o rito dos recursos repetitivos - Honda, Teixeira, Rocha Advogados",
+      "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxOSE55aENvLTlTa0wtNGJLZE05c184QlJKS0F2UVM0cnVpZ2dRaDV1LU1JdmZHOGJoU1Q0UHhsaXhhcWhMbDJaMGxQZ0l2M2p1dVJOVUZEZmRZNHFkSzRCcjhRZG9iOGQ3OFpoUGFYSldibV92UDZsNllBR2loT2pBQmx0WER6RHh3WWVybUtMWW5BZ1I2OVkxaVJ5MmJYd3ptMHNJSUpkN1IzWkFvTGlYSEd6MWZzeDlU?oc=5",
+      "source": "Google News — STF/STJ tributário",
+      "category": "judicial",
+      "summary": "STJ pauta julgamento de relevantes temas tributários sob o rito dos recursos repetitivos Honda, Teixeira, Rocha Advogados",
+      "publishedAt": "2026-07-17T07:00:00+00:00",
+      "score": 15,
+      "impactTags": [
+        "risco",
+        "judicial",
+        "oportunidade"
+      ],
+      "impactLabels": [
+        "Risco fiscal",
+        "Decisão judicial",
+        "Oportunidade consultiva"
+      ],
+      "priority": "media",
+      "opportunityScore": 40,
+      "whoAffected": "Empresas com teses tributárias, créditos, autuações ou operações similares.",
+      "recommendedAction": "Revisar exposição fiscal, documentação de suporte e oportunidade de tese/regularização.",
+      "whyItMatters": "reduz exposição fiscal e contencioso",
+      "contentAngles": {
+        "linkedin": "Explique o impacto de 'STJ pauta julgamento de relevantes temas tributários sob o rito dos recursos repetitivos - Honda, Teixeira, Rocha Advogados' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'STJ pauta julgamento de relevantes temas tributários sob o rito dos recursos repetitivos - Honda, Teixeira, Rocha Advogados' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'STJ pauta julgamento de relevantes temas tributários sob o rito dos recursos repetitivos - Honda, Teixeira, Rocha Advogados'."
+      }
+    },
+    {
+      "id": "ed6b625d3e651d70",
+      "title": "Fazendas podem incluir dívidas em execução fiscal já ajuizada - Consultor Jurídico",
+      "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxPYnpCSEJrN0ZJS3FhYlFNaU5hMTdOck5VWHJ3MkJsVlBxNEFIWE9IRFR4eXRuTXBNZ0xzVUNGMzRFemVucEpId1FzYTVkdjdpVENHaUZKZ01NbGxkNmUyaElUdW1RYXQ1OUE5dzZ4eXdFb1RXSWZUNko0ZFhCR3ktNFI3VTNVSG91YkxvNnBtcTRMeXc0elAxX292eDRqWGx1YWlHaFF6T2VrZlBPaFRMTw?oc=5",
+      "source": "Google News — STF/STJ tributário",
+      "category": "judicial",
+      "summary": "Fazendas podem incluir dívidas em execução fiscal já ajuizada Consultor Jurídico",
+      "publishedAt": "2026-07-17T07:00:00+00:00",
+      "score": 10,
+      "impactTags": [
+        "judicial",
+        "oportunidade"
+      ],
+      "impactLabels": [
+        "Decisão judicial",
+        "Oportunidade consultiva"
+      ],
+      "priority": "baixa",
+      "opportunityScore": 20,
+      "whoAffected": "Empresas com teses tributárias, créditos, autuações ou operações similares.",
+      "recommendedAction": "Ler a fonte original, salvar evidências e avaliar se há impacto em clientes ativos.",
+      "whyItMatters": "gera pauta consultiva para orientar clientes",
+      "contentAngles": {
+        "linkedin": "Explique o impacto de 'Fazendas podem incluir dívidas em execução fiscal já ajuizada - Consultor Jurídico' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'Fazendas podem incluir dívidas em execução fiscal já ajuizada - Consultor Jurídico' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Fazendas podem incluir dívidas em execução fiscal já ajuizada - Consultor Jurídico'."
+      }
+    },
+    {
+      "id": "d4df53d539611ca3",
+      "title": "Sicredi Conexão leva conhecimento sobre a Reforma Tributária por meio do Programa Capacitar - grupochiru.com",
+      "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxQallkc2Z1aGZLOFlkRE4zdjB2THo4MkF3OEJrWlc3RFBvNE1VNkZ6RFd4NlFhTFFqTXctcjFBYjJvcm9sSmN1dURXYURSLWEwSTFVRlM1cFBuTm9KMXJTYzFVWE1DY2EwUzBTREl6Q0NKRHVrbG5FNUhfQm1XN1VIeWIwODNoZWZDNVZnTXpXLUpvYUVoOHV3WTdoT0htendTd2tiSkt0bUhwUFRsUEZJLWJxUFZYOXVJWkt3MTZfT2FuWjRjbGNZ?oc=5",
+      "source": "Google News — Municípios MG fiscal",
+      "category": "reforma",
+      "summary": "Sicredi Conexão leva conhecimento sobre a Reforma Tributária por meio do Programa Capacitar grupochiru.com",
+      "publishedAt": "2026-07-16T07:00:00+00:00",
+      "score": 20,
+      "impactTags": [
+        "reforma",
+        "oportunidade"
+      ],
+      "impactLabels": [
+        "Reforma Tributária",
+        "Oportunidade consultiva"
+      ],
+      "priority": "media",
+      "opportunityScore": 38,
+      "whoAffected": "Empresas no regime regular, contabilidades e áreas fiscal/financeira em adaptação ao IBS/CBS.",
+      "recommendedAction": "Mapear processos, documentos fiscais, sistemas e decisões comerciais afetadas pela transição IBS/CBS.",
+      "whyItMatters": "antecipa adaptação à Reforma Tributária",
+      "contentAngles": {
+        "linkedin": "Explique o impacto de 'Sicredi Conexão leva conhecimento sobre a Reforma Tributária por meio do Programa Capacitar - grupochiru.com' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'Sicredi Conexão leva conhecimento sobre a Reforma Tributária por meio do Programa Capacitar - grupochiru.com' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Sicredi Conexão leva conhecimento sobre a Reforma Tributária por meio do Programa Capacitar - grupochiru.com'."
+      }
+    },
+    {
+      "id": "c8bf52e86c742a5e",
+      "title": "Decisão do STJ reitera entendimento da Receita Federal sobre tributação de combustíveis - gov.br",
+      "url": "https://news.google.com/rss/articles/CBMi7AFBVV95cUxNVmZYc3hsVW80UE1OWWRuVUJWcHdsckJjNk1xTDBPWTI0ZzgxdmszWmd2ZmhyZHk0dVREbDNSTDlwQTBPMWtwTXlRT3ZYcVlFNmFHUDlpVHZlNzRwOW4tNzVSakluN1poaGR2aVREdHMzX281Tk1HLTI0NnpsbjZVQjdidDB2NjlETUxKRENYMGN6ZHI3b2ZVU0VoMWNwU00tZFRGZlgxR0tSZFpEaE1KYWRNR1h0WFNyTDREMEZ3aE1YbTdfQ2xsbmNVSEZLUnJKMUNuaFkzNEVzOUxFZDNjRUxLUmd6ZjE3dTFLMQ?oc=5",
+      "source": "Google News — STF/STJ tributário",
+      "category": "judicial",
+      "summary": "Decisão do STJ reitera entendimento da Receita Federal sobre tributação de combustíveis gov.br",
+      "publishedAt": "2026-07-14T07:00:00+00:00",
+      "score": 20,
+      "impactTags": [
+        "risco",
+        "judicial",
+        "oportunidade"
+      ],
+      "impactLabels": [
+        "Risco fiscal",
+        "Decisão judicial",
+        "Oportunidade consultiva"
+      ],
+      "priority": "media",
+      "opportunityScore": 45,
+      "whoAffected": "Empresas com teses tributárias, créditos, autuações ou operações similares.",
+      "recommendedAction": "Revisar exposição fiscal, documentação de suporte e oportunidade de tese/regularização.",
+      "whyItMatters": "reduz exposição fiscal e contencioso",
+      "contentAngles": {
+        "linkedin": "Explique o impacto de 'Decisão do STJ reitera entendimento da Receita Federal sobre tributação de combustíveis - gov.br' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'Decisão do STJ reitera entendimento da Receita Federal sobre tributação de combustíveis - gov.br' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Decisão do STJ reitera entendimento da Receita Federal sobre tributação de combustíveis - gov.br'."
+      }
+    },
+    {
+      "id": "825ccbfd57ce6765",
+      "title": "STJ reconhece a impossibilidade de redirecionamento da execução fiscal aos sócios de sociedade regularmente dissolvida antes do ajuizamento - Lacerda Gama",
+      "url": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxOcjZJanRkdDB3Q2x0VGs5OWM5VDc4RC1CN3NUX3dHMFgzWXpveDFqWlhHM1J5bEtTSjZmRERQcDlMRVVPOEdvczRwc25OTFVDX1lmWjFfdElmRlhTbzJSbEdqeVRRVXdSVzMyb210cHFERWV5S2dROFIwS043NDhYY3ozVk9ncjB4Ry1OX3NYdlR0MlE0THdnUTJBQjVBQ0VVaWtELXljckZITmNheXNfVkpSS0k1aUtDSnFDMVgtQnZTOVJHRHRKTzk0MGFqOUhCT0Y4SlNNYWZHMTJWM3JESUFYTEdWQQ?oc=5",
+      "source": "Google News — STF/STJ tributário",
+      "category": "municipal",
+      "summary": "STJ reconhece a impossibilidade de redirecionamento da execução fiscal aos sócios de sociedade regularmente dissolvida antes do ajuizamento Lacerda Gama",
+      "publishedAt": "2026-07-14T07:00:00+00:00",
+      "score": 15,
+      "impactTags": [
+        "risco",
+        "judicial",
+        "oportunidade"
+      ],
+      "impactLabels": [
+        "Risco fiscal",
+        "Decisão judicial",
+        "Oportunidade consultiva"
+      ],
+      "priority": "media",
+      "opportunityScore": 40,
+      "whoAffected": "Empresas com teses tributárias, créditos, autuações ou operações similares.",
+      "recommendedAction": "Revisar exposição fiscal, documentação de suporte e oportunidade de tese/regularização.",
+      "whyItMatters": "reduz exposição fiscal e contencioso",
+      "contentAngles": {
+        "linkedin": "Explique o impacto de 'STJ reconhece a impossibilidade de redirecionamento da execução fiscal aos sócios de sociedade regularmente dissolvida antes do ajuizamento - Lacerda Gama' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'STJ reconhece a impossibilidade de redirecionamento da execução fiscal aos sócios de sociedade regularmente dissolvida antes do ajuizamento - Lacerda Gama' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'STJ reconhece a impossibilidade de redirecionamento da execução fiscal aos sócios de sociedade regularmente dissolvida antes do ajuizamento - Lacerda Gama'."
+      }
+    },
+    {
+      "id": "56aa9b24addb9220",
+      "title": "Impactos da Reforma Tributária nas leis de incentivo à cultura e ao esporte pautam audiência - Portal da Assembleia Legislativa de Minas Gerais",
+      "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxQNXoteWI2LURzUnlIMUdDNkM3V3NYRVlmaldJWlZHZktDcm9pLUl3SEtnZlFqekh0dTJyNHNoXzNxM3VDWUZjLXNhLVpuMGlwYlY0YVdwSTljdzJPNDdZM3pKZXUteWV0dDIwN3FXXzRBWllRVVlmSUU5RlVoQkljZm5LZjZzc2tHT1cybnJIMjZNeHhfYy14c2RwdE1HSnRvTXRnT3R2QmZaYUNPWFVSdGNyVWluUW9mVzdRb3A1M3JqTnV4Tk1UNEhMM0RmdXBzR0J3dU9BX19UX0pySktrNQ?oc=5",
+      "source": "Google News — Municípios MG fiscal",
+      "category": "reforma",
+      "summary": "Impactos da Reforma Tributária nas leis de incentivo à cultura e ao esporte pautam audiência Portal da Assembleia Legislativa de Minas Gerais",
+      "publishedAt": "2026-07-10T07:00:00+00:00",
+      "score": 27,
+      "impactTags": [
+        "reforma",
+        "oportunidade"
+      ],
+      "impactLabels": [
+        "Reforma Tributária",
+        "Oportunidade consultiva"
+      ],
+      "priority": "media",
+      "opportunityScore": 45,
+      "whoAffected": "Empresas no regime regular, contabilidades e áreas fiscal/financeira em adaptação ao IBS/CBS.",
+      "recommendedAction": "Mapear processos, documentos fiscais, sistemas e decisões comerciais afetadas pela transição IBS/CBS.",
+      "whyItMatters": "antecipa adaptação à Reforma Tributária",
+      "contentAngles": {
+        "linkedin": "Explique o impacto de 'Impactos da Reforma Tributária nas leis de incentivo à cultura e ao esporte pautam audiência - Portal da Assembleia Legislativa de Minas Gerais' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'Impactos da Reforma Tributária nas leis de incentivo à cultura e ao esporte pautam audiência - Portal da Assembleia Legislativa de Minas Gerais' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Impactos da Reforma Tributária nas leis de incentivo à cultura e ao esporte pautam audiência - Portal da Assembleia Legislativa de Minas Gerais'."
+      }
+    },
+    {
+      "id": "b40d1801f0968d5c",
+      "title": "STF invalida norma piauiense que reduzia ICMS de cervejas com adição de suco de caju - stf noticias",
+      "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxNcnhCLUFYdlFQVkJhQXBrYnhfcHk4SkZ0bDFpd2NuXzhQVFpmQkY4R2RzbnZrQTlkTEhNZ3JtSmZVYXZKUmdPSDJQM2NLck1iakw5bjQ2ZXBWMFZPWldSWS10Z0JYaWtYMXViQnFfYnBRZ0lMekFwWFJYV3M5T1ljdzY2T2xsZFRhNXk4RVQ2djcxUFFtSk1KSTN5RGNLcFlyYjRIUFJCbC15M1h6SWY3bXhzekdpdzBxZGJSZlh4endqd3BwbkE?oc=5",
+      "source": "Google News — STF/STJ tributário",
+      "category": "icms",
+      "summary": "STF invalida norma piauiense que reduzia ICMS de cervejas com adição de suco de caju stf noticias",
+      "publishedAt": "2026-07-07T07:00:00+00:00",
+      "score": 16,
+      "impactTags": [
+        "risco",
+        "judicial",
+        "oportunidade"
+      ],
+      "impactLabels": [
+        "Risco fiscal",
+        "Decisão judicial",
+        "Oportunidade consultiva"
+      ],
+      "priority": "media",
+      "opportunityScore": 41,
+      "whoAffected": "Empresas com teses tributárias, créditos, autuações ou operações similares.",
+      "recommendedAction": "Revisar exposição fiscal, documentação de suporte e oportunidade de tese/regularização.",
+      "whyItMatters": "reduz exposição fiscal e contencioso",
+      "contentAngles": {
+        "linkedin": "Explique o impacto de 'STF invalida norma piauiense que reduzia ICMS de cervejas com adição de suco de caju - stf noticias' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'STF invalida norma piauiense que reduzia ICMS de cervejas com adição de suco de caju - stf noticias' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'STF invalida norma piauiense que reduzia ICMS de cervejas com adição de suco de caju - stf noticias'."
+      }
+    },
+    {
+      "id": "30f7649167287173",
+      "title": "STF derruba benefício de ICMS para cervejas com suco de caju - jota.info",
+      "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxOMEk3UVgtVkNxQThOSkpKVU93Q0YxOGtSVGxlX0JFTmxYT2VibHQzQ0huWHF5TmRsMVVGU3BRS3VibUYtMTJiaGdCTml6VHhOX1lBMkVvTE8wMVNUZU40OG0xX2tMZl9POXhwQVRpTkJIOVVCa3JHcXk4OGtoSFlqQlFLZHdJUjNGWWd1ZFFuRWRiSlEwbEE?oc=5",
+      "source": "Google News — STF/STJ tributário",
+      "category": "icms",
+      "summary": "STF derruba benefício de ICMS para cervejas com suco de caju jota.info",
+      "publishedAt": "2026-07-06T07:00:00+00:00",
+      "score": 16,
+      "impactTags": [
+        "risco",
+        "judicial",
+        "oportunidade"
+      ],
+      "impactLabels": [
+        "Risco fiscal",
+        "Decisão judicial",
+        "Oportunidade consultiva"
+      ],
+      "priority": "media",
+      "opportunityScore": 41,
+      "whoAffected": "Empresas com teses tributárias, créditos, autuações ou operações similares.",
+      "recommendedAction": "Revisar exposição fiscal, documentação de suporte e oportunidade de tese/regularização.",
+      "whyItMatters": "reduz exposição fiscal e contencioso",
+      "contentAngles": {
+        "linkedin": "Explique o impacto de 'STF derruba benefício de ICMS para cervejas com suco de caju - jota.info' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'STF derruba benefício de ICMS para cervejas com suco de caju - jota.info' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'STF derruba benefício de ICMS para cervejas com suco de caju - jota.info'."
+      }
+    },
+    {
+      "id": "9c7756c2c70294c7",
+      "title": "Isso começa em janeiro: o que toda empresa precisa entender sobre a Reforma Tributária antes que seja tarde",
+      "url": "https://ibpt.org.br/isso-comeca-em-janeiro-o-que-toda-empresa-precisa-entender-sobre-a-reforma-tributaria-antes-que-seja-tarde",
+      "source": "IBPT",
+      "category": "reforma",
+      "summary": "Isso começa em janeiro: o que toda empresa precisa entender sobre a Reforma Tributária antes que seja tarde A Reforma Tributária deixou de ser um projeto distante para se tornar uma realidade com impactos práticos sobre a gestão das empresas brasileiras. Embora a transição completa aconteça até 2033, a preparação precisa começar muito antes. Nos […] O post I",
+      "publishedAt": "2026-07-02T12:33:48+00:00",
+      "score": 33,
+      "impactTags": [
+        "reforma",
+        "prazo",
+        "oportunidade"
+      ],
+      "impactLabels": [
+        "Reforma Tributária",
+        "Prazo urgente",
+        "Oportunidade consultiva"
+      ],
+      "priority": "alta",
+      "opportunityScore": 74,
+      "whoAffected": "Empresas no regime regular, contabilidades e áreas fiscal/financeira em adaptação ao IBS/CBS.",
+      "recommendedAction": "Checar o calendário fiscal, responsáveis e documentos necessários antes do vencimento.",
+      "whyItMatters": "há risco de perda de prazo ou multa",
+      "contentAngles": {
+        "linkedin": "Explique o impacto de 'Isso começa em janeiro: o que toda empresa precisa entender sobre a Reforma Tributária antes que seja tarde' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'Isso começa em janeiro: o que toda empresa precisa entender sobre a Reforma Tributária antes que seja tarde' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Isso começa em janeiro: o que toda empresa precisa entender sobre a Reforma Tributária antes que seja tarde'."
+      }
+    },
+    {
+      "id": "5c0a766a86baca80",
+      "title": "STJ nega uso de prejuízo fiscal de empresa para quitar dívida pessoal no Pert - jota.info",
+      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxNVkVGeVdDZ2l1YkxtQU93enBmajFOb2V0Q1pscGMzSDVyel9naVJ5V216OEhZTF8wbVdIMG4tNkhXSDBldGFTV3FfSEcwVW5sZHpqaEZscExZUVM1SG5ZRUdlUjZ0SHdWOUVEMEFLN2s2Mml3NE9OWERfZEJhVW1JQkFBQlJGa21lTVZkUlI0VkhEcHJkVmJzb19xRjFnaGZVRkxfc2JFakxzWUVr?oc=5",
+      "source": "Google News — STF/STJ tributário",
+      "category": "judicial",
+      "summary": "STJ nega uso de prejuízo fiscal de empresa para quitar dívida pessoal no Pert jota.info",
+      "publishedAt": "2026-06-28T07:00:00+00:00",
+      "score": 10,
+      "impactTags": [
+        "risco",
+        "judicial",
+        "oportunidade"
+      ],
+      "impactLabels": [
+        "Risco fiscal",
+        "Decisão judicial",
+        "Oportunidade consultiva"
+      ],
+      "priority": "media",
+      "opportunityScore": 35,
+      "whoAffected": "Empresas com teses tributárias, créditos, autuações ou operações similares.",
+      "recommendedAction": "Revisar exposição fiscal, documentação de suporte e oportunidade de tese/regularização.",
+      "whyItMatters": "reduz exposição fiscal e contencioso",
+      "contentAngles": {
+        "linkedin": "Explique o impacto de 'STJ nega uso de prejuízo fiscal de empresa para quitar dívida pessoal no Pert - jota.info' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'STJ nega uso de prejuízo fiscal de empresa para quitar dívida pessoal no Pert - jota.info' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'STJ nega uso de prejuízo fiscal de empresa para quitar dívida pessoal no Pert - jota.info'."
+      }
+    },
+    {
+      "id": "c72bb8c8359ac7f9",
+      "title": "Prejuízo fiscal de empresa não quita dívida pessoal de sócio, decide STJ - Consultor Jurídico",
+      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQSGphZWUzd1RmeFMtZkFiQXl2ZkZDa25Gc0Q0aGdkUWdvTWZkWUxrQ2twQTE4ZkRCRmFQMWZlcjdRbDg3LW56NjNycGJ6MHQzRDFhSXROV09SN3pnOTYtaXNoQXd4S0t3ak1IamJrTXE2RnBMSW56M0ttMTRvek5QNlZUcl9kNGpZb3BEVE9HSTRsQXZiYnVKVTNpeXhmdVNtT3lrcnU1UWFmT2dk?oc=5",
+      "source": "Google News — STF/STJ tributário",
+      "category": "judicial",
+      "summary": "Prejuízo fiscal de empresa não quita dívida pessoal de sócio, decide STJ Consultor Jurídico",
+      "publishedAt": "2026-06-27T07:00:00+00:00",
+      "score": 10,
+      "impactTags": [
+        "risco",
+        "judicial",
+        "oportunidade"
+      ],
+      "impactLabels": [
+        "Risco fiscal",
+        "Decisão judicial",
+        "Oportunidade consultiva"
+      ],
+      "priority": "media",
+      "opportunityScore": 35,
+      "whoAffected": "Empresas com teses tributárias, créditos, autuações ou operações similares.",
+      "recommendedAction": "Revisar exposição fiscal, documentação de suporte e oportunidade de tese/regularização.",
+      "whyItMatters": "reduz exposição fiscal e contencioso",
+      "contentAngles": {
+        "linkedin": "Explique o impacto de 'Prejuízo fiscal de empresa não quita dívida pessoal de sócio, decide STJ - Consultor Jurídico' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'Prejuízo fiscal de empresa não quita dívida pessoal de sócio, decide STJ - Consultor Jurídico' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Prejuízo fiscal de empresa não quita dívida pessoal de sócio, decide STJ - Consultor Jurídico'."
+      }
+    },
+    {
+      "id": "c621b451bde8e07a",
+      "title": "STF ouve manifestações sobre isenção tributária para compra de veículos por pessoas com deficiência - stf noticias",
+      "url": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxQbWQ3YnBsTFA1S056RXJCWnh4a0JXRTk2QUtCZmliNHBPeFB2czZnaEo1elZBR1E3c1JZVnZLRjYwZ21oaWNGdmZ1VVd3NWVyQnJvbEZPTk94ajJ3TDZCaXlmNUNXVkpKOEFUbFNTYUJmV1dDRTRzTnYyVjZOelp6YnZlMDc2dmU5M3ptNFFxN3diOElTRHNqUVFZY0pJcjRhTFVWcTBYWmdqbVpEQnM2VnJzWWFFeGo3LTY2TjZpM3YwTVdubktjT0RTZW1oWlZXMm42Y2xtX0JRZw?oc=5",
+      "source": "Google News — STF/STJ tributário",
+      "category": "judicial",
+      "summary": "STF ouve manifestações sobre isenção tributária para compra de veículos por pessoas com deficiência stf noticias",
+      "publishedAt": "2026-06-25T07:00:00+00:00",
+      "score": 15,
+      "impactTags": [
+        "risco",
+        "judicial",
+        "oportunidade"
+      ],
+      "impactLabels": [
+        "Risco fiscal",
+        "Decisão judicial",
+        "Oportunidade consultiva"
+      ],
+      "priority": "media",
+      "opportunityScore": 40,
+      "whoAffected": "Empresas com teses tributárias, créditos, autuações ou operações similares.",
+      "recommendedAction": "Revisar exposição fiscal, documentação de suporte e oportunidade de tese/regularização.",
+      "whyItMatters": "reduz exposição fiscal e contencioso",
+      "contentAngles": {
+        "linkedin": "Explique o impacto de 'STF ouve manifestações sobre isenção tributária para compra de veículos por pessoas com deficiência - stf noticias' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'STF ouve manifestações sobre isenção tributária para compra de veículos por pessoas com deficiência - stf noticias' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'STF ouve manifestações sobre isenção tributária para compra de veículos por pessoas com deficiência - stf noticias'."
+      }
+    },
+    {
+      "id": "5a76634ed55a3a3b",
+      "title": "AMM lança projeto para ampliar indicadores do ICMS municipal - AMM | Associação Mineira de Municípios",
+      "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQd2ltbFp4UmVBTDhvb0VIZDAtU0dKYmJnOFYzeTBBMTVpbVR5UEV4VFk5aU04RVJXVmhJc1FEVGYxOVo1RF8wSFR2YTlPU3YxN2hPdGZxRlNMUkktdWtBZnJ1bGNENzdYSmpMa1hROGdFRU4yZU1qS01BMmRBRzJ5WHJwVHc0bS1Cb3BNdVA4blpFYmlkdm1pTjhB?oc=5",
+      "source": "Google News — Municípios MG fiscal",
+      "category": "icms",
+      "summary": "AMM lança projeto para ampliar indicadores do ICMS municipal AMM | Associação Mineira de Municípios",
+      "publishedAt": "2026-06-25T07:00:00+00:00",
+      "score": 13,
+      "impactTags": [],
+      "impactLabels": [],
+      "priority": "baixa",
+      "opportunityScore": 13,
+      "whoAffected": "Empresas e contabilidades que acompanham rotina fiscal.",
+      "recommendedAction": "Ler a fonte original, salvar evidências e avaliar se há impacto em clientes ativos.",
+      "whyItMatters": "gera pauta consultiva para orientar clientes",
+      "contentAngles": {
+        "linkedin": "Explique o impacto de 'AMM lança projeto para ampliar indicadores do ICMS municipal - AMM | Associação Mineira de Municípios' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'AMM lança projeto para ampliar indicadores do ICMS municipal - AMM | Associação Mineira de Municípios' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'AMM lança projeto para ampliar indicadores do ICMS municipal - AMM | Associação Mineira de Municípios'."
+      }
+    },
+    {
+      "id": "252a48be079b33b3",
+      "title": "Fraude à execução fiscal e responsabilidade tributária do sócio: REsp 2.030.470/SC - Consultor Jurídico",
+      "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxOeUhMejBmeUs2cWw5OC0yQThwSDFZQVJNcFItank4SkQ4U2pRMTJUZXcxc3ZNZ0dvdWJBaFo5YUdBWmdfRjNlNU5SMWFwd1BQWXpzQ05iQi01Ri1BUzN6TXlEQTc5aDR0VTRkYU02TkVzelJRcDdMOEFCNjc2RzA0NmdpVnRUX1NSdnpEZHhoNVBlYzRxdWJjS2tMRTRmMnNxbTZNY0V2VFZDVkJVd2d2QS1SVERhb2hPSGEwTlVFUzdLVjZKRWw1MV9BM0F3ek1OWWpwUw?oc=5",
+      "source": "Google News — STF/STJ tributário",
+      "category": "judicial",
+      "summary": "Fraude à execução fiscal e responsabilidade tributária do sócio: REsp 2.030.470/SC Consultor Jurídico",
+      "publishedAt": "2026-06-22T07:00:00+00:00",
+      "score": 20,
+      "impactTags": [
+        "judicial",
+        "oportunidade"
+      ],
+      "impactLabels": [
+        "Decisão judicial",
+        "Oportunidade consultiva"
+      ],
+      "priority": "baixa",
+      "opportunityScore": 30,
+      "whoAffected": "Empresas com teses tributárias, créditos, autuações ou operações similares.",
+      "recommendedAction": "Ler a fonte original, salvar evidências e avaliar se há impacto em clientes ativos.",
+      "whyItMatters": "gera pauta consultiva para orientar clientes",
+      "contentAngles": {
+        "linkedin": "Explique o impacto de 'Fraude à execução fiscal e responsabilidade tributária do sócio: REsp 2.030.470/SC - Consultor Jurídico' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'Fraude à execução fiscal e responsabilidade tributária do sócio: REsp 2.030.470/SC - Consultor Jurídico' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Fraude à execução fiscal e responsabilidade tributária do sócio: REsp 2.030.470/SC - Consultor Jurídico'."
+      }
+    },
+    {
+      "id": "67a56176e757d7a2",
+      "title": "STJ derruba penhora de imóvel vendido com certidão fiscal irregular - jota.info",
+      "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxOUXNUbjdjQ3hQUFFEY3BMamhBd2FvcHVKR1RsU20xMi1MT25rZnBQZWtqdERvSHV3NzRvbjlRUzlxUXNEMENoXy1PZ0tIcXJKdndsRHk5ZHZkLUFhTnJTa1dQa2I5MkFIaGQ1dmdOVk9ldDdwaEthYmQ0cnZFTkNtSUF1M2J2Zmx0QzIxektsSzQyMERYODZuY2cwWEZWWXc?oc=5",
+      "source": "Google News — STF/STJ tributário",
+      "category": "judicial",
+      "summary": "STJ derruba penhora de imóvel vendido com certidão fiscal irregular jota.info",
+      "publishedAt": "2026-06-20T07:00:00+00:00",
+      "score": 10,
+      "impactTags": [
+        "risco",
+        "judicial",
+        "oportunidade"
+      ],
+      "impactLabels": [
+        "Risco fiscal",
+        "Decisão judicial",
+        "Oportunidade consultiva"
+      ],
+      "priority": "media",
+      "opportunityScore": 35,
+      "whoAffected": "Empresas com teses tributárias, créditos, autuações ou operações similares.",
+      "recommendedAction": "Revisar exposição fiscal, documentação de suporte e oportunidade de tese/regularização.",
+      "whyItMatters": "reduz exposição fiscal e contencioso",
+      "contentAngles": {
+        "linkedin": "Explique o impacto de 'STJ derruba penhora de imóvel vendido com certidão fiscal irregular - jota.info' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'STJ derruba penhora de imóvel vendido com certidão fiscal irregular - jota.info' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'STJ derruba penhora de imóvel vendido com certidão fiscal irregular - jota.info'."
+      }
+    },
+    {
+      "id": "6affe5e282ea0448",
+      "title": "Mariana recebe encontro sobre Reforma Tributária e patrimônio - Rádio Itatiaia",
+      "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxOQ1hIZnI3TTRHYmEwcmNUQmdEZk9mRFBJTTRIVzYtWEVUbl8zQnRpYXZRZDdYak4tMzVnLU9NRFlyT0hzM0JyTGtaQWtSUW5ZeVhqemoyc0R5Q2sxTWN5SHNENmlWUnkyTFFLX0twSS1HUjJrMWIzX0I4VjZ4eWJwSTFzVFRhMHFVaHdXd1JzMEdmWV9ROVBfX0lFSmFoYXZ4Nmc?oc=5",
+      "source": "Google News — Municípios MG fiscal",
+      "category": "reforma",
+      "summary": "Mariana recebe encontro sobre Reforma Tributária e patrimônio Rádio Itatiaia",
+      "publishedAt": "2026-06-20T07:00:00+00:00",
+      "score": 20,
+      "impactTags": [
+        "reforma",
+        "oportunidade"
+      ],
+      "impactLabels": [
+        "Reforma Tributária",
+        "Oportunidade consultiva"
+      ],
+      "priority": "media",
+      "opportunityScore": 38,
+      "whoAffected": "Empresas no regime regular, contabilidades e áreas fiscal/financeira em adaptação ao IBS/CBS.",
+      "recommendedAction": "Mapear processos, documentos fiscais, sistemas e decisões comerciais afetadas pela transição IBS/CBS.",
+      "whyItMatters": "antecipa adaptação à Reforma Tributária",
+      "contentAngles": {
+        "linkedin": "Explique o impacto de 'Mariana recebe encontro sobre Reforma Tributária e patrimônio - Rádio Itatiaia' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'Mariana recebe encontro sobre Reforma Tributária e patrimônio - Rádio Itatiaia' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Mariana recebe encontro sobre Reforma Tributária e patrimônio - Rádio Itatiaia'."
+      }
+    },
+    {
+      "id": "3c9d5e86c3ee7ee9",
+      "title": "STJ: Honorários são devidos mesmo quando dívida fiscal é paga antes de citação - migalhas.com.br",
+      "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxOU243dDJZQXhMWjVHU09RMDJFRGxNSGdfUnltVEM5bjF2NG5panJxRDNINHREcDdDNTltTE1abnF3ZS1yNExYUTVRbF9LZFc2T0Z5elFrMHFuQ0FPR0s4bW5RQmhJN0w3OWt3eTBDaDN5NndwbkF1azloYndlX0tNR2llY3BsdUdkWVJ4c1IzMEU4blYtTVZhNkw4NzgzeGRHSkxCdUVTWnZuTnRyNW1XSTZn?oc=5",
+      "source": "Google News — STF/STJ tributário",
+      "category": "judicial",
+      "summary": "STJ: Honorários são devidos mesmo quando dívida fiscal é paga antes de citação migalhas.com.br",
+      "publishedAt": "2026-06-10T07:00:00+00:00",
+      "score": 10,
+      "impactTags": [
+        "risco",
+        "judicial",
+        "oportunidade"
+      ],
+      "impactLabels": [
+        "Risco fiscal",
+        "Decisão judicial",
+        "Oportunidade consultiva"
+      ],
+      "priority": "media",
+      "opportunityScore": 35,
+      "whoAffected": "Empresas com teses tributárias, créditos, autuações ou operações similares.",
+      "recommendedAction": "Revisar exposição fiscal, documentação de suporte e oportunidade de tese/regularização.",
+      "whyItMatters": "reduz exposição fiscal e contencioso",
+      "contentAngles": {
+        "linkedin": "Explique o impacto de 'STJ: Honorários são devidos mesmo quando dívida fiscal é paga antes de citação - migalhas.com.br' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'STJ: Honorários são devidos mesmo quando dívida fiscal é paga antes de citação - migalhas.com.br' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'STJ: Honorários são devidos mesmo quando dívida fiscal é paga antes de citação - migalhas.com.br'."
+      }
+    },
+    {
+      "id": "49949f5842a2c92f",
+      "title": "STJ debate honorários por equidade após exclusão da execução fiscal - Consultor Jurídico",
+      "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxNWmFVZlVrZUFSeHJMalViNDRFcGF6aHp0N2N5bExrVkxBU3Y3MmEwZ2hBUjhyMmViblA5VXMwMGN5UVhOWWJQYzZELUF3LTVRTk05VHV6aDdUbVBwci05WUZMdjFNRXNNNXBmRlJubzFkUUNramJJQ09hSXNXMFUwZG9mVGhycjVXbHB4ZmtZV1NrS2NMSVRRRkxXZ1VpaEpCU0NWeQ?oc=5",
+      "source": "Google News — STF/STJ tributário",
+      "category": "judicial",
+      "summary": "STJ debate honorários por equidade após exclusão da execução fiscal Consultor Jurídico",
+      "publishedAt": "2026-06-07T07:00:00+00:00",
+      "score": 15,
+      "impactTags": [
+        "risco",
+        "judicial",
+        "prazo",
+        "oportunidade"
+      ],
+      "impactLabels": [
+        "Risco fiscal",
+        "Decisão judicial",
+        "Prazo urgente",
+        "Oportunidade consultiva"
+      ],
+      "priority": "alta",
+      "opportunityScore": 63,
+      "whoAffected": "Empresas com teses tributárias, créditos, autuações ou operações similares.",
+      "recommendedAction": "Checar o calendário fiscal, responsáveis e documentos necessários antes do vencimento.",
+      "whyItMatters": "há risco de perda de prazo ou multa",
+      "contentAngles": {
+        "linkedin": "Explique o impacto de 'STJ debate honorários por equidade após exclusão da execução fiscal - Consultor Jurídico' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'STJ debate honorários por equidade após exclusão da execução fiscal - Consultor Jurídico' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'STJ debate honorários por equidade após exclusão da execução fiscal - Consultor Jurídico'."
+      }
+    },
+    {
+      "id": "1e41d8d1861527b4",
+      "title": "Forbes destaca estudo do IBPT sobre o peso do IPVA nos estados brasileiros",
+      "url": "https://ibpt.org.br/ipva-onde-o-imposto-pesa-mais-no-bolso-dos-brasileiros",
+      "source": "IBPT",
+      "category": "legislacao",
+      "summary": "Forbes destaca estudo do IBPT sobre o peso do IPVA nos estados brasileiros A arrecadação do IPVA no Brasil ultrapassou R$ 90 bilhões em 2025, segundo levantamento do IBPT (Instituto Brasileiro de Planejamento e Tributação), repercutido pela Forbes. O estudo revela diferenças significativas entre os estados na arrecadação do imposto e mostra como o IPVA […] O",
+      "publishedAt": "2026-05-28T20:31:43+00:00",
+      "score": 38,
+      "impactTags": [],
+      "impactLabels": [],
+      "priority": "media",
+      "opportunityScore": 38,
+      "whoAffected": "Empresas e contabilidades que acompanham rotina fiscal.",
+      "recommendedAction": "Ler a fonte original, salvar evidências e avaliar se há impacto em clientes ativos.",
+      "whyItMatters": "gera pauta consultiva para orientar clientes",
+      "contentAngles": {
+        "linkedin": "Explique o impacto de 'Forbes destaca estudo do IBPT sobre o peso do IPVA nos estados brasileiros' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'Forbes destaca estudo do IBPT sobre o peso do IPVA nos estados brasileiros' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Forbes destaca estudo do IBPT sobre o peso do IPVA nos estados brasileiros'."
       }
     }
   ],
-  "sourcesOk": 14,
+  "sourcesOk": 13,
   "sourcesFailed": [
     {
       "source": "CONFAZ — Convênios ICMS",
@@ -8205,6 +8255,11 @@
       "source": "STJ — Notícias",
       "url": "https://www.stj.jus.br/sites/portalp/Inicio",
       "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "source": "SEF Minas Gerais — Empresas",
+      "url": "https://www.fazenda.mg.gov.br/empresas/",
+      "error": "The read operation timed out"
     }
   ],
   "sources": [
@@ -8224,7 +8279,7 @@
       "source": "Agência Senado",
       "url": "https://www12.senado.leg.br/noticias/rss",
       "ok": true,
-      "items": 1
+      "items": 0
     },
     {
       "source": "JOTA",
@@ -8293,8 +8348,9 @@
     {
       "source": "SEF Minas Gerais — Empresas",
       "url": "https://www.fazenda.mg.gov.br/empresas/",
-      "ok": true,
-      "items": 20
+      "ok": false,
+      "items": 0,
+      "error": "The read operation timed out"
     },
     {
       "source": "Google News — STF/STJ tributário",
