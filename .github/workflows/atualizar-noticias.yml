@@ -1,4 +1,4 @@
-name: Atualizar notícias fiscais
+name: Atualizar e publicar notícias fiscais
 
 on:
   schedule:
@@ -7,6 +7,12 @@ on:
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: radar-fiscal-pages
+  cancel-in-progress: false
 
 jobs:
   atualizar:
@@ -14,12 +20,47 @@ jobs:
     steps:
       - name: Baixar o projeto
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
       - name: Coletar notícias
         run: python3 collector/collect.py
-      - name: Publicar atualização
+
+      - name: Salvar atualização no repositório
         run: |
           git config user.name 'radar-fiscal-bot'
           git config user.email 'actions@users.noreply.github.com'
           git add data/news.json
           git diff --cached --quiet || git commit -m 'Atualiza notícias fiscais'
           git push
+
+  publicar:
+    needs: atualizar
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Baixar a versão mais recente
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Configurar GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Preparar arquivos públicos
+        run: |
+          mkdir -p _site
+          cp index.html _site/
+          cp .nojekyll _site/
+          cp -R data _site/
+
+      - name: Enviar artefato do site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Publicar no GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
