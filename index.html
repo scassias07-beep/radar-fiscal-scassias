@@ -544,7 +544,7 @@
   </div>
 
   <footer>
-    <p><b style="color:var(--txt-2)">Instantâneo base coletado em 14/09/2026.</b> O painel acompanha autoridades fiscais (Receita Federal, CGIBS, CONFAZ, CARF e Diário Oficial da União), o Judiciário (STF e STJ), a imprensa especializada (JOTA e Valor Econômico) e a esfera estadual e municipal (SEFAZ, CNM e Serpro), tentando uma nova leitura a cada 60 segundos. Quando o navegador bloqueia a leitura externa, o painel avisa no log e no selo do topo e mantém o último instantâneo — o relógio e as contagens seguem em tempo real.</p>
+    <p><b id="feedUpdatedAt" style="color:var(--txt-2)">Última atualização automatizada: verificando…</b> O coletor do servidor consulta autoridades fiscais (Receita Federal, CGIBS, CONFAZ, CARF e Diário Oficial da União), o Judiciário (STF e STJ), a imprensa especializada (JOTA e Valor Econômico) e a esfera estadual e municipal (SEFAZ, CNM e Serpro), aproximadamente uma vez por hora. O navegador também tenta uma leitura complementar a cada 60 segundos. Se uma fonte estiver indisponível, o painel mantém o último conjunto de dados coletado com sucesso.</p>
     <p>Conteúdo informativo de apoio ao acompanhamento fiscal. Não substitui a consulta ao texto oficial publicado no Diário Oficial ou nos canais das autoridades fiscais.</p>
   </footer>
 </div>
@@ -573,7 +573,7 @@
 
 <script>
 /* =========================================================
-   RADAR FISCAL — instantâneo base (coletado em 14/09/2026)
+   RADAR FISCAL — instantâneo local de contingência
    ========================================================= */
 const CAT = {
   reforma:   { nome:"Reforma Tributária", cor:"#f5b13d", cls:"c-reforma" },
@@ -801,12 +801,27 @@ const state = {
   sort: "recent",
   bytes: 0,
   ultima: null,
+  feedAtualizadoEm: null,
   varrendo: false,
   online: false
 };
 
 const $  = (s) => document.querySelector(s);
 const el = (t,c,h) => { const e=document.createElement(t); if(c) e.className=c; if(h!=null) e.innerHTML=h; return e; };
+
+function formatarDataBrasilia(valor){
+  const data = valor instanceof Date ? valor : new Date(valor);
+  if(Number.isNaN(data.getTime())) return null;
+  return new Intl.DateTimeFormat("pt-BR", {
+    timeZone:"America/Sao_Paulo", day:"2-digit", month:"2-digit", year:"numeric",
+    hour:"2-digit", minute:"2-digit", hour12:false
+  }).format(data).replace(",", " às");
+}
+
+function atualizarRodapeFeed(valor){
+  const texto = formatarDataBrasilia(valor);
+  if(texto) $("#feedUpdatedAt").textContent = `Última atualização automatizada: ${texto} (horário de Brasília).`;
+}
 
 const norm = (s) => (s||"").toLowerCase()
   .normalize("NFD").replace(/[̀-ͯ]/g,"");
@@ -1630,7 +1645,12 @@ async function scan(manual){
   $("#liveTxt").textContent = respondeu ? "Ao vivo" : "Instantâneo";
 
   if(respondeu) log(`Conexão estabelecida · ${bytes.toLocaleString("pt-BR")} bytes · ${novos} ${novos===1?"item novo":"itens novos"}.`, "ok");
-  else log("Leitura externa bloqueada pelo navegador. Mantendo o instantâneo de 14/09/2026.", "off");
+  else {
+    const referencia = state.feedAtualizadoEm
+      ? `último feed automatizado de ${formatarDataBrasilia(state.feedAtualizadoEm)}`
+      : "instantâneo local de contingência de 14/09/2026";
+    log(`Leitura externa bloqueada pelo navegador. Mantendo o ${referencia}.`, "off");
+  }
 
   renderKPIs(); renderExecutive(); refreshViews(); renderFontes(); renderFontesCatalogo();
 }
@@ -1686,14 +1706,19 @@ async function carregarFeedPublico(){
       }));
     });
     if(payload.updatedAt){
-      state.ultima = new Date(payload.updatedAt);
+      state.feedAtualizadoEm = new Date(payload.updatedAt);
+      state.ultima = state.feedAtualizadoEm;
       state.online = true;
+      atualizarRodapeFeed(state.feedAtualizadoEm);
       $('#livePill').classList.remove('off');
       $('#liveTxt').textContent = 'Feed atualizado';
       log(`Feed diário carregado · ${externos.length} itens disponíveis.`, 'ok');
       renderKPIs(); renderExecutive(); refreshViews();
+    }else{
+      $('#feedUpdatedAt').textContent = 'Feed automatizado sem data de atualização. Exibindo o último conjunto de dados disponível.';
     }
   }catch(e){
+    $('#feedUpdatedAt').textContent = 'Feed automatizado indisponível. Exibindo o instantâneo local de contingência de 14/09/2026.';
     log('Feed diário indisponível. Mantendo o instantâneo local.', 'off');
   }
 }
@@ -1705,7 +1730,7 @@ renderKPIs(); renderExecutive(); renderPrazos(); renderFontes(); renderFontesCat
 const nFontes = FONTES.filter(f => f.n).length;
 $("#srcCount").textContent = nFontes + " fontes";
 $("#catCount").textContent = nFontes + " no catálogo";
-log(`Painel iniciado com instantâneo de 14/09/2026 · ${state.itens.length} itens · ${nFontes} fontes monitoradas.`, "ok");
+log(`Painel iniciado · ${state.itens.length} itens no instantâneo local · ${nFontes} fontes monitoradas.`, "ok");
 log("Próxima varredura automática em 60 segundos.", "wait");
 setInterval(() => { renderPrazos(); }, 60000);
 setTimeout(() => scan(false), 2500);
