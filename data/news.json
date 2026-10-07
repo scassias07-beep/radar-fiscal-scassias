@@ -1,32 +1,6 @@
 {
-  "updatedAt": "2026-10-07T16:39:03.335877+00:00",
+  "updatedAt": "2026-10-07T17:37:15.278285+00:00",
   "items": [
-    {
-      "id": "b388af50ba14061c",
-      "title": "Acompanhamento Sociofuncional",
-      "url": "https://www.fazenda.mg.gov.br/servidores/acompanhamento_sociofuncional",
-      "source": "SEF Minas Gerais — Empresas",
-      "category": "icms",
-      "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: Acompanhamento Sociofuncional",
-      "publishedAt": "2026-10-07T16:39:00.972680+00:00",
-      "score": 18,
-      "impactTags": [
-        "oportunidade"
-      ],
-      "impactLabels": [
-        "Oportunidade consultiva"
-      ],
-      "priority": "baixa",
-      "opportunityScore": 23,
-      "whoAffected": "Empresas e contabilidades que acompanham rotina fiscal.",
-      "recommendedAction": "Ler a fonte original, salvar evidências e avaliar se há impacto em clientes ativos.",
-      "whyItMatters": "gera pauta consultiva para orientar clientes",
-      "contentAngles": {
-        "linkedin": "Explique o impacto de 'Acompanhamento Sociofuncional' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'Acompanhamento Sociofuncional' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Acompanhamento Sociofuncional'."
-      }
-    },
     {
       "id": "aaf7534780326e6f",
       "title": "Cartilha Direitos e Benefícios Servidores Fazendários",
@@ -34,7 +8,7 @@
       "source": "SEF Minas Gerais — Empresas",
       "category": "icms",
       "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: Cartilha Direitos e Benefícios Servidores Fazendários",
-      "publishedAt": "2026-10-07T16:39:00.972309+00:00",
+      "publishedAt": "2026-10-07T17:37:13.067483+00:00",
       "score": 18,
       "impactTags": [
         "oportunidade"
@@ -60,7 +34,7 @@
       "source": "SEF Minas Gerais — Empresas",
       "category": "icms",
       "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: Processo de Reopção",
-      "publishedAt": "2026-10-07T16:39:00.971890+00:00",
+      "publishedAt": "2026-10-07T17:37:13.066671+00:00",
       "score": 18,
       "impactTags": [
         "oportunidade"
@@ -86,7 +60,7 @@
       "source": "SEF Minas Gerais — Empresas",
       "category": "icms",
       "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: Servidores",
-      "publishedAt": "2026-10-07T16:39:00.971523+00:00",
+      "publishedAt": "2026-10-07T17:37:13.065997+00:00",
       "score": 18,
       "impactTags": [
         "oportunidade"
@@ -112,7 +86,7 @@
       "source": "SEF Minas Gerais — Empresas",
       "category": "icms",
       "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: Transparência",
-      "publishedAt": "2026-10-07T16:39:00.971166+00:00",
+      "publishedAt": "2026-10-07T17:37:13.065344+00:00",
       "score": 18,
       "impactTags": [
         "oportunidade"
@@ -138,7 +112,7 @@
       "source": "SEF Minas Gerais — Empresas",
       "category": "icms",
       "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: Documento Oficial do Auditor Fiscal da Receita Estadual",
-      "publishedAt": "2026-10-07T16:39:00.970821+00:00",
+      "publishedAt": "2026-10-07T17:37:13.064692+00:00",
       "score": 29,
       "impactTags": [
         "oportunidade"
@@ -164,7 +138,7 @@
       "source": "SEF Minas Gerais — Empresas",
       "category": "icms",
       "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: Política de Segurança da Informação",
-      "publishedAt": "2026-10-07T16:39:00.970392+00:00",
+      "publishedAt": "2026-10-07T17:37:13.063882+00:00",
       "score": 18,
       "impactTags": [
         "oportunidade"
@@ -190,7 +164,7 @@
       "source": "SEF Minas Gerais — Empresas",
       "category": "icms",
       "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: Programa de Integridade SEF",
-      "publishedAt": "2026-10-07T16:39:00.970000+00:00",
+      "publishedAt": "2026-10-07T17:37:13.063142+00:00",
       "score": 18,
       "impactTags": [
         "oportunidade"
@@ -216,7 +190,7 @@
       "source": "SEF Minas Gerais — Empresas",
       "category": "icms",
       "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: Plano de Gestão de Riscos",
-      "publishedAt": "2026-10-07T16:39:00.969618+00:00",
+      "publishedAt": "2026-10-07T17:37:13.062443+00:00",
       "score": 18,
       "impactTags": [
         "oportunidade"
@@ -242,7 +216,7 @@
       "source": "SEF Minas Gerais — Empresas",
       "category": "icms",
       "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: Plano de Comunicação Institucional",
-      "publishedAt": "2026-10-07T16:39:00.969246+00:00",
+      "publishedAt": "2026-10-07T17:37:13.061737+00:00",
       "score": 18,
       "impactTags": [
         "oportunidade"
@@ -262,13 +236,39 @@
       }
     },
     {
+      "id": "8847d835e50c0ff1",
+      "title": "Controladoria Setorial",
+      "url": "https://www.fazenda.mg.gov.br/secretaria/controladoria-setorial",
+      "source": "SEF Minas Gerais — Empresas",
+      "category": "icms",
+      "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: Controladoria Setorial",
+      "publishedAt": "2026-10-07T17:37:13.060987+00:00",
+      "score": 18,
+      "impactTags": [
+        "oportunidade"
+      ],
+      "impactLabels": [
+        "Oportunidade consultiva"
+      ],
+      "priority": "baixa",
+      "opportunityScore": 23,
+      "whoAffected": "Empresas e contabilidades que acompanham rotina fiscal.",
+      "recommendedAction": "Ler a fonte original, salvar evidências e avaliar se há impacto em clientes ativos.",
+      "whyItMatters": "gera pauta consultiva para orientar clientes",
+      "contentAngles": {
+        "linkedin": "Explique o impacto de 'Controladoria Setorial' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'Controladoria Setorial' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Controladoria Setorial'."
+      }
+    },
+    {
       "id": "1f515a5d3ca0a6e5",
       "title": "Comissão de Ética",
       "url": "https://www.fazenda.mg.gov.br/secretaria/comissao_etica",
       "source": "SEF Minas Gerais — Empresas",
       "category": "municipal",
       "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: Comissão de Ética",
-      "publishedAt": "2026-10-07T16:39:00.968858+00:00",
+      "publishedAt": "2026-10-07T17:37:13.060294+00:00",
       "score": 18,
       "impactTags": [
         "oportunidade"
@@ -294,7 +294,7 @@
       "source": "SEF Minas Gerais — Empresas",
       "category": "icms",
       "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: Endereços",
-      "publishedAt": "2026-10-07T16:39:00.968488+00:00",
+      "publishedAt": "2026-10-07T17:37:13.059630+00:00",
       "score": 18,
       "impactTags": [
         "oportunidade"
@@ -320,7 +320,7 @@
       "source": "SEF Minas Gerais — Empresas",
       "category": "icms",
       "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: Quem é Quem",
-      "publishedAt": "2026-10-07T16:39:00.968134+00:00",
+      "publishedAt": "2026-10-07T17:37:13.058966+00:00",
       "score": 18,
       "impactTags": [
         "oportunidade"
@@ -346,7 +346,7 @@
       "source": "SEF Minas Gerais — Empresas",
       "category": "icms",
       "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: Legislação Institucional",
-      "publishedAt": "2026-10-07T16:39:00.967783+00:00",
+      "publishedAt": "2026-10-07T17:37:13.058322+00:00",
       "score": 18,
       "impactTags": [
         "oportunidade"
@@ -372,7 +372,7 @@
       "source": "SEF Minas Gerais — Empresas",
       "category": "icms",
       "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: História",
-      "publishedAt": "2026-10-07T16:39:00.967409+00:00",
+      "publishedAt": "2026-10-07T17:37:13.057619+00:00",
       "score": 18,
       "impactTags": [
         "oportunidade"
@@ -398,7 +398,7 @@
       "source": "SEF Minas Gerais — Empresas",
       "category": "icms",
       "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: Organograma",
-      "publishedAt": "2026-10-07T16:39:00.967066+00:00",
+      "publishedAt": "2026-10-07T17:37:13.056967+00:00",
       "score": 18,
       "impactTags": [
         "oportunidade"
@@ -424,7 +424,7 @@
       "source": "SEF Minas Gerais — Empresas",
       "category": "icms",
       "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: A Secretaria",
-      "publishedAt": "2026-10-07T16:39:00.966717+00:00",
+      "publishedAt": "2026-10-07T17:37:13.056320+00:00",
       "score": 18,
       "impactTags": [
         "oportunidade"
@@ -450,7 +450,7 @@
       "source": "SEF Minas Gerais — Empresas",
       "category": "icms",
       "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: Acessibilidade",
-      "publishedAt": "2026-10-07T16:39:00.966326+00:00",
+      "publishedAt": "2026-10-07T17:37:13.055613+00:00",
       "score": 18,
       "impactTags": [
         "oportunidade"
@@ -476,7 +476,7 @@
       "source": "SEF Minas Gerais — Empresas",
       "category": "icms",
       "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: Mapa do Site",
-      "publishedAt": "2026-10-07T16:39:00.965962+00:00",
+      "publishedAt": "2026-10-07T17:37:13.054936+00:00",
       "score": 18,
       "impactTags": [
         "oportunidade"
@@ -502,7 +502,7 @@
       "source": "SEF Minas Gerais — Empresas",
       "category": "icms",
       "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: Intranet",
-      "publishedAt": "2026-10-07T16:39:00.965551+00:00",
+      "publishedAt": "2026-10-07T17:37:13.054216+00:00",
       "score": 18,
       "impactTags": [
         "oportunidade"
@@ -528,7 +528,7 @@
       "source": "Diário Oficial da União — busca fiscal",
       "category": "legislacao",
       "summary": "Publicação monitorada em Diário Oficial da União — busca fiscal: Verificação de autenticidade",
-      "publishedAt": "2026-10-07T16:38:53.818089+00:00",
+      "publishedAt": "2026-10-07T17:37:00.212847+00:00",
       "score": 24,
       "impactTags": [],
       "impactLabels": [],
@@ -550,7 +550,7 @@
       "source": "Diário Oficial da União — busca fiscal",
       "category": "legislacao",
       "summary": "Publicação monitorada em Diário Oficial da União — busca fiscal: PESQUISA AVANÇADA Ícone",
-      "publishedAt": "2026-10-07T16:38:53.817662+00:00",
+      "publishedAt": "2026-10-07T17:37:00.212063+00:00",
       "score": 24,
       "impactTags": [],
       "impactLabels": [],
@@ -572,7 +572,7 @@
       "source": "Diário Oficial da União — busca fiscal",
       "category": "legislacao",
       "summary": "Publicação monitorada em Diário Oficial da União — busca fiscal: Portal da Imprensa Nacional",
-      "publishedAt": "2026-10-07T16:38:53.817233+00:00",
+      "publishedAt": "2026-10-07T17:37:00.211254+00:00",
       "score": 24,
       "impactTags": [],
       "impactLabels": [],
@@ -594,7 +594,7 @@
       "source": "Diário Oficial da União — busca fiscal",
       "category": "legislacao",
       "summary": "Publicação monitorada em Diário Oficial da União — busca fiscal: Termo de Uso e Política de Privacidade",
-      "publishedAt": "2026-10-07T16:38:53.816818+00:00",
+      "publishedAt": "2026-10-07T17:37:00.210479+00:00",
       "score": 24,
       "impactTags": [],
       "impactLabels": [],
@@ -616,7 +616,7 @@
       "source": "Diário Oficial da União — busca fiscal",
       "category": "legislacao",
       "summary": "Publicação monitorada em Diário Oficial da União — busca fiscal: Tutorial INCom",
-      "publishedAt": "2026-10-07T16:38:53.816378+00:00",
+      "publishedAt": "2026-10-07T17:37:00.209664+00:00",
       "score": 24,
       "impactTags": [],
       "impactLabels": [],
@@ -638,7 +638,7 @@
       "source": "Diário Oficial da União — busca fiscal",
       "category": "legislacao",
       "summary": "Publicação monitorada em Diário Oficial da União — busca fiscal: Tutorial do APP DOU",
-      "publishedAt": "2026-10-07T16:38:53.815989+00:00",
+      "publishedAt": "2026-10-07T17:37:00.208945+00:00",
       "score": 35,
       "impactTags": [],
       "impactLabels": [],
@@ -660,7 +660,7 @@
       "source": "Diário Oficial da União — busca fiscal",
       "category": "legislacao",
       "summary": "Publicação monitorada em Diário Oficial da União — busca fiscal: Concursos e Seleções",
-      "publishedAt": "2026-10-07T16:38:53.815585+00:00",
+      "publishedAt": "2026-10-07T17:37:00.208208+00:00",
       "score": 24,
       "impactTags": [],
       "impactLabels": [],
@@ -682,7 +682,7 @@
       "source": "Diário Oficial da União — busca fiscal",
       "category": "legislacao",
       "summary": "Publicação monitorada em Diário Oficial da União — busca fiscal: Acesso ao sistema de envio de matérias INCom",
-      "publishedAt": "2026-10-07T16:38:53.815185+00:00",
+      "publishedAt": "2026-10-07T17:37:00.207466+00:00",
       "score": 24,
       "impactTags": [],
       "impactLabels": [],
@@ -704,7 +704,7 @@
       "source": "Diário Oficial da União — busca fiscal",
       "category": "legislacao",
       "summary": "Publicação monitorada em Diário Oficial da União — busca fiscal: Verificação de autenticidade",
-      "publishedAt": "2026-10-07T16:38:53.814740+00:00",
+      "publishedAt": "2026-10-07T17:37:00.206618+00:00",
       "score": 24,
       "impactTags": [],
       "impactLabels": [],
@@ -726,7 +726,7 @@
       "source": "Diário Oficial da União — busca fiscal",
       "category": "legislacao",
       "summary": "Publicação monitorada em Diário Oficial da União — busca fiscal: Base de Dados de Publicações do DOU",
-      "publishedAt": "2026-10-07T16:38:53.814318+00:00",
+      "publishedAt": "2026-10-07T17:37:00.205834+00:00",
       "score": 35,
       "impactTags": [],
       "impactLabels": [],
@@ -748,7 +748,7 @@
       "source": "Diário Oficial da União — busca fiscal",
       "category": "legislacao",
       "summary": "Publicação monitorada em Diário Oficial da União — busca fiscal: Destaques do Diário Oficial da União",
-      "publishedAt": "2026-10-07T16:38:53.813891+00:00",
+      "publishedAt": "2026-10-07T17:37:00.205022+00:00",
       "score": 24,
       "impactTags": [],
       "impactLabels": [],
@@ -770,7 +770,7 @@
       "source": "Diário Oficial da União — busca fiscal",
       "category": "legislacao",
       "summary": "Publicação monitorada em Diário Oficial da União — busca fiscal: Leitura do Jornal",
-      "publishedAt": "2026-10-07T16:38:53.813450+00:00",
+      "publishedAt": "2026-10-07T17:37:00.204194+00:00",
       "score": 24,
       "impactTags": [],
       "impactLabels": [],
@@ -792,7 +792,7 @@
       "source": "Diário Oficial da União — busca fiscal",
       "category": "legislacao",
       "summary": "Publicação monitorada em Diário Oficial da União — busca fiscal: Diário Oficial da União",
-      "publishedAt": "2026-10-07T16:38:53.813051+00:00",
+      "publishedAt": "2026-10-07T17:37:00.203453+00:00",
       "score": 24,
       "impactTags": [],
       "impactLabels": [],
@@ -814,7 +814,7 @@
       "source": "Diário Oficial da União — busca fiscal",
       "category": "legislacao",
       "summary": "Publicação monitorada em Diário Oficial da União — busca fiscal: Diário Oficial da União",
-      "publishedAt": "2026-10-07T16:38:53.812631+00:00",
+      "publishedAt": "2026-10-07T17:37:00.202659+00:00",
       "score": 24,
       "impactTags": [],
       "impactLabels": [],
@@ -836,7 +836,7 @@
       "source": "Diário Oficial da União — busca fiscal",
       "category": "legislacao",
       "summary": "Publicação monitorada em Diário Oficial da União — busca fiscal: Imprensa Nacional",
-      "publishedAt": "2026-10-07T16:38:53.812176+00:00",
+      "publishedAt": "2026-10-07T17:37:00.201789+00:00",
       "score": 24,
       "impactTags": [],
       "impactLabels": [],
@@ -858,7 +858,7 @@
       "source": "Diário Oficial da União — busca fiscal",
       "category": "legislacao",
       "summary": "Publicação monitorada em Diário Oficial da União — busca fiscal: Acesso GOV.BR",
-      "publishedAt": "2026-10-07T16:38:53.811722+00:00",
+      "publishedAt": "2026-10-07T17:37:00.200909+00:00",
       "score": 24,
       "impactTags": [],
       "impactLabels": [],
@@ -880,7 +880,7 @@
       "source": "Diário Oficial da União — busca fiscal",
       "category": "legislacao",
       "summary": "Publicação monitorada em Diário Oficial da União — busca fiscal: Mudar para o modo de alto contraste",
-      "publishedAt": "2026-10-07T16:38:53.811329+00:00",
+      "publishedAt": "2026-10-07T17:37:00.200172+00:00",
       "score": 24,
       "impactTags": [],
       "impactLabels": [],
@@ -902,7 +902,7 @@
       "source": "Diário Oficial da União — busca fiscal",
       "category": "legislacao",
       "summary": "Publicação monitorada em Diário Oficial da União — busca fiscal: Acessibilidade",
-      "publishedAt": "2026-10-07T16:38:53.810863+00:00",
+      "publishedAt": "2026-10-07T17:37:00.199260+00:00",
       "score": 24,
       "impactTags": [],
       "impactLabels": [],
@@ -924,7 +924,7 @@
       "source": "Diário Oficial da União — busca fiscal",
       "category": "legislacao",
       "summary": "Publicação monitorada em Diário Oficial da União — busca fiscal: Acesso à Informação",
-      "publishedAt": "2026-10-07T16:38:53.810454+00:00",
+      "publishedAt": "2026-10-07T17:37:00.198515+00:00",
       "score": 24,
       "impactTags": [],
       "impactLabels": [],
@@ -946,7 +946,7 @@
       "source": "Diário Oficial da União — busca fiscal",
       "category": "legislacao",
       "summary": "Publicação monitorada em Diário Oficial da União — busca fiscal: Órgãos do Governo",
-      "publishedAt": "2026-10-07T16:38:53.810005+00:00",
+      "publishedAt": "2026-10-07T17:37:00.197691+00:00",
       "score": 24,
       "impactTags": [],
       "impactLabels": [],
@@ -968,7 +968,7 @@
       "source": "PGFN Notícias",
       "category": "receita",
       "summary": "Publicação monitorada em PGFN Notícias: Simples Nacional",
-      "publishedAt": "2026-10-07T16:37:34.808693+00:00",
+      "publishedAt": "2026-10-07T17:35:42.223866+00:00",
       "score": 20,
       "impactTags": [
         "oportunidade"
@@ -994,7 +994,7 @@
       "source": "PGFN Notícias",
       "category": "receita",
       "summary": "Publicação monitorada em PGFN Notícias: Imposto sobre a renda das pessoas jurídicas (IRPJ)",
-      "publishedAt": "2026-10-07T16:37:34.808364+00:00",
+      "publishedAt": "2026-10-07T17:35:42.223265+00:00",
       "score": 24,
       "impactTags": [],
       "impactLabels": [],
@@ -1016,7 +1016,7 @@
       "source": "PGFN Notícias",
       "category": "receita",
       "summary": "Publicação monitorada em PGFN Notícias: Imposto de Renda Pessoa Física (IRPF)",
-      "publishedAt": "2026-10-07T16:37:34.807972+00:00",
+      "publishedAt": "2026-10-07T17:35:42.222550+00:00",
       "score": 24,
       "impactTags": [],
       "impactLabels": [],
@@ -1038,7 +1038,7 @@
       "source": "PGFN Notícias",
       "category": "receita",
       "summary": "Publicação monitorada em PGFN Notícias: Pareceres PGFN, Súmulas e decisões judiciais por assunto",
-      "publishedAt": "2026-10-07T16:37:34.807588+00:00",
+      "publishedAt": "2026-10-07T17:35:42.221861+00:00",
       "score": 14,
       "impactTags": [],
       "impactLabels": [],
@@ -1060,7 +1060,7 @@
       "source": "PGFN Notícias",
       "category": "receita",
       "summary": "Publicação monitorada em PGFN Notícias: Cidadania Tributária",
-      "publishedAt": "2026-10-07T16:37:34.807180+00:00",
+      "publishedAt": "2026-10-07T17:35:42.221100+00:00",
       "score": 25,
       "impactTags": [],
       "impactLabels": [],
@@ -1082,7 +1082,7 @@
       "source": "PGFN Notícias",
       "category": "receita",
       "summary": "Publicação monitorada em PGFN Notícias: Dívida ativa do FGTS",
-      "publishedAt": "2026-10-07T16:37:34.806149+00:00",
+      "publishedAt": "2026-10-07T17:35:42.219228+00:00",
       "score": 28,
       "impactTags": [],
       "impactLabels": [],
@@ -1104,7 +1104,7 @@
       "source": "PGFN Notícias",
       "category": "receita",
       "summary": "Publicação monitorada em PGFN Notícias: Estudos sobre a dívida ativa",
-      "publishedAt": "2026-10-07T16:37:34.805805+00:00",
+      "publishedAt": "2026-10-07T17:35:42.218604+00:00",
       "score": 25,
       "impactTags": [],
       "impactLabels": [],
@@ -1126,7 +1126,7 @@
       "source": "PGFN Notícias",
       "category": "receita",
       "summary": "Publicação monitorada em PGFN Notícias: Estratégias de cobrança",
-      "publishedAt": "2026-10-07T16:37:34.805439+00:00",
+      "publishedAt": "2026-10-07T17:35:42.217924+00:00",
       "score": 14,
       "impactTags": [
         "risco",
@@ -1154,7 +1154,7 @@
       "source": "PGFN Notícias",
       "category": "receita",
       "summary": "Publicação monitorada em PGFN Notícias: Combate à fraude fiscal",
-      "publishedAt": "2026-10-07T16:37:34.805093+00:00",
+      "publishedAt": "2026-10-07T17:35:42.217215+00:00",
       "score": 25,
       "impactTags": [
         "prazo",
@@ -1182,7 +1182,7 @@
       "source": "PGFN Notícias",
       "category": "receita",
       "summary": "Publicação monitorada em PGFN Notícias: Transparência fiscal",
-      "publishedAt": "2026-10-07T16:37:34.804746+00:00",
+      "publishedAt": "2026-10-07T17:35:42.216583+00:00",
       "score": 25,
       "impactTags": [],
       "impactLabels": [],
@@ -1204,7 +1204,7 @@
       "source": "PGFN Notícias",
       "category": "receita",
       "summary": "Publicação monitorada em PGFN Notícias: Dívida Ativa da União e do FGTS",
-      "publishedAt": "2026-10-07T16:37:34.804340+00:00",
+      "publishedAt": "2026-10-07T17:35:42.215853+00:00",
       "score": 28,
       "impactTags": [],
       "impactLabels": [],
@@ -1226,7 +1226,7 @@
       "source": "PGFN Notícias",
       "category": "receita",
       "summary": "Publicação monitorada em PGFN Notícias: Painel dos Parcelamentos e Transações",
-      "publishedAt": "2026-10-07T16:37:34.803525+00:00",
+      "publishedAt": "2026-10-07T17:35:42.214386+00:00",
       "score": 14,
       "impactTags": [],
       "impactLabels": [],
@@ -1248,7 +1248,7 @@
       "source": "PGFN Notícias",
       "category": "receita",
       "summary": "Publicação monitorada em PGFN Notícias: Lista de Devedores",
-      "publishedAt": "2026-10-07T16:37:34.803149+00:00",
+      "publishedAt": "2026-10-07T17:35:42.213684+00:00",
       "score": 14,
       "impactTags": [],
       "impactLabels": [],
@@ -1270,7 +1270,7 @@
       "source": "PGFN Notícias",
       "category": "receita",
       "summary": "Publicação monitorada em PGFN Notícias: Dados Abertos",
-      "publishedAt": "2026-10-07T16:37:34.802801+00:00",
+      "publishedAt": "2026-10-07T17:35:42.213052+00:00",
       "score": 14,
       "impactTags": [],
       "impactLabels": [],
@@ -1292,7 +1292,7 @@
       "source": "PGFN Notícias",
       "category": "receita",
       "summary": "Publicação monitorada em PGFN Notícias: Aplicativo Dívida Aberta",
-      "publishedAt": "2026-10-07T16:37:34.802439+00:00",
+      "publishedAt": "2026-10-07T17:35:42.212402+00:00",
       "score": 14,
       "impactTags": [],
       "impactLabels": [],
@@ -1305,6 +1305,62 @@
         "linkedin": "Explique o impacto de 'Aplicativo Dívida Aberta' para empresas e contabilidades, com orientação prática e CTA consultivo.",
         "reels": "Use 'Aplicativo Dívida Aberta' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
         "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Aplicativo Dívida Aberta'."
+      }
+    },
+    {
+      "id": "8b9fa7293a6821a7",
+      "title": "PGFN e Receita abrem transação para multas de importação",
+      "url": "https://www.contabeis.com.br/noticias/79952/pgfn-e-receita-abrem-transacao-para-multas-de-importacao",
+      "source": "Portal Contábeis",
+      "category": "aduaneiro",
+      "summary": "PGFN e Receita permitem negociar multas por interposição fraudulenta em importações, com descontos de até 65% e prazo até 29 de dezembro. Leia mais em https://www.contabeis.com.br/noticias/79952/pgfn-e-receita-abrem-transacao-para-multas-de-importacao/",
+      "publishedAt": "2026-10-07T17:30:01+00:00",
+      "score": 13,
+      "impactTags": [
+        "prazo",
+        "oportunidade"
+      ],
+      "impactLabels": [
+        "Prazo urgente",
+        "Oportunidade consultiva"
+      ],
+      "priority": "alta",
+      "opportunityScore": 41,
+      "whoAffected": "Empresas e contabilidades que acompanham rotina fiscal.",
+      "recommendedAction": "Checar o calendário fiscal, responsáveis e documentos necessários antes do vencimento.",
+      "whyItMatters": "há risco de perda de prazo ou multa",
+      "contentAngles": {
+        "linkedin": "Explique o impacto de 'PGFN e Receita abrem transação para multas de importação' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'PGFN e Receita abrem transação para multas de importação' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'PGFN e Receita abrem transação para multas de importação'."
+      }
+    },
+    {
+      "id": "014c6218df40e236",
+      "title": "SP aguarda regulamentação do Redata para discutir ICMS",
+      "url": "https://www.contabeis.com.br/noticias/79948/sp-aguarda-regulamentacao-do-redata-para-discutir-icms",
+      "source": "Portal Contábeis",
+      "category": "icms",
+      "summary": "São Paulo quer conhecer as regras do Redata antes de discutir redução do ICMS para data centers. União e estado divergem sobre o prazo. Leia mais em https://www.contabeis.com.br/noticias/79948/sp-aguarda-regulamentacao-do-redata-para-discutir-icms/",
+      "publishedAt": "2026-10-07T17:00:01+00:00",
+      "score": 16,
+      "impactTags": [
+        "prazo",
+        "oportunidade"
+      ],
+      "impactLabels": [
+        "Prazo urgente",
+        "Oportunidade consultiva"
+      ],
+      "priority": "alta",
+      "opportunityScore": 44,
+      "whoAffected": "Empresas e contabilidades que acompanham rotina fiscal.",
+      "recommendedAction": "Checar o calendário fiscal, responsáveis e documentos necessários antes do vencimento.",
+      "whyItMatters": "há risco de perda de prazo ou multa",
+      "contentAngles": {
+        "linkedin": "Explique o impacto de 'SP aguarda regulamentação do Redata para discutir ICMS' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'SP aguarda regulamentação do Redata para discutir ICMS' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'SP aguarda regulamentação do Redata para discutir ICMS'."
       }
     },
     {
@@ -2239,7 +2295,7 @@
       "category": "reforma",
       "summary": "Exclusão do IBS e da CBS da base de cálculo do ICMS e do ISSQN Consultor Jurídico",
       "publishedAt": "2026-10-06T12:24:53+00:00",
-      "score": 19,
+      "score": 18,
       "impactTags": [
         "reforma",
         "oportunidade"
@@ -4725,7 +4781,7 @@
       "category": "reforma",
       "summary": "Split payment pode acabar com a correção de erro no crédito tributário, avalia conselheira do CARF Gazeta da Semana",
       "publishedAt": "2026-10-01T07:01:37+00:00",
-      "score": 17,
+      "score": 28,
       "impactTags": [
         "caixa",
         "risco",
@@ -8120,62 +8176,6 @@
         "reels": "Use 'STF veta revogação unilateral de ICMS aprovado pelo Confaz - Poder360' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
         "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'STF veta revogação unilateral de ICMS aprovado pelo Confaz - Poder360'."
       }
-    },
-    {
-      "id": "d2aa00cb25dd93e4",
-      "title": "CBS/IBS na base de cálculo do ICMS e o leading case favorável ao contribuinte: a liminar concedida pela 16ª Vara da Fazenda Pública de São Paulo",
-      "url": "https://www.reformatributaria.com/opiniao/cbs-ibs-na-base-de-calculo-do-icms-e-o-leading-case-favoravel-ao-contribuinte-a-liminar-concedida-pela-16a-vara-da-fazenda-publica-de-sao-paulo",
-      "source": "Portal Reforma Tributária",
-      "category": "reforma",
-      "summary": "Por Eurico Santi 1. O JULGADO Em 9 de setembro de 2026, o juiz Márcio Ferraz Nunes, da 16ª Vara da […] O post CBS/IBS na base de cálculo do ICMS e o leading case favorável ao contribuinte: a liminar concedida pela 16ª Vara da Fazenda Pública de São Paulo apareceu primeiro em Portal Reforma Tributária .",
-      "publishedAt": "2026-09-25T11:00:00+00:00",
-      "score": 33,
-      "impactTags": [
-        "reforma",
-        "oportunidade"
-      ],
-      "impactLabels": [
-        "Reforma Tributária",
-        "Oportunidade consultiva"
-      ],
-      "priority": "alta",
-      "opportunityScore": 85,
-      "whoAffected": "Empresas no regime regular, contabilidades e áreas fiscal/financeira em adaptação ao IBS/CBS.",
-      "recommendedAction": "Mapear processos, documentos fiscais, sistemas e decisões comerciais afetadas pela transição IBS/CBS.",
-      "whyItMatters": "antecipa adaptação à Reforma Tributária",
-      "contentAngles": {
-        "linkedin": "Explique o impacto de 'CBS/IBS na base de cálculo do ICMS e o leading case favorável ao contribuinte: a liminar concedida pela 16ª Vara da Fazenda Pública de São Paulo' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'CBS/IBS na base de cálculo do ICMS e o leading case favorável ao contribuinte: a liminar concedida pela 16ª Vara da Fazenda Pública de São Paulo' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'CBS/IBS na base de cálculo do ICMS e o leading case favorável ao contribuinte: a liminar concedida pela 16ª Vara da Fazenda Pública de São Paulo'."
-      }
-    },
-    {
-      "id": "d6d14dc09553aea1",
-      "title": "Agroindústria não pode segregar atividades para apuração de contribuição, decide Carf",
-      "url": "https://www.jota.info/tributos/agroindustria-nao-pode-segregar-atividades-para-apuracao-de-contribuicao-decide-carf",
-      "source": "JOTA",
-      "category": "carf",
-      "summary": "Conselho entendeu que contribuições previdenciárias devem alcançar toda a receita bruta das empresas",
-      "publishedAt": "2026-09-25T09:10:59+00:00",
-      "score": 6,
-      "impactTags": [
-        "risco",
-        "oportunidade"
-      ],
-      "impactLabels": [
-        "Risco fiscal",
-        "Oportunidade consultiva"
-      ],
-      "priority": "media",
-      "opportunityScore": 32,
-      "whoAffected": "Empresas e contabilidades que acompanham rotina fiscal.",
-      "recommendedAction": "Revisar exposição fiscal, documentação de suporte e oportunidade de tese/regularização.",
-      "whyItMatters": "reduz exposição fiscal e contencioso",
-      "contentAngles": {
-        "linkedin": "Explique o impacto de 'Agroindústria não pode segregar atividades para apuração de contribuição, decide Carf' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'Agroindústria não pode segregar atividades para apuração de contribuição, decide Carf' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Agroindústria não pode segregar atividades para apuração de contribuição, decide Carf'."
-      }
     }
   ],
   "sourcesOk": 14,
@@ -8236,7 +8236,7 @@
       "source": "Portal Contábeis",
       "url": "https://www.contabeis.com.br/rss/noticias/",
       "ok": true,
-      "items": 16
+      "items": 17
     },
     {
       "source": "PGFN Notícias",
@@ -8294,7 +8294,7 @@
       "source": "Google News — STF/STJ tributário",
       "url": "https://news.google.com/rss/search?q=(STF%20OR%20STJ)%20(tribut%C3%A1rio%20OR%20ICMS%20OR%20ISS%20OR%20PIS%20OR%20Cofins%20OR%20execu%C3%A7%C3%A3o%20fiscal)&hl=pt-BR&gl=BR&ceid=BR:pt-419",
       "ok": true,
-      "items": 32
+      "items": 31
     },
     {
       "source": "Google News — Municípios MG fiscal",
