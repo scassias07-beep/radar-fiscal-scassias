@@ -1,32 +1,6 @@
 {
-  "updatedAt": "2026-11-04T15:31:13.786952+00:00",
+  "updatedAt": "2026-11-04T21:57:47.085120+00:00",
   "items": [
-    {
-      "id": "ce47c4b9d89c25d8",
-      "title": "Processo de Reopção",
-      "url": "https://www.fazenda.mg.gov.br/servidores/processo-de-reopcao",
-      "source": "SEF Minas Gerais — Empresas",
-      "category": "icms",
-      "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: Processo de Reopção",
-      "publishedAt": "2026-11-04T15:31:10.006371+00:00",
-      "score": 18,
-      "impactTags": [
-        "oportunidade"
-      ],
-      "impactLabels": [
-        "Oportunidade consultiva"
-      ],
-      "priority": "baixa",
-      "opportunityScore": 23,
-      "whoAffected": "Empresas e contabilidades que acompanham rotina fiscal.",
-      "recommendedAction": "Ler a fonte original, salvar evidências e avaliar se há impacto em clientes ativos.",
-      "whyItMatters": "gera pauta consultiva para orientar clientes",
-      "contentAngles": {
-        "linkedin": "Explique o impacto de 'Processo de Reopção' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'Processo de Reopção' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Processo de Reopção'."
-      }
-    },
     {
       "id": "1fc6012d536b1f59",
       "title": "Servidores",
@@ -34,7 +8,7 @@
       "source": "SEF Minas Gerais — Empresas",
       "category": "icms",
       "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: Servidores",
-      "publishedAt": "2026-11-04T15:31:10.005827+00:00",
+      "publishedAt": "2026-11-04T21:57:43.758927+00:00",
       "score": 18,
       "impactTags": [
         "oportunidade"
@@ -60,7 +34,7 @@
       "source": "SEF Minas Gerais — Empresas",
       "category": "icms",
       "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: Transparência",
-      "publishedAt": "2026-11-04T15:31:10.005306+00:00",
+      "publishedAt": "2026-11-04T21:57:43.758405+00:00",
       "score": 18,
       "impactTags": [
         "oportunidade"
@@ -86,7 +60,7 @@
       "source": "SEF Minas Gerais — Empresas",
       "category": "icms",
       "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: Política de Privacidade - APP Carteira Funcional",
-      "publishedAt": "2026-11-04T15:31:10.004767+00:00",
+      "publishedAt": "2026-11-04T21:57:43.757902+00:00",
       "score": 18,
       "impactTags": [
         "oportunidade"
@@ -112,7 +86,7 @@
       "source": "SEF Minas Gerais — Empresas",
       "category": "icms",
       "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: Documento Oficial do Auditor Fiscal da Receita Estadual",
-      "publishedAt": "2026-11-04T15:31:10.004166+00:00",
+      "publishedAt": "2026-11-04T21:57:43.757283+00:00",
       "score": 29,
       "impactTags": [
         "oportunidade"
@@ -138,7 +112,7 @@
       "source": "SEF Minas Gerais — Empresas",
       "category": "icms",
       "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: Política de Segurança da Informação",
-      "publishedAt": "2026-11-04T15:31:10.003527+00:00",
+      "publishedAt": "2026-11-04T21:57:43.756651+00:00",
       "score": 18,
       "impactTags": [
         "oportunidade"
@@ -164,7 +138,7 @@
       "source": "SEF Minas Gerais — Empresas",
       "category": "icms",
       "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: Programa de Integridade SEF",
-      "publishedAt": "2026-11-04T15:31:10.002944+00:00",
+      "publishedAt": "2026-11-04T21:57:43.756076+00:00",
       "score": 18,
       "impactTags": [
         "oportunidade"
@@ -190,7 +164,7 @@
       "source": "SEF Minas Gerais — Empresas",
       "category": "icms",
       "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: Plano de Gestão de Riscos",
-      "publishedAt": "2026-11-04T15:31:10.002393+00:00",
+      "publishedAt": "2026-11-04T21:57:43.755533+00:00",
       "score": 18,
       "impactTags": [
         "oportunidade"
@@ -216,7 +190,7 @@
       "source": "SEF Minas Gerais — Empresas",
       "category": "icms",
       "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: Plano de Comunicação Institucional",
-      "publishedAt": "2026-11-04T15:31:10.001844+00:00",
+      "publishedAt": "2026-11-04T21:57:43.754981+00:00",
       "score": 18,
       "impactTags": [
         "oportunidade"
@@ -242,7 +216,7 @@
       "source": "SEF Minas Gerais — Empresas",
       "category": "icms",
       "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: Controladoria Setorial",
-      "publishedAt": "2026-11-04T15:31:10.001271+00:00",
+      "publishedAt": "2026-11-04T21:57:43.754406+00:00",
       "score": 18,
       "impactTags": [
         "oportunidade"
@@ -268,7 +242,7 @@
       "source": "SEF Minas Gerais — Empresas",
       "category": "municipal",
       "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: Comissão de Ética",
-      "publishedAt": "2026-11-04T15:31:10.000502+00:00",
+      "publishedAt": "2026-11-04T21:57:43.753878+00:00",
       "score": 18,
       "impactTags": [
         "oportunidade"
@@ -288,13 +262,39 @@
       }
     },
     {
+      "id": "94be45cd1fd4100a",
+      "title": "Governança e Gestão Estratégica",
+      "url": "https://www.fazenda.mg.gov.br/secretaria/Governanca-e-Gestao-Estrategica",
+      "source": "SEF Minas Gerais — Empresas",
+      "category": "icms",
+      "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: Governança e Gestão Estratégica",
+      "publishedAt": "2026-11-04T21:57:43.753362+00:00",
+      "score": 18,
+      "impactTags": [
+        "oportunidade"
+      ],
+      "impactLabels": [
+        "Oportunidade consultiva"
+      ],
+      "priority": "baixa",
+      "opportunityScore": 23,
+      "whoAffected": "Empresas e contabilidades que acompanham rotina fiscal.",
+      "recommendedAction": "Ler a fonte original, salvar evidências e avaliar se há impacto em clientes ativos.",
+      "whyItMatters": "gera pauta consultiva para orientar clientes",
+      "contentAngles": {
+        "linkedin": "Explique o impacto de 'Governança e Gestão Estratégica' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'Governança e Gestão Estratégica' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Governança e Gestão Estratégica'."
+      }
+    },
+    {
       "id": "f80d105de5dccdbf",
       "title": "Endereços",
       "url": "https://www.fazenda.mg.gov.br/secretaria/enderecos",
       "source": "SEF Minas Gerais — Empresas",
       "category": "icms",
       "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: Endereços",
-      "publishedAt": "2026-11-04T15:31:09.999959+00:00",
+      "publishedAt": "2026-11-04T21:57:43.752800+00:00",
       "score": 18,
       "impactTags": [
         "oportunidade"
@@ -320,7 +320,7 @@
       "source": "SEF Minas Gerais — Empresas",
       "category": "icms",
       "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: Quem é Quem",
-      "publishedAt": "2026-11-04T15:31:09.999459+00:00",
+      "publishedAt": "2026-11-04T21:57:43.752295+00:00",
       "score": 18,
       "impactTags": [
         "oportunidade"
@@ -346,7 +346,7 @@
       "source": "SEF Minas Gerais — Empresas",
       "category": "icms",
       "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: Legislação Institucional",
-      "publishedAt": "2026-11-04T15:31:09.998929+00:00",
+      "publishedAt": "2026-11-04T21:57:43.751789+00:00",
       "score": 18,
       "impactTags": [
         "oportunidade"
@@ -372,7 +372,7 @@
       "source": "SEF Minas Gerais — Empresas",
       "category": "icms",
       "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: História",
-      "publishedAt": "2026-11-04T15:31:09.998399+00:00",
+      "publishedAt": "2026-11-04T21:57:43.751226+00:00",
       "score": 18,
       "impactTags": [
         "oportunidade"
@@ -398,7 +398,7 @@
       "source": "SEF Minas Gerais — Empresas",
       "category": "icms",
       "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: Organograma",
-      "publishedAt": "2026-11-04T15:31:09.997908+00:00",
+      "publishedAt": "2026-11-04T21:57:43.750724+00:00",
       "score": 18,
       "impactTags": [
         "oportunidade"
@@ -424,7 +424,7 @@
       "source": "SEF Minas Gerais — Empresas",
       "category": "icms",
       "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: A Secretaria",
-      "publishedAt": "2026-11-04T15:31:09.997415+00:00",
+      "publishedAt": "2026-11-04T21:57:43.750212+00:00",
       "score": 18,
       "impactTags": [
         "oportunidade"
@@ -450,7 +450,7 @@
       "source": "SEF Minas Gerais — Empresas",
       "category": "icms",
       "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: Acessibilidade",
-      "publishedAt": "2026-11-04T15:31:09.996854+00:00",
+      "publishedAt": "2026-11-04T21:57:43.749663+00:00",
       "score": 18,
       "impactTags": [
         "oportunidade"
@@ -476,7 +476,7 @@
       "source": "SEF Minas Gerais — Empresas",
       "category": "icms",
       "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: Mapa do Site",
-      "publishedAt": "2026-11-04T15:31:09.996314+00:00",
+      "publishedAt": "2026-11-04T21:57:43.749118+00:00",
       "score": 18,
       "impactTags": [
         "oportunidade"
@@ -502,7 +502,7 @@
       "source": "SEF Minas Gerais — Empresas",
       "category": "icms",
       "summary": "Publicação monitorada em SEF Minas Gerais — Empresas: Intranet",
-      "publishedAt": "2026-11-04T15:31:09.995738+00:00",
+      "publishedAt": "2026-11-04T21:57:43.748561+00:00",
       "score": 18,
       "impactTags": [
         "oportunidade"
@@ -528,7 +528,7 @@
       "source": "PGFN Notícias",
       "category": "receita",
       "summary": "Publicação monitorada em PGFN Notícias: Simples Nacional",
-      "publishedAt": "2026-11-04T15:29:43.807680+00:00",
+      "publishedAt": "2026-11-04T21:56:19.078242+00:00",
       "score": 20,
       "impactTags": [
         "oportunidade"
@@ -554,7 +554,7 @@
       "source": "PGFN Notícias",
       "category": "receita",
       "summary": "Publicação monitorada em PGFN Notícias: Imposto sobre a renda das pessoas jurídicas (IRPJ)",
-      "publishedAt": "2026-11-04T15:29:43.807212+00:00",
+      "publishedAt": "2026-11-04T21:56:19.077763+00:00",
       "score": 24,
       "impactTags": [],
       "impactLabels": [],
@@ -576,7 +576,7 @@
       "source": "PGFN Notícias",
       "category": "receita",
       "summary": "Publicação monitorada em PGFN Notícias: Imposto de Renda Pessoa Física (IRPF)",
-      "publishedAt": "2026-11-04T15:29:43.806635+00:00",
+      "publishedAt": "2026-11-04T21:56:19.077176+00:00",
       "score": 24,
       "impactTags": [],
       "impactLabels": [],
@@ -598,7 +598,7 @@
       "source": "PGFN Notícias",
       "category": "receita",
       "summary": "Publicação monitorada em PGFN Notícias: Pareceres PGFN, Súmulas e decisões judiciais por assunto",
-      "publishedAt": "2026-11-04T15:29:43.806099+00:00",
+      "publishedAt": "2026-11-04T21:56:19.076638+00:00",
       "score": 14,
       "impactTags": [],
       "impactLabels": [],
@@ -620,7 +620,7 @@
       "source": "PGFN Notícias",
       "category": "receita",
       "summary": "Publicação monitorada em PGFN Notícias: Cidadania Tributária",
-      "publishedAt": "2026-11-04T15:29:43.805503+00:00",
+      "publishedAt": "2026-11-04T21:56:19.076038+00:00",
       "score": 25,
       "impactTags": [],
       "impactLabels": [],
@@ -642,7 +642,7 @@
       "source": "PGFN Notícias",
       "category": "receita",
       "summary": "Publicação monitorada em PGFN Notícias: Dívida ativa do FGTS",
-      "publishedAt": "2026-11-04T15:29:43.804008+00:00",
+      "publishedAt": "2026-11-04T21:56:19.074577+00:00",
       "score": 28,
       "impactTags": [],
       "impactLabels": [],
@@ -664,7 +664,7 @@
       "source": "PGFN Notícias",
       "category": "receita",
       "summary": "Publicação monitorada em PGFN Notícias: Estudos sobre a dívida ativa",
-      "publishedAt": "2026-11-04T15:29:43.803519+00:00",
+      "publishedAt": "2026-11-04T21:56:19.074073+00:00",
       "score": 25,
       "impactTags": [],
       "impactLabels": [],
@@ -686,7 +686,7 @@
       "source": "PGFN Notícias",
       "category": "receita",
       "summary": "Publicação monitorada em PGFN Notícias: Estratégias de cobrança",
-      "publishedAt": "2026-11-04T15:29:43.803006+00:00",
+      "publishedAt": "2026-11-04T21:56:19.073554+00:00",
       "score": 14,
       "impactTags": [
         "risco",
@@ -714,7 +714,7 @@
       "source": "PGFN Notícias",
       "category": "receita",
       "summary": "Publicação monitorada em PGFN Notícias: Combate à fraude fiscal",
-      "publishedAt": "2026-11-04T15:29:43.802510+00:00",
+      "publishedAt": "2026-11-04T21:56:19.073042+00:00",
       "score": 25,
       "impactTags": [
         "prazo",
@@ -742,7 +742,7 @@
       "source": "PGFN Notícias",
       "category": "receita",
       "summary": "Publicação monitorada em PGFN Notícias: Transparência fiscal",
-      "publishedAt": "2026-11-04T15:29:43.802010+00:00",
+      "publishedAt": "2026-11-04T21:56:19.072552+00:00",
       "score": 25,
       "impactTags": [],
       "impactLabels": [],
@@ -764,7 +764,7 @@
       "source": "PGFN Notícias",
       "category": "receita",
       "summary": "Publicação monitorada em PGFN Notícias: Dívida Ativa da União e do FGTS",
-      "publishedAt": "2026-11-04T15:29:43.801458+00:00",
+      "publishedAt": "2026-11-04T21:56:19.071980+00:00",
       "score": 28,
       "impactTags": [],
       "impactLabels": [],
@@ -786,7 +786,7 @@
       "source": "PGFN Notícias",
       "category": "receita",
       "summary": "Publicação monitorada em PGFN Notícias: Painel dos Parcelamentos e Transações",
-      "publishedAt": "2026-11-04T15:29:43.800314+00:00",
+      "publishedAt": "2026-11-04T21:56:19.070841+00:00",
       "score": 14,
       "impactTags": [],
       "impactLabels": [],
@@ -808,7 +808,7 @@
       "source": "PGFN Notícias",
       "category": "receita",
       "summary": "Publicação monitorada em PGFN Notícias: Lista de Devedores",
-      "publishedAt": "2026-11-04T15:29:43.799753+00:00",
+      "publishedAt": "2026-11-04T21:56:19.070293+00:00",
       "score": 14,
       "impactTags": [],
       "impactLabels": [],
@@ -830,7 +830,7 @@
       "source": "PGFN Notícias",
       "category": "receita",
       "summary": "Publicação monitorada em PGFN Notícias: Dados Abertos",
-      "publishedAt": "2026-11-04T15:29:43.799260+00:00",
+      "publishedAt": "2026-11-04T21:56:19.069804+00:00",
       "score": 14,
       "impactTags": [],
       "impactLabels": [],
@@ -852,7 +852,7 @@
       "source": "PGFN Notícias",
       "category": "receita",
       "summary": "Publicação monitorada em PGFN Notícias: Aplicativo Dívida Aberta",
-      "publishedAt": "2026-11-04T15:29:43.798716+00:00",
+      "publishedAt": "2026-11-04T21:56:19.069287+00:00",
       "score": 14,
       "impactTags": [],
       "impactLabels": [],
@@ -865,6 +865,460 @@
         "linkedin": "Explique o impacto de 'Aplicativo Dívida Aberta' para empresas e contabilidades, com orientação prática e CTA consultivo.",
         "reels": "Use 'Aplicativo Dívida Aberta' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
         "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Aplicativo Dívida Aberta'."
+      }
+    },
+    {
+      "id": "53ca47e1108bfaa2",
+      "title": "Reforma tributária: o ruim hoje seguirá sendo ruim em um ano",
+      "url": "https://www.jota.info/coberturas-especiais/pulso-da-reforma/reforma-tributaria-o-ruim-hoje-seguira-sendo-ruim-em-um-ano",
+      "source": "JOTA",
+      "category": "reforma",
+      "summary": "Adiar a reforma tributária pode oferecer algum alívio operacional, mas não resolve os reais problemas do novo modelo",
+      "publishedAt": "2026-11-04T21:54:53+00:00",
+      "score": 24,
+      "impactTags": [
+        "reforma",
+        "oportunidade"
+      ],
+      "impactLabels": [
+        "Reforma Tributária",
+        "Oportunidade consultiva"
+      ],
+      "priority": "media",
+      "opportunityScore": 42,
+      "whoAffected": "Empresas no regime regular, contabilidades e áreas fiscal/financeira em adaptação ao IBS/CBS.",
+      "recommendedAction": "Mapear processos, documentos fiscais, sistemas e decisões comerciais afetadas pela transição IBS/CBS.",
+      "whyItMatters": "antecipa adaptação à Reforma Tributária",
+      "contentAngles": {
+        "linkedin": "Explique o impacto de 'Reforma tributária: o ruim hoje seguirá sendo ruim em um ano' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'Reforma tributária: o ruim hoje seguirá sendo ruim em um ano' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Reforma tributária: o ruim hoje seguirá sendo ruim em um ano'."
+      }
+    },
+    {
+      "id": "e4aa37740791de1d",
+      "title": "Split Payment inicia testes de integração em outubro",
+      "url": "https://www.contabeis.com.br/noticias/80589/split-payment-inicia-testes-de-integracao-em-outubro",
+      "source": "Portal Contábeis",
+      "category": "reforma",
+      "summary": "Foto: Towfiqu barbhuiya / Unsplash · Licença Unsplash Split Payment inicia testes entre prestadores de pagamento e plataforma pública. Entenda as etapas e os possíveis impactos para o fluxo de caixa das empresas. Leia mais em https://www.contabeis.com.br/noticias/80589/split-payment-inicia-testes-de-integracao-em-outubro/",
+      "publishedAt": "2026-11-04T20:30:02+00:00",
+      "score": 10,
+      "impactTags": [
+        "caixa",
+        "reforma",
+        "oportunidade"
+      ],
+      "impactLabels": [
+        "Impacto no caixa",
+        "Reforma Tributária",
+        "Oportunidade consultiva"
+      ],
+      "priority": "media",
+      "opportunityScore": 45,
+      "whoAffected": "Empresas com vendas B2B, estoque, créditos tributários ou necessidade de precificação.",
+      "recommendedAction": "Simular impacto no fluxo de caixa, preços, créditos e contratos antes de 2027.",
+      "whyItMatters": "pode alterar fluxo de caixa e precificação",
+      "contentAngles": {
+        "linkedin": "Explique o impacto de 'Split Payment inicia testes de integração em outubro' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'Split Payment inicia testes de integração em outubro' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Split Payment inicia testes de integração em outubro'."
+      }
+    },
+    {
+      "id": "10a627e07daadfd1",
+      "title": "Drogarias devem ter farmacêutico trabalhando presencialmente durante todo o expediente, diz STJ",
+      "url": "https://www.jota.info/saude/drogarias-devem-ter-farmaceutico-trabalhando-presencialmente-durante-todo-o-expediente-diz-stj",
+      "source": "JOTA",
+      "category": "judicial",
+      "summary": "O processo envolve a rede Drogaria Araújo, que tem mais de 200 lojas em Minas Gerais",
+      "publishedAt": "2026-11-04T20:06:26+00:00",
+      "score": 9,
+      "impactTags": [
+        "risco",
+        "judicial",
+        "oportunidade"
+      ],
+      "impactLabels": [
+        "Risco fiscal",
+        "Decisão judicial",
+        "Oportunidade consultiva"
+      ],
+      "priority": "media",
+      "opportunityScore": 34,
+      "whoAffected": "Empresas com teses tributárias, créditos, autuações ou operações similares.",
+      "recommendedAction": "Revisar exposição fiscal, documentação de suporte e oportunidade de tese/regularização.",
+      "whyItMatters": "reduz exposição fiscal e contencioso",
+      "contentAngles": {
+        "linkedin": "Explique o impacto de 'Drogarias devem ter farmacêutico trabalhando presencialmente durante todo o expediente, diz STJ' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'Drogarias devem ter farmacêutico trabalhando presencialmente durante todo o expediente, diz STJ' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Drogarias devem ter farmacêutico trabalhando presencialmente durante todo o expediente, diz STJ'."
+      }
+    },
+    {
+      "id": "b814660eee79f736",
+      "title": "Copom define Selic nesta quarta (4) com expectativa de novo corte",
+      "url": "https://www.contabeis.com.br/noticias/80597/copom-define-selic-nesta-quarta-4-com-expectativa-de-novo-corte",
+      "source": "Portal Contábeis",
+      "category": "legislacao",
+      "summary": "Mercado financeiro espera que Banco Central reduza a taxa básica de juros de 13,75% para 13,5% ao ano na penúltima reunião do Copom em 2026. Leia mais em https://www.contabeis.com.br/noticias/80597/copom-define-selic-nesta-quarta-4-com-expectativa-de-novo-corte/",
+      "publishedAt": "2026-11-04T19:30:01+00:00",
+      "score": 7,
+      "impactTags": [],
+      "impactLabels": [],
+      "priority": "baixa",
+      "opportunityScore": 7,
+      "whoAffected": "Empresas e contabilidades que acompanham rotina fiscal.",
+      "recommendedAction": "Ler a fonte original, salvar evidências e avaliar se há impacto em clientes ativos.",
+      "whyItMatters": "gera pauta consultiva para orientar clientes",
+      "contentAngles": {
+        "linkedin": "Explique o impacto de 'Copom define Selic nesta quarta (4) com expectativa de novo corte' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'Copom define Selic nesta quarta (4) com expectativa de novo corte' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Copom define Selic nesta quarta (4) com expectativa de novo corte'."
+      }
+    },
+    {
+      "id": "6fb46c6ca453797b",
+      "title": "Justiça de SP concede liminar à ROIT para excluir IBS e CBS do cálculo do ISS a partir de 2027",
+      "url": "https://www.reformatributaria.com/justica/justica-de-sp-concede-liminar-a-roit-para-excluir-ibs-e-cbs-do-calculo-do-iss-a-partir-de-2027",
+      "source": "Portal Reforma Tributária",
+      "category": "reforma",
+      "summary": "Por Redação A Justiça de São Paulo concedeu na 3ª feira (3.nov.2026) uma liminar favorável à empresa de tecnologia tributária […] O post Justiça de SP concede liminar à ROIT para excluir IBS e CBS do cálculo do ISS a partir de 2027 apareceu primeiro em Portal Reforma Tributária .",
+      "publishedAt": "2026-11-04T18:54:41+00:00",
+      "score": 58,
+      "impactTags": [
+        "reforma",
+        "oportunidade"
+      ],
+      "impactLabels": [
+        "Reforma Tributária",
+        "Oportunidade consultiva"
+      ],
+      "priority": "alta",
+      "opportunityScore": 76,
+      "whoAffected": "Empresas no regime regular, contabilidades e áreas fiscal/financeira em adaptação ao IBS/CBS.",
+      "recommendedAction": "Mapear processos, documentos fiscais, sistemas e decisões comerciais afetadas pela transição IBS/CBS.",
+      "whyItMatters": "antecipa adaptação à Reforma Tributária",
+      "contentAngles": {
+        "linkedin": "Explique o impacto de 'Justiça de SP concede liminar à ROIT para excluir IBS e CBS do cálculo do ISS a partir de 2027' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'Justiça de SP concede liminar à ROIT para excluir IBS e CBS do cálculo do ISS a partir de 2027' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Justiça de SP concede liminar à ROIT para excluir IBS e CBS do cálculo do ISS a partir de 2027'."
+      }
+    },
+    {
+      "id": "9891e923b1fc1e04",
+      "title": "NFS-e nacional: como consultar o ISS retido na nota",
+      "url": "https://www.contabeis.com.br/noticias/80594/nfs-e-nacional-como-consultar-o-iss-retido-na-nota",
+      "source": "Portal Contábeis",
+      "category": "municipal",
+      "summary": "Empresas podem verificar a retenção do ISS nas notas recebidas pelo Portal Nacional da NFS-e. Veja onde localizar a informação e o que conferir. Leia mais em https://www.contabeis.com.br/noticias/80594/nfs-e-nacional-como-consultar-o-iss-retido-na-nota/",
+      "publishedAt": "2026-11-04T18:30:02+00:00",
+      "score": 16,
+      "impactTags": [
+        "oportunidade"
+      ],
+      "impactLabels": [
+        "Oportunidade consultiva"
+      ],
+      "priority": "baixa",
+      "opportunityScore": 21,
+      "whoAffected": "Empresas e contabilidades que acompanham rotina fiscal.",
+      "recommendedAction": "Ler a fonte original, salvar evidências e avaliar se há impacto em clientes ativos.",
+      "whyItMatters": "gera pauta consultiva para orientar clientes",
+      "contentAngles": {
+        "linkedin": "Explique o impacto de 'NFS-e nacional: como consultar o ISS retido na nota' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'NFS-e nacional: como consultar o ISS retido na nota' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'NFS-e nacional: como consultar o ISS retido na nota'."
+      }
+    },
+    {
+      "id": "d5c83dfac0df7275",
+      "title": "NFS-e nacional: como consultar o ISS retido na nota - Portal Contabeis",
+      "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPOEFzUkZmVXZkS014REppaGNXRk9waHF4eEZXbDZGQS01b3FFalE4eU5oQU1HalVObGgzM1hTbDZWVDdtbi1RRjlXOUF3NFFvc244d2N6cXNrc0NBcDM0aE0zQWtYS09WRl9KMWRHQk00QlJ6N3J3bUNQbjdQa3VvMC1RU2I2UUlzTGMtWHlQeDV2RFo1a0FNMGVwbw?oc=5",
+      "source": "Google News — STF/STJ tributário",
+      "category": "municipal",
+      "summary": "NFS-e nacional: como consultar o ISS retido na nota Portal Contabeis",
+      "publishedAt": "2026-11-04T18:30:02+00:00",
+      "score": 15,
+      "impactTags": [],
+      "impactLabels": [],
+      "priority": "baixa",
+      "opportunityScore": 15,
+      "whoAffected": "Empresas e contabilidades que acompanham rotina fiscal.",
+      "recommendedAction": "Ler a fonte original, salvar evidências e avaliar se há impacto em clientes ativos.",
+      "whyItMatters": "gera pauta consultiva para orientar clientes",
+      "contentAngles": {
+        "linkedin": "Explique o impacto de 'NFS-e nacional: como consultar o ISS retido na nota - Portal Contabeis' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'NFS-e nacional: como consultar o ISS retido na nota - Portal Contabeis' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'NFS-e nacional: como consultar o ISS retido na nota - Portal Contabeis'."
+      }
+    },
+    {
+      "id": "938aaed0edb229f0",
+      "title": "INSS paga benefícios de outubro até 9 de novembro",
+      "url": "https://www.contabeis.com.br/noticias/80591/inss-paga-beneficios-de-outubro-ate-9-de-novembro",
+      "source": "Portal Contábeis",
+      "category": "legislacao",
+      "summary": "Pagamentos do INSS seguem até 9 de novembro, conforme o valor recebido e o número final do benefício. Veja o calendário e como consultar. Leia mais em https://www.contabeis.com.br/noticias/80591/inss-paga-beneficios-de-outubro-ate-9-de-novembro/",
+      "publishedAt": "2026-11-04T18:00:01+00:00",
+      "score": 13,
+      "impactTags": [
+        "prazo",
+        "oportunidade"
+      ],
+      "impactLabels": [
+        "Prazo urgente",
+        "Oportunidade consultiva"
+      ],
+      "priority": "alta",
+      "opportunityScore": 41,
+      "whoAffected": "Empresas e contabilidades que acompanham rotina fiscal.",
+      "recommendedAction": "Checar o calendário fiscal, responsáveis e documentos necessários antes do vencimento.",
+      "whyItMatters": "há risco de perda de prazo ou multa",
+      "contentAngles": {
+        "linkedin": "Explique o impacto de 'INSS paga benefícios de outubro até 9 de novembro' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'INSS paga benefícios de outubro até 9 de novembro' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'INSS paga benefícios de outubro até 9 de novembro'."
+      }
+    },
+    {
+      "id": "a2bcd28d6de28ba8",
+      "title": "Novas regras fiscais mudam rotina e exigem mais controle dos negócios de beleza",
+      "url": "https://www.reformatributaria.com/opiniao/novas-regras-fiscais-mudam-rotina-e-exigem-mais-controle-dos-negocios-de-beleza",
+      "source": "Portal Reforma Tributária",
+      "category": "reforma",
+      "summary": "Por Davi Iglesias As mudanças recentes na emissão de notas fiscais trouxeram um novo desafio para os salões de beleza […] O post Novas regras fiscais mudam rotina e exigem mais controle dos negócios de beleza apareceu primeiro em Portal Reforma Tributária .",
+      "publishedAt": "2026-11-04T17:41:02+00:00",
+      "score": 28,
+      "impactTags": [
+        "reforma",
+        "oportunidade"
+      ],
+      "impactLabels": [
+        "Reforma Tributária",
+        "Oportunidade consultiva"
+      ],
+      "priority": "media",
+      "opportunityScore": 46,
+      "whoAffected": "Empresas no regime regular, contabilidades e áreas fiscal/financeira em adaptação ao IBS/CBS.",
+      "recommendedAction": "Mapear processos, documentos fiscais, sistemas e decisões comerciais afetadas pela transição IBS/CBS.",
+      "whyItMatters": "antecipa adaptação à Reforma Tributária",
+      "contentAngles": {
+        "linkedin": "Explique o impacto de 'Novas regras fiscais mudam rotina e exigem mais controle dos negócios de beleza' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'Novas regras fiscais mudam rotina e exigem mais controle dos negócios de beleza' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Novas regras fiscais mudam rotina e exigem mais controle dos negócios de beleza'."
+      }
+    },
+    {
+      "id": "52101317dcc14db7",
+      "title": "STJ suspende ações e vai decidir futuro do Perse",
+      "url": "https://www.contabeis.com.br/noticias/80590/stj-suspende-acoes-e-vai-decidir-futuro-do-perse",
+      "source": "Portal Contábeis",
+      "category": "legislacao",
+      "summary": "Tribunal analisará se o benefício fiscal poderia ser encerrado antes dos 60 meses. Processos sobre o tema estão suspensos em todo o país. Leia mais em https://www.contabeis.com.br/noticias/80590/stj-suspende-acoes-e-vai-decidir-futuro-do-perse/",
+      "publishedAt": "2026-11-04T17:30:02+00:00",
+      "score": 20,
+      "impactTags": [
+        "risco",
+        "judicial",
+        "oportunidade"
+      ],
+      "impactLabels": [
+        "Risco fiscal",
+        "Decisão judicial",
+        "Oportunidade consultiva"
+      ],
+      "priority": "media",
+      "opportunityScore": 45,
+      "whoAffected": "Empresas com teses tributárias, créditos, autuações ou operações similares.",
+      "recommendedAction": "Revisar exposição fiscal, documentação de suporte e oportunidade de tese/regularização.",
+      "whyItMatters": "reduz exposição fiscal e contencioso",
+      "contentAngles": {
+        "linkedin": "Explique o impacto de 'STJ suspende ações e vai decidir futuro do Perse' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'STJ suspende ações e vai decidir futuro do Perse' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'STJ suspende ações e vai decidir futuro do Perse'."
+      }
+    },
+    {
+      "id": "99c476a20276bf4a",
+      "title": "CBS de 11,3%: a economia digital que ainda não entrou na conta",
+      "url": "https://www.reformatributaria.com/opiniao/cbs-de-113-a-economia-digital-que-ainda-nao-entrou-na-conta",
+      "source": "Portal Reforma Tributária",
+      "category": "reforma",
+      "summary": "Por Luiz Roberto Peroba A divulgação pelo Tribunal de Contas da União (TCU) da alíquota de referência de 11,3% para a […] O post CBS de 11,3%: a economia digital que ainda não entrou na conta apareceu primeiro em Portal Reforma Tributária .",
+      "publishedAt": "2026-11-04T17:29:15+00:00",
+      "score": 40,
+      "impactTags": [
+        "caixa",
+        "reforma",
+        "judicial",
+        "oportunidade"
+      ],
+      "impactLabels": [
+        "Impacto no caixa",
+        "Reforma Tributária",
+        "Decisão judicial",
+        "Oportunidade consultiva"
+      ],
+      "priority": "alta",
+      "opportunityScore": 80,
+      "whoAffected": "Empresas com teses tributárias, créditos, autuações ou operações similares.",
+      "recommendedAction": "Simular impacto no fluxo de caixa, preços, créditos e contratos antes de 2027.",
+      "whyItMatters": "pode alterar fluxo de caixa e precificação",
+      "contentAngles": {
+        "linkedin": "Explique o impacto de 'CBS de 11,3%: a economia digital que ainda não entrou na conta' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'CBS de 11,3%: a economia digital que ainda não entrou na conta' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'CBS de 11,3%: a economia digital que ainda não entrou na conta'."
+      }
+    },
+    {
+      "id": "5f79f8a2a8f861c7",
+      "title": "STF afasta PIS e Cofins sobre créditos presumidos de ICMS",
+      "url": "https://www.contabeis.com.br/noticias/80586/stf-afasta-pis-e-cofins-sobre-creditos-presumidos-de-icms",
+      "source": "Portal Contábeis",
+      "category": "icms",
+      "summary": "Decisão do Supremo beneficia empresas que recebem incentivos fiscais estaduais, mas recuperação de valores depende de prazo, alcance da tese e possíveis recursos. Leia mais em https://www.contabeis.com.br/noticias/80586/stf-afasta-pis-e-cofins-sobre-creditos-presumidos-de-icms/",
+      "publishedAt": "2026-11-04T17:00:01+00:00",
+      "score": 36,
+      "impactTags": [
+        "risco",
+        "judicial",
+        "prazo",
+        "oportunidade"
+      ],
+      "impactLabels": [
+        "Risco fiscal",
+        "Decisão judicial",
+        "Prazo urgente",
+        "Oportunidade consultiva"
+      ],
+      "priority": "alta",
+      "opportunityScore": 84,
+      "whoAffected": "Empresas com teses tributárias, créditos, autuações ou operações similares.",
+      "recommendedAction": "Checar o calendário fiscal, responsáveis e documentos necessários antes do vencimento.",
+      "whyItMatters": "há risco de perda de prazo ou multa",
+      "contentAngles": {
+        "linkedin": "Explique o impacto de 'STF afasta PIS e Cofins sobre créditos presumidos de ICMS' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'STF afasta PIS e Cofins sobre créditos presumidos de ICMS' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'STF afasta PIS e Cofins sobre créditos presumidos de ICMS'."
+      }
+    },
+    {
+      "id": "60419f6af710639c",
+      "title": "STF afasta PIS e Cofins sobre créditos presumidos de ICMS - Portal Contabeis",
+      "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPalFzRHZPWF8ya0NlM3dWQ3VkMW8tN3JWQ01NeEpoVnVtaFVrVGhQcmFaRWpMRW5xTGoyQkpMZTMtb2xjR1V2Y3BTUFU4dC1RUnY0bjg1ekRtZlVFRWtwZFFaMTZQTFR2UmFEdmVucy1Xc2lhVVVjdUt1YVlDV0FkbkVneGFIRlpGWEV2cnVQSmdnMHJ0QkRpNVY4NlVKS0NSbWFfUA?oc=5",
+      "source": "Google News — STF/STJ tributário",
+      "category": "icms",
+      "summary": "STF afasta PIS e Cofins sobre créditos presumidos de ICMS Portal Contabeis",
+      "publishedAt": "2026-11-04T17:00:01+00:00",
+      "score": 38,
+      "impactTags": [
+        "risco",
+        "judicial",
+        "oportunidade"
+      ],
+      "impactLabels": [
+        "Risco fiscal",
+        "Decisão judicial",
+        "Oportunidade consultiva"
+      ],
+      "priority": "alta",
+      "opportunityScore": 63,
+      "whoAffected": "Empresas com teses tributárias, créditos, autuações ou operações similares.",
+      "recommendedAction": "Revisar exposição fiscal, documentação de suporte e oportunidade de tese/regularização.",
+      "whyItMatters": "reduz exposição fiscal e contencioso",
+      "contentAngles": {
+        "linkedin": "Explique o impacto de 'STF afasta PIS e Cofins sobre créditos presumidos de ICMS - Portal Contabeis' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'STF afasta PIS e Cofins sobre créditos presumidos de ICMS - Portal Contabeis' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'STF afasta PIS e Cofins sobre créditos presumidos de ICMS - Portal Contabeis'."
+      }
+    },
+    {
+      "id": "1c70495f33440c9a",
+      "title": "Comissão do Senado fará audiência pública sobre alíquota da CBS",
+      "url": "https://www.reformatributaria.com/reforma-tributaria-congresso-nacional/comissao-do-senado-fara-audiencia-publica-sobre-aliquota-da-cbs",
+      "source": "Portal Reforma Tributária",
+      "category": "reforma",
+      "summary": "Por Enzo Bernardes, de Brasília A CAE (Comissão de Assuntos Econômicos) do Senado aprovou nesta 4ª feira (4.nov.2026) a realização […] O post Comissão do Senado fará audiência pública sobre alíquota da CBS apareceu primeiro em Portal Reforma Tributária .",
+      "publishedAt": "2026-11-04T16:16:27+00:00",
+      "score": 40,
+      "impactTags": [
+        "caixa",
+        "reforma",
+        "oportunidade"
+      ],
+      "impactLabels": [
+        "Impacto no caixa",
+        "Reforma Tributária",
+        "Oportunidade consultiva"
+      ],
+      "priority": "alta",
+      "opportunityScore": 75,
+      "whoAffected": "Empresas com vendas B2B, estoque, créditos tributários ou necessidade de precificação.",
+      "recommendedAction": "Simular impacto no fluxo de caixa, preços, créditos e contratos antes de 2027.",
+      "whyItMatters": "pode alterar fluxo de caixa e precificação",
+      "contentAngles": {
+        "linkedin": "Explique o impacto de 'Comissão do Senado fará audiência pública sobre alíquota da CBS' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'Comissão do Senado fará audiência pública sobre alíquota da CBS' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Comissão do Senado fará audiência pública sobre alíquota da CBS'."
+      }
+    },
+    {
+      "id": "e0caecf328139d8c",
+      "title": "STF AO VIVO – Leis municipais que autorizam loterias e apostas esportivas – 4/11/2026",
+      "url": "https://www.jota.info/stf/do-supremo/stf-ao-vivo-leis-municipais-que-autorizam-loterias-e-apostas-esportivas-4-10-2026",
+      "source": "JOTA",
+      "category": "municipal",
+      "summary": "Corte analisa se municípios podem criar e explorar loterias e apostas esportivas por meio de legislação própria",
+      "publishedAt": "2026-11-04T15:55:38+00:00",
+      "score": 9,
+      "impactTags": [
+        "risco",
+        "judicial",
+        "oportunidade"
+      ],
+      "impactLabels": [
+        "Risco fiscal",
+        "Decisão judicial",
+        "Oportunidade consultiva"
+      ],
+      "priority": "media",
+      "opportunityScore": 34,
+      "whoAffected": "Empresas com teses tributárias, créditos, autuações ou operações similares.",
+      "recommendedAction": "Revisar exposição fiscal, documentação de suporte e oportunidade de tese/regularização.",
+      "whyItMatters": "reduz exposição fiscal e contencioso",
+      "contentAngles": {
+        "linkedin": "Explique o impacto de 'STF AO VIVO – Leis municipais que autorizam loterias e apostas esportivas – 4/11/2026' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'STF AO VIVO – Leis municipais que autorizam loterias e apostas esportivas – 4/11/2026' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'STF AO VIVO – Leis municipais que autorizam loterias e apostas esportivas – 4/11/2026'."
+      }
+    },
+    {
+      "id": "bc3c5abb103b7278",
+      "title": "Saiba como ganhar e-book, revistas e canecas no Programa de Indicação do Portal RT",
+      "url": "https://www.reformatributaria.com/institucional-portal-reforma-tributaria/saiba-como-ganhar-revistas-e-canecas-no-programa-de-indicacao-do-portal-rt",
+      "source": "Portal Reforma Tributária",
+      "category": "reforma",
+      "summary": "Por Redação Indique colegas, equipe e clientes para o boletim do Portal da Reforma Tributária e receba brindes em casa. […] O post Saiba como ganhar e-book, revistas e canecas no Programa de Indicação do Portal RT apareceu primeiro em Portal Reforma Tributária .",
+      "publishedAt": "2026-11-04T15:39:57+00:00",
+      "score": 28,
+      "impactTags": [
+        "reforma",
+        "oportunidade"
+      ],
+      "impactLabels": [
+        "Reforma Tributária",
+        "Oportunidade consultiva"
+      ],
+      "priority": "media",
+      "opportunityScore": 46,
+      "whoAffected": "Empresas no regime regular, contabilidades e áreas fiscal/financeira em adaptação ao IBS/CBS.",
+      "recommendedAction": "Mapear processos, documentos fiscais, sistemas e decisões comerciais afetadas pela transição IBS/CBS.",
+      "whyItMatters": "antecipa adaptação à Reforma Tributária",
+      "contentAngles": {
+        "linkedin": "Explique o impacto de 'Saiba como ganhar e-book, revistas e canecas no Programa de Indicação do Portal RT' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'Saiba como ganhar e-book, revistas e canecas no Programa de Indicação do Portal RT' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Saiba como ganhar e-book, revistas e canecas no Programa de Indicação do Portal RT'."
       }
     },
     {
@@ -916,6 +1370,64 @@
       }
     },
     {
+      "id": "53443b528cdd6df4",
+      "title": "“Fomos pegos de surpresa”, diz relator da alíquota da CBS",
+      "url": "https://www.reformatributaria.com/iva/fomos-pegos-de-surpresa-diz-relator-da-aliquota-da-cbs",
+      "source": "Portal Reforma Tributária",
+      "category": "reforma",
+      "summary": "Por Enzo Bernardes, de Brasília O senador Eduardo Braga (MDB-AM) disse na 3ª feira (3.nov.2026) estar surpreso com a alíquota […] O post “Fomos pegos de surpresa”, diz relator da alíquota da CBS apareceu primeiro em Portal Reforma Tributária .",
+      "publishedAt": "2026-11-04T14:27:34+00:00",
+      "score": 40,
+      "impactTags": [
+        "caixa",
+        "reforma",
+        "oportunidade"
+      ],
+      "impactLabels": [
+        "Impacto no caixa",
+        "Reforma Tributária",
+        "Oportunidade consultiva"
+      ],
+      "priority": "alta",
+      "opportunityScore": 75,
+      "whoAffected": "Empresas com vendas B2B, estoque, créditos tributários ou necessidade de precificação.",
+      "recommendedAction": "Simular impacto no fluxo de caixa, preços, créditos e contratos antes de 2027.",
+      "whyItMatters": "pode alterar fluxo de caixa e precificação",
+      "contentAngles": {
+        "linkedin": "Explique o impacto de '“Fomos pegos de surpresa”, diz relator da alíquota da CBS' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use '“Fomos pegos de surpresa”, diz relator da alíquota da CBS' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre '“Fomos pegos de surpresa”, diz relator da alíquota da CBS'."
+      }
+    },
+    {
+      "id": "6afc14aad17ed985",
+      "title": "Milei critica Brasil por ter expectativa de maior IVA do mundo",
+      "url": "https://www.reformatributaria.com/internacional/milei-critica-brasil-por-ter-expectativa-de-maior-iva-do-mundo",
+      "source": "Portal Reforma Tributária",
+      "category": "reforma",
+      "summary": "Por Redação O presidente da Argentina, Javier Milei (La Libertad Avanza), criticou na 2ª feira (2.nov.2026) a possibilidade de o […] O post Milei critica Brasil por ter expectativa de maior IVA do mundo apareceu primeiro em Portal Reforma Tributária .",
+      "publishedAt": "2026-11-04T14:18:34+00:00",
+      "score": 28,
+      "impactTags": [
+        "reforma",
+        "oportunidade"
+      ],
+      "impactLabels": [
+        "Reforma Tributária",
+        "Oportunidade consultiva"
+      ],
+      "priority": "media",
+      "opportunityScore": 46,
+      "whoAffected": "Empresas no regime regular, contabilidades e áreas fiscal/financeira em adaptação ao IBS/CBS.",
+      "recommendedAction": "Mapear processos, documentos fiscais, sistemas e decisões comerciais afetadas pela transição IBS/CBS.",
+      "whyItMatters": "antecipa adaptação à Reforma Tributária",
+      "contentAngles": {
+        "linkedin": "Explique o impacto de 'Milei critica Brasil por ter expectativa de maior IVA do mundo' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'Milei critica Brasil por ter expectativa de maior IVA do mundo' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Milei critica Brasil por ter expectativa de maior IVA do mundo'."
+      }
+    },
+    {
       "id": "f9178db3ad44bc4f",
       "title": "Imposto Seletivo: veja quais produtos serão tributados",
       "url": "https://www.contabeis.com.br/noticias/80581/imposto-seletivo-veja-quais-produtos-serao-tributados",
@@ -941,6 +1453,34 @@
         "linkedin": "Explique o impacto de 'Imposto Seletivo: veja quais produtos serão tributados' para empresas e contabilidades, com orientação prática e CTA consultivo.",
         "reels": "Use 'Imposto Seletivo: veja quais produtos serão tributados' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
         "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Imposto Seletivo: veja quais produtos serão tributados'."
+      }
+    },
+    {
+      "id": "ca2f6a7cd98c77d1",
+      "title": "Lula propõe à Câmara isentar Fifa de tributos para a Copa Feminina de 2027",
+      "url": "https://www.reformatributaria.com/governo/lula-propoe-a-camara-isentar-fifa-de-tributos-para-a-copa-feminina-de-2027",
+      "source": "Portal Reforma Tributária",
+      "category": "reforma",
+      "summary": "Por Enzo Bernardes, de Brasília O governo do presidente Luiz Inácio Lula da Silva (PT) enviou na 3ª feira (3.nov.2026) […] O post Lula propõe à Câmara isentar Fifa de tributos para a Copa Feminina de 2027 apareceu primeiro em Portal Reforma Tributária .",
+      "publishedAt": "2026-11-04T14:14:10+00:00",
+      "score": 28,
+      "impactTags": [
+        "reforma",
+        "oportunidade"
+      ],
+      "impactLabels": [
+        "Reforma Tributária",
+        "Oportunidade consultiva"
+      ],
+      "priority": "media",
+      "opportunityScore": 46,
+      "whoAffected": "Empresas no regime regular, contabilidades e áreas fiscal/financeira em adaptação ao IBS/CBS.",
+      "recommendedAction": "Mapear processos, documentos fiscais, sistemas e decisões comerciais afetadas pela transição IBS/CBS.",
+      "whyItMatters": "antecipa adaptação à Reforma Tributária",
+      "contentAngles": {
+        "linkedin": "Explique o impacto de 'Lula propõe à Câmara isentar Fifa de tributos para a Copa Feminina de 2027' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'Lula propõe à Câmara isentar Fifa de tributos para a Copa Feminina de 2027' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Lula propõe à Câmara isentar Fifa de tributos para a Copa Feminina de 2027'."
       }
     },
     {
@@ -1863,7 +2403,7 @@
       "category": "reforma",
       "summary": "Por Redação A Prefeitura de São Paulo publicou em 27 de outubro uma nova versão (3.4) do Manual de Utilização […] O post Prefeitura de São Paulo publica nova versão do manual de utilização do webservice da NFSe apareceu primeiro em Portal Reforma Tributária .",
       "publishedAt": "2026-11-03T20:56:08+00:00",
-      "score": 28,
+      "score": 12,
       "impactTags": [
         "reforma",
         "oportunidade"
@@ -1941,7 +2481,7 @@
       "category": "reforma",
       "summary": "Por Leonardo Alexandre, de São Paulo Ana Luiza Príncipe, Gabriele Holland e Juliane Fernandes assumiram novos cargos nas áreas tributárias […] O post Carrefour, Amazon e Raízen têm novas profissionais na área tributária apareceu primeiro em Portal Reforma Tributária .",
       "publishedAt": "2026-11-03T19:22:11+00:00",
-      "score": 28,
+      "score": 12,
       "impactTags": [
         "reforma",
         "oportunidade"
@@ -2019,7 +2559,7 @@
       "category": "reforma",
       "summary": "Por Redação Sara Oliveira é a nova coordenadora tributária da Energimp, empresa de geração de energia renovável. Oliveira é contadora […] O post Sara Oliveira é a nova coordenadora tributária da Energimp apareceu primeiro em Portal Reforma Tributária .",
       "publishedAt": "2026-11-03T18:24:40+00:00",
-      "score": 28,
+      "score": 12,
       "impactTags": [
         "reforma",
         "oportunidade"
@@ -2047,7 +2587,7 @@
       "category": "reforma",
       "summary": "Por Redação A emissão da NFSe (Nota Fiscal de Serviço eletrônica) por contribuintes do Simples Nacional deverá ser realizada exclusivamente […] O post Simples Nacional terá emissão de NFSe exclusivamente pelo ambiente nacional a partir de novembro apareceu primeiro em Portal Reforma Tributária .",
       "publishedAt": "2026-11-03T18:21:45+00:00",
-      "score": 44,
+      "score": 28,
       "impactTags": [
         "obrigacao",
         "reforma",
@@ -2121,7 +2661,7 @@
       "category": "reforma",
       "summary": "Foto: Reprodução/LinkedIn Por Leonardo Alexandre, de São Paulo Jessica Ramona, que está à frente da operacionalização do projeto da reforma […] O post Líder de reforma tributária da Unilever recebe reconhecimento da empresa apareceu primeiro em Portal Reforma Tributária .",
       "publishedAt": "2026-11-03T17:57:06+00:00",
-      "score": 28,
+      "score": 12,
       "impactTags": [
         "reforma",
         "oportunidade"
@@ -2149,7 +2689,7 @@
       "category": "reforma",
       "summary": "Foto: Reprodução via LinkedIn Por Leonardo Alexandre, de São Paulo Itamar Coelho assumiu o cargo de diretor de impostos da […] O post Itamar Coelho assume a diretoria de impostos da RSM Brasil apareceu primeiro em Portal Reforma Tributária .",
       "publishedAt": "2026-11-03T17:50:48+00:00",
-      "score": 28,
+      "score": 12,
       "impactTags": [
         "reforma",
         "oportunidade"
@@ -2177,7 +2717,7 @@
       "category": "reforma",
       "summary": "Por Guilherme Saraiva Grava Nos últimos dias, os jornais vêm noticiando que o governo pretende, após as eleições, apresentar um […] O post Prorrogar o IPI não resolve apagão tributário do Imposto Seletivo apareceu primeiro em Portal Reforma Tributária .",
       "publishedAt": "2026-11-03T17:41:30+00:00",
-      "score": 50,
+      "score": 28,
       "impactTags": [
         "reforma",
         "oportunidade"
@@ -2227,7 +2767,7 @@
       "category": "reforma",
       "summary": "Proposta de CBS de 11,3% aprovada pelo TCU eleva projeção da tributação sobre o consumo em 2033; Senado definirá percentual até 15 de dezembro. Leia mais em https://www.contabeis.com.br/noticias/80549/iva-dual-pode-ultrapassar-30-no-brasil-e-superar-aliquotas-da-ocde/",
       "publishedAt": "2026-11-03T17:15:01+00:00",
-      "score": 21,
+      "score": 15,
       "impactTags": [
         "reforma",
         "prazo",
@@ -2333,7 +2873,7 @@
       "category": "reforma",
       "summary": "Por Enzo Bernardes, de Brasília O senador Eduardo Braga (MDB-AM) será o relator da proposta de alíquota da CBS (Contribuição […] O post Eduardo Braga será relator da alíquota da CBS em comissão do Senado apareceu primeiro em Portal Reforma Tributária .",
       "publishedAt": "2026-11-03T14:26:01+00:00",
-      "score": 40,
+      "score": 18,
       "impactTags": [
         "caixa",
         "reforma",
@@ -2621,7 +3161,7 @@
       "category": "carf",
       "summary": "CARF admite percentuais reduzidos de IRPJ e CSLL para laboratório registrado como sociedade simples Contadores.cnt.br",
       "publishedAt": "2026-11-03T13:04:00+00:00",
-      "score": 22,
+      "score": 16,
       "impactTags": [
         "risco",
         "oportunidade"
@@ -2677,7 +3217,7 @@
       "category": "carf",
       "summary": "Carf nega tese do STF à multa regulamentar do IPI por notas fiscais irregulares Contadores.cnt.br",
       "publishedAt": "2026-11-03T12:47:00+00:00",
-      "score": 17,
+      "score": 11,
       "impactTags": [
         "risco",
         "judicial",
@@ -2818,6 +3358,34 @@
       }
     },
     {
+      "id": "35354bf2f4122dc5",
+      "title": "Afinal, o que integra a base de cálculo do IBS e da CBS? - Migalhas",
+      "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxOeHZMZ2pNMXFuQ0x6R0tUOUtFaTZDWl9vemhOcXVOX3pRUFVuZ3RKWjlUNHVVVTBQcGNxa3lnSk9qaUk2TVdSYmVuQ2Z6dDJ6MURlSEl3dHRLdXNGVUZSV2RlRVFBbm41RmpndlpTOVAzbkFuNURtcUprQ2s3Q1FacTdabTBneDlPVzQ5SEZTOGtpT05LNmpQaG5yWHA?oc=5",
+      "source": "Google News — STF/STJ tributário",
+      "category": "reforma",
+      "summary": "Afinal, o que integra a base de cálculo do IBS e da CBS? Migalhas",
+      "publishedAt": "2026-11-03T10:25:02+00:00",
+      "score": 12,
+      "impactTags": [
+        "reforma",
+        "oportunidade"
+      ],
+      "impactLabels": [
+        "Reforma Tributária",
+        "Oportunidade consultiva"
+      ],
+      "priority": "baixa",
+      "opportunityScore": 30,
+      "whoAffected": "Empresas no regime regular, contabilidades e áreas fiscal/financeira em adaptação ao IBS/CBS.",
+      "recommendedAction": "Mapear processos, documentos fiscais, sistemas e decisões comerciais afetadas pela transição IBS/CBS.",
+      "whyItMatters": "antecipa adaptação à Reforma Tributária",
+      "contentAngles": {
+        "linkedin": "Explique o impacto de 'Afinal, o que integra a base de cálculo do IBS e da CBS? - Migalhas' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'Afinal, o que integra a base de cálculo do IBS e da CBS? - Migalhas' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Afinal, o que integra a base de cálculo do IBS e da CBS? - Migalhas'."
+      }
+    },
+    {
       "id": "329338c3464b9499",
       "title": "Alíquota de referência da CBS acende alerta no Senado",
       "url": "https://www.jota.info/coberturas-especiais/pulso-da-reforma/aliquota-de-referencia-da-cbs-acende-alerta-no-senado",
@@ -2935,7 +3503,7 @@
       "category": "judicial",
       "summary": "STJ autoriza Fazenda Pública a garantir prioridade em dívidas mesmo sem execução fiscal ou penhora prévia Jurinews",
       "publishedAt": "2026-11-02T14:14:00+00:00",
-      "score": 15,
+      "score": 5,
       "impactTags": [
         "risco",
         "judicial",
@@ -3441,7 +4009,7 @@
       "category": "icms",
       "summary": "Suprema Corte rejeita por unanimidade inclusão do ICMS em créditos de PIS e Cofins no STJ Imprensa 24h",
       "publishedAt": "2026-11-01T10:22:14+00:00",
-      "score": 34,
+      "score": 14,
       "impactTags": [
         "risco",
         "judicial",
@@ -3603,34 +4171,6 @@
         "linkedin": "Explique o impacto de 'O Direito Tributário e a concretização dos direitos humanos sob a perspectiva de gênero' para empresas e contabilidades, com orientação prática e CTA consultivo.",
         "reels": "Use 'O Direito Tributário e a concretização dos direitos humanos sob a perspectiva de gênero' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
         "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'O Direito Tributário e a concretização dos direitos humanos sob a perspectiva de gênero'."
-      }
-    },
-    {
-      "id": "bc3c5abb103b7278",
-      "title": "Saiba como ganhar e-book, revistas e canecas no Programa de Indicação do Portal RT",
-      "url": "https://www.reformatributaria.com/institucional-portal-reforma-tributaria/saiba-como-ganhar-revistas-e-canecas-no-programa-de-indicacao-do-portal-rt",
-      "source": "Portal Reforma Tributária",
-      "category": "reforma",
-      "summary": "Por Redação Indique colegas, equipe e clientes para o boletim do Portal da Reforma Tributária e receba brindes em casa. […] O post Saiba como ganhar e-book, revistas e canecas no Programa de Indicação do Portal RT apareceu primeiro em Portal Reforma Tributária .",
-      "publishedAt": "2026-10-31T20:41:49+00:00",
-      "score": 12,
-      "impactTags": [
-        "reforma",
-        "oportunidade"
-      ],
-      "impactLabels": [
-        "Reforma Tributária",
-        "Oportunidade consultiva"
-      ],
-      "priority": "media",
-      "opportunityScore": 46,
-      "whoAffected": "Empresas no regime regular, contabilidades e áreas fiscal/financeira em adaptação ao IBS/CBS.",
-      "recommendedAction": "Mapear processos, documentos fiscais, sistemas e decisões comerciais afetadas pela transição IBS/CBS.",
-      "whyItMatters": "antecipa adaptação à Reforma Tributária",
-      "contentAngles": {
-        "linkedin": "Explique o impacto de 'Saiba como ganhar e-book, revistas e canecas no Programa de Indicação do Portal RT' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'Saiba como ganhar e-book, revistas e canecas no Programa de Indicação do Portal RT' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Saiba como ganhar e-book, revistas e canecas no Programa de Indicação do Portal RT'."
       }
     },
     {
@@ -3955,7 +4495,7 @@
       "category": "judicial",
       "summary": "Pacotão fiscal: entenda a PEC de Riedel que mexe em tributos e salários em MS Midiamax",
       "publishedAt": "2026-10-31T10:16:00+00:00",
-      "score": 15,
+      "score": 10,
       "impactTags": [
         "judicial",
         "oportunidade"
@@ -5081,7 +5621,7 @@
       "category": "carf",
       "summary": "Carf permite adesão ao lucro presumido após incorporação de empresa JOTA Info",
       "publishedAt": "2026-10-30T09:12:19+00:00",
-      "score": 12,
+      "score": 6,
       "impactTags": [
         "risco",
         "oportunidade"
@@ -5223,7 +5763,7 @@
       "category": "judicial",
       "summary": "Tributária: Grupo no STF propõe solução para evitar decisões divergentes em disputas judiciais Estadão",
       "publishedAt": "2026-10-29T20:56:00+00:00",
-      "score": 15,
+      "score": 5,
       "impactTags": [
         "risco",
         "judicial",
@@ -6131,7 +6671,7 @@
       "category": "carf",
       "summary": "Presidente do Carf projeta R$ 2 trilhões em casos julgados até o final do ano JOTA Info",
       "publishedAt": "2026-10-29T09:40:27+00:00",
-      "score": 12,
+      "score": 6,
       "impactTags": [
         "risco",
         "prazo",
@@ -6585,13 +7125,13 @@
     },
     {
       "id": "294d1865b6979878",
-      "title": "Comitê Gestor do IBS e União assinam contrato de operação de crédito para financiar a implantação do órgão - CGIBS - Comitê Gestor do IBS",
+      "title": "Comitê Gestor do IBS e União assinam contrato de operação de crédito para financiar a implantação do órgão - Comitê Gestor do IBS",
       "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxNb25XZ1dVNDZadWpUV1lJdWpxbGFteWtjWUhNckRZZ05hbnNNZG1XY2ZDZkhZVnFPcWdyaTJJcG1qZHUzRl93T0x3d0pud2kzUVNPVjRTS0ZOUlgyaVVGeGZZZERrZlRKZVFfcTMtNnB3WnQzN0lJSHJmY0ZYaDZMVUs1bThCMmFrWDJHWW1ZWk1EZUVwRU56WDJnYXFQNTdJaXkxZG5ldFpaNnpZeTdoNDRhZlJCbWNSSHhCY2VhU2NEeEYxTUhpVHhjcw?oc=5",
       "source": "Google News — Comitê Gestor IBS",
       "category": "reforma",
-      "summary": "Comitê Gestor do IBS e União assinam contrato de operação de crédito para financiar a implantação do órgão - CGIBS Comitê Gestor do IBS",
+      "summary": "Comitê Gestor do IBS e União assinam contrato de operação de crédito para financiar a implantação do órgão Comitê Gestor do IBS",
       "publishedAt": "2026-10-28T19:58:00+00:00",
-      "score": 22,
+      "score": 17,
       "impactTags": [
         "caixa",
         "reforma",
@@ -6602,15 +7142,15 @@
         "Reforma Tributária",
         "Oportunidade consultiva"
       ],
-      "priority": "alta",
-      "opportunityScore": 57,
+      "priority": "media",
+      "opportunityScore": 52,
       "whoAffected": "Empresas com vendas B2B, estoque, créditos tributários ou necessidade de precificação.",
       "recommendedAction": "Simular impacto no fluxo de caixa, preços, créditos e contratos antes de 2027.",
       "whyItMatters": "pode alterar fluxo de caixa e precificação",
       "contentAngles": {
-        "linkedin": "Explique o impacto de 'Comitê Gestor do IBS e União assinam contrato de operação de crédito para financiar a implantação do órgão - CGIBS - Comitê Gestor do IBS' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'Comitê Gestor do IBS e União assinam contrato de operação de crédito para financiar a implantação do órgão - CGIBS - Comitê Gestor do IBS' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Comitê Gestor do IBS e União assinam contrato de operação de crédito para financiar a implantação do órgão - CGIBS - Comitê Gestor do IBS'."
+        "linkedin": "Explique o impacto de 'Comitê Gestor do IBS e União assinam contrato de operação de crédito para financiar a implantação do órgão - Comitê Gestor do IBS' para empresas e contabilidades, com orientação prática e CTA consultivo.",
+        "reels": "Use 'Comitê Gestor do IBS e União assinam contrato de operação de crédito para financiar a implantação do órgão - Comitê Gestor do IBS' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
+        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Comitê Gestor do IBS e União assinam contrato de operação de crédito para financiar a implantação do órgão - Comitê Gestor do IBS'."
       }
     },
     {
@@ -7569,7 +8109,7 @@
       "category": "carf",
       "summary": "Tema 487 na jurisprudência do Carf: alcance da consunção e lugar do ne bis in idem Consultor Jurídico",
       "publishedAt": "2026-10-28T11:00:30+00:00",
-      "score": 12,
+      "score": 6,
       "impactTags": [
         "risco",
         "oportunidade"
@@ -7646,532 +8186,6 @@
         "reels": "Use 'Decisão do STF sobre créditos presumidos de ICMS abre espaço para revisão tributária na Zona Franca de Manaus - Coluna Política' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
         "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Decisão do STF sobre créditos presumidos de ICMS abre espaço para revisão tributária na Zona Franca de Manaus - Coluna Política'."
       }
-    },
-    {
-      "id": "b07a62b47ee87bac",
-      "title": "CBS pode favorecer terceirização e agências em 2027",
-      "url": "https://www.contabeis.com.br/noticias/80355/cbs-pode-favorecer-terceirizacao-e-agencias-em-2027",
-      "source": "Portal Contábeis",
-      "category": "reforma",
-      "summary": "Com a CBS em vigor em 2027, créditos tributários podem mudar a escolha entre equipe própria, agências e fornecedores de serviços. Leia mais em https://www.contabeis.com.br/noticias/80355/cbs-pode-favorecer-terceirizacao-e-agencias-em-2027/",
-      "publishedAt": "2026-10-27T23:00:02+00:00",
-      "score": 15,
-      "impactTags": [
-        "reforma",
-        "oportunidade"
-      ],
-      "impactLabels": [
-        "Reforma Tributária",
-        "Oportunidade consultiva"
-      ],
-      "priority": "media",
-      "opportunityScore": 39,
-      "whoAffected": "Empresas no regime regular, contabilidades e áreas fiscal/financeira em adaptação ao IBS/CBS.",
-      "recommendedAction": "Mapear processos, documentos fiscais, sistemas e decisões comerciais afetadas pela transição IBS/CBS.",
-      "whyItMatters": "antecipa adaptação à Reforma Tributária",
-      "contentAngles": {
-        "linkedin": "Explique o impacto de 'CBS pode favorecer terceirização e agências em 2027' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'CBS pode favorecer terceirização e agências em 2027' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'CBS pode favorecer terceirização e agências em 2027'."
-      }
-    },
-    {
-      "id": "0c67f50d268fe2ea",
-      "title": "Reforma Tributária: atraso amplia riscos às empresas",
-      "url": "https://www.contabeis.com.br/noticias/80364/reforma-tributaria-atraso-amplia-riscos-as-empresas",
-      "source": "Portal Contábeis",
-      "category": "reforma",
-      "summary": "Atrasos na adaptação à Reforma Tributária podem afetar a emissão de documentos fiscais, o faturamento e a continuidade das operações. Leia mais em https://www.contabeis.com.br/noticias/80364/reforma-tributaria-atraso-amplia-riscos-as-empresas/",
-      "publishedAt": "2026-10-27T22:30:02+00:00",
-      "score": 16,
-      "impactTags": [
-        "reforma",
-        "oportunidade"
-      ],
-      "impactLabels": [
-        "Reforma Tributária",
-        "Oportunidade consultiva"
-      ],
-      "priority": "media",
-      "opportunityScore": 46,
-      "whoAffected": "Empresas no regime regular, contabilidades e áreas fiscal/financeira em adaptação ao IBS/CBS.",
-      "recommendedAction": "Mapear processos, documentos fiscais, sistemas e decisões comerciais afetadas pela transição IBS/CBS.",
-      "whyItMatters": "antecipa adaptação à Reforma Tributária",
-      "contentAngles": {
-        "linkedin": "Explique o impacto de 'Reforma Tributária: atraso amplia riscos às empresas' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'Reforma Tributária: atraso amplia riscos às empresas' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Reforma Tributária: atraso amplia riscos às empresas'."
-      }
-    },
-    {
-      "id": "f62c7d9e1bd60c8a",
-      "title": "Perdão de dívidas pode beneficiar bares e restaurantes",
-      "url": "https://www.contabeis.com.br/noticias/80370/perdao-de-dividas-pode-beneficiar-bares-e-restaurantes",
-      "source": "Portal Contábeis",
-      "category": "legislacao",
-      "summary": "Abrasel avalia proposta de perdão de dívidas para empresas de eventos, bares e restaurantes e defende que o programa inclua negócios do Simples Nacional . Leia mais em https://www.contabeis.com.br/noticias/80370/perdao-de-dividas-pode-beneficiar-bares-e-restaurantes/",
-      "publishedAt": "2026-10-27T22:15:01+00:00",
-      "score": 10,
-      "impactTags": [
-        "oportunidade"
-      ],
-      "impactLabels": [
-        "Oportunidade consultiva"
-      ],
-      "priority": "baixa",
-      "opportunityScore": 21,
-      "whoAffected": "Empresas e contabilidades que acompanham rotina fiscal.",
-      "recommendedAction": "Ler a fonte original, salvar evidências e avaliar se há impacto em clientes ativos.",
-      "whyItMatters": "gera pauta consultiva para orientar clientes",
-      "contentAngles": {
-        "linkedin": "Explique o impacto de 'Perdão de dívidas pode beneficiar bares e restaurantes' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'Perdão de dívidas pode beneficiar bares e restaurantes' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Perdão de dívidas pode beneficiar bares e restaurantes'."
-      }
-    },
-    {
-      "id": "9ee04670121c940b",
-      "title": "Fazenda Nacional vence maioria das teses tributárias derivadas da exclusão do ICMS do PIS/Cofins - TAGD Advogados",
-      "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOT3diMGZxMkFFQlB4Ql9LZEhLUjVfUWl1LUhpY1dncFpxR1hmNXNtU3BPbDUyNkktc0dhMmwySHlXUFZTS1RfRTNveTZSWHo3Wm5jbTNSSTRNLVA2N0VENU9WQVFHaGZ4NEVhNE1MUWRNWWZ4RXdQY09GLXlhSDhVUExyWnBvaEx0cWJQUWhYNkNNbTNUV1B0eDJiZ2lDc1NBTXphMlI4ZFg4Z3Ytc1VoeFE0U3NIcDk3bnhwRg?oc=5",
-      "source": "Google News — STF/STJ tributário",
-      "category": "icms",
-      "summary": "Fazenda Nacional vence maioria das teses tributárias derivadas da exclusão do ICMS do PIS/Cofins TAGD Advogados",
-      "publishedAt": "2026-10-27T20:49:53+00:00",
-      "score": 19,
-      "impactTags": [
-        "prazo",
-        "oportunidade"
-      ],
-      "impactLabels": [
-        "Prazo urgente",
-        "Oportunidade consultiva"
-      ],
-      "priority": "alta",
-      "opportunityScore": 67,
-      "whoAffected": "Empresas e contabilidades que acompanham rotina fiscal.",
-      "recommendedAction": "Checar o calendário fiscal, responsáveis e documentos necessários antes do vencimento.",
-      "whyItMatters": "há risco de perda de prazo ou multa",
-      "contentAngles": {
-        "linkedin": "Explique o impacto de 'Fazenda Nacional vence maioria das teses tributárias derivadas da exclusão do ICMS do PIS/Cofins - TAGD Advogados' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'Fazenda Nacional vence maioria das teses tributárias derivadas da exclusão do ICMS do PIS/Cofins - TAGD Advogados' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Fazenda Nacional vence maioria das teses tributárias derivadas da exclusão do ICMS do PIS/Cofins - TAGD Advogados'."
-      }
-    },
-    {
-      "id": "b2b440a4cb933258",
-      "title": "CBS de 10% a 10,6% compensaria impacto das promessas eleitorais de Lula, diz levantamento",
-      "url": "https://www.reformatributaria.com/iva/cbs-de-10-a-106-compensaria-impacto-das-promessas-eleitorais-de-lula-diz-roit",
-      "source": "Portal Reforma Tributária",
-      "category": "reforma",
-      "summary": "Por Redação Uma CBS (Contribuição sobre Bens e Serviços) na faixa dos 10% poderia compensar o impacto fiscal das medidas […] O post CBS de 10% a 10,6% compensaria impacto das promessas eleitorais de Lula, diz levantamento apareceu primeiro em Portal Reforma Tributária .",
-      "publishedAt": "2026-10-27T20:43:23+00:00",
-      "score": 23,
-      "impactTags": [
-        "reforma",
-        "oportunidade"
-      ],
-      "impactLabels": [
-        "Reforma Tributária",
-        "Oportunidade consultiva"
-      ],
-      "priority": "alta",
-      "opportunityScore": 63,
-      "whoAffected": "Empresas no regime regular, contabilidades e áreas fiscal/financeira em adaptação ao IBS/CBS.",
-      "recommendedAction": "Mapear processos, documentos fiscais, sistemas e decisões comerciais afetadas pela transição IBS/CBS.",
-      "whyItMatters": "antecipa adaptação à Reforma Tributária",
-      "contentAngles": {
-        "linkedin": "Explique o impacto de 'CBS de 10% a 10,6% compensaria impacto das promessas eleitorais de Lula, diz levantamento' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'CBS de 10% a 10,6% compensaria impacto das promessas eleitorais de Lula, diz levantamento' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'CBS de 10% a 10,6% compensaria impacto das promessas eleitorais de Lula, diz levantamento'."
-      }
-    },
-    {
-      "id": "cffbe14f8cdf7492",
-      "title": "O custo de manter o ISS na base do PIS e da Cofins - Monitor Mercantil",
-      "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxQeDJsb3FBdE8wUlN5TDlIUS1UNUNIcVRVWHpLLTJtMFVZeTFzcTBYN0JlY0xWd3pXeXlpQ3lIRm9WZ2dqRTVMYjNSRk1fUkh0TUFKOVdRVWtYTGo4by1iWmVSa3oxZ0ZnZ21zbi1BTmxUUi1va0o5Qy00eXZWUmFraXBqSWwxQTBIN3Q0?oc=5",
-      "source": "Google News — STF/STJ tributário",
-      "category": "municipal",
-      "summary": "O custo de manter o ISS na base do PIS e da Cofins Monitor Mercantil",
-      "publishedAt": "2026-10-27T20:40:00+00:00",
-      "score": 14,
-      "impactTags": [],
-      "impactLabels": [],
-      "priority": "baixa",
-      "opportunityScore": 14,
-      "whoAffected": "Empresas e contabilidades que acompanham rotina fiscal.",
-      "recommendedAction": "Ler a fonte original, salvar evidências e avaliar se há impacto em clientes ativos.",
-      "whyItMatters": "gera pauta consultiva para orientar clientes",
-      "contentAngles": {
-        "linkedin": "Explique o impacto de 'O custo de manter o ISS na base do PIS e da Cofins - Monitor Mercantil' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'O custo de manter o ISS na base do PIS e da Cofins - Monitor Mercantil' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'O custo de manter o ISS na base do PIS e da Cofins - Monitor Mercantil'."
-      }
-    },
-    {
-      "id": "eaef5eb64aae6687",
-      "title": "STJ mantém TJLP no limite de dedução dos JCP",
-      "url": "https://www.contabeis.com.br/noticias/80391/stj-mantem-tjlp-no-limite-de-deducao-dos-jcp",
-      "source": "Portal Contábeis",
-      "category": "legislacao",
-      "summary": "STJ rejeita o uso da TLP e mantém a TJLP no cálculo do limite de dedução dos JCP nas bases do IRPJ e da CSLL . Leia mais em https://www.contabeis.com.br/noticias/80391/stj-mantem-tjlp-no-limite-de-deducao-dos-jcp/",
-      "publishedAt": "2026-10-27T20:30:01+00:00",
-      "score": 14,
-      "impactTags": [
-        "risco",
-        "judicial",
-        "oportunidade"
-      ],
-      "impactLabels": [
-        "Risco fiscal",
-        "Decisão judicial",
-        "Oportunidade consultiva"
-      ],
-      "priority": "media",
-      "opportunityScore": 39,
-      "whoAffected": "Empresas com teses tributárias, créditos, autuações ou operações similares.",
-      "recommendedAction": "Revisar exposição fiscal, documentação de suporte e oportunidade de tese/regularização.",
-      "whyItMatters": "reduz exposição fiscal e contencioso",
-      "contentAngles": {
-        "linkedin": "Explique o impacto de 'STJ mantém TJLP no limite de dedução dos JCP' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'STJ mantém TJLP no limite de dedução dos JCP' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'STJ mantém TJLP no limite de dedução dos JCP'."
-      }
-    },
-    {
-      "id": "64c84565237082a6",
-      "title": "Ato Conjunto nº 9: Os 25 grupos da Reforma Tributária - Omie",
-      "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQeWF2aXQ2bXlXUUdpbjVUSlNmWHVZZjdxQ05QRWlhN3Boay15WTlxc3IwQ1FyUTFobnN0bzA3TFBFRDdNbE13WndEeGZYeHA1cTExNGw1bTBZaEVMZzAwUk85dHRxZ0tLMjVpQ3pVekYwR1NuUUlidElXRkxlUVJtNDN3?oc=5",
-      "source": "Google News — Comitê Gestor IBS",
-      "category": "reforma",
-      "summary": "Ato Conjunto nº 9: Os 25 grupos da Reforma Tributária Omie",
-      "publishedAt": "2026-10-27T20:06:50+00:00",
-      "score": 12,
-      "impactTags": [
-        "reforma",
-        "oportunidade"
-      ],
-      "impactLabels": [
-        "Reforma Tributária",
-        "Oportunidade consultiva"
-      ],
-      "priority": "media",
-      "opportunityScore": 36,
-      "whoAffected": "Empresas no regime regular, contabilidades e áreas fiscal/financeira em adaptação ao IBS/CBS.",
-      "recommendedAction": "Mapear processos, documentos fiscais, sistemas e decisões comerciais afetadas pela transição IBS/CBS.",
-      "whyItMatters": "antecipa adaptação à Reforma Tributária",
-      "contentAngles": {
-        "linkedin": "Explique o impacto de 'Ato Conjunto nº 9: Os 25 grupos da Reforma Tributária - Omie' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'Ato Conjunto nº 9: Os 25 grupos da Reforma Tributária - Omie' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Ato Conjunto nº 9: Os 25 grupos da Reforma Tributária - Omie'."
-      }
-    },
-    {
-      "id": "a00dcaba698d2a68",
-      "title": "Decisão do STF sobre créditos presumidos de ICMS abre espaço para revisão tributária na Zona Franca de Manaus - Justiça em Foco",
-      "url": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxPYlZNendveXJIUjd0Sko4dmw3Zlhhc0JDOXRVSkZITjFQb2xTYlZ4ZmxHbmVqYXBfRlN4Y0pxbERxR1ZuQXpxbm85c1huSS1ZSVgwTmgtUnRHckRfMUJVTTd1SmRwMHNLREtHNkp4eS1tSGNSelVhYUdYbXlwSWdYYWJ4YUtBSnd6SG9kdUxvemhPczFVVVdBdXFFUFJQY1FjYUd3UDBJUDdCZGxuLXFYbzA0TkdnZ3BReDg0ak1SZ1NSRFpjeTAySElvSlExcHlDbXdn?oc=5",
-      "source": "Google News — STF/STJ tributário",
-      "category": "icms",
-      "summary": "Decisão do STF sobre créditos presumidos de ICMS abre espaço para revisão tributária na Zona Franca de Manaus Justiça em Foco",
-      "publishedAt": "2026-10-27T19:38:56+00:00",
-      "score": 11,
-      "impactTags": [
-        "risco",
-        "judicial",
-        "oportunidade"
-      ],
-      "impactLabels": [
-        "Risco fiscal",
-        "Decisão judicial",
-        "Oportunidade consultiva"
-      ],
-      "priority": "media",
-      "opportunityScore": 51,
-      "whoAffected": "Empresas com teses tributárias, créditos, autuações ou operações similares.",
-      "recommendedAction": "Revisar exposição fiscal, documentação de suporte e oportunidade de tese/regularização.",
-      "whyItMatters": "reduz exposição fiscal e contencioso",
-      "contentAngles": {
-        "linkedin": "Explique o impacto de 'Decisão do STF sobre créditos presumidos de ICMS abre espaço para revisão tributária na Zona Franca de Manaus - Justiça em Foco' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'Decisão do STF sobre créditos presumidos de ICMS abre espaço para revisão tributária na Zona Franca de Manaus - Justiça em Foco' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Decisão do STF sobre créditos presumidos de ICMS abre espaço para revisão tributária na Zona Franca de Manaus - Justiça em Foco'."
-      }
-    },
-    {
-      "id": "28d4d8625c6820ff",
-      "title": "Recusa parcial de mercadorias muda emissão de nota fiscal em SP em 2027",
-      "url": "https://www.contabeis.com.br/noticias/80403/recusa-parcial-de-mercadorias-muda-emissao-de-nota-fiscal-em-sp-em-2027",
-      "source": "Portal Contábeis",
-      "category": "municipal",
-      "summary": "Nova regra define quem deve emitir a NF-e na recusa parcial de mercadorias e exige atenção das empresas paulistas a partir de janeiro de 2027. Leia mais em https://www.contabeis.com.br/noticias/80403/recusa-parcial-de-mercadorias-muda-emissao-de-nota-fiscal-em-sp-em-2027/",
-      "publishedAt": "2026-10-27T19:15:02+00:00",
-      "score": 18,
-      "impactTags": [
-        "obrigacao",
-        "oportunidade"
-      ],
-      "impactLabels": [
-        "Obrigação acessória",
-        "Oportunidade consultiva"
-      ],
-      "priority": "media",
-      "opportunityScore": 40,
-      "whoAffected": "Contabilidades, financeiro e empresas com obrigações acessórias no período.",
-      "recommendedAction": "Ler a fonte original, salvar evidências e avaliar se há impacto em clientes ativos.",
-      "whyItMatters": "gera pauta consultiva para orientar clientes",
-      "contentAngles": {
-        "linkedin": "Explique o impacto de 'Recusa parcial de mercadorias muda emissão de nota fiscal em SP em 2027' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'Recusa parcial de mercadorias muda emissão de nota fiscal em SP em 2027' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Recusa parcial de mercadorias muda emissão de nota fiscal em SP em 2027'."
-      }
-    },
-    {
-      "id": "2b822b75aebf179c",
-      "title": "INSS: como contribuir sem carteira assinada",
-      "url": "https://www.contabeis.com.br/noticias/80398/inss-como-contribuir-sem-carteira-assinada",
-      "source": "Portal Contábeis",
-      "category": "legislacao",
-      "summary": "Trabalhadores autônomos, entregadores e freelancers podem contribuir mensalmente para o INSS e ter acesso a benefícios previdenciários. Leia mais em https://www.contabeis.com.br/noticias/80398/inss-como-contribuir-sem-carteira-assinada/",
-      "publishedAt": "2026-10-27T18:45:02+00:00",
-      "score": 7,
-      "impactTags": [],
-      "impactLabels": [],
-      "priority": "baixa",
-      "opportunityScore": 7,
-      "whoAffected": "Empresas e contabilidades que acompanham rotina fiscal.",
-      "recommendedAction": "Ler a fonte original, salvar evidências e avaliar se há impacto em clientes ativos.",
-      "whyItMatters": "gera pauta consultiva para orientar clientes",
-      "contentAngles": {
-        "linkedin": "Explique o impacto de 'INSS: como contribuir sem carteira assinada' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'INSS: como contribuir sem carteira assinada' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'INSS: como contribuir sem carteira assinada'."
-      }
-    },
-    {
-      "id": "5873b7a78d29d90c",
-      "title": "NFe: nota técnica prevê fim de autorização assíncrona em 2027",
-      "url": "https://www.reformatributaria.com/documentos-fiscais/nfe-nota-tecnica-preve-fim-de-autorizacao-assincrona-em-2027",
-      "source": "Portal Reforma Tributária",
-      "category": "reforma",
-      "summary": "Por Enzo Bernardes, de Brasília Uma nota técnica (2023.002 – versão 1.02) publicada na 2ª feira (26.out.2026) estabelece alterações nos […] O post NFe: nota técnica prevê fim de autorização assíncrona em 2027 apareceu primeiro em Portal Reforma Tributária .",
-      "publishedAt": "2026-10-27T18:22:43+00:00",
-      "score": 16,
-      "impactTags": [
-        "obrigacao",
-        "reforma",
-        "oportunidade"
-      ],
-      "impactLabels": [
-        "Obrigação acessória",
-        "Reforma Tributária",
-        "Oportunidade consultiva"
-      ],
-      "priority": "alta",
-      "opportunityScore": 55,
-      "whoAffected": "Contabilidades, financeiro e empresas com obrigações acessórias no período.",
-      "recommendedAction": "Mapear processos, documentos fiscais, sistemas e decisões comerciais afetadas pela transição IBS/CBS.",
-      "whyItMatters": "antecipa adaptação à Reforma Tributária",
-      "contentAngles": {
-        "linkedin": "Explique o impacto de 'NFe: nota técnica prevê fim de autorização assíncrona em 2027' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'NFe: nota técnica prevê fim de autorização assíncrona em 2027' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'NFe: nota técnica prevê fim de autorização assíncrona em 2027'."
-      }
-    },
-    {
-      "id": "5b92e0fa05b73f62",
-      "title": "Judicialização da Reforma Tributária: aumentos do ICMS na transição e do lucro presumido pressionam setor produtivo - FecomercioSP",
-      "url": "https://news.google.com/rss/articles/CBMi5wFBVV95cUxNVE1OREpOd012ZHprRi1GbXFLaXBFTm8wMXR6S3V2TndDZ3YwcWZ1Y3ZQM3JDaF9XUF9ZdERZTlRiQk1EWUpjRGRUWVNfQzVsZzFjVzExbkZjQVM0enFKaEZRVDRyZkdnNEJSQXR5MTMwVUJZRmxaM0FvVGN4Y0VBTDNRWHlsd1JpRXNEeDdoZlpLeVRlTW5USWJIVXR3WHEtRmlzY0dHUXZtcU5YUGZzeF9tSnA4eEU0R2hkWFdUZTlCT2k3ampWWlhDY2cyQ3hNSWw1S1Jxa050Mmw1dTFEXzJVeTZzSGM?oc=5",
-      "source": "Google News — STF/STJ tributário",
-      "category": "reforma",
-      "summary": "Judicialização da Reforma Tributária: aumentos do ICMS na transição e do lucro presumido pressionam setor produtivo FecomercioSP",
-      "publishedAt": "2026-10-27T18:18:40+00:00",
-      "score": 18,
-      "impactTags": [
-        "reforma",
-        "oportunidade"
-      ],
-      "impactLabels": [
-        "Reforma Tributária",
-        "Oportunidade consultiva"
-      ],
-      "priority": "media",
-      "opportunityScore": 46,
-      "whoAffected": "Empresas no regime regular, contabilidades e áreas fiscal/financeira em adaptação ao IBS/CBS.",
-      "recommendedAction": "Mapear processos, documentos fiscais, sistemas e decisões comerciais afetadas pela transição IBS/CBS.",
-      "whyItMatters": "antecipa adaptação à Reforma Tributária",
-      "contentAngles": {
-        "linkedin": "Explique o impacto de 'Judicialização da Reforma Tributária: aumentos do ICMS na transição e do lucro presumido pressionam setor produtivo - FecomercioSP' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'Judicialização da Reforma Tributária: aumentos do ICMS na transição e do lucro presumido pressionam setor produtivo - FecomercioSP' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Judicialização da Reforma Tributária: aumentos do ICMS na transição e do lucro presumido pressionam setor produtivo - FecomercioSP'."
-      }
-    },
-    {
-      "id": "492db71094c852df",
-      "title": "Receita Federal e Comitê Gestor do IBS criam grupos de trabalho para implementar a Reforma Tributária sobre o consumo - CBIC - Câmara Brasileira da Indústria da Construção",
-      "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxPTlhRS1RZbWdzVmpOajZTVEhpXzV6dHNKb09VaHpRUW9RVXRnM2YzU0NHTndHTWp3ZVBMUVRnbDZFUnB6cWdDb3ZPY0JKWE5kd3d2VDZueDBDWVA3b2tycmxvSUlfdEY2RjBtSjU0SGVveVdmTHVIYmhwUThCYi1xa1Y0NmFZQzJnVzAtYWx4V1l0ek9hV2xCekM0UFZCS1gzblRqUWs4VXhVTGsxQlBFSXBsbUNzUkZwRTdpTWhXMzdybW9ZeHVtSFUzbG1iTnUtNlJZNA?oc=5",
-      "source": "Google News — Comitê Gestor IBS",
-      "category": "reforma",
-      "summary": "Receita Federal e Comitê Gestor do IBS criam grupos de trabalho para implementar a Reforma Tributária sobre o consumo CBIC - Câmara Brasileira da Indústria da Construção",
-      "publishedAt": "2026-10-27T18:09:45+00:00",
-      "score": 23,
-      "impactTags": [
-        "reforma",
-        "oportunidade"
-      ],
-      "impactLabels": [
-        "Reforma Tributária",
-        "Oportunidade consultiva"
-      ],
-      "priority": "alta",
-      "opportunityScore": 57,
-      "whoAffected": "Empresas no regime regular, contabilidades e áreas fiscal/financeira em adaptação ao IBS/CBS.",
-      "recommendedAction": "Mapear processos, documentos fiscais, sistemas e decisões comerciais afetadas pela transição IBS/CBS.",
-      "whyItMatters": "antecipa adaptação à Reforma Tributária",
-      "contentAngles": {
-        "linkedin": "Explique o impacto de 'Receita Federal e Comitê Gestor do IBS criam grupos de trabalho para implementar a Reforma Tributária sobre o consumo - CBIC - Câmara Brasileira da Indústria da Construção' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'Receita Federal e Comitê Gestor do IBS criam grupos de trabalho para implementar a Reforma Tributária sobre o consumo - CBIC - Câmara Brasileira da Indústria da Construção' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Receita Federal e Comitê Gestor do IBS criam grupos de trabalho para implementar a Reforma Tributária sobre o consumo - CBIC - Câmara Brasileira da Indústria da Construção'."
-      }
-    },
-    {
-      "id": "56c22df25caab071",
-      "title": "Fisco adia prazos de implantação de notas técnicas da NFe, NFCe e CTe",
-      "url": "https://www.reformatributaria.com/documentos-fiscais/fisco-adia-prazos-de-implantacao-de-notas-tecnicas-da-nfe-nfce-e-cte",
-      "source": "Portal Reforma Tributária",
-      "category": "reforma",
-      "summary": "Por Enzo Bernardes, de Brasília O Fisco postergou as datas de implantação em produção para diversas notas técnicas da NFe […] O post Fisco adia prazos de implantação de notas técnicas da NFe, NFCe e CTe apareceu primeiro em Portal Reforma Tributária .",
-      "publishedAt": "2026-10-27T18:08:02+00:00",
-      "score": 16,
-      "impactTags": [
-        "obrigacao",
-        "reforma",
-        "oportunidade"
-      ],
-      "impactLabels": [
-        "Obrigação acessória",
-        "Reforma Tributária",
-        "Oportunidade consultiva"
-      ],
-      "priority": "alta",
-      "opportunityScore": 55,
-      "whoAffected": "Contabilidades, financeiro e empresas com obrigações acessórias no período.",
-      "recommendedAction": "Mapear processos, documentos fiscais, sistemas e decisões comerciais afetadas pela transição IBS/CBS.",
-      "whyItMatters": "antecipa adaptação à Reforma Tributária",
-      "contentAngles": {
-        "linkedin": "Explique o impacto de 'Fisco adia prazos de implantação de notas técnicas da NFe, NFCe e CTe' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'Fisco adia prazos de implantação de notas técnicas da NFe, NFCe e CTe' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Fisco adia prazos de implantação de notas técnicas da NFe, NFCe e CTe'."
-      }
-    },
-    {
-      "id": "6f3d6feea6bcb214",
-      "title": "STF suspende julgamento sobre prazo para restituição de tributos",
-      "url": "https://www.contabeis.com.br/noticias/80392/stf-suspende-julgamento-sobre-prazo-para-restituicao-de-tributos",
-      "source": "Portal Contábeis",
-      "category": "legislacao",
-      "summary": "Pedido de vista de Alexandre de Moraes interrompe análise sobre prescrição tributária e aplicação retroativa de mudança de entendimento do STJ. Leia mais em https://www.contabeis.com.br/noticias/80392/stf-suspende-julgamento-sobre-prazo-para-restituicao-de-tributos/",
-      "publishedAt": "2026-10-27T18:00:01+00:00",
-      "score": 9,
-      "impactTags": [
-        "risco",
-        "judicial",
-        "prazo",
-        "oportunidade"
-      ],
-      "impactLabels": [
-        "Risco fiscal",
-        "Decisão judicial",
-        "Prazo urgente",
-        "Oportunidade consultiva"
-      ],
-      "priority": "alta",
-      "opportunityScore": 63,
-      "whoAffected": "Empresas com teses tributárias, créditos, autuações ou operações similares.",
-      "recommendedAction": "Checar o calendário fiscal, responsáveis e documentos necessários antes do vencimento.",
-      "whyItMatters": "há risco de perda de prazo ou multa",
-      "contentAngles": {
-        "linkedin": "Explique o impacto de 'STF suspende julgamento sobre prazo para restituição de tributos' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'STF suspende julgamento sobre prazo para restituição de tributos' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'STF suspende julgamento sobre prazo para restituição de tributos'."
-      }
-    },
-    {
-      "id": "17d0c4a064340763",
-      "title": "Fisco publica pacote de schemas XML da NFe para notas técnicas; baixe o arquivo",
-      "url": "https://www.reformatributaria.com/documentos-fiscais/fisco-publica-pacote-de-schemas-xml-da-nfe-para-notas-tecnicas-baixe-o-arquivo",
-      "source": "Portal Reforma Tributária",
-      "category": "reforma",
-      "summary": "Por Enzo Bernardes, de Brasília O Fisco publicou na 2ª feira (26.out.2026) um novo pacote de liberação (nº 010g – […] O post Fisco publica pacote de schemas XML da NFe para notas técnicas; baixe o arquivo apareceu primeiro em Portal Reforma Tributária .",
-      "publishedAt": "2026-10-27T17:58:04+00:00",
-      "score": 16,
-      "impactTags": [
-        "obrigacao",
-        "reforma",
-        "oportunidade"
-      ],
-      "impactLabels": [
-        "Obrigação acessória",
-        "Reforma Tributária",
-        "Oportunidade consultiva"
-      ],
-      "priority": "alta",
-      "opportunityScore": 55,
-      "whoAffected": "Contabilidades, financeiro e empresas com obrigações acessórias no período.",
-      "recommendedAction": "Mapear processos, documentos fiscais, sistemas e decisões comerciais afetadas pela transição IBS/CBS.",
-      "whyItMatters": "antecipa adaptação à Reforma Tributária",
-      "contentAngles": {
-        "linkedin": "Explique o impacto de 'Fisco publica pacote de schemas XML da NFe para notas técnicas; baixe o arquivo' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'Fisco publica pacote de schemas XML da NFe para notas técnicas; baixe o arquivo' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Fisco publica pacote de schemas XML da NFe para notas técnicas; baixe o arquivo'."
-      }
-    },
-    {
-      "id": "3a74197d0c422563",
-      "title": "Minas libera uso de créditos de ICMS para fabricantes de etanol",
-      "url": "https://www.contabeis.com.br/noticias/80388/minas-libera-uso-de-creditos-de-icms-para-fabricantes-de-etanol",
-      "source": "Portal Contábeis",
-      "category": "icms",
-      "summary": "Decreto de Minas Gerais define regras para transferência e uso de créditos acumulados de ICMS por fabricantes de etanol a partir de 2027. Leia mais em https://www.contabeis.com.br/noticias/80388/minas-libera-uso-de-creditos-de-icms-para-fabricantes-de-etanol/",
-      "publishedAt": "2026-10-27T17:45:01+00:00",
-      "score": 13,
-      "impactTags": [],
-      "impactLabels": [],
-      "priority": "baixa",
-      "opportunityScore": 13,
-      "whoAffected": "Empresas e contabilidades que acompanham rotina fiscal.",
-      "recommendedAction": "Ler a fonte original, salvar evidências e avaliar se há impacto em clientes ativos.",
-      "whyItMatters": "gera pauta consultiva para orientar clientes",
-      "contentAngles": {
-        "linkedin": "Explique o impacto de 'Minas libera uso de créditos de ICMS para fabricantes de etanol' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'Minas libera uso de créditos de ICMS para fabricantes de etanol' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'Minas libera uso de créditos de ICMS para fabricantes de etanol'."
-      }
-    },
-    {
-      "id": "395976348588f3ac",
-      "title": "TJ-SP afasta ICMS sobre gorjetas acima de 10%",
-      "url": "https://www.contabeis.com.br/noticias/80389/tj-sp-afasta-icms-sobre-gorjetas-acima-de-10",
-      "source": "Portal Contábeis",
-      "category": "icms",
-      "summary": "Tribunal paulista decidiu que gorjetas repassadas aos funcionários podem ficar fora da base de cálculo do ICMS , mesmo quando superam 10% da conta. Leia mais em https://www.contabeis.com.br/noticias/80389/tj-sp-afasta-icms-sobre-gorjetas-acima-de-10/",
-      "publishedAt": "2026-10-27T17:30:01+00:00",
-      "score": 10,
-      "impactTags": [
-        "judicial",
-        "oportunidade"
-      ],
-      "impactLabels": [
-        "Decisão judicial",
-        "Oportunidade consultiva"
-      ],
-      "priority": "baixa",
-      "opportunityScore": 26,
-      "whoAffected": "Empresas com teses tributárias, créditos, autuações ou operações similares.",
-      "recommendedAction": "Ler a fonte original, salvar evidências e avaliar se há impacto em clientes ativos.",
-      "whyItMatters": "gera pauta consultiva para orientar clientes",
-      "contentAngles": {
-        "linkedin": "Explique o impacto de 'TJ-SP afasta ICMS sobre gorjetas acima de 10%' para empresas e contabilidades, com orientação prática e CTA consultivo.",
-        "reels": "Use 'TJ-SP afasta ICMS sobre gorjetas acima de 10%' como gancho, explique o risco em 20 segundos e finalize com uma ação recomendada.",
-        "whatsapp": "Alerta curto para clientes: resumo, impacto e próximo passo sobre 'TJ-SP afasta ICMS sobre gorjetas acima de 10%'."
-      }
     }
   ],
   "sourcesOk": 13,
@@ -8225,7 +8239,7 @@
       "source": "JOTA",
       "url": "https://www.jota.info/feed",
       "ok": true,
-      "items": 4
+      "items": 6
     },
     {
       "source": "IBPT",
@@ -8237,7 +8251,7 @@
       "source": "Portal Contábeis",
       "url": "https://www.contabeis.com.br/rss/noticias/",
       "ok": true,
-      "items": 16
+      "items": 20
     },
     {
       "source": "PGFN Notícias",
@@ -8302,7 +8316,7 @@
       "source": "Google News — Municípios MG fiscal",
       "url": "https://news.google.com/rss/search?q=(munic%C3%ADpios%20OR%20prefeituras)%20Minas%20Gerais%20(ISS%20OR%20tribut%C3%A1rio%20OR%20fiscal%20OR%20arrecada%C3%A7%C3%A3o%20OR%20reforma%20tribut%C3%A1ria)&hl=pt-BR&gl=BR&ceid=BR:pt-419",
       "ok": true,
-      "items": 34
+      "items": 33
     },
     {
       "source": "Google News — CARF e contencioso",
