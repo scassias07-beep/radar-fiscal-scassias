@@ -91,7 +91,7 @@ RELEVANCE_TERMS = {
     "regularize": 4,
 }
 
-SSL_CONTEXT = ssl._create_unverified_context()
+SSL_CONTEXT = ssl.create_default_context()
 
 GLOBAL_EXCLUDE_TERMS = {
     "eleicao",
@@ -129,6 +129,12 @@ CATEGORY_TERMS = [
 
 TRACKING_PARAMS_PREFIXES = ("utm_",)
 TRACKING_PARAMS = {"fbclid", "gclid", "mc_cid", "mc_eid"}
+
+NON_CONTENT_TITLES = {
+    "brasil", "servicos", "legislacao", "noticias", "rss", "voltar",
+    "proxima", "anterior", "contato", "institucional", "quem somos",
+}
+NON_CONTENT_PATH_PARTS = {"institucional", "contato", "quem-somos", "menu"}
 
 IMPACT_RULES = {
     "caixa": ("split payment", "fluxo de caixa", "caixa", "credito", "crédito", "ressarcimento", "aliquota", "alíquota", "precificacao", "precificação"),
@@ -196,10 +202,28 @@ def canonical_url(url: str) -> str:
     return urlunsplit((parts.scheme.lower(), parts.netloc.lower(), path.rstrip("/") or "/", urlencode(query), ""))
 
 
-def parse_date(value: str) -> str:
+def is_valid_content_link(href: str, title: str, source: dict) -> bool:
+    raw_href = clean(href).strip()
+    if not raw_href or raw_href.startswith("#"):
+        return False
+    url = canonical_url(urljoin(source["url"], raw_href))
+    parts = urlsplit(url)
+    if parts.scheme not in {"http", "https"} or not parts.netloc:
+        return False
+    if norm(title) in NON_CONTENT_TITLES:
+        return False
+    path_parts = {part for part in norm(parts.path).split("/") if part}
+    if path_parts & NON_CONTENT_PATH_PARTS:
+        return False
+    if url == canonical_url(source["url"]):
+        return False
+    return True
+
+
+def parse_date(value: str) -> str | None:
     raw = clean(value)
     if not raw:
-        return datetime.now(timezone.utc).isoformat()
+        return None
     try:
         dt = parsedate_to_datetime(raw)
         if dt.tzinfo is None:
@@ -215,7 +239,7 @@ def parse_date(value: str) -> str:
             return dt.astimezone(timezone.utc).isoformat()
         except Exception:
             continue
-    return datetime.now(timezone.utc).isoformat()
+    return None
 
 
 def relevance_score(title: str, summary: str, source: dict) -> int:
@@ -255,12 +279,27 @@ def classify(title: str, summary: str, source: dict) -> str:
 
 
 
-def strategic_analysis(title: str, summary: str, category: str, score: int) -> dict:
+def strategic_analysis(
+    title: str,
+    summary: str,
+    category: str,
+    score: int,
+    deadline: str | None = None,
+    now: datetime | None = None,
+) -> dict:
     blob = norm(f"{title} {summary} {category}")
     tags: list[str] = []
     for key, terms in IMPACT_RULES.items():
         if any(term_matches(blob, term) if term.strip() == term else term in blob for term in terms):
             tags.append(key)
+    parsed_deadline = parse_date(deadline or "")
+    now = now or datetime.now(timezone.utc)
+    has_future_deadline = bool(
+        parsed_deadline
+        and datetime.fromisoformat(parsed_deadline).astimezone(timezone.utc) > now.astimezone(timezone.utc)
+    )
+    if not has_future_deadline and "prazo" in tags:
+        tags.remove("prazo")
     if category in {"reforma", "cgibs"} and "reforma" not in tags:
         tags.append("reforma")
     if category == "judicial" and "judicial" not in tags:
@@ -317,7 +356,7 @@ def strategic_analysis(title: str, summary: str, category: str, score: int) -> d
     else:
         why = "gera pauta consultiva para orientar clientes"
 
-    return {
+    result = {
         "impactTags": tags,
         "impactLabels": [IMPACT_LABELS[t] for t in tags if t in IMPACT_LABELS],
         "priority": priority,
@@ -331,6 +370,9 @@ def strategic_analysis(title: str, summary: str, category: str, score: int) -> d
             "whatsapp": f"Alerta curto para clientes: resumo, impacto e próximo passo sobre '{title}'.",
         },
     }
+    if has_future_deadline:
+        result["deadline"] = parsed_deadline
+    return result
 
 def iter_entries(root: ET.Element) -> list[ET.Element]:
     entries = []
@@ -341,16 +383,20 @@ def iter_entries(root: ET.Element) -> list[ET.Element]:
     return entries
 
 
-def parse_feed(raw: bytes, source: dict) -> list[dict]:
+def parse_feed(raw: bytes, source: dict, collected_at: datetime | None = None) -> list[dict]:
     root = ET.fromstring(raw)
     result = []
+    collected_at = collected_at or datetime.now(timezone.utc)
     min_score = int(source.get("minScore", 5))
     for node in iter_entries(root)[:PER_SOURCE_LIMIT]:
         title = child_text(node, ("title",))
         link = child_text(node, ("link",)) or child_attr(node, "link", "href", "alternate") or child_attr(node, "link", "href")
         summary = child_text(node, ("description", "summary", "content", "encoded"))
         published = child_text(node, ("pubdate", "published", "updated", "date", "dc:date"))
-        if not title or not link:
+        if not title or not link or not is_valid_content_link(link, title, source):
+            continue
+        published_at = parse_date(published)
+        if published_at is None:
             continue
         score = relevance_score(title, summary, source)
         if score < min_score:
@@ -365,7 +411,8 @@ def parse_feed(raw: bytes, source: dict) -> list[dict]:
             "source": source["name"],
             "category": category,
             "summary": item_summary,
-            "publishedAt": parse_date(published),
+            "publishedAt": published_at,
+            "collectedAt": collected_at.astimezone(timezone.utc).isoformat(),
             "score": score,
         }
         item.update(strategic_analysis(title, item_summary, category, score))
@@ -374,7 +421,7 @@ def parse_feed(raw: bytes, source: dict) -> list[dict]:
 
 
 
-def parse_html_links(raw: bytes, source: dict) -> list[dict]:
+def parse_html_links(raw: bytes, source: dict, collected_at: datetime | None = None) -> list[dict]:
     """Extrai links de páginas HTML sem depender de BeautifulSoup.
 
     Serve para fontes oficiais sem RSS público (CONFAZ, PGFN, páginas de legislação),
@@ -384,6 +431,7 @@ def parse_html_links(raw: bytes, source: dict) -> list[dict]:
     """
     page_url = source["url"]
     html_text = raw.decode(source.get("encoding", "utf-8"), "replace")
+    collected_at = collected_at or datetime.now(timezone.utc)
     html_text = re.sub(r"<script[\s\S]*?</script>|<style[\s\S]*?</style>", " ", html_text, flags=re.I)
     links = re.findall(r"<a\b([^>]*?)href=[\"']([^\"']+)[\"']([^>]*)>([\s\S]*?)</a>", html_text, flags=re.I)
     result = []
@@ -394,7 +442,7 @@ def parse_html_links(raw: bytes, source: dict) -> list[dict]:
         title = clean(inner)
         if not title or len(title) < int(source.get("minTitleLength", 8)):
             continue
-        if title.lower() in {"brasil", "serviços", "legislação", "notícias", "rss", "voltar", "próxima", "anterior"}:
+        if not is_valid_content_link(href, title, source):
             continue
         url = canonical_url(urljoin(page_url, href))
         if url in seen or url == canonical_url(page_url):
@@ -402,6 +450,11 @@ def parse_html_links(raw: bytes, source: dict) -> list[dict]:
         if allow and not re.search(allow, url, flags=re.I):
             continue
         if deny and re.search(deny, url, flags=re.I):
+            continue
+        date_pattern = source.get("htmlPublishedDateRegex")
+        date_match = re.search(date_pattern, f"{title} {href}", flags=re.I) if date_pattern else None
+        published_at = parse_date(date_match.group(1)) if date_match else None
+        if published_at is None:
             continue
         summary = clean(f"Publicação monitorada em {source['name']}: {title}")
         score = relevance_score(title, summary, source)
@@ -415,7 +468,8 @@ def parse_html_links(raw: bytes, source: dict) -> list[dict]:
             "source": source["name"],
             "category": classify(title, summary, source),
             "summary": summary[:360],
-            "publishedAt": datetime.now(timezone.utc).isoformat(),
+            "publishedAt": published_at,
+            "collectedAt": collected_at.astimezone(timezone.utc).isoformat(),
             "score": score,
         })
         if len(result) >= int(source.get("htmlLimit", PER_SOURCE_LIMIT)):
@@ -438,11 +492,31 @@ def keep_existing(item: dict) -> bool:
     pseudo_source = {"baseScore": 0, "includeKeywords": [], "excludeKeywords": [], "minScore": 5}
     score = relevance_score(item.get("title", ""), item.get("summary", ""), pseudo_source)
     if score >= 5:
+        parsed = parse_date(item.get("publishedAt", ""))
+        if parsed is None:
+            return False
         item["score"] = score
-        if item.get("publishedAt"):
-            item["publishedAt"] = parse_date(item["publishedAt"])
+        item["publishedAt"] = parsed
         return True
     return False
+
+
+def source_health(statuses: list[dict]) -> dict:
+    failed = [status["source"] for status in statuses if status.get("critical") and not status.get("ok")]
+    empty = [
+        status["source"]
+        for status in statuses
+        if status.get("critical") and status.get("ok") and status.get("items", 0) == 0
+    ]
+    return {
+        "status": "degraded" if failed or empty else "healthy",
+        "criticalSourcesFailed": failed,
+        "criticalSourcesEmpty": empty,
+    }
+
+
+def health_gate_exit_code(health: dict) -> int:
+    return 1 if health.get("status") != "healthy" else 0
 
 
 def main():
@@ -458,7 +532,13 @@ def main():
     statuses = []
 
     for source in sources:
-        source_status = {"source": source["name"], "url": source["url"], "ok": False, "items": 0}
+        source_status = {
+            "source": source["name"],
+            "url": source["url"],
+            "critical": bool(source.get("critical")),
+            "ok": False,
+            "items": 0,
+        }
         try:
             req = Request(
                 source["url"],
@@ -488,12 +568,14 @@ def main():
         if not item.get("impactTags"):
             item.update(strategic_analysis(item.get("title", ""), item.get("summary", ""), item.get("category", "receita"), int(item.get("score", 0))))
     items = sorted(by_id.values(), key=lambda x: x.get("publishedAt", ""), reverse=True)[:MAX_ITEMS]
+    health = source_health(statuses)
     payload = {
         "updatedAt": datetime.now(timezone.utc).isoformat(),
         "items": items,
         "sourcesOk": ok,
         "sourcesFailed": failed,
         "sources": statuses,
+        "health": health,
         "meta": {
             "collector": "collector/collect.py",
             "policy": "RSS/Atom e páginas HTML públicas com filtro fiscal/tributário, deduplicação por URL canônica e fallback do histórico local.",
@@ -509,7 +591,10 @@ def main():
     for status in statuses:
         if status["ok"]:
             print(f"- OK {status['source']}: {status['items']} itens relevantes")
+    if health["status"] == "degraded":
+        print(f"- SAÚDE DEGRADADA: {health}")
+    return health_gate_exit_code(health)
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

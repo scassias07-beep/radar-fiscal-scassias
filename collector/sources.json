@@ -1,6 +1,7 @@
 [
   {
     "name": "Receita Federal",
+    "critical": true,
     "url": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/RSS",
     "category": "receita",
     "baseScore": 2,
@@ -185,6 +186,7 @@
   },
   {
     "name": "PGFN Notícias",
+    "critical": true,
     "type": "html",
     "url": "https://www.gov.br/pgfn/pt-br/assuntos/noticias",
     "category": "receita",
@@ -209,6 +211,7 @@
   },
   {
     "name": "CONFAZ — Convênios ICMS",
+    "critical": true,
     "type": "html",
     "url": "https://www.confaz.fazenda.gov.br/legislacao/convenios",
     "category": "icms",
@@ -227,6 +230,7 @@
   },
   {
     "name": "CONFAZ — Ajustes SINIEF",
+    "critical": true,
     "type": "html",
     "url": "https://www.confaz.fazenda.gov.br/legislacao/ajustes",
     "category": "icms",
@@ -245,6 +249,7 @@
   },
   {
     "name": "CONFAZ — Protocolos ICMS",
+    "critical": true,
     "type": "html",
     "url": "https://www.confaz.fazenda.gov.br/legislacao/protocolos",
     "category": "icms",
@@ -290,6 +295,7 @@
   },
   {
     "name": "Diário Oficial da União — busca fiscal",
+    "critical": true,
     "type": "html",
     "url": "https://www.in.gov.br/consulta/-/buscar/dou?q=tribut%C3%A1rio%20OR%20fiscal%20OR%20ICMS%20OR%20reforma%20tribut%C3%A1ria&s=todos&exactDate=all&sortType=0",
     "category": "legislacao",
@@ -317,6 +323,7 @@
   },
   {
     "name": "Diário Oficial de Minas Gerais",
+    "critical": true,
     "type": "html",
     "url": "https://www.jornalminasgerais.mg.gov.br/",
     "category": "legislacao",
@@ -344,6 +351,7 @@
   },
   {
     "name": "SEF Minas Gerais — Empresas",
+    "critical": true,
     "type": "html",
     "url": "https://www.fazenda.mg.gov.br/empresas/",
     "category": "icms",
