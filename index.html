@@ -590,7 +590,7 @@ const CAT = {
 let SEQ = 0;
 const N = (o) => Object.assign({ id:"n"+(++SEQ), novo:false, prazo:null }, o);
 
-const SNAPSHOT = [
+const LEGACY_SNAPSHOT_QUARANTINED = [
   N({ data:"2026-09-14", cat:"reforma", fonte:"CGIBS · Comitê Gestor do IBS",
      titulo:"Regulamento do IBS e da CBS deve ganhar nova versão até outubro",
      resumo:"Ajustes em discussão abrangem créditos de CBS sobre estoques no período de transição — ponto sensível para empresas que carregam inventário de exercícios anteriores sob o regime antigo.",
@@ -746,9 +746,10 @@ const SNAPSHOT = [
      resumo:"Médios e grandes empresários iniciaram os testes de implantação da reforma. As alíquotas de 0,9% de CBS e 0,1% de IBS presentes nas notas de 2026 têm função de medição de arrecadação, sem cobrança efetiva no ano.",
      url:"https://www12.senado.leg.br/tv/programas/agenda-economica/2026/04/reforma-tributaria-comeca-fase-de-testes-notas-fiscais-trazem-espaco-para-declaracao-de-cbs-e-ibs" })
 ];
+const SNAPSHOT = [];
 
 /* ---------- Prazos / agenda ---------- */
-const PRAZOS = [
+const LEGACY_PRAZOS_QUARANTINED = [
   { data:"2026-09-23", t:"Fim da consulta pública aduaneira", d:"Contribuições sobre regimes aduaneiros de depósito de mercadorias.", cat:"aduaneiro" },
   { data:"2026-09-30", t:"Opção pelo Simples Nacional + modelo IBS/CBS", d:"Definição do modelo de recolhimento aplicável a 2027 (Simples híbrido).", cat:"reforma" },
   { data:"2026-09-30", t:"Inscrições no EQTD 2026", d:"Exame de Qualificação Técnica para Despachante Aduaneiro.", cat:"aduaneiro" },
@@ -759,6 +760,7 @@ const PRAZOS = [
   { data:"2026-12-31", t:"Fim do período de adaptação da IN de benefícios fiscais", d:"Ajuste ao novo acompanhamento da fruição de benefícios.", cat:"receita" },
   { data:"2026-12-31", t:"Definição das alíquotas da CBS e do Imposto Seletivo", d:"Percentuais podem ser conhecidos apenas em dezembro, conforme a cobertura da imprensa especializada.", cat:"reforma" }
 ];
+const PRAZOS = [];
 
 const FONTES = [
   { g:"Autoridades fiscais" },
@@ -802,6 +804,7 @@ const state = {
   bytes: 0,
   ultima: null,
   feedAtualizadoEm: null,
+  collectorDegraded: true,
   varrendo: false,
   online: false
 };
@@ -835,6 +838,11 @@ function diffDias(iso){
   const hoje = new Date(); hoje.setHours(0,0,0,0);
   const alvo = new Date(iso+"T00:00:00");
   return Math.round((alvo - hoje)/86400000);
+}
+function deadlineFuturo(iso){
+  if(!iso) return false;
+  const alvo = new Date(iso);
+  return !Number.isNaN(alvo.getTime()) && alvo.getTime() > Date.now();
 }
 function ago(iso){
   if(!iso) return "";
@@ -870,7 +878,7 @@ function analisarItem(i){
   if(inclui(blob,["stf","stj","carf","multa","autuação","autuacao","débito","debito","cobrança","cobranca","risco","rejeição","rejeicao"])) tags.push("risco");
   if(inclui(blob,["reforma tributaria","ibs","cbs","imposto seletivo","comitê gestor","comite gestor"]) || i.cat === "reforma" || i.cat === "cgibs") tags.push("reforma");
   if(i.cat === "judicial" || inclui(blob,["stf","stj","tribunal","tese","repercussão geral","repercussao geral"])) tags.push("judicial");
-  if(i.prazo || inclui(blob,["vence","prazo","até ","ate ","amanhã","amanha"])) tags.push("prazo");
+  if(deadlineFuturo(i.prazo)) tags.push("prazo");
   if(tags.length || inclui(blob,["simples nacional","mei","empresas","contabilidade","contábil","contabil","governança","governanca"])) tags.push("oportunidade");
   const score = (i.score||0) + tags.length*5 + (tags.includes("prazo")?18:0) + (tags.includes("caixa")?12:0) + (tags.includes("risco")?10:0) + (tags.includes("reforma")?8:0);
   const prioridade = score >= 55 || tags.includes("prazo") ? "alta" : (score >= 32 || tags.includes("caixa") || tags.includes("risco") ? "media" : "baixa");
@@ -1094,7 +1102,7 @@ function prioridadeItem(i){
   const blob = norm(`${i.titulo} ${i.resumo} ${i.fonte} ${i.cat}`);
 
   if((prazo !== null && prazo >= 0 && prazo <= 15) || score >= 55 || i.novo ||
-     /(vence|prazo|urgente|carf|stf|repercussao geral|autuacao|transacao tributaria|obrigacao acessoria|reforma tributaria|ibs|cbs|split payment)/.test(blob)){
+     /(carf|stf|repercussao geral|autuacao|transacao tributaria|obrigacao acessoria|reforma tributaria|ibs|cbs|split payment)/.test(blob)){
     return "alta";
   }
   if((prazo !== null && prazo >= 0 && prazo <= 45) || score >= 32 ||
@@ -1139,7 +1147,9 @@ function renderKPIs(){
       bar:100 },
     { cls:"blue", b:"Última varredura",
       v: state.ultima ? state.ultima.toLocaleTimeString("pt-BR") : "--:--:--",
-      s: state.online ? `Conexão ativa · ${state.bytes} bytes recebidos.` : "Modo instantâneo: leitura externa bloqueada pelo navegador.",
+      s: state.collectorDegraded
+        ? "Saúde crítica degradada: o painel não considera a coleta confiável."
+        : (state.online ? `Conexão ativa · ${state.bytes} bytes recebidos.` : "Leitura externa indisponível no navegador."),
       bar: state.ultima ? 100 : 0 }
   ];
   cards.forEach(c=>{
@@ -1606,7 +1616,7 @@ async function scan(manual){
   renderFontes();
   log(manual ? "Varredura manual iniciada." : "Varredura automática iniciada.", "wait");
 
-  let bytes = 0, novos = 0, respondeu = false;
+  let bytes = 0, candidatos = 0, respondeu = false;
 
   for(const alvo of ALVOS){
     const txt = await tentar(alvo);
@@ -1615,25 +1625,11 @@ async function scan(manual){
     respondeu = true;
     bytes += txt.length;
     const achados = extrair(txt);
-    achados.forEach(a => {
-      const dup = state.itens.some(i => norm(i.titulo).slice(0,40) === norm(a.titulo).slice(0,40));
-      if(dup) return;
-      const cls = classificar(alvo, a.titulo);
-      state.itens.unshift(N({
-        data: a.data,
-        cat: cls.cat,
-        fonte: cls.nome,
-        titulo: a.titulo,
-        resumo: "Item capturado automaticamente na varredura das fontes públicas. Confirme o teor na publicação oficial antes de tomar decisões.",
-        url: alvo,
-        novo: true
-      }));
-      novos++;
-    });
+    candidatos += achados.length;
   }
 
   state.bytes = bytes;
-  state.online = respondeu;
+  state.online = respondeu && !state.collectorDegraded;
   state.varrendo = false;
   state.ultima = new Date();
   btn.classList.remove("spin");
@@ -1641,10 +1637,12 @@ async function scan(manual){
   setTimeout(()=>{ $("#scanFill").style.width = "0"; }, 900);
 
   const pill = $("#livePill");
-  pill.classList.toggle("off", !respondeu);
-  $("#liveTxt").textContent = respondeu ? "Ao vivo" : "Instantâneo";
+  pill.classList.toggle("off", state.collectorDegraded || !respondeu);
+  $("#liveTxt").textContent = state.collectorDegraded
+    ? "Fontes críticas degradadas"
+    : (respondeu ? "Ao vivo" : "Sem conexão");
 
-  if(respondeu) log(`Conexão estabelecida · ${bytes.toLocaleString("pt-BR")} bytes · ${novos} ${novos===1?"item novo":"itens novos"}.`, "ok");
+  if(respondeu) log(`Conexão estabelecida · ${bytes.toLocaleString("pt-BR")} bytes · ${candidatos} candidatos detectados e não incorporados sem validação do coletor.`, "ok");
   else {
     const referencia = state.feedAtualizadoEm
       ? `último feed automatizado de ${formatarDataBrasilia(state.feedAtualizadoEm)}`
@@ -1681,45 +1679,76 @@ async function carregarFeedPublico(){
     const r = await fetch('data/news.json?ts=' + Date.now(), { cache:'no-store' });
     if(!r.ok) return;
     const payload = await r.json();
-    const externos = Array.isArray(payload.items) ? payload.items : [];
+    const payloadHealthy = payload.health?.status === 'healthy';
+    const updatedAt = new Date(payload.updatedAt || '');
+    const feedComDataValida = !Number.isNaN(updatedAt.getTime());
+    const FEED_MAX_AGE_MS = 2 * 60 * 60 * 1000;
+    const feedObsoleto = feedComDataValida && Date.now() - updatedAt.getTime() > FEED_MAX_AGE_MS;
+    const feedHistorico = payloadHealthy && feedComDataValida && feedObsoleto;
+    const feedValidated = payloadHealthy && feedComDataValida;
+    state.collectorDegraded = !feedValidated || feedHistorico;
+    const evidenceAllowed = new Set([
+      'feed:pubdate','feed:published','feed:date',
+      'html:time[datetime]','html:time','html:configured-regex',
+      'html:detail:configured-regex','dou:pubDate'
+    ]);
+    const externos = payloadHealthy && feedComDataValida && Array.isArray(payload.items) ? payload.items : [];
     externos.forEach(item => {
-      if(!item || !item.title || !item.url) return;
+      if(!item || !item.title || !item.url || !item.publishedAt || !item.publicationDateEvidence || !item.collectedAt) return;
+      if(!evidenceAllowed.has(item.publicationDateEvidence)) return;
       const dup = state.itens.some(i => i.url === item.url || norm(i.titulo).slice(0,50) === norm(item.title).slice(0,50));
       if(dup) return;
       const cat = item.category || 'receita';
+      const deadline = deadlineFuturo(item.deadline) ? item.deadline : null;
+      const rawImpacts = item.impactTags || item.impactTypes || item.impactos || [];
+      const staleUrgency = rawImpacts.includes('prazo') && !deadline;
+      const impactos = rawImpacts.filter(tag => tag !== 'prazo' || deadline);
+      const priority = staleUrgency ? null : (item.priority || item.prioridade || null);
       state.itens.unshift(N({
-        data: (item.publishedAt || '').slice(0,10) || new Date().toISOString().slice(0,10),
+        data: item.publishedAt.slice(0,10),
         cat: CAT[cat] ? cat : 'receita',
         fonte: item.source || 'Fonte monitorada',
         titulo: item.title,
         resumo: item.summary || 'Publicação coletada automaticamente. Confirme o teor na fonte oficial.',
         url: item.url,
+        prazo: deadline,
         novo: false,
         score: item.score || 0,
-        priority: item.priority || item.prioridade || null,
-        prioridade: item.priority || item.prioridade || null,
-        impactos: item.impactTags || item.impactTypes || item.impactos || [],
-        quemAfeta: item.whoAffected || item.quemAfeta || null,
-        acaoRecomendada: item.recommendedAction || item.acaoRecomendada || null,
-        porqueImporta: item.whyItMatters || item.porqueImporta || null,
+        priority,
+        prioridade: priority,
+        impactos,
+        quemAfeta: staleUrgency ? null : (item.whoAffected || item.quemAfeta || null),
+        acaoRecomendada: staleUrgency ? null : (item.recommendedAction || item.acaoRecomendada || null),
+        porqueImporta: staleUrgency ? null : (item.whyItMatters || item.porqueImporta || null),
         oportunidadeScore: item.opportunityScore || 0
       }));
     });
-    if(payload.updatedAt){
-      state.feedAtualizadoEm = new Date(payload.updatedAt);
+    if(feedValidated){
+      state.feedAtualizadoEm = updatedAt;
       state.ultima = state.feedAtualizadoEm;
-      state.online = true;
+      state.online = !feedHistorico;
       atualizarRodapeFeed(state.feedAtualizadoEm);
-      $('#livePill').classList.remove('off');
-      $('#liveTxt').textContent = 'Feed atualizado';
-      log(`Feed diário carregado · ${externos.length} itens disponíveis.`, 'ok');
-      renderKPIs(); renderExecutive(); refreshViews();
+      $('#livePill').classList.toggle('off', feedHistorico);
+      $('#liveTxt').textContent = feedHistorico ? 'Histórico possivelmente desatualizado' : 'Feed atualizado';
+      if(feedHistorico){
+        $('#feedUpdatedAt').textContent = `Fallback histórico possivelmente desatualizado. Última coleta saudável: ${formatarDataBrasilia(updatedAt)} (horário de Brasília).`;
+        log(`Exibindo fallback histórico da última coleta saudável · ${externos.length} itens disponíveis.`, 'off');
+      }else{
+        log(`Feed diário validado · ${externos.length} itens disponíveis.`, 'ok');
+      }
     }else{
-      $('#feedUpdatedAt').textContent = 'Feed automatizado sem data de atualização. Exibindo o último conjunto de dados disponível.';
+      state.online = false;
+      $('#livePill').classList.add('off');
+      $('#liveTxt').textContent = 'Feed não validado';
+      $('#feedUpdatedAt').textContent = 'Feed sem saúde validada ou data válida. Itens do payload foram colocados em quarentena.';
+      log('Feed rejeitado: a saúde não é healthy ou falta data de atualização válida.', 'off');
     }
+    renderKPIs(); renderExecutive(); refreshViews();
   }catch(e){
-    $('#feedUpdatedAt').textContent = 'Feed automatizado indisponível. Exibindo o instantâneo local de contingência de 14/09/2026.';
-    log('Feed diário indisponível. Mantendo o instantâneo local.', 'off');
+    state.collectorDegraded = true;
+    state.online = false;
+    $('#feedUpdatedAt').textContent = 'Feed automatizado indisponível. Nenhum dado sem validação será exibido.';
+    log('Feed diário indisponível. Dados legados permanecem em quarentena.', 'off');
   }
 }
 

@@ -133,8 +133,17 @@ TRACKING_PARAMS = {"fbclid", "gclid", "mc_cid", "mc_eid"}
 NON_CONTENT_TITLES = {
     "brasil", "servicos", "legislacao", "noticias", "rss", "voltar",
     "proxima", "anterior", "contato", "institucional", "quem somos",
+    "ouvidoria", "acesso a informacao",
 }
-NON_CONTENT_PATH_PARTS = {"institucional", "contato", "quem-somos", "menu"}
+NON_CONTENT_PATH_PARTS = {
+    "institucional", "contato", "quem-somos", "menu", "ouvidoria",
+    "acesso-a-informacao",
+}
+ALLOWED_DATE_EVIDENCE = {
+    "feed:pubdate", "feed:published", "feed:date",
+    "html:time[datetime]", "html:time", "html:configured-regex",
+    "html:detail:configured-regex", "dou:pubDate",
+}
 
 IMPACT_RULES = {
     "caixa": ("split payment", "fluxo de caixa", "caixa", "credito", "crédito", "ressarcimento", "aliquota", "alíquota", "precificacao", "precificação"),
@@ -171,12 +180,17 @@ def norm(value: str | None) -> str:
 
 
 def child_text(node: ET.Element, names: tuple[str, ...]) -> str:
+    value, _ = child_value(node, names)
+    return value
+
+
+def child_value(node: ET.Element, names: tuple[str, ...]) -> tuple[str, str | None]:
     wanted = set(names)
     for child in list(node):
         local = child.tag.rsplit("}", 1)[-1].lower()
         if local in wanted and child.text:
-            return clean(child.text)
-    return ""
+            return clean(child.text), local
+    return "", None
 
 
 def child_attr(node: ET.Element, tag: str, attr: str, rel: str | None = None) -> str:
@@ -210,6 +224,10 @@ def is_valid_content_link(href: str, title: str, source: dict) -> bool:
     parts = urlsplit(url)
     if parts.scheme not in {"http", "https"} or not parts.netloc:
         return False
+    source_host = urlsplit(source["url"]).hostname or ""
+    target_host = parts.hostname or ""
+    if target_host != source_host and not target_host.endswith(f".{source_host}"):
+        return False
     if norm(title) in NON_CONTENT_TITLES:
         return False
     path_parts = {part for part in norm(parts.path).split("/") if part}
@@ -225,15 +243,23 @@ def parse_date(value: str) -> str | None:
     if not raw:
         return None
     try:
-        dt = parsedate_to_datetime(raw)
+        dt = datetime.fromisoformat(raw.replace("Z", "+00:00"))
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=timezone.utc)
+        return dt.astimezone(timezone.utc).isoformat()
+    except (TypeError, ValueError):
+        pass
+    try:
+        mail_raw = re.sub(r"\bBRT\b", "-0300", raw)
+        dt = parsedate_to_datetime(mail_raw)
         if dt.tzinfo is None:
             dt = dt.replace(tzinfo=timezone.utc)
         return dt.astimezone(timezone.utc).isoformat()
     except Exception:
         pass
-    for fmt in ("%Y-%m-%dT%H:%M:%S%z", "%Y-%m-%dT%H:%M:%S", "%Y-%m-%d", "%d/%m/%Y", "%d/%m/%Y %H:%M"):
+    for fmt in ("%Y-%m-%dT%H:%M:%S%z", "%Y-%m-%dT%H:%M:%S", "%Y-%m-%d", "%d/%m/%Y", "%d/%m/%Y %H:%M", "%d.%m.%y"):
         try:
-            dt = datetime.strptime(raw[: len(datetime.now().strftime(fmt))], fmt)
+            dt = datetime.strptime(raw, fmt)
             if dt.tzinfo is None:
                 dt = dt.replace(tzinfo=timezone.utc)
             return dt.astimezone(timezone.utc).isoformat()
@@ -392,11 +418,15 @@ def parse_feed(raw: bytes, source: dict, collected_at: datetime | None = None) -
         title = child_text(node, ("title",))
         link = child_text(node, ("link",)) or child_attr(node, "link", "href", "alternate") or child_attr(node, "link", "href")
         summary = child_text(node, ("description", "summary", "content", "encoded"))
-        published = child_text(node, ("pubdate", "published", "updated", "date", "dc:date"))
+        published, published_field = child_value(
+            node, ("pubdate", "published", "date", "dc:date")
+        )
         if not title or not link or not is_valid_content_link(link, title, source):
             continue
         published_at = parse_date(published)
-        if published_at is None:
+        if published_at is None or published_field is None:
+            continue
+        if datetime.fromisoformat(published_at) > collected_at.astimezone(timezone.utc):
             continue
         score = relevance_score(title, summary, source)
         if score < min_score:
@@ -412,6 +442,7 @@ def parse_feed(raw: bytes, source: dict, collected_at: datetime | None = None) -
             "category": category,
             "summary": item_summary,
             "publishedAt": published_at,
+            "publicationDateEvidence": f"feed:{published_field}",
             "collectedAt": collected_at.astimezone(timezone.utc).isoformat(),
             "score": score,
         }
@@ -422,24 +453,42 @@ def parse_feed(raw: bytes, source: dict, collected_at: datetime | None = None) -
 
 
 def parse_html_links(raw: bytes, source: dict, collected_at: datetime | None = None) -> list[dict]:
-    """Extrai links de páginas HTML sem depender de BeautifulSoup.
-
-    Serve para fontes oficiais sem RSS público (CONFAZ, PGFN, páginas de legislação),
-    mantendo o mesmo filtro fiscal/tributário. Não substitui raspadores dedicados para
-    portais protegidos (ex.: DOU/Diários com bloqueio), mas permite monitorar listagens
-    públicas e registrar falhas quando houver bloqueio.
-    """
+    """Extrai somente resultados HTML com data de publicação no mesmo bloco."""
     page_url = source["url"]
     html_text = raw.decode(source.get("encoding", "utf-8"), "replace")
     collected_at = collected_at or datetime.now(timezone.utc)
-    html_text = re.sub(r"<script[\s\S]*?</script>|<style[\s\S]*?</style>", " ", html_text, flags=re.I)
-    links = re.findall(r"<a\b([^>]*?)href=[\"']([^\"']+)[\"']([^>]*)>([\s\S]*?)</a>", html_text, flags=re.I)
+    html_text = re.sub(
+        r"<script[\s\S]*?</script>|<style[\s\S]*?</style>",
+        " ",
+        html_text,
+        flags=re.I,
+    )
+    container_tag = source.get("htmlContainerTag")
+    if container_tag:
+        tag = re.escape(container_tag)
+        contexts = re.findall(
+            rf"<{tag}\b[^>]*>[\s\S]*?</{tag}>", html_text, flags=re.I
+        )
+    else:
+        contexts = re.findall(r"<a\b[^>]*>[\s\S]*?</a>", html_text, flags=re.I)
+
     result = []
     seen = set()
     allow = source.get("urlAllowRegex")
     deny = source.get("urlDenyRegex")
-    for before, href, after, inner in links[: int(source.get("scanLimit", 450))]:
-        title = clean(inner)
+    for context in contexts[: int(source.get("scanLimit", 450))]:
+        link_match = re.search(
+            r"<a\b[^>]*href=[\"']([^\"']+)[\"'][^>]*>([\s\S]*?)</a>",
+            context,
+            flags=re.I,
+        )
+        if not link_match:
+            continue
+        href, inner = link_match.groups()
+        title_match = None
+        if source.get("htmlTitleRegex"):
+            title_match = re.search(source["htmlTitleRegex"], context, flags=re.I)
+        title = clean(title_match.group(1) if title_match else inner)
         if not title or len(title) < int(source.get("minTitleLength", 8)):
             continue
         if not is_valid_content_link(href, title, source):
@@ -451,30 +500,308 @@ def parse_html_links(raw: bytes, source: dict, collected_at: datetime | None = N
             continue
         if deny and re.search(deny, url, flags=re.I):
             continue
-        date_pattern = source.get("htmlPublishedDateRegex")
-        date_match = re.search(date_pattern, f"{title} {href}", flags=re.I) if date_pattern else None
-        published_at = parse_date(date_match.group(1)) if date_match else None
+
+        published_at = None
+        date_evidence = None
+        time_attr = re.search(
+            r"<time\b[^>]*datetime=[\"']([^\"']+)[\"'][^>]*>", context, flags=re.I
+        )
+        if time_attr:
+            published_at = parse_date(time_attr.group(1))
+            date_evidence = "html:time[datetime]"
         if published_at is None:
+            time_text = re.search(r"<time\b[^>]*>([\s\S]*?)</time>", context, flags=re.I)
+            if time_text:
+                published_at = parse_date(clean(time_text.group(1)))
+                date_evidence = "html:time"
+        if published_at is None and source.get("htmlPublishedDateRegex"):
+            date_match = re.search(
+                source["htmlPublishedDateRegex"], context, flags=re.I
+            )
+            if date_match:
+                published_at = parse_date(date_match.group(1))
+                date_evidence = "html:configured-regex"
+        if published_at is None or date_evidence is None:
             continue
+        if datetime.fromisoformat(published_at) > collected_at.astimezone(timezone.utc):
+            continue
+
         summary = clean(f"Publicação monitorada em {source['name']}: {title}")
         score = relevance_score(title, summary, source)
         if score < int(source.get("minScore", 5)):
             continue
         seen.add(url)
-        result.append({
+        category = classify(title, summary, source)
+        item = {
             "id": hashlib.sha256(url.encode()).hexdigest()[:16],
             "title": title[:220],
             "url": url,
             "source": source["name"],
-            "category": classify(title, summary, source),
+            "category": category,
             "summary": summary[:360],
             "publishedAt": published_at,
+            "publicationDateEvidence": date_evidence,
             "collectedAt": collected_at.astimezone(timezone.utc).isoformat(),
             "score": score,
-        })
+        }
+        item.update(strategic_analysis(title, summary, category, score))
+        result.append(item)
         if len(result) >= int(source.get("htmlLimit", PER_SOURCE_LIMIT)):
             break
     return result
+
+
+def _dou_payload(raw: bytes, source: dict) -> dict | None:
+    text = raw.decode(source.get("encoding", "utf-8"), "replace")
+    match = re.search(
+        r"<[^>]+id=[\"'][^\"']*BuscaDouPortlet_params[\"'][^>]*>([\s\S]*?)</[^>]+>",
+        text,
+        flags=re.I,
+    )
+    if not match:
+        return None
+    try:
+        payload = json.loads(html.unescape(match.group(1)).strip())
+    except (TypeError, ValueError, json.JSONDecodeError):
+        return None
+    return payload if isinstance(payload.get("jsonArray"), list) else None
+
+
+def parse_dou_html(raw: bytes, source: dict, collected_at: datetime | None = None) -> list[dict]:
+    """Extrai atos do JSON oficial embutido na busca do DOU."""
+    payload = _dou_payload(raw, source)
+    if payload is None:
+        return []
+    collected_at = collected_at or datetime.now(timezone.utc)
+    result = []
+    for entry in payload["jsonArray"][: int(source.get("htmlLimit", PER_SOURCE_LIMIT))]:
+        title = clean(entry.get("title"))
+        slug = clean(entry.get("urlTitle"))
+        published_at = parse_date(entry.get("pubDate", ""))
+        if not title or not slug or published_at is None:
+            continue
+        if datetime.fromisoformat(published_at) > collected_at.astimezone(timezone.utc):
+            continue
+        url = canonical_url(urljoin("https://www.in.gov.br/web/dou/-/", slug))
+        if not is_valid_content_link(url, title, source):
+            continue
+        summary = clean(entry.get("content"))
+        edition = clean(entry.get("editionNumber"))
+        page = clean(entry.get("numberPage"))
+        provenance = " · ".join(
+            part
+            for part in (
+                f"Edição {edition}" if edition else "",
+                f"p. {page}" if page else "",
+            )
+            if part
+        )
+        if provenance:
+            summary = clean(f"{summary} {provenance}")
+        score = relevance_score(title, summary, source)
+        if score < int(source.get("minScore", 5)):
+            continue
+        category = classify(title, summary, source)
+        item = {
+            "id": hashlib.sha256(url.encode()).hexdigest()[:16],
+            "title": title[:220],
+            "url": url,
+            "source": source["name"],
+            "category": category,
+            "summary": summary[:360],
+            "publishedAt": published_at,
+            "publicationDateEvidence": "dou:pubDate",
+            "collectedAt": collected_at.astimezone(timezone.utc).isoformat(),
+            "score": score,
+        }
+        item.update(strategic_analysis(title, summary, category, score))
+        result.append(item)
+    return result
+
+
+def _fetch_detail(url: str, source: dict) -> bytes:
+    req = Request(
+        url,
+        headers={
+            "User-Agent": "RadarFiscal/2.0 (fontes fiscais públicas)",
+            "Accept": "text/html,application/xhtml+xml",
+        },
+    )
+    with urlopen(
+        req,
+        timeout=int(source.get("timeout", TIMEOUT)),
+        context=SSL_CONTEXT,
+    ) as response:
+        return response.read(int(source.get("detailMaxBytes", 700_000)))
+
+
+def _confaz_act_date(title: str) -> datetime | None:
+    match = re.search(
+        r"\bDE\s+([0-3]?\d)\s+DE\s+([A-ZÇ]+)\s+DE\s+(20\d{2})\b",
+        title,
+        flags=re.I,
+    )
+    if not match:
+        return None
+    months = {
+        "janeiro": 1, "fevereiro": 2, "marco": 3, "abril": 4,
+        "maio": 5, "junho": 6, "julho": 7, "agosto": 8,
+        "setembro": 9, "outubro": 10, "novembro": 11, "dezembro": 12,
+    }
+    try:
+        return datetime(
+            int(match.group(3)), months[norm(match.group(2))], int(match.group(1)),
+            tzinfo=timezone.utc,
+        )
+    except (KeyError, ValueError):
+        return None
+
+
+def parse_html_detail_links(
+    raw: bytes,
+    source: dict,
+    collected_at: datetime | None = None,
+    detail_fetcher=None,
+) -> list[dict]:
+    """Segue links permitidos e exige título e data oficial na página de detalhe."""
+    collected_at = collected_at or datetime.now(timezone.utc)
+    detail_fetcher = detail_fetcher or (lambda url: _fetch_detail(url, source))
+    text = raw.decode(source.get("encoding", "utf-8"), "replace")
+    tag = re.escape(source.get("htmlContainerTag", "tr"))
+    contexts = re.findall(rf"<{tag}\b[^>]*>[\s\S]*?</{tag}>", text, flags=re.I)
+    title_pattern = source.get("htmlDetailTitleRegex")
+    date_pattern = source.get("htmlPublishedDateRegex")
+    allow = source.get("urlAllowRegex")
+    deny = source.get("urlDenyRegex")
+    if not title_pattern or not date_pattern or not allow:
+        return []
+
+    result = []
+    seen = set()
+    source_year_match = re.search(r"/(20\d{2})/\1/?$", urlsplit(source["url"]).path)
+    source_year = source_year_match.group(1) if source_year_match else None
+    for context in contexts[: int(source.get("scanLimit", 450))]:
+        anchor = re.search(r"<a\b([^>]*)>([\s\S]*?)</a>", context, flags=re.I)
+        if not anchor:
+            continue
+        attrs, inner = anchor.groups()
+        href_match = re.search(r"href=[\"']([^\"']+)[\"']", attrs, flags=re.I)
+        attr_title = re.search(r"title=[\"']([^\"']+)[\"']", attrs, flags=re.I)
+        if not href_match:
+            continue
+        href = href_match.group(1)
+        link_title = clean(attr_title.group(1) if attr_title else inner)
+        url = canonical_url(urljoin(source["url"], href))
+        linked_year_match = re.search(r"/(20\d{2})/", urlsplit(url).path)
+        if source_year and (not linked_year_match or linked_year_match.group(1) != source_year):
+            continue
+        if url in seen or not is_valid_content_link(href, link_title, source):
+            continue
+        if not re.search(allow, url, flags=re.I) or (deny and re.search(deny, url, flags=re.I)):
+            continue
+        detail = detail_fetcher(url)
+        detail_text = detail.decode(source.get("encoding", "utf-8"), "replace")
+        title_match = re.search(title_pattern, detail_text, flags=re.I)
+        date_match = re.search(date_pattern, detail_text, flags=re.I)
+        if not title_match or not date_match:
+            continue
+        title = clean(title_match.group(1))
+        published_at = parse_date(date_match.group(1))
+        if not title or published_at is None:
+            continue
+        title_year_match = re.search(r"\b(20\d{2})\b", title)
+        if source_year and (
+            not title_year_match or title_year_match.group(1) != source_year
+        ):
+            continue
+        published_date = datetime.fromisoformat(published_at)
+        if title_year_match:
+            title_year = int(title_year_match.group(1))
+            if published_date.year < title_year or published_date.year > title_year + 1:
+                continue
+        act_date = _confaz_act_date(title)
+        if act_date is not None and published_date < act_date:
+            continue
+        if datetime.fromisoformat(published_at) > collected_at.astimezone(timezone.utc):
+            continue
+        summary = clean(f"Publicação oficial monitorada em {source['name']}: {title}")
+        score = relevance_score(title, summary, source)
+        if score < int(source.get("minScore", 5)):
+            continue
+        seen.add(url)
+        category = classify(title, summary, source)
+        item = {
+            "id": hashlib.sha256(url.encode()).hexdigest()[:16],
+            "title": title[:220],
+            "url": url,
+            "source": source["name"],
+            "category": category,
+            "summary": summary[:360],
+            "publishedAt": published_at,
+            "publicationDateEvidence": "html:detail:configured-regex",
+            "collectedAt": collected_at.astimezone(timezone.utc).isoformat(),
+            "score": score,
+        }
+        item.update(strategic_analysis(title, summary, category, score))
+        result.append(item)
+        if len(result) >= int(source.get("htmlLimit", PER_SOURCE_LIMIT)):
+            break
+    return result
+
+
+def parse_source_document(
+    raw: bytes,
+    source: dict,
+    collected_at: datetime | None = None,
+    detail_fetcher=None,
+) -> list[dict]:
+    source_type = source.get("type")
+    if source_type == "dou":
+        return parse_dou_html(raw, source, collected_at)
+    if source_type == "html" and source.get("htmlFollowDetail"):
+        return parse_html_detail_links(raw, source, collected_at, detail_fetcher)
+    if source_type == "html":
+        return parse_html_links(raw, source, collected_at)
+    return parse_feed(raw, source, collected_at)
+
+
+def recognizes_source_document(raw: bytes, source: dict) -> bool:
+    """Confirma que o documento corresponde à estrutura que o adaptador conhece."""
+    source_type = source.get("type")
+    if source_type == "dou":
+        return _dou_payload(raw, source) is not None
+    if source_type != "html":
+        try:
+            return bool(iter_entries(ET.fromstring(raw)))
+        except ET.ParseError:
+            return False
+    container_tag = source.get("htmlContainerTag")
+    if not container_tag:
+        return False
+    text = raw.decode(source.get("encoding", "utf-8"), "replace")
+    tag = re.escape(container_tag)
+    contexts = re.findall(rf"<{tag}\b[^>]*>[\s\S]*?</{tag}>", text, flags=re.I)
+    if source.get("htmlFollowDetail"):
+        allow = source.get("urlAllowRegex")
+        return bool(
+            source.get("htmlDetailTitleRegex")
+            and source.get("htmlPublishedDateRegex")
+            and allow
+            and any(
+                re.search(allow, canonical_url(urljoin(source["url"], match.group(1))), flags=re.I)
+                for context in contexts
+                if (match := re.search(r"<a\b[^>]*href=[\"']([^\"']+)[\"']", context, flags=re.I))
+            )
+        )
+    date_pattern = source.get("htmlPublishedDateRegex")
+    for context in contexts:
+        has_link = re.search(r"<a\b[^>]*href=[\"'][^\"']+[\"']", context, flags=re.I)
+        has_time = re.search(r"<time\b[^>]*(?:datetime=[\"'][^\"']+[\"'])?[^>]*>[\s\S]*?</time>", context, flags=re.I)
+        has_configured_date = date_pattern and re.search(date_pattern, context, flags=re.I)
+        if has_link and (has_time or has_configured_date):
+            return True
+    return False
+
 
 def load_old() -> dict:
     if not OUTPUT.exists():
@@ -486,37 +813,97 @@ def load_old() -> dict:
 
 
 def keep_existing(item: dict) -> bool:
-    """Evita carregar ruído histórico de coletas antigas com feeds genéricos."""
-    if not item.get("title") or not item.get("url"):
+    """Reutiliza apenas itens cuja data tem origem comprovável e reanalisa o risco."""
+    required = (
+        item.get("title"),
+        item.get("url"),
+        item.get("collectedAt"),
+        item.get("publicationDateEvidence"),
+    )
+    evidence = item.get("publicationDateEvidence")
+    if not all(required) or evidence not in ALLOWED_DATE_EVIDENCE:
         return False
-    pseudo_source = {"baseScore": 0, "includeKeywords": [], "excludeKeywords": [], "minScore": 5}
-    score = relevance_score(item.get("title", ""), item.get("summary", ""), pseudo_source)
-    if score >= 5:
-        parsed = parse_date(item.get("publishedAt", ""))
-        if parsed is None:
-            return False
-        item["score"] = score
-        item["publishedAt"] = parsed
-        return True
-    return False
+    pseudo_source = {
+        "baseScore": 0,
+        "includeKeywords": [],
+        "excludeKeywords": [],
+        "minScore": 5,
+    }
+    score = relevance_score(
+        item.get("title", ""), item.get("summary", ""), pseudo_source
+    )
+    published_at = parse_date(item.get("publishedAt", ""))
+    collected_at = parse_date(item.get("collectedAt", ""))
+    if (
+        score < 5
+        or published_at is None
+        or collected_at is None
+        or published_at > collected_at
+    ):
+        return False
+    item["score"] = score
+    item["publishedAt"] = published_at
+    item["collectedAt"] = collected_at
+    item.pop("deadline", None)
+    item.update(
+        strategic_analysis(
+            item.get("title", ""),
+            item.get("summary", ""),
+            item.get("category", "receita"),
+            score,
+        )
+    )
+    return True
 
 
 def source_health(statuses: list[dict]) -> dict:
-    failed = [status["source"] for status in statuses if status.get("critical") and not status.get("ok")]
+    failed = [
+        status["source"]
+        for status in statuses
+        if status.get("critical") and not status.get("ok")
+    ]
+    unrecognized = [
+        status["source"]
+        for status in statuses
+        if status.get("critical")
+        and status.get("ok")
+        and not status.get("parserRecognized", False)
+    ]
     empty = [
         status["source"]
         for status in statuses
-        if status.get("critical") and status.get("ok") and status.get("items", 0) == 0
+        if status.get("critical")
+        and status.get("ok")
+        and status.get("parserRecognized", False)
+        and status.get("items", 0) == 0
     ]
     return {
-        "status": "degraded" if failed or empty else "healthy",
+        "status": "degraded" if failed or unrecognized or empty else "healthy",
         "criticalSourcesFailed": failed,
+        "criticalSourcesUnrecognized": unrecognized,
         "criticalSourcesEmpty": empty,
     }
 
 
 def health_gate_exit_code(health: dict) -> int:
-    return 1 if health.get("status") != "healthy" else 0
+    return 0 if health.get("status") == "healthy" else 1
+
+
+def persist_payload(payload: dict, health: dict, output: Path = OUTPUT) -> bool:
+    if health.get("status") != "healthy":
+        return False
+    output.parent.mkdir(parents=True, exist_ok=True)
+    temporary = output.with_suffix(output.suffix + ".tmp")
+    temporary.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+    temporary.replace(output)
+    return True
+
+
+def resolve_source(source: dict, now: datetime | None = None) -> dict:
+    resolved = dict(source)
+    year = (now or datetime.now(timezone.utc)).year
+    resolved["url"] = resolved["url"].replace("{year}", str(year))
+    return resolved
 
 
 def main():
@@ -531,12 +918,14 @@ def main():
     failed = []
     statuses = []
 
-    for source in sources:
+    for configured_source in sources:
+        source = resolve_source(configured_source)
         source_status = {
             "source": source["name"],
             "url": source["url"],
             "critical": bool(source.get("critical")),
             "ok": False,
+            "parserRecognized": False,
             "items": 0,
         }
         try:
@@ -548,16 +937,18 @@ def main():
                 },
             )
             with urlopen(req, timeout=int(source.get("timeout", TIMEOUT)), context=SSL_CONTEXT) as response:
-                max_bytes = int(source.get("maxBytes", 900_000 if source.get("type") == "html" else 0))
+                max_bytes = int(source.get("maxBytes", 900_000 if source.get("type") in {"html", "dou"} else 0))
                 raw = response.read(max_bytes) if max_bytes > 0 else response.read()
-            if source.get("type") == "html":
-                found = parse_html_links(raw, source)
-            else:
-                found = parse_feed(raw, source)
+            parser_recognized = recognizes_source_document(raw, source)
+            found = parse_source_document(raw, source)
             for item in found:
                 by_id[item["id"]] = item
             ok += 1
-            source_status.update({"ok": True, "items": len(found)})
+            source_status.update({
+                "ok": True,
+                "parserRecognized": parser_recognized,
+                "items": len(found),
+            })
         except Exception as exc:
             error = str(exc)[:180]
             failed.append({"source": source["name"], "url": source["url"], "error": error})
@@ -582,8 +973,7 @@ def main():
             "maxItems": MAX_ITEMS,
         },
     }
-    OUTPUT.parent.mkdir(parents=True, exist_ok=True)
-    OUTPUT.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+    written = persist_payload(payload, health, OUTPUT)
     print(f"Coleta concluída: {len(items)} itens; {ok} fontes OK; {len(failed)} falhas.")
     if failed:
         for item in failed:
