@@ -11,12 +11,14 @@ import hashlib
 import html
 import json
 import re
+import sys
 import unicodedata
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
 from pathlib import Path
+from urllib.error import HTTPError
 from urllib.parse import parse_qsl, urlencode, urljoin, urlsplit, urlunsplit
-from urllib.request import Request, urlopen
+from urllib.request import HTTPRedirectHandler, HTTPSHandler, Request, build_opener, urlopen
 import xml.etree.ElementTree as ET
 import ssl
 
@@ -93,6 +95,44 @@ RELEVANCE_TERMS = {
 
 SSL_CONTEXT = ssl.create_default_context()
 
+
+class NoBearerRedirectHandler(HTTPRedirectHandler):
+    """Bearer nunca atravessa redirects, inclusive redirects para a mesma origem."""
+
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        raise HTTPError(
+            newurl, code, f"{msg} (redirect bloqueado para requisição bearer)", headers, fp
+        )
+
+
+def _open_bearer_request(request: Request, *, timeout: int, context: ssl.SSLContext):
+    opener = build_opener(HTTPSHandler(context=context), NoBearerRedirectHandler())
+    return opener.open(request, timeout=timeout)
+
+
+def ssl_context_for_source(source: dict) -> ssl.SSLContext:
+    """Cria contexto TLS estrito e, quando configurado, completa cadeia por fonte."""
+    context = ssl.create_default_context()
+    intermediate = source.get("tlsIntermediateCert")
+    if intermediate:
+        cert_dir = (ROOT / "collector" / "certs").resolve()
+        cert_path = (ROOT / intermediate).resolve()
+        try:
+            cert_path.relative_to(cert_dir)
+        except ValueError as exc:
+            raise ValueError("Certificado intermediário fora de collector/certs") from exc
+        if not cert_path.is_file():
+            raise FileNotFoundError(f"Certificado intermediário ausente: {cert_path}")
+        expected_fingerprint = str(source.get("tlsIntermediateSha256") or "").lower()
+        certificate_der = ssl.PEM_cert_to_DER_cert(cert_path.read_text(encoding="ascii"))
+        actual_fingerprint = hashlib.sha256(certificate_der).hexdigest()
+        if len(expected_fingerprint) != 64 or actual_fingerprint != expected_fingerprint:
+            raise ValueError("SHA-256 do certificado intermediário não confere")
+        context.load_verify_locations(cafile=str(cert_path))
+    if context.verify_mode != ssl.CERT_REQUIRED or not context.check_hostname:
+        raise RuntimeError("Contexto TLS da fonte não preserva validação estrita")
+    return context
+
 GLOBAL_EXCLUDE_TERMS = {
     "eleicao",
     "votar",
@@ -143,6 +183,7 @@ ALLOWED_DATE_EVIDENCE = {
     "feed:pubdate", "feed:published", "feed:date",
     "html:time[datetime]", "html:time", "html:configured-regex",
     "html:detail:configured-regex", "dou:pubDate",
+    "jornal-mg-api:dataPublicacao",
 }
 
 IMPACT_RULES = {
@@ -409,6 +450,128 @@ def iter_entries(root: ET.Element) -> list[ET.Element]:
     return entries
 
 
+def parse_jornal_mg_results(
+    raw: bytes,
+    source: dict,
+    search_term: str,
+    collected_at: datetime | None = None,
+) -> list[dict]:
+    """Converte resultados da API oficial do Jornal Minas Gerais em itens auditáveis."""
+    payload = json.loads(raw.decode("utf-8"))
+    if not isinstance(payload, dict) or not isinstance(payload.get("dados"), list):
+        raise ValueError("Resposta da pesquisa do Jornal MG não reconhecida")
+    if payload.get("erros"):
+        raise ValueError(f"API do Jornal MG retornou erros: {payload['erros']}")
+
+    collected_at = collected_at or datetime.now(timezone.utc)
+    result = []
+    for record in payload["dados"]:
+        if not isinstance(record, dict):
+            continue
+        journal_id = record.get("idJornal")
+        page = record.get("pagina")
+        published_raw = record.get("dataPublicacao")
+        journal_type = clean(str(record.get("tipoCaderno") or "Jornal Minas Gerais"))
+        summary = clean(str(record.get("textoResultado") or ""))
+        if not isinstance(journal_id, int) or not isinstance(page, int) or not summary:
+            continue
+        published_at = parse_date(str(published_raw or ""))
+        if published_at is None or datetime.fromisoformat(published_at) > collected_at.astimezone(timezone.utc):
+            continue
+
+        navigation = {
+            "dataPublicacaoSelecionada": published_raw,
+            "idCadernoEdicaoSelecionado": journal_id,
+            "paginaSelecionada": page,
+            "textoPesquisa": search_term,
+        }
+        url = urljoin(source["url"], "edicao-do-dia") + "?" + urlencode({
+            "dados": json.dumps(navigation, ensure_ascii=False, separators=(",", ":"))
+        })
+        display_date = datetime.fromisoformat(published_at).strftime("%d/%m/%Y")
+        title = f"Ocorrência de {search_term} no {journal_type} — {display_date}, p. {page}"
+        score = relevance_score(title, summary, source)
+        if score < int(source.get("minScore", 5)):
+            continue
+        category = classify(title, summary, source)
+        item = {
+            "id": hashlib.sha256(url.encode()).hexdigest()[:16],
+            "title": title[:220],
+            "url": url,
+            "source": source["name"],
+            "sourceRecord": {"idJornal": journal_id, "pagina": page},
+            "category": category,
+            "summary": summary[:360],
+            "publishedAt": published_at,
+            "publicationDateEvidence": "jornal-mg-api:dataPublicacao",
+            "collectedAt": collected_at.astimezone(timezone.utc).isoformat(),
+            "score": score,
+        }
+        item.update(strategic_analysis(title, summary, category, score))
+        result.append(item)
+    return result
+
+
+def collect_jornal_mg(source: dict, now: datetime | None = None) -> list[dict]:
+    """Autentica anonimamente e pesquisa termos fiscais na API usada pelo portal oficial."""
+    now = now or datetime.now(timezone.utc)
+    context = ssl_context_for_source(source)
+    base_api = urljoin(source["url"], "api/v1/")
+    common_headers = {
+        "User-Agent": "RadarFiscal/2.0 (monitoramento fiscal de fonte publica)",
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+    }
+    auth_request = Request(
+        urljoin(base_api, "Autenticacao/Autenticar"),
+        data=b"{}",
+        headers=common_headers,
+        method="POST",
+    )
+    with urlopen(auth_request, timeout=int(source.get("timeout", TIMEOUT)), context=context) as response:
+        auth_payload = json.loads(response.read(100_000).decode("utf-8"))
+    token = auth_payload.get("dados") if isinstance(auth_payload, dict) else None
+    if not isinstance(token, str) or not token:
+        raise ValueError("Autenticação anônima do Jornal MG não retornou token")
+
+    start = (now - timedelta(days=int(source.get("lookbackDays", 30)))).date().isoformat()
+    end = now.date().isoformat()
+    page_size = int(source.get("pageSize", 50))
+    max_pages = int(source.get("maxPagesPerTerm", 2))
+    by_record: dict[tuple[int, int], dict] = {}
+    for search_term in source.get("searchTerms", []):
+        for page_number in range(1, max_pages + 1):
+            query = urlencode({
+                "DataPublicacaoInicial": start,
+                "DataPublicacaoFinal": end,
+                "TextoPesquisa": search_term,
+                "DiarioExecutivo": "true",
+                "DiarioMunicipios": "true",
+                "DiarioTerceiros": "true",
+                "EdicaoExtra": "true",
+                "PaginaAtual": page_number,
+                "TamanhoPagina": page_size,
+            })
+            request = Request(
+                urljoin(base_api, "Pesquisa/PesquisarJornaisPaginados") + "?" + query,
+                headers={**common_headers, "Authorization": f"Bearer {token}"},
+            )
+            with _open_bearer_request(
+                request, timeout=int(source.get("timeout", TIMEOUT)), context=context
+            ) as response:
+                raw = response.read(int(source.get("maxBytes", 2_000_000)))
+            payload = json.loads(raw.decode("utf-8"))
+            found = parse_jornal_mg_results(raw, source, search_term, collected_at=now)
+            for item in found:
+                record = item["sourceRecord"]
+                by_record.setdefault((record["idJornal"], record["pagina"]), item)
+            total_pages = int(payload.get("totalDePaginas", 1)) if isinstance(payload, dict) else 1
+            if page_number >= total_pages:
+                break
+    limit = int(source.get("htmlLimit", PER_SOURCE_LIMIT))
+    return sorted(by_record.values(), key=lambda item: item["publishedAt"], reverse=True)[:limit]
+
+
 def parse_feed(raw: bytes, source: dict, collected_at: datetime | None = None) -> list[dict]:
     root = ET.fromstring(raw)
     result = []
@@ -662,6 +825,7 @@ def parse_html_detail_links(
     source: dict,
     collected_at: datetime | None = None,
     detail_fetcher=None,
+    detail_failures: list[dict] | None = None,
 ) -> list[dict]:
     """Segue links permitidos e exige título e data oficial na página de detalhe."""
     collected_at = collected_at or datetime.now(timezone.utc)
@@ -699,7 +863,22 @@ def parse_html_detail_links(
             continue
         if not re.search(allow, url, flags=re.I) or (deny and re.search(deny, url, flags=re.I)):
             continue
-        detail = detail_fetcher(url)
+        try:
+            detail = detail_fetcher(url)
+        except OSError as exc:
+            parts = urlsplit(url)
+            safe_failure = {
+                "url": urlunsplit((parts.scheme, parts.netloc, parts.path, "", "")),
+                "error": type(exc).__name__,
+            }
+            if detail_failures is not None:
+                detail_failures.append(safe_failure)
+            print(
+                f"AVISO: detalhe indisponível em {source['name']}: "
+                f"{safe_failure['url']} ({safe_failure['error']})",
+                file=sys.stderr,
+            )
+            continue
         detail_text = detail.decode(source.get("encoding", "utf-8"), "replace")
         title_match = re.search(title_pattern, detail_text, flags=re.I)
         date_match = re.search(date_pattern, detail_text, flags=re.I)
@@ -754,12 +933,15 @@ def parse_source_document(
     source: dict,
     collected_at: datetime | None = None,
     detail_fetcher=None,
+    detail_failures: list[dict] | None = None,
 ) -> list[dict]:
     source_type = source.get("type")
     if source_type == "dou":
         return parse_dou_html(raw, source, collected_at)
     if source_type == "html" and source.get("htmlFollowDetail"):
-        return parse_html_detail_links(raw, source, collected_at, detail_fetcher)
+        return parse_html_detail_links(
+            raw, source, collected_at, detail_fetcher, detail_failures
+        )
     if source_type == "html":
         return parse_html_links(raw, source, collected_at)
     return parse_feed(raw, source, collected_at)
@@ -877,20 +1059,31 @@ def source_health(statuses: list[dict]) -> dict:
         and status.get("parserRecognized", False)
         and status.get("items", 0) == 0
     ]
-    return {
-        "status": "degraded" if failed or unrecognized or empty else "healthy",
+    partial = [
+        status["source"]
+        for status in statuses
+        if status.get("critical")
+        and status.get("ok")
+        and status.get("items", 0) > 0
+        and status.get("detailFailureCount", 0) > 0
+    ]
+    result = {
+        "status": "degraded" if failed or unrecognized or empty else ("partial" if partial else "healthy"),
         "criticalSourcesFailed": failed,
         "criticalSourcesUnrecognized": unrecognized,
         "criticalSourcesEmpty": empty,
     }
+    if partial:
+        result["criticalSourcesPartial"] = partial
+    return result
 
 
 def health_gate_exit_code(health: dict) -> int:
-    return 0 if health.get("status") == "healthy" else 1
+    return 0 if health.get("status") in {"healthy", "partial"} else 1
 
 
 def persist_payload(payload: dict, health: dict, output: Path = OUTPUT) -> bool:
-    if health.get("status") != "healthy":
+    if health.get("status") not in {"healthy", "partial"}:
         return False
     output.parent.mkdir(parents=True, exist_ok=True)
     temporary = output.with_suffix(output.suffix + ".tmp")
@@ -928,19 +1121,28 @@ def main():
             "parserRecognized": False,
             "items": 0,
         }
+        detail_failures = []
         try:
-            req = Request(
-                source["url"],
-                headers={
-                    "User-Agent": "RadarFiscal/2.0 (RSS fiscal; contato: painel local)",
-                    "Accept": "application/rss+xml, application/atom+xml, application/xml, text/xml;q=0.9, */*;q=0.8",
-                },
-            )
-            with urlopen(req, timeout=int(source.get("timeout", TIMEOUT)), context=SSL_CONTEXT) as response:
-                max_bytes = int(source.get("maxBytes", 900_000 if source.get("type") in {"html", "dou"} else 0))
-                raw = response.read(max_bytes) if max_bytes > 0 else response.read()
-            parser_recognized = recognizes_source_document(raw, source)
-            found = parse_source_document(raw, source)
+            if source.get("type") == "jornal_mg":
+                found = collect_jornal_mg(source)
+                parser_recognized = True
+            else:
+                req = Request(
+                    source["url"],
+                    headers={
+                        "User-Agent": "RadarFiscal/2.0 (RSS fiscal; contato: painel local)",
+                        "Accept": "application/rss+xml, application/atom+xml, application/xml, text/xml;q=0.9, */*;q=0.8",
+                    },
+                )
+                with urlopen(req, timeout=int(source.get("timeout", TIMEOUT)), context=ssl_context_for_source(source)) as response:
+                    max_bytes = int(source.get("maxBytes", 900_000 if source.get("type") in {"html", "dou"} else 0))
+                    raw = response.read(max_bytes) if max_bytes > 0 else response.read()
+                parser_recognized = recognizes_source_document(raw, source)
+                found = parse_source_document(
+                    raw,
+                    source,
+                    detail_failures=detail_failures,
+                )
             for item in found:
                 by_id[item["id"]] = item
             ok += 1
@@ -948,6 +1150,8 @@ def main():
                 "ok": True,
                 "parserRecognized": parser_recognized,
                 "items": len(found),
+                "detailFailureCount": len(detail_failures),
+                "detailFailures": detail_failures,
             })
         except Exception as exc:
             error = str(exc)[:180]

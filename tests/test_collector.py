@@ -1,4 +1,6 @@
 import json
+import re
+import subprocess
 from datetime import datetime, timezone
 
 import pytest
@@ -174,6 +176,148 @@ def test_tls_context_requires_certificate_validation():
 
     assert collect.SSL_CONTEXT.verify_mode == ssl.CERT_REQUIRED
     assert collect.SSL_CONTEXT.check_hostname is True
+
+
+def test_jornal_mg_tls_context_adds_pinned_intermediate_without_weakening_tls():
+    import ssl
+
+    sources = json.loads(collect.CONFIG.read_text(encoding="utf-8"))
+    source = next(item for item in sources if item["name"] == "Diário Oficial de Minas Gerais")
+
+    context = collect.ssl_context_for_source(source)
+
+    assert source["type"] == "jornal_mg"
+    assert source["tlsIntermediateCert"] == "collector/certs/sectigo-public-server-authentication-ca-dv-r36.pem"
+    assert source["tlsIntermediateSha256"] == "8c54c334b66ba4e426772af4a3f9136c19a1aec729fdb28c535c07a5a4ef22e0"
+    assert context.verify_mode == ssl.CERT_REQUIRED
+    assert context.check_hostname is True
+
+    with pytest.raises(ValueError, match="SHA-256"):
+        collect.ssl_context_for_source({**source, "tlsIntermediateSha256": "00" * 32})
+
+
+def test_jornal_mg_parser_uses_official_date_page_and_canonical_portal_link():
+    from urllib.parse import parse_qs, urlparse
+
+    source = {
+        **SOURCE,
+        "name": "Diário Oficial de Minas Gerais",
+        "url": "https://www.jornalminasgerais.mg.gov.br/",
+        "type": "jornal_mg",
+        "minScore": 0,
+    }
+    raw = json.dumps({
+        "dados": [{
+            "idJornal": 331353,
+            "dataPublicacao": "2026-11-20T00:00:00",
+            "tipoCaderno": "Diário do Executivo",
+            "textoResultado": "A Secretaria de Fazenda fixa índices definitivos da parcela do ICMS.",
+            "pagina": 7,
+        }],
+        "paginaAtual": 1,
+        "totalDePaginas": 1,
+        "totalDeRegistros": 1,
+        "erros": [],
+    }).encode()
+
+    items = collect.parse_jornal_mg_results(
+        raw,
+        source,
+        "ICMS",
+        collected_at=datetime(2026, 11, 21, 12, 0, tzinfo=timezone.utc),
+    )
+
+    assert len(items) == 1
+    item = items[0]
+    assert item["publishedAt"] == "2026-11-20T00:00:00+00:00"
+    assert item["publicationDateEvidence"] == "jornal-mg-api:dataPublicacao"
+    assert item["sourceRecord"] == {"idJornal": 331353, "pagina": 7}
+    assert "ICMS" in item["title"]
+    parsed = urlparse(item["url"])
+    assert parsed.path == "/edicao-do-dia"
+    navigation = json.loads(parse_qs(parsed.query)["dados"][0])
+    assert navigation == {
+        "dataPublicacaoSelecionada": "2026-11-20T00:00:00",
+        "idCadernoEdicaoSelecionado": 331353,
+        "paginaSelecionada": 7,
+        "textoPesquisa": "ICMS",
+    }
+
+
+def test_jornal_mg_collection_uses_anonymous_auth_then_bearer_search(monkeypatch):
+    source = {
+        **SOURCE,
+        "name": "Diário Oficial de Minas Gerais",
+        "url": "https://www.jornalminasgerais.mg.gov.br/",
+        "type": "jornal_mg",
+        "minScore": 0,
+        "searchTerms": ["ICMS"],
+        "lookbackDays": 30,
+        "pageSize": 50,
+        "maxPagesPerTerm": 1,
+        "htmlLimit": 20,
+    }
+    search_payload = json.dumps({
+        "dados": [{
+            "idJornal": 331353,
+            "dataPublicacao": "2026-11-20T00:00:00",
+            "tipoCaderno": "Diário do Executivo",
+            "textoResultado": "Publicação sobre ICMS.",
+            "pagina": 7,
+        }],
+        "paginaAtual": 1,
+        "totalDePaginas": 1,
+        "totalDeRegistros": 1,
+        "erros": [],
+    }).encode()
+    responses = [json.dumps({"dados": "token-anonimo"}).encode(), search_payload]
+    calls = []
+    strict_context = object()
+
+    class FakeResponse:
+        def __init__(self, body):
+            self.body = body
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *args):
+            return False
+
+        def read(self, _limit=None):
+            return self.body
+
+    def fake_urlopen(request, timeout, context):
+        calls.append((request, timeout, context))
+        return FakeResponse(responses.pop(0))
+
+    monkeypatch.setattr(collect, "ssl_context_for_source", lambda _source: strict_context)
+    monkeypatch.setattr(collect, "urlopen", fake_urlopen)
+    monkeypatch.setattr(
+        collect,
+        "_open_bearer_request",
+        lambda request, *, timeout, context: fake_urlopen(request, timeout, context),
+    )
+
+    items = collect.collect_jornal_mg(
+        source,
+        now=datetime(2026, 11, 21, 12, 0, tzinfo=timezone.utc),
+    )
+
+    assert len(items) == 1
+    assert len(calls) == 2
+    auth_request, _, auth_context = calls[0]
+    search_request, _, search_context = calls[1]
+    assert auth_request.get_method() == "POST"
+    assert auth_request.data == b"{}"
+    assert auth_request.full_url.endswith("/api/v1/Autenticacao/Autenticar")
+    assert auth_request.get_header("Authorization") is None
+    assert dict(auth_request.header_items())["User-agent"].encode("ascii")
+    assert search_request.get_method() == "GET"
+    assert "/api/v1/Pesquisa/PesquisarJornaisPaginados?" in search_request.full_url
+    assert search_request.get_header("Authorization") == "Bearer token-anonimo"
+    assert auth_context is strict_context
+    assert search_context is strict_context
 
 
 @pytest.mark.parametrize(
@@ -357,6 +501,39 @@ def test_confaz_detail_adapter_uses_detail_title_and_dou_publication_date():
     assert items[0]["publicationDateEvidence"] == "html:detail:configured-regex"
 
 
+def test_confaz_detail_adapter_skips_one_failed_detail_and_keeps_valid_items():
+    index = b'''<table>
+      <tr><td><a href="/legislacao/convenios/2026/CV127_26">127</a></td></tr>
+      <tr><td><a href="/legislacao/convenios/2026/CV131_26">131</a></td></tr>
+    </table>'''
+    source = {
+        **SOURCE,
+        "name": "CONFAZ — Convênios ICMS",
+        "url": "https://www.confaz.fazenda.gov.br/legislacao/convenios/2026/2026",
+        "type": "html",
+        "htmlContainerTag": "tr",
+        "htmlFollowDetail": True,
+        "htmlDetailTitleRegex": r'<p class="TituloAcordo">([\s\S]*?)</p>',
+        "htmlPublishedDateRegex": r"Publicado no DOU de ([0-3]?\d\.[01]?\d\.\d{2})",
+        "urlAllowRegex": r"confaz\.fazenda\.gov\.br/legislacao/convenios/\d{4}/CV\d{3}_\d{2}$",
+    }
+
+    def fake_fetch(url):
+        if url.endswith("CV127_26"):
+            raise TimeoutError("detalhe indisponível")
+        return b'''<p class="TituloAcordo">CONVENIO ICMS 131, DE 27 DE OUTUBRO DE 2026</p>
+          <p>Publicado no DOU de 29.10.26</p>'''
+
+    items = collect.parse_html_detail_links(
+        index,
+        source,
+        datetime(2026, 11, 21, tzinfo=timezone.utc),
+        detail_fetcher=fake_fetch,
+    )
+
+    assert [item["url"].rsplit("/", 1)[-1] for item in items] == ["CV131_26"]
+
+
 def test_confaz_rejects_cross_year_links_and_semantically_inconsistent_dates():
     source = {
         "name": "CONFAZ — Convênios ICMS",
@@ -452,6 +629,19 @@ def test_healthy_payload_is_written_atomically(tmp_path):
     assert not output.with_suffix(".json.tmp").exists()
 
 
+def test_jornal_mg_evidence_is_allowed_for_verified_history():
+    item = {
+        "title": "Diário Oficial de Minas Gerais — ICMS",
+        "url": "https://www.jornalminasgerais.mg.gov.br/edicao-do-dia?dados=teste",
+        "summary": "Publicação oficial sobre ICMS",
+        "publishedAt": "2026-11-20T00:00:00+00:00",
+        "collectedAt": "2026-11-21T12:00:00+00:00",
+        "publicationDateEvidence": "jornal-mg-api:dataPublicacao",
+    }
+
+    assert collect.keep_existing(item)
+
+
 def test_unrecognized_critical_parser_blocks_publication_gate():
     health = collect.source_health(
         [{"source": "CONFAZ", "critical": True, "ok": True, "parserRecognized": False, "items": 0}]
@@ -534,10 +724,147 @@ def test_frontend_only_accepts_validated_feed_and_rechecks_urgency_and_health():
     assert "const payloadHealthy = payload.health?.status === 'healthy';" in index
     assert "const externos = payloadHealthy && feedComDataValida && Array.isArray(payload.items) ? payload.items : [];" in index
     assert "const feedHistorico = payloadHealthy && feedComDataValida && feedObsoleto;" in index
+    assert "state.collectorDegraded = !feedValidated;" in index
+    assert "state.feedHistorico = feedHistorico;" in index
+    assert "Última coleta saudável preservada" in index
     assert "Histórico possivelmente desatualizado" in index
     assert "'feed:updated'" not in index
     assert "!item.publicationDateEvidence || !item.collectedAt" in index
     assert "'html:detail:configured-regex'" in index
     assert "'dou:pubDate'" in index
+    assert "'jornal-mg-api:dataPublicacao'" in index
     assert "const staleUrgency = rawImpacts.includes('prazo') && !deadline;" in index
-    assert "state.online = respondeu && !state.collectorDegraded;" in index
+    assert "state.online = respondeu && !state.collectorDegraded && !state.feedHistorico;" in index
+
+
+def test_phase_three_preview_has_app_shell_theme_and_mobile_navigation_contract():
+    index = (collect.ROOT / "index.html").read_text(encoding="utf-8")
+
+    assert 'class="app-shell"' in index
+    assert 'class="product-nav"' in index
+    assert 'id="themeToggle"' in index
+    assert 'id="navToggle"' in index
+    assert 'data-theme="dark"' in index
+    assert "radar-fiscal-theme" in index
+    assert "prefers-color-scheme: dark" in index
+    assert "@media(max-width:900px)" in index
+
+
+def _run_frontend_validator(items):
+    index = (collect.ROOT / "index.html").read_text(encoding="utf-8")
+    functions = []
+    for name in ("urlExternaSegura", "validarItemFeed"):
+        match = re.search(rf"function {name}\([^\n]+\)\{{[\s\S]*?\n\}}", index)
+        assert match, f"função {name} ausente"
+        functions.append(match.group(0))
+    script = "\n".join(functions) + f"\nconsole.log(JSON.stringify({json.dumps(items)}.map(validarItemFeed)));"
+    completed = subprocess.run(
+        ["node", "-e", script], check=True, capture_output=True, text=True
+    )
+    return json.loads(completed.stdout)
+
+
+def test_frontend_rejects_xss_urls_markup_and_invalid_feed_item_dates():
+    valid = {
+        "title": "Ato fiscal válido",
+        "url": "https://example.gov.br/ato",
+        "source": "Fonte oficial",
+        "category": "icms",
+        "summary": "Resumo válido",
+        "publishedAt": "2026-11-20T10:00:00Z",
+        "collectedAt": "2026-11-21T10:00:00Z",
+        "publicationDateEvidence": "feed:pubdate",
+        "impactTags": ["risco"],
+    }
+    candidates = [
+        valid,
+        {**valid, "title": '<img src=x onerror="globalThis.pwned=1">'},
+        {**valid, "url": "javascript:alert(1)"},
+        {**valid, "url": "data:text/html,<script>alert(1)</script>"},
+        {**valid, "publishedAt": "inválida"},
+        {**valid, "collectedAt": "inválida"},
+        {**valid, "publishedAt": "2999-01-01T00:00:00Z", "collectedAt": "2999-01-02T00:00:00Z"},
+        {**valid, "publishedAt": "2026-11-22T00:00:00Z"},
+        {**valid, "collectedAt": "2999-01-02T00:00:00Z"},
+        {**valid, "title": 123},
+        {**valid, "impactTags": "risco"},
+    ]
+
+    validated = _run_frontend_validator(candidates)
+
+    assert validated[0]["url"] == valid["url"]
+    # Markup é texto legítimo e deve permanecer inerte; os demais itens são inválidos.
+    assert validated[1]["title"] == candidates[1]["title"]
+    assert validated[2:] == [None] * (len(candidates) - 2)
+
+
+def test_frontend_has_no_innerhtml_sink_for_external_data():
+    index = (collect.ROOT / "index.html").read_text(encoding="utf-8")
+
+    assert ".innerHTML" not in index
+    assert "e.textContent = String(text)" in index
+    assert "a.href = i.url" in index
+    assert "urlExternaSegura(item.url)" in index
+    assert "if(urlExternaSegura(i.url))" in index
+    assert "const payloadPartial = payload.health?.status === 'partial';" in index
+    assert "state.collectorPartial = payloadPartial && feedComDataValida;" in index
+    assert "Feed parcial" in index
+
+
+def test_bearer_redirects_are_blocked_before_authorization_can_be_forwarded():
+    from urllib.error import HTTPError
+    from urllib.request import Request
+
+    request = Request(
+        "https://www.jornalminasgerais.mg.gov.br/api/v1/Pesquisa/teste",
+        headers={"Authorization": "Bearer segredo"},
+    )
+    handler = collect.NoBearerRedirectHandler()
+
+    with pytest.raises(HTTPError, match="redirect bloqueado"):
+        handler.redirect_request(
+            request, None, 302, "Found", {}, "https://attacker.example/roubo"
+        )
+
+
+def test_confaz_partial_detail_failures_are_structured_sanitized_and_publishable():
+    index = b'''<table>
+      <tr><td><a href="/legislacao/convenios/2026/CV127_26?token=segredo">127</a></td></tr>
+      <tr><td><a href="/legislacao/convenios/2026/CV131_26">131</a></td></tr>
+    </table>'''
+    source = {
+        **SOURCE,
+        "name": "CONFAZ — Convênios ICMS", "critical": True,
+        "url": "https://www.confaz.fazenda.gov.br/legislacao/convenios/2026/2026",
+        "type": "html", "htmlContainerTag": "tr", "htmlFollowDetail": True,
+        "htmlDetailTitleRegex": r'<p class="TituloAcordo">([\s\S]*?)</p>',
+        "htmlPublishedDateRegex": r"Publicado no DOU de ([0-3]?\d\.[01]?\d\.\d{2})",
+        "urlAllowRegex": r"confaz\.fazenda\.gov\.br/legislacao/convenios/\d{4}/CV\d{3}_\d{2}",
+    }
+    failures = []
+
+    def fake_fetch(url):
+        if "CV127_26" in url:
+            raise TimeoutError("token=segredo não deve vazar")
+        return b'''<p class="TituloAcordo">CONVENIO ICMS 131, DE 27 DE OUTUBRO DE 2026</p>
+          <p>Publicado no DOU de 29.10.26</p>'''
+
+    items = collect.parse_source_document(
+        index, source, datetime(2026, 11, 21, tzinfo=timezone.utc),
+        detail_fetcher=fake_fetch, detail_failures=failures,
+    )
+    status = {
+        "source": source["name"], "critical": True, "ok": True,
+        "parserRecognized": True, "items": len(items),
+        "detailFailureCount": len(failures), "detailFailures": failures,
+    }
+    health = collect.source_health([status])
+
+    assert len(items) == 1
+    assert failures == [{
+        "url": "https://www.confaz.fazenda.gov.br/legislacao/convenios/2026/CV127_26",
+        "error": "TimeoutError",
+    }]
+    assert health["status"] == "partial"
+    assert health["criticalSourcesPartial"] == [source["name"]]
+    assert collect.health_gate_exit_code(health) == 0
