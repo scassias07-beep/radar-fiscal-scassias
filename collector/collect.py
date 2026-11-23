@@ -9,8 +9,10 @@ from __future__ import annotations
 
 import hashlib
 import html
+import ipaddress
 import json
 import re
+import socket
 import sys
 import unicodedata
 from datetime import datetime, timedelta, timezone
@@ -28,6 +30,14 @@ OUTPUT = ROOT / "data" / "news.json"
 MAX_ITEMS = 300
 PER_SOURCE_LIMIT = 35
 TIMEOUT = 25
+# Política da coleta ativa: somente publicações comprovadas dos últimos 90 dias.
+# A janela usa publishedAt (nunca collectedAt/updatedAt), portanto uma nova coleta
+# não transforma conteúdo antigo em notícia atual.
+ACTIVE_ITEM_MAX_AGE = timedelta(days=90)
+DEFAULT_MAX_BYTES = 900_000
+DEFAULT_AUTH_MAX_BYTES = 100_000
+DEFAULT_API_MAX_BYTES = 2_000_000
+DEFAULT_DETAIL_MAX_BYTES = 700_000
 
 RELEVANCE_TERMS = {
     "tribut": 5,
@@ -105,9 +115,134 @@ class NoBearerRedirectHandler(HTTPRedirectHandler):
         )
 
 
-def _open_bearer_request(request: Request, *, timeout: int, context: ssl.SSLContext):
-    opener = build_opener(HTTPSHandler(context=context), NoBearerRedirectHandler())
+class ResponseTooLarge(ValueError):
+    """A resposta excedeu o limite e não pode ser usada parcialmente."""
+
+
+def read_response_limited(response, max_bytes: int) -> bytes:
+    """Lê com byte sentinela para distinguir resposta completa de truncada."""
+    if max_bytes <= 0:
+        raise ValueError("limite de resposta deve ser positivo")
+    declared = response.headers.get("Content-Length") if response.headers else None
+    if declared is not None:
+        try:
+            declared_size = int(declared)
+        except (TypeError, ValueError) as exc:
+            raise ValueError("Content-Length inválido") from exc
+        if declared_size > max_bytes:
+            raise ResponseTooLarge(f"resposta excede limite de {max_bytes} bytes")
+    body = response.read(max_bytes + 1)
+    if len(body) > max_bytes:
+        raise ResponseTooLarge(f"resposta excede limite de {max_bytes} bytes")
+    return body
+
+
+def validate_network_url(
+    url: str, *, allowed_hosts: set[str], allowed_ports: set[int]
+) -> None:
+    """Valida esquema, allowlist e todos os IPs resolvidos (SSRF fail-closed)."""
+    parts = urlsplit(url)
+    host = (parts.hostname or "").lower().rstrip(".")
+    try:
+        port = parts.port or 443
+    except ValueError as exc:
+        raise ValueError("porta inválida") from exc
+    normalized_hosts = {value.lower().rstrip(".") for value in allowed_hosts}
+    if parts.scheme.lower() != "https":
+        raise ValueError("apenas HTTPS é permitido")
+    if not host or host not in normalized_hosts:
+        raise ValueError("host não permitido")
+    if port not in allowed_ports:
+        raise ValueError("porta não permitida")
+    try:
+        addresses = socket.getaddrinfo(host, port, type=socket.SOCK_STREAM)
+    except OSError as exc:
+        raise ValueError("não foi possível validar o DNS do destino") from exc
+    if not addresses:
+        raise ValueError("destino sem endereço validável")
+    for address in addresses:
+        try:
+            ip = ipaddress.ip_address(address[4][0])
+        except ValueError as exc:
+            raise ValueError("endereço de destino inválido") from exc
+        if not ip.is_global:
+            raise ValueError("destino local, privado ou reservado bloqueado")
+
+
+class SafeRedirectHandler(HTTPRedirectHandler):
+    """Valida cada redirect público antes de o urllib segui-lo."""
+
+    def __init__(self, allowed_hosts: set[str], allowed_ports: set[int]):
+        self.allowed_hosts = allowed_hosts
+        self.allowed_ports = allowed_ports
+        super().__init__()
+
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        try:
+            validate_network_url(
+                newurl, allowed_hosts=self.allowed_hosts, allowed_ports=self.allowed_ports
+            )
+        except ValueError as exc:
+            raise HTTPError(newurl, code, f"{msg} (redirect inseguro: {exc})", headers, fp) from exc
+        return super().redirect_request(req, fp, code, msg, headers, newurl)
+
+
+def _network_policy(source: dict) -> tuple[set[str], set[int]]:
+    source_parts = urlsplit(source["url"])
+    hosts = {source_parts.hostname or ""}
+    hosts.update(str(host) for host in source.get("allowedRedirectHosts", []))
+    ports = {int(port) for port in source.get("allowedPorts", [443])}
+    return hosts, ports
+
+
+def _open_with_validated_redirects(
+    request: Request, *, timeout: int, context: ssl.SSLContext,
+    allowed_hosts: set[str], allowed_ports: set[int],
+):
+    opener = build_opener(
+        HTTPSHandler(context=context), SafeRedirectHandler(allowed_hosts, allowed_ports)
+    )
     return opener.open(request, timeout=timeout)
+
+
+def open_public_request(request: Request, *, source: dict):
+    """Valida URL inicial, cada salto e a URL final da resposta."""
+    hosts, ports = _network_policy(source)
+    validate_network_url(request.full_url, allowed_hosts=hosts, allowed_ports=ports)
+    response = _open_with_validated_redirects(
+        request,
+        timeout=int(source.get("timeout", TIMEOUT)),
+        context=ssl_context_for_source(source),
+        allowed_hosts=hosts,
+        allowed_ports=ports,
+    )
+    try:
+        validate_network_url(response.geturl(), allowed_hosts=hosts, allowed_ports=ports)
+    except Exception:
+        if hasattr(response, "close"):
+            response.close()
+        raise
+    return response
+
+
+def _open_bearer_request(
+    request: Request, *, timeout: int, context: ssl.SSLContext,
+    allowed_hosts: set[str], allowed_ports: set[int],
+):
+    validate_network_url(
+        request.full_url, allowed_hosts=allowed_hosts, allowed_ports=allowed_ports
+    )
+    opener = build_opener(HTTPSHandler(context=context), NoBearerRedirectHandler())
+    response = opener.open(request, timeout=timeout)
+    try:
+        validate_network_url(
+            response.geturl(), allowed_hosts=allowed_hosts, allowed_ports=allowed_ports
+        )
+    except Exception:
+        if hasattr(response, "close"):
+            response.close()
+        raise
+    return response
 
 
 def ssl_context_for_source(source: dict) -> ssl.SSLContext:
@@ -261,9 +396,12 @@ def is_valid_content_link(href: str, title: str, source: dict) -> bool:
     raw_href = clean(href).strip()
     if not raw_href or raw_href.startswith("#"):
         return False
+    raw_parts = urlsplit(raw_href)
+    if raw_parts.scheme and raw_parts.scheme.lower() != "https":
+        return False
     url = canonical_url(urljoin(source["url"], raw_href))
     parts = urlsplit(url)
-    if parts.scheme not in {"http", "https"} or not parts.netloc:
+    if parts.scheme != "https" or not parts.netloc:
         return False
     source_host = urlsplit(source["url"]).hostname or ""
     target_host = parts.hostname or ""
@@ -528,8 +666,11 @@ def collect_jornal_mg(source: dict, now: datetime | None = None) -> list[dict]:
         headers=common_headers,
         method="POST",
     )
-    with urlopen(auth_request, timeout=int(source.get("timeout", TIMEOUT)), context=context) as response:
-        auth_payload = json.loads(response.read(100_000).decode("utf-8"))
+    auth_max_bytes = int(source.get("authMaxBytes", DEFAULT_AUTH_MAX_BYTES))
+    with open_public_request(auth_request, source=source) as response:
+        auth_payload = json.loads(
+            read_response_limited(response, auth_max_bytes).decode("utf-8")
+        )
     token = auth_payload.get("dados") if isinstance(auth_payload, dict) else None
     if not isinstance(token, str) or not token:
         raise ValueError("Autenticação anônima do Jornal MG não retornou token")
@@ -556,10 +697,16 @@ def collect_jornal_mg(source: dict, now: datetime | None = None) -> list[dict]:
                 urljoin(base_api, "Pesquisa/PesquisarJornaisPaginados") + "?" + query,
                 headers={**common_headers, "Authorization": f"Bearer {token}"},
             )
+            allowed_hosts, allowed_ports = _network_policy(source)
             with _open_bearer_request(
-                request, timeout=int(source.get("timeout", TIMEOUT)), context=context
+                request,
+                timeout=int(source.get("timeout", TIMEOUT)),
+                context=context,
+                allowed_hosts=allowed_hosts,
+                allowed_ports=allowed_ports,
             ) as response:
-                raw = response.read(int(source.get("maxBytes", 2_000_000)))
+                max_bytes = int(source.get("maxBytes", DEFAULT_API_MAX_BYTES))
+                raw = read_response_limited(response, max_bytes)
             payload = json.loads(raw.decode("utf-8"))
             found = parse_jornal_mg_results(raw, source, search_term, collected_at=now)
             for item in found:
@@ -594,7 +741,7 @@ def parse_feed(raw: bytes, source: dict, collected_at: datetime | None = None) -
         score = relevance_score(title, summary, source)
         if score < min_score:
             continue
-        url = canonical_url(link)
+        url = canonical_url(urljoin(source["url"], link))
         category = classify(title, summary, source)
         item_summary = (summary or "Publicação coletada automaticamente. Confirme o teor na fonte original.")[:360]
         item = {
@@ -790,12 +937,9 @@ def _fetch_detail(url: str, source: dict) -> bytes:
             "Accept": "text/html,application/xhtml+xml",
         },
     )
-    with urlopen(
-        req,
-        timeout=int(source.get("timeout", TIMEOUT)),
-        context=SSL_CONTEXT,
-    ) as response:
-        return response.read(int(source.get("detailMaxBytes", 700_000)))
+    detail_max_bytes = int(source.get("detailMaxBytes", DEFAULT_DETAIL_MAX_BYTES))
+    with open_public_request(req, source=source) as response:
+        return read_response_limited(response, detail_max_bytes)
 
 
 def _confaz_act_date(title: str) -> datetime | None:
@@ -994,8 +1138,18 @@ def load_old() -> dict:
         return {"items": []}
 
 
-def keep_existing(item: dict) -> bool:
-    """Reutiliza apenas itens cuja data tem origem comprovável e reanalisa o risco."""
+def publication_is_active(published_at: str, reference: datetime) -> bool:
+    """Aceita publicação comprovada que esteja dentro da janela ativa."""
+    parsed = parse_date(published_at)
+    if parsed is None:
+        return False
+    published = datetime.fromisoformat(parsed).astimezone(timezone.utc)
+    reference = reference.astimezone(timezone.utc)
+    return reference - ACTIVE_ITEM_MAX_AGE <= published <= reference
+
+
+def keep_existing(item: dict, now: datetime | None = None) -> bool:
+    """Reutiliza apenas itens recentes cuja data tem origem comprovável."""
     required = (
         item.get("title"),
         item.get("url"),
@@ -1003,7 +1157,11 @@ def keep_existing(item: dict) -> bool:
         item.get("publicationDateEvidence"),
     )
     evidence = item.get("publicationDateEvidence")
-    if not all(required) or evidence not in ALLOWED_DATE_EVIDENCE:
+    if (
+        not all(required)
+        or evidence not in ALLOWED_DATE_EVIDENCE
+        or urlsplit(str(item.get("url", ""))).scheme.lower() != "https"
+    ):
         return False
     pseudo_source = {
         "baseScore": 0,
@@ -1016,11 +1174,13 @@ def keep_existing(item: dict) -> bool:
     )
     published_at = parse_date(item.get("publishedAt", ""))
     collected_at = parse_date(item.get("collectedAt", ""))
+    reference = now or datetime.now(timezone.utc)
     if (
         score < 5
         or published_at is None
         or collected_at is None
         or published_at > collected_at
+        or not publication_is_active(published_at, reference)
     ):
         return False
     item["score"] = score
@@ -1039,6 +1199,7 @@ def keep_existing(item: dict) -> bool:
 
 
 def source_health(statuses: list[dict]) -> dict:
+    all_failed = [status["source"] for status in statuses if not status.get("ok")]
     failed = [
         status["source"]
         for status in statuses
@@ -1059,7 +1220,7 @@ def source_health(statuses: list[dict]) -> dict:
         and status.get("parserRecognized", False)
         and status.get("items", 0) == 0
     ]
-    partial = [
+    critical_detail_partial = [
         status["source"]
         for status in statuses
         if status.get("critical")
@@ -1067,14 +1228,34 @@ def source_health(statuses: list[dict]) -> dict:
         and status.get("items", 0) > 0
         and status.get("detailFailureCount", 0) > 0
     ]
+    noncritical_detail_partial = [
+        status["source"]
+        for status in statuses
+        if not status.get("critical")
+        and status.get("ok")
+        and status.get("detailFailureCount", 0) > 0
+    ]
+    noncritical_failed = [
+        status["source"]
+        for status in statuses
+        if not status.get("critical") and not status.get("ok")
+    ]
     result = {
-        "status": "degraded" if failed or unrecognized or empty else ("partial" if partial else "healthy"),
+        "status": "degraded" if failed or unrecognized or empty else (
+            "partial"
+            if all_failed or critical_detail_partial or noncritical_detail_partial
+            else "healthy"
+        ),
+        "sourcesFailed": all_failed,
+        "nonCriticalSourcesFailed": noncritical_failed,
         "criticalSourcesFailed": failed,
         "criticalSourcesUnrecognized": unrecognized,
         "criticalSourcesEmpty": empty,
     }
-    if partial:
-        result["criticalSourcesPartial"] = partial
+    if critical_detail_partial:
+        result["criticalSourcesPartial"] = critical_detail_partial
+    if noncritical_detail_partial:
+        result["nonCriticalSourcesPartial"] = noncritical_detail_partial
     return result
 
 
@@ -1100,19 +1281,20 @@ def resolve_source(source: dict, now: datetime | None = None) -> dict:
 
 
 def main():
+    collection_started_at = datetime.now(timezone.utc)
     sources = json.loads(CONFIG.read_text(encoding="utf-8"))
     old = load_old()
     by_id = {
         item.get("id") or hashlib.sha256(canonical_url(item.get("url", "")).encode()).hexdigest()[:16]: item
         for item in old.get("items", [])
-        if keep_existing(item)
+        if keep_existing(item, collection_started_at)
     }
     ok = 0
     failed = []
     statuses = []
 
     for configured_source in sources:
-        source = resolve_source(configured_source)
+        source = resolve_source(configured_source, collection_started_at)
         source_status = {
             "source": source["name"],
             "url": source["url"],
@@ -1124,7 +1306,7 @@ def main():
         detail_failures = []
         try:
             if source.get("type") == "jornal_mg":
-                found = collect_jornal_mg(source)
+                found = collect_jornal_mg(source, collection_started_at)
                 parser_recognized = True
             else:
                 req = Request(
@@ -1134,15 +1316,21 @@ def main():
                         "Accept": "application/rss+xml, application/atom+xml, application/xml, text/xml;q=0.9, */*;q=0.8",
                     },
                 )
-                with urlopen(req, timeout=int(source.get("timeout", TIMEOUT)), context=ssl_context_for_source(source)) as response:
-                    max_bytes = int(source.get("maxBytes", 900_000 if source.get("type") in {"html", "dou"} else 0))
-                    raw = response.read(max_bytes) if max_bytes > 0 else response.read()
+                max_bytes = int(source.get("maxBytes", DEFAULT_MAX_BYTES))
+                with open_public_request(req, source=source) as response:
+                    raw = read_response_limited(response, max_bytes)
                 parser_recognized = recognizes_source_document(raw, source)
                 found = parse_source_document(
                     raw,
                     source,
+                    collected_at=collection_started_at,
                     detail_failures=detail_failures,
                 )
+            found = [
+                item
+                for item in found
+                if publication_is_active(item.get("publishedAt", ""), collection_started_at)
+            ]
             for item in found:
                 by_id[item["id"]] = item
             ok += 1
@@ -1170,11 +1358,13 @@ def main():
         "sourcesOk": ok,
         "sourcesFailed": failed,
         "sources": statuses,
+        "sourceStats": statuses,
         "health": health,
         "meta": {
             "collector": "collector/collect.py",
             "policy": "RSS/Atom e páginas HTML públicas com filtro fiscal/tributário, deduplicação por URL canônica e fallback do histórico local.",
             "maxItems": MAX_ITEMS,
+            "activeItemMaxAgeDays": ACTIVE_ITEM_MAX_AGE.days,
         },
     }
     written = persist_payload(payload, health, OUTPUT)

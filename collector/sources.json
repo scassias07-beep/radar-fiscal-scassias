@@ -2,10 +2,16 @@
   {
     "name": "Receita Federal",
     "critical": true,
-    "url": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias/RSS",
+    "type": "html",
+    "url": "https://www.gov.br/receitafederal/pt-br/assuntos/noticias",
     "category": "receita",
     "baseScore": 2,
     "minScore": 4,
+    "urlAllowRegex": "^https://www\\.gov\\.br/receitafederal/pt-br/assuntos/noticias/\\d{4}/[^/?#]+/[^/?#]+/?$",
+    "urlDenyRegex": "(?:/@@|/imagens?/|\\.(?:jpe?g|png|gif|pdf)(?:$|[?#]))",
+    "htmlContainerTag": "li",
+    "htmlPublishedDateRegex": "<span\\b[^>]*class=[\"'][^\"']*\\bdata\\b[^\"']*[\"'][^>]*>\\s*(\\d{2}/\\d{2}/\\d{4})",
+    "minTitleLength": 12,
     "includeKeywords": [
       "tribut",
       "fiscal",
@@ -30,11 +36,12 @@
       "aeroporto",
       "doação",
       "campanha institucional"
-    ]
+    ],
+    "htmlLimit": 20
   },
   {
     "name": "Portal Reforma Tributária",
-    "url": "https://reformatributaria.com/feed/",
+    "url": "https://www.reformatributaria.com/feed/",
     "category": "reforma",
     "baseScore": 4,
     "minScore": 5,

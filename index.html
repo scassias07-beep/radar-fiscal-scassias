@@ -879,22 +879,22 @@ const FONTES = [
   { g:"Autoridades fiscais" },
   { n:"Receita Federal",    u:"https://www.gov.br/receitafederal/pt-br/assuntos/noticias", h:"gov.br/receitafederal",  s:"noticias" },
   { n:"CGIBS",              u:"https://cgibs.gov.br/",                                      h:"cgibs.gov.br",          s:"comite gestor do IBS" },
-  { n:"CONFAZ",             u:"https://www.confaz.fazenda.gov.br/legislacao",               h:"confaz.fazenda.gov.br", s:"legislacao" },
+  { n:"CONFAZ",             u:"https://www.confaz.fazenda.gov.br/legislacao",               h:"confaz.fazenda.gov.br", s:"legislacao", a:["CONFAZ — Convênios ICMS","CONFAZ — Ajustes SINIEF","CONFAZ — Protocolos ICMS"] },
   { n:"CARF",               u:"https://www.gov.br/carf/pt-br/assuntos/avisos-comunicados/2026", h:"gov.br/carf",       s:"pautas e acordaos" },
 
   { g:"Judiciário e contencioso" },
   { n:"STF · Jurisprudência", u:"https://jurisprudencia.stf.jus.br/",                       h:"jurisprudencia.stf.jus.br", s:"decisoes e teses" },
-  { n:"STJ · Jurisprudência", u:"https://scon.stj.jus.br/SCON/",                            h:"scon.stj.jus.br",       s:"pesquisa de julgados" },
-  { n:"JOTA · Jurisprudência", u:"https://www.jota.info/tributos",                          h:"jota.info",             s:"STF, STJ e CARF" },
+  { n:"STJ · Jurisprudência", u:"https://scon.stj.jus.br/SCON/",                            h:"scon.stj.jus.br",       s:"pesquisa de julgados", a:["STJ — Notícias"] },
+  { n:"JOTA · Jurisprudência", u:"https://www.jota.info/tributos",                          h:"jota.info",             s:"STF, STJ e CARF", a:["JOTA"] },
 
   { g:"Imprensa especializada" },
-  { n:"JOTA · Tributos",    u:"https://www.jota.info/tributos",                             h:"jota.info",             s:"tributos" },
-  { n:"JOTA · Pulso da Reforma", u:"https://www.jota.info/coberturas-especiais/pulso-da-reforma", h:"jota.info",        s:"reforma tributaria" },
+  { n:"JOTA · Tributos",    u:"https://www.jota.info/tributos",                             h:"jota.info",             s:"tributos", a:["JOTA"] },
+  { n:"JOTA · Pulso da Reforma", u:"https://www.jota.info/coberturas-especiais/pulso-da-reforma", h:"jota.info",        s:"reforma tributaria", a:["JOTA"] },
   { n:"Valor Econômico",    u:"https://valor.globo.com/legislacao/",                        h:"valor.globo.com",       s:"legislacao e tributos" },
-  { n:"Diário Oficial da União", u:"https://www.in.gov.br/consulta/-/buscar/dou?q=tribut%C3%A1rio&s=todos", h:"in.gov.br", s:"atos federais" },
+  { n:"Diário Oficial da União", u:"https://www.in.gov.br/consulta/-/buscar/dou?q=tribut%C3%A1rio&s=todos", h:"in.gov.br", s:"atos federais", a:["Diário Oficial da União — busca fiscal"] },
 
   { g:"Estados e municípios" },
-  { n:"SEFAZ estaduais",    u:"SEFAZ de cada estado · notas e resolucoes",                  h:"sefaz.**.gov.br",       s:"ICMS e IBS estadual" },
+  { n:"SEFAZ estaduais",    u:"SEFAZ de cada estado · notas e resolucoes",                  h:"sefaz.**.gov.br",       s:"ICMS e IBS estadual", a:["SEF Minas Gerais — Empresas"] },
   { n:"CNM · Reforma",      u:"https://cnm.org.br/comunicacao/noticias",                    h:"cnm.org.br",            s:"ISS e IBS municipal" },
   { n:"Serpro",             u:"https://www.serpro.gov.br/menu/noticias/noticias-2026",      h:"serpro.gov.br",         s:"sistemas e obrigacoes" }
 ];
@@ -920,6 +920,7 @@ const state = {
   feedHistorico: false,
   collectorPartial: false,
   collectorDegraded: true,
+  sourceStatuses: [],
   varrendo: false,
   online: false
 };
@@ -1265,7 +1266,7 @@ function renderKPIs(){
       s: state.collectorDegraded
         ? "Saúde crítica degradada: o painel não considera a coleta confiável."
         : (state.collectorPartial
-          ? "Coleta parcial: itens válidos publicados, com falhas de detalhe registradas na auditoria."
+          ? "Coleta parcial: uma ou mais fontes apresentaram falhas; consulte o diagnóstico."
           : state.feedHistorico
           ? "Última coleta saudável preservada; aguardando atualização das fontes."
           : (state.online ? `Conexão ativa · ${state.bytes} bytes recebidos.` : "Leitura externa indisponível no navegador.")),
@@ -1535,9 +1536,12 @@ function renderFontes(){
     txt.appendChild(el("div","host", f.h));
     a.appendChild(txt);
     row.appendChild(a);
-    let cls = "p-off", label = "instantâneo";
+    const status = statusDaFonte(f);
+    let cls = "p-off", label = "sem diagnóstico";
     if(state.varrendo)    { cls = "p-wait"; label = "varrendo…"; }
-    else if(state.online) { cls = "p-ok";   label = "conectada"; }
+    else if(status && status.ok === false) { cls = "p-off"; label = "falha"; }
+    else if(status && status.detailFailureCount > 0) { cls = "p-wait"; label = "parcial"; }
+    else if(status && status.ok === true) { cls = "p-ok"; label = "conectada"; }
     row.appendChild(el("span","pill "+cls, label));
     box.appendChild(row);
   });
@@ -1692,6 +1696,7 @@ const ALVOS = [
   "https://www.serpro.gov.br/menu/noticias/noticias-2026",
   "https://valor.globo.com/legislacao/"
 ];
+const MAX_SCAN_BYTES = 500_000;
 
 async function tentar(url){
   for(const p of PROXIES){
@@ -1701,7 +1706,23 @@ async function tentar(url){
       const r = await fetch(p(url), { signal: ctl.signal, redirect:"follow" });
       clearTimeout(to);
       if(!r.ok) continue;
-      const txt = await r.text();
+      if(!r.body || typeof r.body.getReader !== "function") continue;
+      const leitor = r.body.getReader();
+      const declarado = r.headers?.get("Content-Length");
+      if(declarado !== null && declarado !== undefined && (!/^\d+$/.test(declarado) || Number(declarado) > MAX_SCAN_BYTES)){
+        await leitor.cancel();
+        continue;
+      }
+      const decoder = new TextDecoder("utf-8", {fatal:true});
+      let total = 0, txt = "";
+      while(true){
+        const {done,value} = await leitor.read();
+        if(done) break;
+        total += value.byteLength;
+        if(total > MAX_SCAN_BYTES){ await leitor.cancel(); throw new RangeError("Varredura excede o limite de bytes"); }
+        txt += decoder.decode(value, {stream:true});
+      }
+      txt += decoder.decode();
       if(txt && txt.length > 800) return txt;
     }catch(e){ /* próximo espelho */ }
   }
@@ -1844,52 +1865,136 @@ document.addEventListener("keydown", e => { if(e.key === "Escape") fecharModalCo
 
 
 /* ---------- DADOS GERADOS PELO COLETOR ---------- */
+const MAX_FEED_BYTES = 2_000_000;
+const MAX_FEED_ITEMS = 300;
+const MAX_SOURCE_STATUSES = 64;
+const FEED_MAX_AGE_MS = 2 * 60 * 60 * 1000;
+const FEED_FUTURE_TOLERANCE_MS = 5 * 60 * 1000;
+// Itens ativos usam publishedAt, nunca updatedAt/collectedAt, e expiram em 90 dias.
+const ACTIVE_ITEM_MAX_AGE_MS = 90 * 24 * 60 * 60 * 1000;
+
 function urlExternaSegura(valor){
   const texto = typeof valor === 'string' ? valor.trim() : '';
-  const valida = texto !== '' && URL.canParse(texto);
-  const protocolo = valida ? new URL(texto).protocol : '';
-  return valida && (protocolo === 'http:' || protocolo === 'https:');
+  const base = globalThis.location && globalThis.location.href ? globalThis.location.href : 'https://invalid.local/';
+  const valida = texto !== '' && URL.canParse(texto, base);
+  const protocolo = valida ? new URL(texto, base).protocol : '';
+  return valida && protocolo === 'https:';
 }
 
-function validarItemFeed(item){
+function validarItemFeed(item, agora=Date.now()){
   const objetoValido = item !== null && typeof item === 'object' && !Array.isArray(item);
-  const stringsObrigatorias = objetoValido && ['title','url','source','publishedAt','collectedAt','publicationDateEvidence'].every(campo => typeof item[campo] === 'string' && item[campo].trim() !== '');
+  const limites = {title:220,url:2048,source:160,publishedAt:40,collectedAt:40,publicationDateEvidence:64,summary:360,category:64,deadline:40,priority:32,prioridade:32,whoAffected:1000,quemAfeta:1000,recommendedAction:1000,acaoRecomendada:1000,whyItMatters:1000,porqueImporta:1000};
+  const stringsObrigatorias = objetoValido && ['title','url','source','publishedAt','collectedAt','publicationDateEvidence'].every(campo => typeof item[campo] === 'string' && item[campo].trim() !== '' && item[campo].length <= limites[campo]);
   const isoComFuso = valor => typeof valor === 'string' && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/.test(valor) && Number.isFinite(Date.parse(valor));
   const publicados = stringsObrigatorias ? Date.parse(item.publishedAt) : NaN;
   const coletados = stringsObrigatorias ? Date.parse(item.collectedAt) : NaN;
   const textosOpcionais = ['summary','category','deadline','priority','prioridade','whoAffected','quemAfeta','recommendedAction','acaoRecomendada','whyItMatters','porqueImporta'];
   const numerosOpcionais = ['score','opportunityScore'];
-  const camposOpcionaisValidos = objetoValido && textosOpcionais.every(campo => item[campo] === undefined || typeof item[campo] === 'string') && numerosOpcionais.every(campo => item[campo] === undefined || typeof item[campo] === 'number' && Number.isFinite(item[campo]));
-  const impactosValidos = objetoValido && Array.isArray(item.impactTags) && item.impactTags.every(tag => typeof tag === 'string');
-  const valido = stringsObrigatorias && urlExternaSegura(item.url) && isoComFuso(item.publishedAt) && isoComFuso(item.collectedAt) && publicados <= coletados && publicados <= Date.now() && coletados <= Date.now() && camposOpcionaisValidos && impactosValidos;
-  return valido ? item : null;
+  const camposOpcionaisValidos = objetoValido && textosOpcionais.every(campo => item[campo] === undefined || typeof item[campo] === 'string' && item[campo].length <= limites[campo]) && numerosOpcionais.every(campo => item[campo] === undefined || typeof item[campo] === 'number' && Number.isFinite(item[campo]));
+  const impactosValidos = objetoValido && Array.isArray(item.impactTags) && item.impactTags.length <= 20 && item.impactTags.every(tag => typeof tag === 'string' && tag.length <= 64);
+  const valido = stringsObrigatorias && urlExternaSegura(item.url) && isoComFuso(item.publishedAt) && isoComFuso(item.collectedAt) && publicados <= coletados && publicados <= agora && coletados <= agora && agora - publicados <= ACTIVE_ITEM_MAX_AGE_MS && camposOpcionaisValidos && impactosValidos;
+  if(!valido) return null;
+  const base = globalThis.location && globalThis.location.href ? globalThis.location.href : 'https://invalid.local/';
+  return {...item, url:new URL(item.url, base).href};
+}
+
+function normalizarNomeFonte(valor){
+  return typeof valor === 'string' ? valor.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,' ').trim() : '';
+}
+
+function sanitizarStatusFontes(payload){
+  const candidatos = Array.isArray(payload && payload.sourceStats) ? payload.sourceStats : (Array.isArray(payload && payload.sources) ? payload.sources : []);
+  return candidatos.slice(0, MAX_SOURCE_STATUSES).map(item => {
+    if(item === null || typeof item !== 'object' || Array.isArray(item) || typeof item.ok !== 'boolean') return null;
+    const source = typeof item.source === 'string' && item.source.trim() !== '' && item.source.length <= 160 ? item.source.trim() : '';
+    const base = globalThis.location && globalThis.location.href ? globalThis.location.href : 'https://invalid.local/';
+    const url = typeof item.url === 'string' && item.url.length <= 2048 && urlExternaSegura(item.url) ? new URL(item.url, base).href : '';
+    if(!source && !url) return null;
+    const detailFailureCount = Number.isSafeInteger(item.detailFailureCount) && item.detailFailureCount >= 0 && item.detailFailureCount <= 10_000 ? item.detailFailureCount : 0;
+    return {source,url,ok:item.ok,detailFailureCount};
+  }).filter(Boolean);
+}
+
+function statusDaFonte(fonte){
+  const nomes = new Set(
+    [fonte.n, ...(Array.isArray(fonte.a) ? fonte.a : [])]
+      .map(normalizarNomeFonte)
+      .filter(Boolean)
+  );
+  const correspondentes = state.sourceStatuses.filter(status =>
+    nomes.has(normalizarNomeFonte(status.source))
+  );
+  if(correspondentes.length === 0) return null;
+  if(correspondentes.some(status => status.ok === false)){
+    return {ok:false, detailFailureCount:0};
+  }
+  const detailFailureCount = correspondentes.reduce(
+    (total,status) => total + status.detailFailureCount,
+    0
+  );
+  if(detailFailureCount > 0) return {ok:true, detailFailureCount};
+  if(correspondentes.every(status => status.ok === true)){
+    return {ok:true, detailFailureCount:0};
+  }
+  return null;
+}
+
+async function lerRespostaLimitada(response, limite){
+  const declarado = response.headers.get('Content-Length');
+  if(declarado !== null && (!/^\d+$/.test(declarado) || Number(declarado) > limite)) throw new RangeError('Feed excede o limite de bytes');
+  if(!response.body || typeof response.body.getReader !== 'function') throw new TypeError('Streaming de resposta indisponível');
+  const leitor = response.body.getReader();
+  const decoder = new TextDecoder('utf-8', {fatal:true});
+  let total = 0, texto = '';
+  while(true){
+    const {done,value} = await leitor.read();
+    if(done) break;
+    total += value.byteLength;
+    if(total > limite){ if(leitor.cancel) await leitor.cancel(); throw new RangeError('Feed excede o limite de bytes'); }
+    texto += decoder.decode(value, {stream:true});
+  }
+  return texto + decoder.decode();
+}
+
+function avaliarPayloadFeed(payload, agora=Date.now()){
+  const statusDeclarado = payload && payload.health && payload.health.status;
+  const temFalhas = Array.isArray(payload && payload.sourcesFailed) && payload.sourcesFailed.length > 0;
+  const status = statusDeclarado === 'healthy' && temFalhas ? 'partial' : statusDeclarado;
+  const saudeValida = status === 'healthy' || status === 'partial';
+  const valor = payload && payload.updatedAt;
+  const formatoValido = typeof valor === 'string' && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/.test(valor);
+  const instante = formatoValido ? Date.parse(valor) : NaN;
+  const dataValida = Number.isFinite(instante);
+  const futura = dataValida && instante > agora + FEED_FUTURE_TOLERANCE_MS;
+  const obsoleto = dataValida && agora - instante > FEED_MAX_AGE_MS;
+  const usavel = saudeValida && dataValida && !futura;
+  return {aceito:usavel && !obsoleto,historico:usavel && obsoleto,usavel,saudeValida,dataValida,futura,obsoleto,instante,status};
 }
 
 async function carregarFeedPublico(){
   try{
     const r = await fetch('data/news.json?ts=' + Date.now(), { cache:'no-store' });
     if(!r.ok) return;
-    const payload = await r.json();
-    const payloadHealthy = payload.health?.status === 'healthy';
-    const payloadPartial = payload.health?.status === 'partial';
-    const updatedAt = new Date(payload.updatedAt || '');
-    const feedComDataValida = !Number.isNaN(updatedAt.getTime());
-    const FEED_MAX_AGE_MS = 2 * 60 * 60 * 1000;
-    const feedObsoleto = feedComDataValida && Date.now() - updatedAt.getTime() > FEED_MAX_AGE_MS;
-    const feedHistorico = payloadHealthy && feedComDataValida && feedObsoleto;
-    const feedValidated = payloadHealthy && feedComDataValida;
-    state.collectorDegraded = !feedValidated;
-    state.collectorPartial = payloadPartial && feedComDataValida;
-    if(state.collectorPartial) state.collectorDegraded = false;
+    const texto = await lerRespostaLimitada(r, MAX_FEED_BYTES);
+    const payload = JSON.parse(texto);
+    const feed = avaliarPayloadFeed(payload);
+    const payloadHealthy = feed.status === 'healthy';
+    const payloadPartial = feed.status === 'partial';
+    const updatedAt = feed.dataValida ? new Date(feed.instante) : new Date(NaN);
+    const feedHistorico = feed.historico;
+    state.collectorDegraded = !feed.usavel;
+    state.collectorPartial = payloadPartial && feed.aceito;
     state.feedHistorico = feedHistorico;
+    state.sourceStatuses = feed.aceito ? sanitizarStatusFontes(payload) : [];
     const evidenceAllowed = new Set([
       'feed:pubdate','feed:published','feed:date',
       'html:time[datetime]','html:time','html:configured-regex',
       'html:detail:configured-regex','dou:pubDate',
       'jornal-mg-api:dataPublicacao'
     ]);
-    const externos = payloadHealthy && feedComDataValida && Array.isArray(payload.items) ? payload.items : [];
-    const itensParciais = payloadPartial && feedComDataValida && Array.isArray(payload.items) ? payload.items : [];
+    const itensPayload = feed.usavel && Array.isArray(payload.items) ? payload.items.slice(0, MAX_FEED_ITEMS) : [];
+    const externos = payloadHealthy ? itensPayload : [];
+    const itensParciais = payloadPartial ? itensPayload : [];
     const itensAceitos = [...externos, ...itensParciais].map(validarItemFeed).filter(Boolean);
     itensAceitos.forEach(item => {
       if(!item || !item.title || !item.url || !item.publishedAt || !item.publicationDateEvidence || !item.collectedAt) return;
@@ -1921,19 +2026,19 @@ async function carregarFeedPublico(){
         oportunidadeScore: item.opportunityScore || 0
       }));
     });
-    if(feedValidated || payloadPartial && feedComDataValida){
+    if(feed.usavel){
       state.feedAtualizadoEm = updatedAt;
       state.ultima = state.feedAtualizadoEm;
-      state.online = !feedHistorico;
+      state.online = feed.aceito;
       atualizarRodapeFeed(state.feedAtualizadoEm);
-      $('#livePill').classList.toggle('off', feedHistorico);
-      $('#liveTxt').textContent = payloadPartial ? 'Feed parcial' : (feedHistorico ? 'Histórico possivelmente desatualizado' : 'Feed atualizado');
+      $('#livePill').classList.toggle('off', !feed.aceito);
+      $('#liveTxt').textContent = feedHistorico ? 'Histórico possivelmente desatualizado' : (payloadPartial ? 'Feed parcial' : 'Feed atualizado');
       if(feedHistorico){
         $('#feedUpdatedAt').textContent = `Fallback histórico possivelmente desatualizado. Última coleta saudável: ${formatarDataBrasilia(updatedAt)} (horário de Brasília).`;
-        log(`Exibindo fallback histórico da última coleta saudável · ${externos.length} itens disponíveis.`, 'off');
+        log(`Exibindo fallback histórico da última coleta saudável · ${payloadPartial ? itensParciais.length : externos.length} itens disponíveis.`, 'off');
       }else if(payloadPartial){
         $('#livePill').classList.add('off');
-        $('#feedUpdatedAt').textContent = 'Feed publicado com resultados válidos, mas com falhas parciais de detalhes em fonte crítica.';
+        $('#feedUpdatedAt').textContent = 'Feed publicado com resultados válidos; uma ou mais fontes apresentaram falhas. Consulte o diagnóstico.';
         log(`Feed parcial validado · ${itensAceitos.length} itens disponíveis; consulte a auditoria da coleta.`, 'wait');
       }else{
         log(`Feed diário validado · ${externos.length} itens disponíveis.`, 'ok');
@@ -1941,14 +2046,18 @@ async function carregarFeedPublico(){
     }else{
       state.online = false;
       $('#livePill').classList.add('off');
-      $('#liveTxt').textContent = 'Feed não validado';
-      $('#feedUpdatedAt').textContent = 'Feed sem saúde validada ou data válida. Itens do payload foram colocados em quarentena.';
-      log('Feed rejeitado: a saúde não é healthy ou falta data de atualização válida.', 'off');
+      const feedDegradado = feed.status === 'degraded';
+      $('#liveTxt').textContent = feedDegradado ? 'Feed degradado' : 'Feed não validado';
+      $('#feedUpdatedAt').textContent = feedDegradado
+        ? 'Coleta degradada por falha crítica; o payload atual foi colocado em quarentena.'
+        : 'Feed sem saúde validada ou data válida. Itens do payload foram colocados em quarentena.';
+      log(feedDegradado ? 'Feed degradado: há falha crítica registrada na coleta.' : 'Feed rejeitado: a saúde não é healthy/partial ou falta data de atualização válida.', 'off');
     }
-    renderKPIs(); renderExecutive(); refreshViews();
+    renderKPIs(); renderExecutive(); refreshViews(); renderFontes();
   }catch(e){
     state.collectorDegraded = true;
     state.online = false;
+    state.sourceStatuses = [];
     $('#feedUpdatedAt').textContent = 'Feed automatizado indisponível. Nenhum dado sem validação será exibido.';
     log('Feed diário indisponível. Dados legados permanecem em quarentena.', 'off');
   }
