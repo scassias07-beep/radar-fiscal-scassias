@@ -1995,7 +1995,7 @@ async function carregarFeedPublico(){
     const itensPayload = feed.usavel && Array.isArray(payload.items) ? payload.items.slice(0, MAX_FEED_ITEMS) : [];
     const externos = payloadHealthy ? itensPayload : [];
     const itensParciais = payloadPartial ? itensPayload : [];
-    const itensAceitos = [...externos, ...itensParciais].map(validarItemFeed).filter(Boolean);
+    const itensAceitos = [...externos, ...itensParciais].map(item => validarItemFeed(item)).filter(Boolean);
     itensAceitos.forEach(item => {
       if(!item || !item.title || !item.url || !item.publishedAt || !item.publicationDateEvidence || !item.collectedAt) return;
       if(!evidenceAllowed.has(item.publicationDateEvidence)) return;
