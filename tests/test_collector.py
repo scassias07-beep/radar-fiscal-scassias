@@ -1634,3 +1634,33 @@ def test_main_persists_partial_payload_with_failure_and_source_stats(monkeypatch
     assert next(status for status in payload["sourceStats"] if status["source"] == "Fonte auxiliar")["ok"] is False
     assert payload["meta"]["activeItemMaxAgeDays"] == 90
     assert [item["id"] for item in payload["items"]] == ["item-recente"]
+
+
+def test_versioned_snapshot_satisfies_the_frontend_feed_contract():
+    payload = json.loads((collect.ROOT / "data" / "news.json").read_text(encoding="utf-8"))
+    allowed_evidence = {
+        "feed:pubdate", "feed:published", "feed:date",
+        "html:time[datetime]", "html:time", "html:configured-regex",
+        "html:detail:configured-regex", "dou:pubDate",
+        "jornal-mg-api:dataPublicacao",
+    }
+
+    assert payload.get("health", {}).get("status") in {"healthy", "partial"}
+    assert datetime.fromisoformat(payload["updatedAt"])
+    assert payload.get("items")
+    assert payload.get("sources")
+    validated = []
+    for start in range(0, len(payload["items"]), 20):
+        validated.extend(_run_frontend_validator(
+            payload["items"][start:start + 20],
+            now=payload["updatedAt"],
+        ))
+    assert all(item is not None for item in validated)
+    for item in payload["items"]:
+        assert item["publicationDateEvidence"] in allowed_evidence
+
+
+def test_frontend_validates_feed_items_without_passing_the_map_index_as_time():
+    index = (collect.ROOT / "index.html").read_text(encoding="utf-8")
+    assert ".map(item => validarItemFeed(item)).filter(Boolean)" in index
+    assert ".map(validarItemFeed).filter(Boolean)" not in index
