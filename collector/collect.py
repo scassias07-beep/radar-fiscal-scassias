@@ -9,14 +9,18 @@ from __future__ import annotations
 
 import hashlib
 import html
+import ipaddress
 import json
 import re
+import socket
+import sys
 import unicodedata
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
 from pathlib import Path
+from urllib.error import HTTPError
 from urllib.parse import parse_qsl, urlencode, urljoin, urlsplit, urlunsplit
-from urllib.request import Request, urlopen
+from urllib.request import HTTPRedirectHandler, HTTPSHandler, Request, build_opener, urlopen
 import xml.etree.ElementTree as ET
 import ssl
 
@@ -26,6 +30,14 @@ OUTPUT = ROOT / "data" / "news.json"
 MAX_ITEMS = 300
 PER_SOURCE_LIMIT = 35
 TIMEOUT = 25
+# Política da coleta ativa: somente publicações comprovadas dos últimos 90 dias.
+# A janela usa publishedAt (nunca collectedAt/updatedAt), portanto uma nova coleta
+# não transforma conteúdo antigo em notícia atual.
+ACTIVE_ITEM_MAX_AGE = timedelta(days=90)
+DEFAULT_MAX_BYTES = 900_000
+DEFAULT_AUTH_MAX_BYTES = 100_000
+DEFAULT_API_MAX_BYTES = 2_000_000
+DEFAULT_DETAIL_MAX_BYTES = 700_000
 
 RELEVANCE_TERMS = {
     "tribut": 5,
@@ -91,7 +103,170 @@ RELEVANCE_TERMS = {
     "regularize": 4,
 }
 
-SSL_CONTEXT = ssl._create_unverified_context()
+SSL_CONTEXT = ssl.create_default_context()
+
+
+class NoBearerRedirectHandler(HTTPRedirectHandler):
+    """Bearer nunca atravessa redirects, inclusive redirects para a mesma origem."""
+
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        raise HTTPError(
+            newurl, code, f"{msg} (redirect bloqueado para requisição bearer)", headers, fp
+        )
+
+
+class ResponseTooLarge(ValueError):
+    """A resposta excedeu o limite e não pode ser usada parcialmente."""
+
+
+def read_response_limited(response, max_bytes: int) -> bytes:
+    """Lê com byte sentinela para distinguir resposta completa de truncada."""
+    if max_bytes <= 0:
+        raise ValueError("limite de resposta deve ser positivo")
+    declared = response.headers.get("Content-Length") if response.headers else None
+    if declared is not None:
+        try:
+            declared_size = int(declared)
+        except (TypeError, ValueError) as exc:
+            raise ValueError("Content-Length inválido") from exc
+        if declared_size > max_bytes:
+            raise ResponseTooLarge(f"resposta excede limite de {max_bytes} bytes")
+    body = response.read(max_bytes + 1)
+    if len(body) > max_bytes:
+        raise ResponseTooLarge(f"resposta excede limite de {max_bytes} bytes")
+    return body
+
+
+def validate_network_url(
+    url: str, *, allowed_hosts: set[str], allowed_ports: set[int]
+) -> None:
+    """Valida esquema, allowlist e todos os IPs resolvidos (SSRF fail-closed)."""
+    parts = urlsplit(url)
+    host = (parts.hostname or "").lower().rstrip(".")
+    try:
+        port = parts.port or 443
+    except ValueError as exc:
+        raise ValueError("porta inválida") from exc
+    normalized_hosts = {value.lower().rstrip(".") for value in allowed_hosts}
+    if parts.scheme.lower() != "https":
+        raise ValueError("apenas HTTPS é permitido")
+    if not host or host not in normalized_hosts:
+        raise ValueError("host não permitido")
+    if port not in allowed_ports:
+        raise ValueError("porta não permitida")
+    try:
+        addresses = socket.getaddrinfo(host, port, type=socket.SOCK_STREAM)
+    except OSError as exc:
+        raise ValueError("não foi possível validar o DNS do destino") from exc
+    if not addresses:
+        raise ValueError("destino sem endereço validável")
+    for address in addresses:
+        try:
+            ip = ipaddress.ip_address(address[4][0])
+        except ValueError as exc:
+            raise ValueError("endereço de destino inválido") from exc
+        if not ip.is_global:
+            raise ValueError("destino local, privado ou reservado bloqueado")
+
+
+class SafeRedirectHandler(HTTPRedirectHandler):
+    """Valida cada redirect público antes de o urllib segui-lo."""
+
+    def __init__(self, allowed_hosts: set[str], allowed_ports: set[int]):
+        self.allowed_hosts = allowed_hosts
+        self.allowed_ports = allowed_ports
+        super().__init__()
+
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        try:
+            validate_network_url(
+                newurl, allowed_hosts=self.allowed_hosts, allowed_ports=self.allowed_ports
+            )
+        except ValueError as exc:
+            raise HTTPError(newurl, code, f"{msg} (redirect inseguro: {exc})", headers, fp) from exc
+        return super().redirect_request(req, fp, code, msg, headers, newurl)
+
+
+def _network_policy(source: dict) -> tuple[set[str], set[int]]:
+    source_parts = urlsplit(source["url"])
+    hosts = {source_parts.hostname or ""}
+    hosts.update(str(host) for host in source.get("allowedRedirectHosts", []))
+    ports = {int(port) for port in source.get("allowedPorts", [443])}
+    return hosts, ports
+
+
+def _open_with_validated_redirects(
+    request: Request, *, timeout: int, context: ssl.SSLContext,
+    allowed_hosts: set[str], allowed_ports: set[int],
+):
+    opener = build_opener(
+        HTTPSHandler(context=context), SafeRedirectHandler(allowed_hosts, allowed_ports)
+    )
+    return opener.open(request, timeout=timeout)
+
+
+def open_public_request(request: Request, *, source: dict):
+    """Valida URL inicial, cada salto e a URL final da resposta."""
+    hosts, ports = _network_policy(source)
+    validate_network_url(request.full_url, allowed_hosts=hosts, allowed_ports=ports)
+    response = _open_with_validated_redirects(
+        request,
+        timeout=int(source.get("timeout", TIMEOUT)),
+        context=ssl_context_for_source(source),
+        allowed_hosts=hosts,
+        allowed_ports=ports,
+    )
+    try:
+        validate_network_url(response.geturl(), allowed_hosts=hosts, allowed_ports=ports)
+    except Exception:
+        if hasattr(response, "close"):
+            response.close()
+        raise
+    return response
+
+
+def _open_bearer_request(
+    request: Request, *, timeout: int, context: ssl.SSLContext,
+    allowed_hosts: set[str], allowed_ports: set[int],
+):
+    validate_network_url(
+        request.full_url, allowed_hosts=allowed_hosts, allowed_ports=allowed_ports
+    )
+    opener = build_opener(HTTPSHandler(context=context), NoBearerRedirectHandler())
+    response = opener.open(request, timeout=timeout)
+    try:
+        validate_network_url(
+            response.geturl(), allowed_hosts=allowed_hosts, allowed_ports=allowed_ports
+        )
+    except Exception:
+        if hasattr(response, "close"):
+            response.close()
+        raise
+    return response
+
+
+def ssl_context_for_source(source: dict) -> ssl.SSLContext:
+    """Cria contexto TLS estrito e, quando configurado, completa cadeia por fonte."""
+    context = ssl.create_default_context()
+    intermediate = source.get("tlsIntermediateCert")
+    if intermediate:
+        cert_dir = (ROOT / "collector" / "certs").resolve()
+        cert_path = (ROOT / intermediate).resolve()
+        try:
+            cert_path.relative_to(cert_dir)
+        except ValueError as exc:
+            raise ValueError("Certificado intermediário fora de collector/certs") from exc
+        if not cert_path.is_file():
+            raise FileNotFoundError(f"Certificado intermediário ausente: {cert_path}")
+        expected_fingerprint = str(source.get("tlsIntermediateSha256") or "").lower()
+        certificate_der = ssl.PEM_cert_to_DER_cert(cert_path.read_text(encoding="ascii"))
+        actual_fingerprint = hashlib.sha256(certificate_der).hexdigest()
+        if len(expected_fingerprint) != 64 or actual_fingerprint != expected_fingerprint:
+            raise ValueError("SHA-256 do certificado intermediário não confere")
+        context.load_verify_locations(cafile=str(cert_path))
+    if context.verify_mode != ssl.CERT_REQUIRED or not context.check_hostname:
+        raise RuntimeError("Contexto TLS da fonte não preserva validação estrita")
+    return context
 
 GLOBAL_EXCLUDE_TERMS = {
     "eleicao",
@@ -130,6 +305,22 @@ CATEGORY_TERMS = [
 TRACKING_PARAMS_PREFIXES = ("utm_",)
 TRACKING_PARAMS = {"fbclid", "gclid", "mc_cid", "mc_eid"}
 
+NON_CONTENT_TITLES = {
+    "brasil", "servicos", "legislacao", "noticias", "rss", "voltar",
+    "proxima", "anterior", "contato", "institucional", "quem somos",
+    "ouvidoria", "acesso a informacao",
+}
+NON_CONTENT_PATH_PARTS = {
+    "institucional", "contato", "quem-somos", "menu", "ouvidoria",
+    "acesso-a-informacao",
+}
+ALLOWED_DATE_EVIDENCE = {
+    "feed:pubdate", "feed:published", "feed:date",
+    "html:time[datetime]", "html:time", "html:configured-regex",
+    "html:detail:configured-regex", "dou:pubDate",
+    "jornal-mg-api:dataPublicacao",
+}
+
 IMPACT_RULES = {
     "caixa": ("split payment", "fluxo de caixa", "caixa", "credito", "crédito", "ressarcimento", "aliquota", "alíquota", "precificacao", "precificação"),
     "obrigacao": ("efd", "reinf", "dctf", "pgdas", "nfe", "nf-e", "nota fiscal", "sped", "declaracao", "declaração", "obrigacao", "obrigação", "ditr", "dirbi"),
@@ -165,12 +356,17 @@ def norm(value: str | None) -> str:
 
 
 def child_text(node: ET.Element, names: tuple[str, ...]) -> str:
+    value, _ = child_value(node, names)
+    return value
+
+
+def child_value(node: ET.Element, names: tuple[str, ...]) -> tuple[str, str | None]:
     wanted = set(names)
     for child in list(node):
         local = child.tag.rsplit("}", 1)[-1].lower()
         if local in wanted and child.text:
-            return clean(child.text)
-    return ""
+            return clean(child.text), local
+    return "", None
 
 
 def child_attr(node: ET.Element, tag: str, attr: str, rel: str | None = None) -> str:
@@ -196,26 +392,59 @@ def canonical_url(url: str) -> str:
     return urlunsplit((parts.scheme.lower(), parts.netloc.lower(), path.rstrip("/") or "/", urlencode(query), ""))
 
 
-def parse_date(value: str) -> str:
+def is_valid_content_link(href: str, title: str, source: dict) -> bool:
+    raw_href = clean(href).strip()
+    if not raw_href or raw_href.startswith("#"):
+        return False
+    raw_parts = urlsplit(raw_href)
+    if raw_parts.scheme and raw_parts.scheme.lower() != "https":
+        return False
+    url = canonical_url(urljoin(source["url"], raw_href))
+    parts = urlsplit(url)
+    if parts.scheme != "https" or not parts.netloc:
+        return False
+    source_host = urlsplit(source["url"]).hostname or ""
+    target_host = parts.hostname or ""
+    if target_host != source_host and not target_host.endswith(f".{source_host}"):
+        return False
+    if norm(title) in NON_CONTENT_TITLES:
+        return False
+    path_parts = {part for part in norm(parts.path).split("/") if part}
+    if path_parts & NON_CONTENT_PATH_PARTS:
+        return False
+    if url == canonical_url(source["url"]):
+        return False
+    return True
+
+
+def parse_date(value: str) -> str | None:
     raw = clean(value)
     if not raw:
-        return datetime.now(timezone.utc).isoformat()
+        return None
     try:
-        dt = parsedate_to_datetime(raw)
+        dt = datetime.fromisoformat(raw.replace("Z", "+00:00"))
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=timezone.utc)
+        return dt.astimezone(timezone.utc).isoformat()
+    except (TypeError, ValueError):
+        pass
+    try:
+        mail_raw = re.sub(r"\bBRT\b", "-0300", raw)
+        dt = parsedate_to_datetime(mail_raw)
         if dt.tzinfo is None:
             dt = dt.replace(tzinfo=timezone.utc)
         return dt.astimezone(timezone.utc).isoformat()
     except Exception:
         pass
-    for fmt in ("%Y-%m-%dT%H:%M:%S%z", "%Y-%m-%dT%H:%M:%S", "%Y-%m-%d", "%d/%m/%Y", "%d/%m/%Y %H:%M"):
+    for fmt in ("%Y-%m-%dT%H:%M:%S%z", "%Y-%m-%dT%H:%M:%S", "%Y-%m-%d", "%d/%m/%Y", "%d/%m/%Y %H:%M", "%d.%m.%y"):
         try:
-            dt = datetime.strptime(raw[: len(datetime.now().strftime(fmt))], fmt)
+            dt = datetime.strptime(raw, fmt)
             if dt.tzinfo is None:
                 dt = dt.replace(tzinfo=timezone.utc)
             return dt.astimezone(timezone.utc).isoformat()
         except Exception:
             continue
-    return datetime.now(timezone.utc).isoformat()
+    return None
 
 
 def relevance_score(title: str, summary: str, source: dict) -> int:
@@ -255,12 +484,27 @@ def classify(title: str, summary: str, source: dict) -> str:
 
 
 
-def strategic_analysis(title: str, summary: str, category: str, score: int) -> dict:
+def strategic_analysis(
+    title: str,
+    summary: str,
+    category: str,
+    score: int,
+    deadline: str | None = None,
+    now: datetime | None = None,
+) -> dict:
     blob = norm(f"{title} {summary} {category}")
     tags: list[str] = []
     for key, terms in IMPACT_RULES.items():
         if any(term_matches(blob, term) if term.strip() == term else term in blob for term in terms):
             tags.append(key)
+    parsed_deadline = parse_date(deadline or "")
+    now = now or datetime.now(timezone.utc)
+    has_future_deadline = bool(
+        parsed_deadline
+        and datetime.fromisoformat(parsed_deadline).astimezone(timezone.utc) > now.astimezone(timezone.utc)
+    )
+    if not has_future_deadline and "prazo" in tags:
+        tags.remove("prazo")
     if category in {"reforma", "cgibs"} and "reforma" not in tags:
         tags.append("reforma")
     if category == "judicial" and "judicial" not in tags:
@@ -317,7 +561,7 @@ def strategic_analysis(title: str, summary: str, category: str, score: int) -> d
     else:
         why = "gera pauta consultiva para orientar clientes"
 
-    return {
+    result = {
         "impactTags": tags,
         "impactLabels": [IMPACT_LABELS[t] for t in tags if t in IMPACT_LABELS],
         "priority": priority,
@@ -331,6 +575,9 @@ def strategic_analysis(title: str, summary: str, category: str, score: int) -> d
             "whatsapp": f"Alerta curto para clientes: resumo, impacto e próximo passo sobre '{title}'.",
         },
     }
+    if has_future_deadline:
+        result["deadline"] = parsed_deadline
+    return result
 
 def iter_entries(root: ET.Element) -> list[ET.Element]:
     entries = []
@@ -341,21 +588,160 @@ def iter_entries(root: ET.Element) -> list[ET.Element]:
     return entries
 
 
-def parse_feed(raw: bytes, source: dict) -> list[dict]:
+def parse_jornal_mg_results(
+    raw: bytes,
+    source: dict,
+    search_term: str,
+    collected_at: datetime | None = None,
+) -> list[dict]:
+    """Converte resultados da API oficial do Jornal Minas Gerais em itens auditáveis."""
+    payload = json.loads(raw.decode("utf-8"))
+    if not isinstance(payload, dict) or not isinstance(payload.get("dados"), list):
+        raise ValueError("Resposta da pesquisa do Jornal MG não reconhecida")
+    if payload.get("erros"):
+        raise ValueError(f"API do Jornal MG retornou erros: {payload['erros']}")
+
+    collected_at = collected_at or datetime.now(timezone.utc)
+    result = []
+    for record in payload["dados"]:
+        if not isinstance(record, dict):
+            continue
+        journal_id = record.get("idJornal")
+        page = record.get("pagina")
+        published_raw = record.get("dataPublicacao")
+        journal_type = clean(str(record.get("tipoCaderno") or "Jornal Minas Gerais"))
+        summary = clean(str(record.get("textoResultado") or ""))
+        if not isinstance(journal_id, int) or not isinstance(page, int) or not summary:
+            continue
+        published_at = parse_date(str(published_raw or ""))
+        if published_at is None or datetime.fromisoformat(published_at) > collected_at.astimezone(timezone.utc):
+            continue
+
+        navigation = {
+            "dataPublicacaoSelecionada": published_raw,
+            "idCadernoEdicaoSelecionado": journal_id,
+            "paginaSelecionada": page,
+            "textoPesquisa": search_term,
+        }
+        url = urljoin(source["url"], "edicao-do-dia") + "?" + urlencode({
+            "dados": json.dumps(navigation, ensure_ascii=False, separators=(",", ":"))
+        })
+        display_date = datetime.fromisoformat(published_at).strftime("%d/%m/%Y")
+        title = f"Ocorrência de {search_term} no {journal_type} — {display_date}, p. {page}"
+        score = relevance_score(title, summary, source)
+        if score < int(source.get("minScore", 5)):
+            continue
+        category = classify(title, summary, source)
+        item = {
+            "id": hashlib.sha256(url.encode()).hexdigest()[:16],
+            "title": title[:220],
+            "url": url,
+            "source": source["name"],
+            "sourceRecord": {"idJornal": journal_id, "pagina": page},
+            "category": category,
+            "summary": summary[:360],
+            "publishedAt": published_at,
+            "publicationDateEvidence": "jornal-mg-api:dataPublicacao",
+            "collectedAt": collected_at.astimezone(timezone.utc).isoformat(),
+            "score": score,
+        }
+        item.update(strategic_analysis(title, summary, category, score))
+        result.append(item)
+    return result
+
+
+def collect_jornal_mg(source: dict, now: datetime | None = None) -> list[dict]:
+    """Autentica anonimamente e pesquisa termos fiscais na API usada pelo portal oficial."""
+    now = now or datetime.now(timezone.utc)
+    context = ssl_context_for_source(source)
+    base_api = urljoin(source["url"], "api/v1/")
+    common_headers = {
+        "User-Agent": "RadarFiscal/2.0 (monitoramento fiscal de fonte publica)",
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+    }
+    auth_request = Request(
+        urljoin(base_api, "Autenticacao/Autenticar"),
+        data=b"{}",
+        headers=common_headers,
+        method="POST",
+    )
+    auth_max_bytes = int(source.get("authMaxBytes", DEFAULT_AUTH_MAX_BYTES))
+    with open_public_request(auth_request, source=source) as response:
+        auth_payload = json.loads(
+            read_response_limited(response, auth_max_bytes).decode("utf-8")
+        )
+    token = auth_payload.get("dados") if isinstance(auth_payload, dict) else None
+    if not isinstance(token, str) or not token:
+        raise ValueError("Autenticação anônima do Jornal MG não retornou token")
+
+    start = (now - timedelta(days=int(source.get("lookbackDays", 30)))).date().isoformat()
+    end = now.date().isoformat()
+    page_size = int(source.get("pageSize", 50))
+    max_pages = int(source.get("maxPagesPerTerm", 2))
+    by_record: dict[tuple[int, int], dict] = {}
+    for search_term in source.get("searchTerms", []):
+        for page_number in range(1, max_pages + 1):
+            query = urlencode({
+                "DataPublicacaoInicial": start,
+                "DataPublicacaoFinal": end,
+                "TextoPesquisa": search_term,
+                "DiarioExecutivo": "true",
+                "DiarioMunicipios": "true",
+                "DiarioTerceiros": "true",
+                "EdicaoExtra": "true",
+                "PaginaAtual": page_number,
+                "TamanhoPagina": page_size,
+            })
+            request = Request(
+                urljoin(base_api, "Pesquisa/PesquisarJornaisPaginados") + "?" + query,
+                headers={**common_headers, "Authorization": f"Bearer {token}"},
+            )
+            allowed_hosts, allowed_ports = _network_policy(source)
+            with _open_bearer_request(
+                request,
+                timeout=int(source.get("timeout", TIMEOUT)),
+                context=context,
+                allowed_hosts=allowed_hosts,
+                allowed_ports=allowed_ports,
+            ) as response:
+                max_bytes = int(source.get("maxBytes", DEFAULT_API_MAX_BYTES))
+                raw = read_response_limited(response, max_bytes)
+            payload = json.loads(raw.decode("utf-8"))
+            found = parse_jornal_mg_results(raw, source, search_term, collected_at=now)
+            for item in found:
+                record = item["sourceRecord"]
+                by_record.setdefault((record["idJornal"], record["pagina"]), item)
+            total_pages = int(payload.get("totalDePaginas", 1)) if isinstance(payload, dict) else 1
+            if page_number >= total_pages:
+                break
+    limit = int(source.get("htmlLimit", PER_SOURCE_LIMIT))
+    return sorted(by_record.values(), key=lambda item: item["publishedAt"], reverse=True)[:limit]
+
+
+def parse_feed(raw: bytes, source: dict, collected_at: datetime | None = None) -> list[dict]:
     root = ET.fromstring(raw)
     result = []
+    collected_at = collected_at or datetime.now(timezone.utc)
     min_score = int(source.get("minScore", 5))
     for node in iter_entries(root)[:PER_SOURCE_LIMIT]:
         title = child_text(node, ("title",))
         link = child_text(node, ("link",)) or child_attr(node, "link", "href", "alternate") or child_attr(node, "link", "href")
         summary = child_text(node, ("description", "summary", "content", "encoded"))
-        published = child_text(node, ("pubdate", "published", "updated", "date", "dc:date"))
-        if not title or not link:
+        published, published_field = child_value(
+            node, ("pubdate", "published", "date", "dc:date")
+        )
+        if not title or not link or not is_valid_content_link(link, title, source):
+            continue
+        published_at = parse_date(published)
+        if published_at is None or published_field is None:
+            continue
+        if datetime.fromisoformat(published_at) > collected_at.astimezone(timezone.utc):
             continue
         score = relevance_score(title, summary, source)
         if score < min_score:
             continue
-        url = canonical_url(link)
+        url = canonical_url(urljoin(source["url"], link))
         category = classify(title, summary, source)
         item_summary = (summary or "Publicação coletada automaticamente. Confirme o teor na fonte original.")[:360]
         item = {
@@ -365,7 +751,9 @@ def parse_feed(raw: bytes, source: dict) -> list[dict]:
             "source": source["name"],
             "category": category,
             "summary": item_summary,
-            "publishedAt": parse_date(published),
+            "publishedAt": published_at,
+            "publicationDateEvidence": f"feed:{published_field}",
+            "collectedAt": collected_at.astimezone(timezone.utc).isoformat(),
             "score": score,
         }
         item.update(strategic_analysis(title, item_summary, category, score))
@@ -374,27 +762,46 @@ def parse_feed(raw: bytes, source: dict) -> list[dict]:
 
 
 
-def parse_html_links(raw: bytes, source: dict) -> list[dict]:
-    """Extrai links de páginas HTML sem depender de BeautifulSoup.
-
-    Serve para fontes oficiais sem RSS público (CONFAZ, PGFN, páginas de legislação),
-    mantendo o mesmo filtro fiscal/tributário. Não substitui raspadores dedicados para
-    portais protegidos (ex.: DOU/Diários com bloqueio), mas permite monitorar listagens
-    públicas e registrar falhas quando houver bloqueio.
-    """
+def parse_html_links(raw: bytes, source: dict, collected_at: datetime | None = None) -> list[dict]:
+    """Extrai somente resultados HTML com data de publicação no mesmo bloco."""
     page_url = source["url"]
     html_text = raw.decode(source.get("encoding", "utf-8"), "replace")
-    html_text = re.sub(r"<script[\s\S]*?</script>|<style[\s\S]*?</style>", " ", html_text, flags=re.I)
-    links = re.findall(r"<a\b([^>]*?)href=[\"']([^\"']+)[\"']([^>]*)>([\s\S]*?)</a>", html_text, flags=re.I)
+    collected_at = collected_at or datetime.now(timezone.utc)
+    html_text = re.sub(
+        r"<script[\s\S]*?</script>|<style[\s\S]*?</style>",
+        " ",
+        html_text,
+        flags=re.I,
+    )
+    container_tag = source.get("htmlContainerTag")
+    if container_tag:
+        tag = re.escape(container_tag)
+        contexts = re.findall(
+            rf"<{tag}\b[^>]*>[\s\S]*?</{tag}>", html_text, flags=re.I
+        )
+    else:
+        contexts = re.findall(r"<a\b[^>]*>[\s\S]*?</a>", html_text, flags=re.I)
+
     result = []
     seen = set()
     allow = source.get("urlAllowRegex")
     deny = source.get("urlDenyRegex")
-    for before, href, after, inner in links[: int(source.get("scanLimit", 450))]:
-        title = clean(inner)
+    for context in contexts[: int(source.get("scanLimit", 450))]:
+        link_match = re.search(
+            r"<a\b[^>]*href=[\"']([^\"']+)[\"'][^>]*>([\s\S]*?)</a>",
+            context,
+            flags=re.I,
+        )
+        if not link_match:
+            continue
+        href, inner = link_match.groups()
+        title_match = None
+        if source.get("htmlTitleRegex"):
+            title_match = re.search(source["htmlTitleRegex"], context, flags=re.I)
+        title = clean(title_match.group(1) if title_match else inner)
         if not title or len(title) < int(source.get("minTitleLength", 8)):
             continue
-        if title.lower() in {"brasil", "serviços", "legislação", "notícias", "rss", "voltar", "próxima", "anterior"}:
+        if not is_valid_content_link(href, title, source):
             continue
         url = canonical_url(urljoin(page_url, href))
         if url in seen or url == canonical_url(page_url):
@@ -403,24 +810,324 @@ def parse_html_links(raw: bytes, source: dict) -> list[dict]:
             continue
         if deny and re.search(deny, url, flags=re.I):
             continue
+
+        published_at = None
+        date_evidence = None
+        time_attr = re.search(
+            r"<time\b[^>]*datetime=[\"']([^\"']+)[\"'][^>]*>", context, flags=re.I
+        )
+        if time_attr:
+            published_at = parse_date(time_attr.group(1))
+            date_evidence = "html:time[datetime]"
+        if published_at is None:
+            time_text = re.search(r"<time\b[^>]*>([\s\S]*?)</time>", context, flags=re.I)
+            if time_text:
+                published_at = parse_date(clean(time_text.group(1)))
+                date_evidence = "html:time"
+        if published_at is None and source.get("htmlPublishedDateRegex"):
+            date_match = re.search(
+                source["htmlPublishedDateRegex"], context, flags=re.I
+            )
+            if date_match:
+                published_at = parse_date(date_match.group(1))
+                date_evidence = "html:configured-regex"
+        if published_at is None or date_evidence is None:
+            continue
+        if datetime.fromisoformat(published_at) > collected_at.astimezone(timezone.utc):
+            continue
+
         summary = clean(f"Publicação monitorada em {source['name']}: {title}")
         score = relevance_score(title, summary, source)
         if score < int(source.get("minScore", 5)):
             continue
         seen.add(url)
-        result.append({
+        category = classify(title, summary, source)
+        item = {
             "id": hashlib.sha256(url.encode()).hexdigest()[:16],
             "title": title[:220],
             "url": url,
             "source": source["name"],
-            "category": classify(title, summary, source),
+            "category": category,
             "summary": summary[:360],
-            "publishedAt": datetime.now(timezone.utc).isoformat(),
+            "publishedAt": published_at,
+            "publicationDateEvidence": date_evidence,
+            "collectedAt": collected_at.astimezone(timezone.utc).isoformat(),
             "score": score,
-        })
+        }
+        item.update(strategic_analysis(title, summary, category, score))
+        result.append(item)
         if len(result) >= int(source.get("htmlLimit", PER_SOURCE_LIMIT)):
             break
     return result
+
+
+def _dou_payload(raw: bytes, source: dict) -> dict | None:
+    text = raw.decode(source.get("encoding", "utf-8"), "replace")
+    match = re.search(
+        r"<[^>]+id=[\"'][^\"']*BuscaDouPortlet_params[\"'][^>]*>([\s\S]*?)</[^>]+>",
+        text,
+        flags=re.I,
+    )
+    if not match:
+        return None
+    try:
+        payload = json.loads(html.unescape(match.group(1)).strip())
+    except (TypeError, ValueError, json.JSONDecodeError):
+        return None
+    return payload if isinstance(payload.get("jsonArray"), list) else None
+
+
+def parse_dou_html(raw: bytes, source: dict, collected_at: datetime | None = None) -> list[dict]:
+    """Extrai atos do JSON oficial embutido na busca do DOU."""
+    payload = _dou_payload(raw, source)
+    if payload is None:
+        return []
+    collected_at = collected_at or datetime.now(timezone.utc)
+    result = []
+    for entry in payload["jsonArray"][: int(source.get("htmlLimit", PER_SOURCE_LIMIT))]:
+        title = clean(entry.get("title"))
+        slug = clean(entry.get("urlTitle"))
+        published_at = parse_date(entry.get("pubDate", ""))
+        if not title or not slug or published_at is None:
+            continue
+        if datetime.fromisoformat(published_at) > collected_at.astimezone(timezone.utc):
+            continue
+        url = canonical_url(urljoin("https://www.in.gov.br/web/dou/-/", slug))
+        if not is_valid_content_link(url, title, source):
+            continue
+        summary = clean(entry.get("content"))
+        edition = clean(entry.get("editionNumber"))
+        page = clean(entry.get("numberPage"))
+        provenance = " · ".join(
+            part
+            for part in (
+                f"Edição {edition}" if edition else "",
+                f"p. {page}" if page else "",
+            )
+            if part
+        )
+        if provenance:
+            summary = clean(f"{summary} {provenance}")
+        score = relevance_score(title, summary, source)
+        if score < int(source.get("minScore", 5)):
+            continue
+        category = classify(title, summary, source)
+        item = {
+            "id": hashlib.sha256(url.encode()).hexdigest()[:16],
+            "title": title[:220],
+            "url": url,
+            "source": source["name"],
+            "category": category,
+            "summary": summary[:360],
+            "publishedAt": published_at,
+            "publicationDateEvidence": "dou:pubDate",
+            "collectedAt": collected_at.astimezone(timezone.utc).isoformat(),
+            "score": score,
+        }
+        item.update(strategic_analysis(title, summary, category, score))
+        result.append(item)
+    return result
+
+
+def _fetch_detail(url: str, source: dict) -> bytes:
+    req = Request(
+        url,
+        headers={
+            "User-Agent": "RadarFiscal/2.0 (fontes fiscais públicas)",
+            "Accept": "text/html,application/xhtml+xml",
+        },
+    )
+    detail_max_bytes = int(source.get("detailMaxBytes", DEFAULT_DETAIL_MAX_BYTES))
+    with open_public_request(req, source=source) as response:
+        return read_response_limited(response, detail_max_bytes)
+
+
+def _confaz_act_date(title: str) -> datetime | None:
+    match = re.search(
+        r"\bDE\s+([0-3]?\d)\s+DE\s+([A-ZÇ]+)\s+DE\s+(20\d{2})\b",
+        title,
+        flags=re.I,
+    )
+    if not match:
+        return None
+    months = {
+        "janeiro": 1, "fevereiro": 2, "marco": 3, "abril": 4,
+        "maio": 5, "junho": 6, "julho": 7, "agosto": 8,
+        "setembro": 9, "outubro": 10, "novembro": 11, "dezembro": 12,
+    }
+    try:
+        return datetime(
+            int(match.group(3)), months[norm(match.group(2))], int(match.group(1)),
+            tzinfo=timezone.utc,
+        )
+    except (KeyError, ValueError):
+        return None
+
+
+def parse_html_detail_links(
+    raw: bytes,
+    source: dict,
+    collected_at: datetime | None = None,
+    detail_fetcher=None,
+    detail_failures: list[dict] | None = None,
+) -> list[dict]:
+    """Segue links permitidos e exige título e data oficial na página de detalhe."""
+    collected_at = collected_at or datetime.now(timezone.utc)
+    detail_fetcher = detail_fetcher or (lambda url: _fetch_detail(url, source))
+    text = raw.decode(source.get("encoding", "utf-8"), "replace")
+    tag = re.escape(source.get("htmlContainerTag", "tr"))
+    contexts = re.findall(rf"<{tag}\b[^>]*>[\s\S]*?</{tag}>", text, flags=re.I)
+    title_pattern = source.get("htmlDetailTitleRegex")
+    date_pattern = source.get("htmlPublishedDateRegex")
+    allow = source.get("urlAllowRegex")
+    deny = source.get("urlDenyRegex")
+    if not title_pattern or not date_pattern or not allow:
+        return []
+
+    result = []
+    seen = set()
+    source_year_match = re.search(r"/(20\d{2})/\1/?$", urlsplit(source["url"]).path)
+    source_year = source_year_match.group(1) if source_year_match else None
+    for context in contexts[: int(source.get("scanLimit", 450))]:
+        anchor = re.search(r"<a\b([^>]*)>([\s\S]*?)</a>", context, flags=re.I)
+        if not anchor:
+            continue
+        attrs, inner = anchor.groups()
+        href_match = re.search(r"href=[\"']([^\"']+)[\"']", attrs, flags=re.I)
+        attr_title = re.search(r"title=[\"']([^\"']+)[\"']", attrs, flags=re.I)
+        if not href_match:
+            continue
+        href = href_match.group(1)
+        link_title = clean(attr_title.group(1) if attr_title else inner)
+        url = canonical_url(urljoin(source["url"], href))
+        linked_year_match = re.search(r"/(20\d{2})/", urlsplit(url).path)
+        if source_year and (not linked_year_match or linked_year_match.group(1) != source_year):
+            continue
+        if url in seen or not is_valid_content_link(href, link_title, source):
+            continue
+        if not re.search(allow, url, flags=re.I) or (deny and re.search(deny, url, flags=re.I)):
+            continue
+        try:
+            detail = detail_fetcher(url)
+        except OSError as exc:
+            parts = urlsplit(url)
+            safe_failure = {
+                "url": urlunsplit((parts.scheme, parts.netloc, parts.path, "", "")),
+                "error": type(exc).__name__,
+            }
+            if detail_failures is not None:
+                detail_failures.append(safe_failure)
+            print(
+                f"AVISO: detalhe indisponível em {source['name']}: "
+                f"{safe_failure['url']} ({safe_failure['error']})",
+                file=sys.stderr,
+            )
+            continue
+        detail_text = detail.decode(source.get("encoding", "utf-8"), "replace")
+        title_match = re.search(title_pattern, detail_text, flags=re.I)
+        date_match = re.search(date_pattern, detail_text, flags=re.I)
+        if not title_match or not date_match:
+            continue
+        title = clean(title_match.group(1))
+        published_at = parse_date(date_match.group(1))
+        if not title or published_at is None:
+            continue
+        title_year_match = re.search(r"\b(20\d{2})\b", title)
+        if source_year and (
+            not title_year_match or title_year_match.group(1) != source_year
+        ):
+            continue
+        published_date = datetime.fromisoformat(published_at)
+        if title_year_match:
+            title_year = int(title_year_match.group(1))
+            if published_date.year < title_year or published_date.year > title_year + 1:
+                continue
+        act_date = _confaz_act_date(title)
+        if act_date is not None and published_date < act_date:
+            continue
+        if datetime.fromisoformat(published_at) > collected_at.astimezone(timezone.utc):
+            continue
+        summary = clean(f"Publicação oficial monitorada em {source['name']}: {title}")
+        score = relevance_score(title, summary, source)
+        if score < int(source.get("minScore", 5)):
+            continue
+        seen.add(url)
+        category = classify(title, summary, source)
+        item = {
+            "id": hashlib.sha256(url.encode()).hexdigest()[:16],
+            "title": title[:220],
+            "url": url,
+            "source": source["name"],
+            "category": category,
+            "summary": summary[:360],
+            "publishedAt": published_at,
+            "publicationDateEvidence": "html:detail:configured-regex",
+            "collectedAt": collected_at.astimezone(timezone.utc).isoformat(),
+            "score": score,
+        }
+        item.update(strategic_analysis(title, summary, category, score))
+        result.append(item)
+        if len(result) >= int(source.get("htmlLimit", PER_SOURCE_LIMIT)):
+            break
+    return result
+
+
+def parse_source_document(
+    raw: bytes,
+    source: dict,
+    collected_at: datetime | None = None,
+    detail_fetcher=None,
+    detail_failures: list[dict] | None = None,
+) -> list[dict]:
+    source_type = source.get("type")
+    if source_type == "dou":
+        return parse_dou_html(raw, source, collected_at)
+    if source_type == "html" and source.get("htmlFollowDetail"):
+        return parse_html_detail_links(
+            raw, source, collected_at, detail_fetcher, detail_failures
+        )
+    if source_type == "html":
+        return parse_html_links(raw, source, collected_at)
+    return parse_feed(raw, source, collected_at)
+
+
+def recognizes_source_document(raw: bytes, source: dict) -> bool:
+    """Confirma que o documento corresponde à estrutura que o adaptador conhece."""
+    source_type = source.get("type")
+    if source_type == "dou":
+        return _dou_payload(raw, source) is not None
+    if source_type != "html":
+        try:
+            return bool(iter_entries(ET.fromstring(raw)))
+        except ET.ParseError:
+            return False
+    container_tag = source.get("htmlContainerTag")
+    if not container_tag:
+        return False
+    text = raw.decode(source.get("encoding", "utf-8"), "replace")
+    tag = re.escape(container_tag)
+    contexts = re.findall(rf"<{tag}\b[^>]*>[\s\S]*?</{tag}>", text, flags=re.I)
+    if source.get("htmlFollowDetail"):
+        allow = source.get("urlAllowRegex")
+        return bool(
+            source.get("htmlDetailTitleRegex")
+            and source.get("htmlPublishedDateRegex")
+            and allow
+            and any(
+                re.search(allow, canonical_url(urljoin(source["url"], match.group(1))), flags=re.I)
+                for context in contexts
+                if (match := re.search(r"<a\b[^>]*href=[\"']([^\"']+)[\"']", context, flags=re.I))
+            )
+        )
+    date_pattern = source.get("htmlPublishedDateRegex")
+    for context in contexts:
+        has_link = re.search(r"<a\b[^>]*href=[\"'][^\"']+[\"']", context, flags=re.I)
+        has_time = re.search(r"<time\b[^>]*(?:datetime=[\"'][^\"']+[\"'])?[^>]*>[\s\S]*?</time>", context, flags=re.I)
+        has_configured_date = date_pattern and re.search(date_pattern, context, flags=re.I)
+        if has_link and (has_time or has_configured_date):
+            return True
+    return False
+
 
 def load_old() -> dict:
     if not OUTPUT.exists():
@@ -431,53 +1138,209 @@ def load_old() -> dict:
         return {"items": []}
 
 
-def keep_existing(item: dict) -> bool:
-    """Evita carregar ruído histórico de coletas antigas com feeds genéricos."""
-    if not item.get("title") or not item.get("url"):
+def publication_is_active(published_at: str, reference: datetime) -> bool:
+    """Aceita publicação comprovada que esteja dentro da janela ativa."""
+    parsed = parse_date(published_at)
+    if parsed is None:
         return False
-    pseudo_source = {"baseScore": 0, "includeKeywords": [], "excludeKeywords": [], "minScore": 5}
-    score = relevance_score(item.get("title", ""), item.get("summary", ""), pseudo_source)
-    if score >= 5:
-        item["score"] = score
-        if item.get("publishedAt"):
-            item["publishedAt"] = parse_date(item["publishedAt"])
-        return True
-    return False
+    published = datetime.fromisoformat(parsed).astimezone(timezone.utc)
+    reference = reference.astimezone(timezone.utc)
+    return reference - ACTIVE_ITEM_MAX_AGE <= published <= reference
+
+
+def keep_existing(item: dict, now: datetime | None = None) -> bool:
+    """Reutiliza apenas itens recentes cuja data tem origem comprovável."""
+    required = (
+        item.get("title"),
+        item.get("url"),
+        item.get("collectedAt"),
+        item.get("publicationDateEvidence"),
+    )
+    evidence = item.get("publicationDateEvidence")
+    if (
+        not all(required)
+        or evidence not in ALLOWED_DATE_EVIDENCE
+        or urlsplit(str(item.get("url", ""))).scheme.lower() != "https"
+    ):
+        return False
+    pseudo_source = {
+        "baseScore": 0,
+        "includeKeywords": [],
+        "excludeKeywords": [],
+        "minScore": 5,
+    }
+    score = relevance_score(
+        item.get("title", ""), item.get("summary", ""), pseudo_source
+    )
+    published_at = parse_date(item.get("publishedAt", ""))
+    collected_at = parse_date(item.get("collectedAt", ""))
+    reference = now or datetime.now(timezone.utc)
+    if (
+        score < 5
+        or published_at is None
+        or collected_at is None
+        or published_at > collected_at
+        or not publication_is_active(published_at, reference)
+    ):
+        return False
+    item["score"] = score
+    item["publishedAt"] = published_at
+    item["collectedAt"] = collected_at
+    item.pop("deadline", None)
+    item.update(
+        strategic_analysis(
+            item.get("title", ""),
+            item.get("summary", ""),
+            item.get("category", "receita"),
+            score,
+        )
+    )
+    return True
+
+
+def source_health(statuses: list[dict]) -> dict:
+    all_failed = [status["source"] for status in statuses if not status.get("ok")]
+    failed = [
+        status["source"]
+        for status in statuses
+        if status.get("critical") and not status.get("ok")
+    ]
+    unrecognized = [
+        status["source"]
+        for status in statuses
+        if status.get("critical")
+        and status.get("ok")
+        and not status.get("parserRecognized", False)
+    ]
+    empty = [
+        status["source"]
+        for status in statuses
+        if status.get("critical")
+        and status.get("ok")
+        and status.get("parserRecognized", False)
+        and status.get("items", 0) == 0
+    ]
+    critical_detail_partial = [
+        status["source"]
+        for status in statuses
+        if status.get("critical")
+        and status.get("ok")
+        and status.get("items", 0) > 0
+        and status.get("detailFailureCount", 0) > 0
+    ]
+    noncritical_detail_partial = [
+        status["source"]
+        for status in statuses
+        if not status.get("critical")
+        and status.get("ok")
+        and status.get("detailFailureCount", 0) > 0
+    ]
+    noncritical_failed = [
+        status["source"]
+        for status in statuses
+        if not status.get("critical") and not status.get("ok")
+    ]
+    result = {
+        "status": "degraded" if failed or unrecognized or empty else (
+            "partial"
+            if all_failed or critical_detail_partial or noncritical_detail_partial
+            else "healthy"
+        ),
+        "sourcesFailed": all_failed,
+        "nonCriticalSourcesFailed": noncritical_failed,
+        "criticalSourcesFailed": failed,
+        "criticalSourcesUnrecognized": unrecognized,
+        "criticalSourcesEmpty": empty,
+    }
+    if critical_detail_partial:
+        result["criticalSourcesPartial"] = critical_detail_partial
+    if noncritical_detail_partial:
+        result["nonCriticalSourcesPartial"] = noncritical_detail_partial
+    return result
+
+
+def health_gate_exit_code(health: dict) -> int:
+    return 0 if health.get("status") in {"healthy", "partial"} else 1
+
+
+def persist_payload(payload: dict, health: dict, output: Path = OUTPUT) -> bool:
+    if health.get("status") not in {"healthy", "partial"}:
+        return False
+    output.parent.mkdir(parents=True, exist_ok=True)
+    temporary = output.with_suffix(output.suffix + ".tmp")
+    temporary.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+    temporary.replace(output)
+    return True
+
+
+def resolve_source(source: dict, now: datetime | None = None) -> dict:
+    resolved = dict(source)
+    year = (now or datetime.now(timezone.utc)).year
+    resolved["url"] = resolved["url"].replace("{year}", str(year))
+    return resolved
 
 
 def main():
+    collection_started_at = datetime.now(timezone.utc)
     sources = json.loads(CONFIG.read_text(encoding="utf-8"))
     old = load_old()
     by_id = {
         item.get("id") or hashlib.sha256(canonical_url(item.get("url", "")).encode()).hexdigest()[:16]: item
         for item in old.get("items", [])
-        if keep_existing(item)
+        if keep_existing(item, collection_started_at)
     }
     ok = 0
     failed = []
     statuses = []
 
-    for source in sources:
-        source_status = {"source": source["name"], "url": source["url"], "ok": False, "items": 0}
+    for configured_source in sources:
+        source = resolve_source(configured_source, collection_started_at)
+        source_status = {
+            "source": source["name"],
+            "url": source["url"],
+            "critical": bool(source.get("critical")),
+            "ok": False,
+            "parserRecognized": False,
+            "items": 0,
+        }
+        detail_failures = []
         try:
-            req = Request(
-                source["url"],
-                headers={
-                    "User-Agent": "RadarFiscal/2.0 (RSS fiscal; contato: painel local)",
-                    "Accept": "application/rss+xml, application/atom+xml, application/xml, text/xml;q=0.9, */*;q=0.8",
-                },
-            )
-            with urlopen(req, timeout=int(source.get("timeout", TIMEOUT)), context=SSL_CONTEXT) as response:
-                max_bytes = int(source.get("maxBytes", 900_000 if source.get("type") == "html" else 0))
-                raw = response.read(max_bytes) if max_bytes > 0 else response.read()
-            if source.get("type") == "html":
-                found = parse_html_links(raw, source)
+            if source.get("type") == "jornal_mg":
+                found = collect_jornal_mg(source, collection_started_at)
+                parser_recognized = True
             else:
-                found = parse_feed(raw, source)
+                req = Request(
+                    source["url"],
+                    headers={
+                        "User-Agent": "RadarFiscal/2.0 (RSS fiscal; contato: painel local)",
+                        "Accept": "application/rss+xml, application/atom+xml, application/xml, text/xml;q=0.9, */*;q=0.8",
+                    },
+                )
+                max_bytes = int(source.get("maxBytes", DEFAULT_MAX_BYTES))
+                with open_public_request(req, source=source) as response:
+                    raw = read_response_limited(response, max_bytes)
+                parser_recognized = recognizes_source_document(raw, source)
+                found = parse_source_document(
+                    raw,
+                    source,
+                    collected_at=collection_started_at,
+                    detail_failures=detail_failures,
+                )
+            found = [
+                item
+                for item in found
+                if publication_is_active(item.get("publishedAt", ""), collection_started_at)
+            ]
             for item in found:
                 by_id[item["id"]] = item
             ok += 1
-            source_status.update({"ok": True, "items": len(found)})
+            source_status.update({
+                "ok": True,
+                "parserRecognized": parser_recognized,
+                "items": len(found),
+                "detailFailureCount": len(detail_failures),
+                "detailFailures": detail_failures,
+            })
         except Exception as exc:
             error = str(exc)[:180]
             failed.append({"source": source["name"], "url": source["url"], "error": error})
@@ -488,20 +1351,23 @@ def main():
         if not item.get("impactTags"):
             item.update(strategic_analysis(item.get("title", ""), item.get("summary", ""), item.get("category", "receita"), int(item.get("score", 0))))
     items = sorted(by_id.values(), key=lambda x: x.get("publishedAt", ""), reverse=True)[:MAX_ITEMS]
+    health = source_health(statuses)
     payload = {
         "updatedAt": datetime.now(timezone.utc).isoformat(),
         "items": items,
         "sourcesOk": ok,
         "sourcesFailed": failed,
         "sources": statuses,
+        "sourceStats": statuses,
+        "health": health,
         "meta": {
             "collector": "collector/collect.py",
             "policy": "RSS/Atom e páginas HTML públicas com filtro fiscal/tributário, deduplicação por URL canônica e fallback do histórico local.",
             "maxItems": MAX_ITEMS,
+            "activeItemMaxAgeDays": ACTIVE_ITEM_MAX_AGE.days,
         },
     }
-    OUTPUT.parent.mkdir(parents=True, exist_ok=True)
-    OUTPUT.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+    written = persist_payload(payload, health, OUTPUT)
     print(f"Coleta concluída: {len(items)} itens; {ok} fontes OK; {len(failed)} falhas.")
     if failed:
         for item in failed:
@@ -509,7 +1375,10 @@ def main():
     for status in statuses:
         if status["ok"]:
             print(f"- OK {status['source']}: {status['items']} itens relevantes")
+    if health["status"] == "degraded":
+        print(f"- SAÚDE DEGRADADA: {health}")
+    return health_gate_exit_code(health)
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

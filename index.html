@@ -379,12 +379,123 @@
     header.top{padding:18px}.hdr-right{justify-content:flex-start;width:100%}.clock{text-align:left}
     .kpis{grid-template-columns:1fr}.item{padding:18px}.card > .hd,.filters,.card > .bd{padding-left:16px;padding-right:16px}
   }
+
+  /* ---------- FASE 3 · PRODUCT SHELL PREVIEW ---------- */
+  :root{
+    --bg:#f3f6f8;--bg-2:#eaf0f3;--panel:#ffffff;--panel-2:#f7f9fa;--panel-3:#eef3f5;
+    --line:#d6e0e4;--line-soft:#e6ecef;--txt:#102a37;--txt-2:#405a66;--txt-3:#687f89;
+    --muted:#526a75;--accent:#087f7a;--accent-2:#14a39a;--warn:#b66b08;--danger:#c73c3c;
+    --success:#16875c;--neutral:#80939b;--radius:14px;--radius-sm:9px;
+    --nav:#0d2b34;--nav-2:#123b43;--nav-txt:#e7f7f6;--nav-muted:#91b7b6;
+    --shadow:0 1px 2px rgba(16,42,55,.04),0 10px 28px rgba(16,42,55,.07);
+  }
+  html[data-theme="dark"]{
+    --bg:#10191d;--bg-2:#152126;--panel:#19262c;--panel-2:#1e2d34;--panel-3:#24363d;
+    --line:#37505a;--line-soft:#2b4048;--txt:#f0f7f7;--txt-2:#c2d4d7;--txt-3:#91aab0;
+    --muted:#b6cbce;--accent:#35c0b5;--accent-2:#6adbd2;--warn:#efb24e;--danger:#ff8585;
+    --success:#62cf9a;--neutral:#9fb1b6;--nav:#071a20;--nav-2:#102f36;
+    --shadow:0 1px 2px rgba(0,0,0,.18),0 14px 34px rgba(0,0,0,.24);
+    color-scheme:dark;
+  }
+  html{scroll-behavior:smooth;background:var(--bg)}
+  body{background:radial-gradient(circle at 78% 0,rgba(20,163,154,.08),transparent 28rem),var(--bg);color:var(--txt)}
+  .app-shell{display:grid;grid-template-columns:252px minmax(0,1fr);min-height:100vh}
+  .app-main{min-width:0}
+  .product-nav{
+    position:sticky;top:0;height:100vh;z-index:40;display:flex;flex-direction:column;overflow:auto;
+    padding:22px 16px 18px;background:linear-gradient(180deg,var(--nav),#0a252d 72%,#081f26);
+    color:var(--nav-txt);border-right:1px solid rgba(255,255,255,.08)
+  }
+  .nav-brand{display:flex;align-items:center;gap:12px;padding:0 8px 22px;border-bottom:1px solid rgba(255,255,255,.1)}
+  .nav-brand-mark{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;background:#d8fbf6;color:#08343a;box-shadow:0 8px 20px rgba(0,0,0,.18)}
+  .nav-brand-mark svg{width:21px;height:21px}
+  .nav-brand strong{display:block;font-size:15px;letter-spacing:-.1px}.nav-brand span{display:block;margin-top:2px;color:var(--nav-muted);font-size:11px;font-weight:700;letter-spacing:.55px;text-transform:uppercase}
+  .nav-group{margin-top:22px}.nav-label{padding:0 10px 8px;color:var(--nav-muted);font-size:10px;font-weight:800;letter-spacing:1.1px;text-transform:uppercase}
+  .nav-link{display:flex;align-items:center;gap:11px;min-height:42px;margin:3px 0;padding:9px 11px;border-radius:9px;color:#c9e2e2;text-decoration:none;font-size:14px;font-weight:650;transition:.15s ease}
+  .nav-link svg{width:18px;height:18px;flex:0 0 18px;color:#78b9b5}.nav-link:hover{background:rgba(255,255,255,.08);color:#fff}.nav-link.active{background:#d8fbf6;color:#08343a}.nav-link.active svg{color:#087f7a}
+  .nav-footer{margin-top:auto;padding:18px 8px 0;border-top:1px solid rgba(255,255,255,.1)}
+  .theme-toggle{width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:42px;padding:9px 11px;border:1px solid rgba(255,255,255,.14);border-radius:9px;background:rgba(255,255,255,.06);color:var(--nav-txt);font:700 13px var(--font);cursor:pointer}
+  .theme-toggle:hover{background:rgba(255,255,255,.11)}.theme-icon{font-size:17px}.theme-copy{flex:1;text-align:left}.theme-value{color:var(--nav-muted);font-size:11px}
+  .preview-banner{display:flex;align-items:center;justify-content:center;gap:8px;min-height:34px;padding:7px 18px;background:#fff4cd;border-bottom:1px solid #e2c76b;color:#6a4a00;font-size:12px;font-weight:800;letter-spacing:.25px;text-align:center}
+  html[data-theme="dark"] .preview-banner{background:#4a3b17;border-color:#7c6427;color:#ffe9a3}
+  .wrap{max-width:1600px;margin:0 auto;padding:22px 28px 52px}
+  header.top{padding:14px 0 20px;border:0;border-radius:0;background:transparent;overflow:visible}
+  .brand{gap:13px}.brand .mark{display:none}.brand h1{font-size:24px;color:var(--txt)}.brand p{font-size:13px;color:var(--txt-3);max-width:760px}
+  .nav-toggle{display:none;width:42px;height:42px;padding:0;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--txt);cursor:pointer;place-items:center;box-shadow:var(--shadow)}
+  .nav-toggle svg{width:20px;height:20px}.hdr-right{gap:12px}.live{background:#e8f7f1;border-color:#9fd9c0;color:#0c714a}.live.off{background:#fff0ef;border-color:#efaaa5;color:#a82f2f}
+  html[data-theme="dark"] .live{background:#173f32;border-color:#39795d;color:#c9f3da}
+  .clock .t{font-size:20px;color:var(--txt)}.clock .d{color:var(--txt-3)}
+  .btn{background:var(--panel);border-color:var(--line);color:var(--txt);box-shadow:0 1px 2px rgba(16,42,55,.05)}.btn:hover{border-color:var(--accent);background:var(--panel-2);color:var(--accent)}
+  .scanbar{margin-top:-9px;height:3px;border:0;background:var(--line-soft)}.scanbar i{background:linear-gradient(90deg,var(--accent),var(--accent-2))}
+  .kpis{grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:20px 0}.kpi{padding:18px;background:var(--panel);border-color:var(--line);box-shadow:var(--shadow)}.kpi b{color:var(--txt-3)}.kpi .v{font-size:34px;color:var(--txt)}.kpi .s{font-size:13px;color:var(--txt-2)}.kpi .bar{background:var(--line-soft)}.kpi.red{background:#fff8f7;border-color:#edc1bd}.kpi.red .v{color:#a72f2f}html[data-theme="dark"] .kpi.red{background:#382a2b;border-color:#704a4b}html[data-theme="dark"] .kpi.red .v{color:#ffc2be}
+  .card,.executive,.chart-card,footer{border-color:var(--line);background:var(--panel);box-shadow:var(--shadow)}
+  .grid{grid-template-columns:minmax(0,1fr) 360px;gap:18px}.card>.hd,.chart-hd,.exec-hd,.filters{background:var(--panel-2);border-color:var(--line-soft)}
+  .executive{margin:20px 0}.exec-hd{padding:18px 20px}.exec-hd p{font-size:21px}.executive-shell{grid-template-columns:minmax(0,1fr) 290px}.exec-donut{background:var(--panel-2);border-color:var(--line-soft)}
+  .exec-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.exec-box{min-height:124px;border-color:var(--line-soft);--exec-bg:var(--panel);--exec-bg-hover:var(--panel-2)}
+  .exec-box:nth-child(1){--exec-bg:#f1f8fb;--exec-bg-hover:#e9f5fa}.exec-box:nth-child(2){--exec-bg:#fff5f4;--exec-bg-hover:#ffedeb}.exec-box:nth-child(3){--exec-bg:#fff9ec;--exec-bg-hover:#fff3d7}.exec-box:nth-child(4){--exec-bg:#f0faf5;--exec-bg-hover:#e8f7ef}
+  html[data-theme="dark"] .exec-box:nth-child(1){--exec-bg:#20303a;--exec-bg-hover:#263b48}html[data-theme="dark"] .exec-box:nth-child(2){--exec-bg:#382829;--exec-bg-hover:#463031}html[data-theme="dark"] .exec-box:nth-child(3){--exec-bg:#383220;--exec-bg-hover:#474029}html[data-theme="dark"] .exec-box:nth-child(4){--exec-bg:#24362c;--exec-bg-hover:#2d4437}
+  .exec-box:hover,.exec-box:focus-within{transform:none;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--exec-accent) 32%,transparent)}
+  .charts-grid{margin:18px 0}.chart-card{min-height:250px}.chart-body{height:230px}
+  .search input,select,.log,.content-output,.modal-close{background:var(--panel);border-color:var(--line);color:var(--txt)}.search input::placeholder{color:var(--txt-3)}
+  .chip,.filter-chip,.impact-tag,.mini-btn,.clear-filters{background:var(--panel);border-color:var(--line);color:var(--txt-2)}.chip:hover,.mini-btn:hover,.clear-filters:hover{background:var(--panel-2);border-color:var(--accent);color:var(--accent)}.chip.on{background:#e4f7f5;border-color:#77c9c3;color:#075f5b}.chip .n{color:inherit}html[data-theme="dark"] .chip.on{background:#16413f;border-color:#42a89f;color:#d9fffb}
+  .filter-chip input[type="date"]{color-scheme:light}html[data-theme="dark"] .filter-chip input[type="date"]{color-scheme:dark}
+  #feed{background:var(--panel)}.item,.item:nth-child(odd),.item:nth-child(even){background:var(--panel);border-color:var(--line-soft)}.item:hover{background:var(--panel-2);border-left-color:var(--accent)}.item h3 a:hover,.i-src a,.src-l:hover b{color:var(--accent)}.i-src a{border-color:color-mix(in srgb,var(--accent) 45%,transparent)}
+  .cat{background:var(--panel-3);color:var(--txt-2)}.cd,.dist-bar,.strategic div{background:var(--panel-2)}.log b{color:var(--success)}.log u{color:var(--warn)}
+  .p-alta,.priority.alta{background:#fff0ef;color:#a72f2f;border-color:#e89994}.p-media,.priority.media{background:#fff7e5;color:#8a5709;border-color:#e1bd71}.p-baixa,.priority.baixa{background:#eaf7f0;color:#0d7048;border-color:#8ac8a7}.p-ok{background:#eaf7f0;color:#0d7048;border-color:#8ac8a7}.p-wait{background:#fff7e5;color:#8a5709;border-color:#e1bd71}.p-off{background:var(--panel-3);color:var(--txt-3);border-color:var(--line)}
+  html[data-theme="dark"] .p-alta,html[data-theme="dark"] .priority.alta{background:#542c2b;color:#ffd4d0}html[data-theme="dark"] .p-media,html[data-theme="dark"] .priority.media{background:#4a3b1d;color:#ffe4a2}html[data-theme="dark"] .p-baixa,html[data-theme="dark"] .priority.baixa,html[data-theme="dark"] .p-ok{background:#214332;color:#c7f2d9}
+  .modal{background:var(--panel);border-color:var(--line)}.modal-hd{background:var(--panel-2)}.modal-tab{background:var(--panel-3);color:var(--txt-2)}.modal-tab.on{background:#e4f7f5;border-color:#77c9c3;color:#075f5b}
+  .nav-scrim{display:none}
+  @media(max-width:1280px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.grid{grid-template-columns:minmax(0,1fr) 330px}}
+  @media(max-width:1120px){.grid{grid-template-columns:1fr}.side{position:static}.executive-shell{grid-template-columns:1fr}.exec-donut{border-left:0;border-top:1px solid var(--line-soft)}}
+  @media(max-width:900px){
+    .app-shell{display:block}.product-nav{position:fixed;left:0;top:0;width:min(82vw,290px);height:100dvh;transform:translateX(-105%);transition:transform .22s ease;box-shadow:18px 0 48px rgba(0,0,0,.24)}
+    body.nav-open{overflow:hidden}body.nav-open .product-nav{transform:translateX(0)}.nav-scrim{display:block;position:fixed;inset:0;z-index:35;background:rgba(4,20,25,.48);opacity:0;pointer-events:none;transition:opacity .2s ease}body.nav-open .nav-scrim{opacity:1;pointer-events:auto}
+    .nav-toggle{display:grid}.wrap{padding:18px 18px 44px}.brand{flex:1 1 320px}.brand h1{font-size:22px}.brand p{display:none}.hdr-right{margin-left:auto}.clock{display:none}
+    .exec-grid{grid-template-columns:1fr}.exec-box{border-right:0}.charts-grid{margin:16px 0}
+  }
+  @media(max-width:640px){
+    .wrap{padding:14px 12px 38px}.preview-banner{font-size:11px}.kpis{grid-template-columns:1fr 1fr;gap:10px}.kpi{padding:14px}.kpi .v{font-size:28px}.kpi .s{font-size:12px}.hdr-right{width:auto}.hdr-right .btn{font-size:0;padding:10px}.hdr-right .btn svg{margin:0}.live{font-size:11px;padding:7px 9px}.filters{padding:14px}.tool-r,.filter-row{align-items:stretch}.filter-chip{flex:1 1 145px;justify-content:space-between}.filter-chip select{max-width:115px}.item{padding:16px}.item h3{font-size:16px}.item p{font-size:14px}.exec-hd p{font-size:18px}.card>.hd,.card>.bd{padding-left:14px;padding-right:14px}
+  }
 </style>
 </head>
 <body>
+<div class="app-shell">
+  <aside class="product-nav" id="productNav" aria-label="Navegação principal">
+    <div class="nav-brand">
+      <div class="nav-brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9"/><path d="M12 3v6l4 2"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>
+      </div>
+      <div><strong>Radar Fiscal</strong><span>SCASSIAS Intelligence</span></div>
+    </div>
+    <nav>
+      <div class="nav-group">
+        <div class="nav-label">Visão gerencial</div>
+        <a class="nav-link active" href="#kpis"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Painel executivo</a>
+        <a class="nav-link" href="#executive"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V9"/><path d="M10 19V5"/><path d="M16 19v-7"/><path d="M22 19H2"/></svg>Inteligência Naia</a>
+        <a class="nav-link" href="#feed"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h10"/></svg>Atualizações fiscais</a>
+      </div>
+      <div class="nav-group">
+        <div class="nav-label">Monitoramento</div>
+        <a class="nav-link" href="#prazos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18"/></svg>Prazos críticos</a>
+        <a class="nav-link" href="#fontes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-2.83 2.83-.06-.06A1.7 1.7 0 0 0 15 19.4a1.7 1.7 0 0 0-1 .6 1.7 1.7 0 0 0-.4 1.1V21H9.6v-.1A1.7 1.7 0 0 0 8 19.4a1.7 1.7 0 0 0-1.88.34l-.06.06-2.83-2.83.06-.06A1.7 1.7 0 0 0 3.6 15a1.7 1.7 0 0 0-.6-1A1.7 1.7 0 0 0 1.9 13H2V9h-.1A1.7 1.7 0 0 0 3.6 8a1.7 1.7 0 0 0-.34-1.88l-.06-.06 2.83-2.83.06.06A1.7 1.7 0 0 0 8 3.6a1.7 1.7 0 0 0 1-.6A1.7 1.7 0 0 0 9.4 1.9V2h4v-.1A1.7 1.7 0 0 0 15 3.6a1.7 1.7 0 0 0 1.88-.34l.06-.06 2.83 2.83-.06.06A1.7 1.7 0 0 0 19.4 8c.19.37.48.7.84.9.35.2.76.31 1.16.3H21v4h.1c-.4-.01-.81.1-1.16.3-.36.2-.65.53-.84.9z"/></svg>Saúde das fontes</a>
+        <a class="nav-link" href="#log"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg>Auditoria</a>
+      </div>
+    </nav>
+    <div class="nav-footer">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Alternar tema">
+        <span class="theme-icon" aria-hidden="true">◐</span><span class="theme-copy">Aparência</span><span class="theme-value" id="themeValue">Claro</span>
+      </button>
+    </div>
+  </aside>
+  <div class="nav-scrim" id="navScrim" aria-hidden="true"></div>
+  <div class="app-main">
+    <div class="preview-banner"><span>PREVIEW FASE 3</span> · Nova experiência visual em homologação — produção não alterada</div>
 <div class="wrap">
 
   <header class="top">
+    <button class="nav-toggle" id="navToggle" type="button" aria-label="Abrir menu" aria-controls="productNav" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
     <div class="brand">
       <div class="mark">
         <svg viewBox="0 0 24 24" fill="none" stroke="#241703" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -548,6 +659,8 @@
     <p>Conteúdo informativo de apoio ao acompanhamento fiscal. Não substitui a consulta ao texto oficial publicado no Diário Oficial ou nos canais das autoridades fiscais.</p>
   </footer>
 </div>
+  </div>
+</div>
 
 <div class="modal-backdrop" id="contentModal" aria-hidden="true">
   <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
@@ -590,7 +703,7 @@ const CAT = {
 let SEQ = 0;
 const N = (o) => Object.assign({ id:"n"+(++SEQ), novo:false, prazo:null }, o);
 
-const SNAPSHOT = [
+const LEGACY_SNAPSHOT_QUARANTINED = [
   N({ data:"2026-09-14", cat:"reforma", fonte:"CGIBS · Comitê Gestor do IBS",
      titulo:"Regulamento do IBS e da CBS deve ganhar nova versão até outubro",
      resumo:"Ajustes em discussão abrangem créditos de CBS sobre estoques no período de transição — ponto sensível para empresas que carregam inventário de exercícios anteriores sob o regime antigo.",
@@ -746,9 +859,10 @@ const SNAPSHOT = [
      resumo:"Médios e grandes empresários iniciaram os testes de implantação da reforma. As alíquotas de 0,9% de CBS e 0,1% de IBS presentes nas notas de 2026 têm função de medição de arrecadação, sem cobrança efetiva no ano.",
      url:"https://www12.senado.leg.br/tv/programas/agenda-economica/2026/04/reforma-tributaria-comeca-fase-de-testes-notas-fiscais-trazem-espaco-para-declaracao-de-cbs-e-ibs" })
 ];
+const SNAPSHOT = [];
 
 /* ---------- Prazos / agenda ---------- */
-const PRAZOS = [
+const LEGACY_PRAZOS_QUARANTINED = [
   { data:"2026-09-23", t:"Fim da consulta pública aduaneira", d:"Contribuições sobre regimes aduaneiros de depósito de mercadorias.", cat:"aduaneiro" },
   { data:"2026-09-30", t:"Opção pelo Simples Nacional + modelo IBS/CBS", d:"Definição do modelo de recolhimento aplicável a 2027 (Simples híbrido).", cat:"reforma" },
   { data:"2026-09-30", t:"Inscrições no EQTD 2026", d:"Exame de Qualificação Técnica para Despachante Aduaneiro.", cat:"aduaneiro" },
@@ -759,27 +873,28 @@ const PRAZOS = [
   { data:"2026-12-31", t:"Fim do período de adaptação da IN de benefícios fiscais", d:"Ajuste ao novo acompanhamento da fruição de benefícios.", cat:"receita" },
   { data:"2026-12-31", t:"Definição das alíquotas da CBS e do Imposto Seletivo", d:"Percentuais podem ser conhecidos apenas em dezembro, conforme a cobertura da imprensa especializada.", cat:"reforma" }
 ];
+const PRAZOS = [];
 
 const FONTES = [
   { g:"Autoridades fiscais" },
   { n:"Receita Federal",    u:"https://www.gov.br/receitafederal/pt-br/assuntos/noticias", h:"gov.br/receitafederal",  s:"noticias" },
   { n:"CGIBS",              u:"https://cgibs.gov.br/",                                      h:"cgibs.gov.br",          s:"comite gestor do IBS" },
-  { n:"CONFAZ",             u:"https://www.confaz.fazenda.gov.br/legislacao",               h:"confaz.fazenda.gov.br", s:"legislacao" },
+  { n:"CONFAZ",             u:"https://www.confaz.fazenda.gov.br/legislacao",               h:"confaz.fazenda.gov.br", s:"legislacao", a:["CONFAZ — Convênios ICMS","CONFAZ — Ajustes SINIEF","CONFAZ — Protocolos ICMS"] },
   { n:"CARF",               u:"https://www.gov.br/carf/pt-br/assuntos/avisos-comunicados/2026", h:"gov.br/carf",       s:"pautas e acordaos" },
 
   { g:"Judiciário e contencioso" },
   { n:"STF · Jurisprudência", u:"https://jurisprudencia.stf.jus.br/",                       h:"jurisprudencia.stf.jus.br", s:"decisoes e teses" },
-  { n:"STJ · Jurisprudência", u:"https://scon.stj.jus.br/SCON/",                            h:"scon.stj.jus.br",       s:"pesquisa de julgados" },
-  { n:"JOTA · Jurisprudência", u:"https://www.jota.info/tributos",                          h:"jota.info",             s:"STF, STJ e CARF" },
+  { n:"STJ · Jurisprudência", u:"https://scon.stj.jus.br/SCON/",                            h:"scon.stj.jus.br",       s:"pesquisa de julgados", a:["STJ — Notícias"] },
+  { n:"JOTA · Jurisprudência", u:"https://www.jota.info/tributos",                          h:"jota.info",             s:"STF, STJ e CARF", a:["JOTA"] },
 
   { g:"Imprensa especializada" },
-  { n:"JOTA · Tributos",    u:"https://www.jota.info/tributos",                             h:"jota.info",             s:"tributos" },
-  { n:"JOTA · Pulso da Reforma", u:"https://www.jota.info/coberturas-especiais/pulso-da-reforma", h:"jota.info",        s:"reforma tributaria" },
+  { n:"JOTA · Tributos",    u:"https://www.jota.info/tributos",                             h:"jota.info",             s:"tributos", a:["JOTA"] },
+  { n:"JOTA · Pulso da Reforma", u:"https://www.jota.info/coberturas-especiais/pulso-da-reforma", h:"jota.info",        s:"reforma tributaria", a:["JOTA"] },
   { n:"Valor Econômico",    u:"https://valor.globo.com/legislacao/",                        h:"valor.globo.com",       s:"legislacao e tributos" },
-  { n:"Diário Oficial da União", u:"https://www.in.gov.br/consulta/-/buscar/dou?q=tribut%C3%A1rio&s=todos", h:"in.gov.br", s:"atos federais" },
+  { n:"Diário Oficial da União", u:"https://www.in.gov.br/consulta/-/buscar/dou?q=tribut%C3%A1rio&s=todos", h:"in.gov.br", s:"atos federais", a:["Diário Oficial da União — busca fiscal"] },
 
   { g:"Estados e municípios" },
-  { n:"SEFAZ estaduais",    u:"SEFAZ de cada estado · notas e resolucoes",                  h:"sefaz.**.gov.br",       s:"ICMS e IBS estadual" },
+  { n:"SEFAZ estaduais",    u:"SEFAZ de cada estado · notas e resolucoes",                  h:"sefaz.**.gov.br",       s:"ICMS e IBS estadual", a:["SEF Minas Gerais — Empresas"] },
   { n:"CNM · Reforma",      u:"https://cnm.org.br/comunicacao/noticias",                    h:"cnm.org.br",            s:"ISS e IBS municipal" },
   { n:"Serpro",             u:"https://www.serpro.gov.br/menu/noticias/noticias-2026",      h:"serpro.gov.br",         s:"sistemas e obrigacoes" }
 ];
@@ -802,12 +917,16 @@ const state = {
   bytes: 0,
   ultima: null,
   feedAtualizadoEm: null,
+  feedHistorico: false,
+  collectorPartial: false,
+  collectorDegraded: true,
+  sourceStatuses: [],
   varrendo: false,
   online: false
 };
 
 const $  = (s) => document.querySelector(s);
-const el = (t,c,h) => { const e=document.createElement(t); if(c) e.className=c; if(h!=null) e.innerHTML=h; return e; };
+const el = (t,c,text) => { const e=document.createElement(t); if(c) e.className=c; if(text!=null) e.textContent = String(text); return e; };
 
 function formatarDataBrasilia(valor){
   const data = valor instanceof Date ? valor : new Date(valor);
@@ -835,6 +954,11 @@ function diffDias(iso){
   const hoje = new Date(); hoje.setHours(0,0,0,0);
   const alvo = new Date(iso+"T00:00:00");
   return Math.round((alvo - hoje)/86400000);
+}
+function deadlineFuturo(iso){
+  if(!iso) return false;
+  const alvo = new Date(iso);
+  return !Number.isNaN(alvo.getTime()) && alvo.getTime() > Date.now();
 }
 function ago(iso){
   if(!iso) return "";
@@ -870,7 +994,7 @@ function analisarItem(i){
   if(inclui(blob,["stf","stj","carf","multa","autuação","autuacao","débito","debito","cobrança","cobranca","risco","rejeição","rejeicao"])) tags.push("risco");
   if(inclui(blob,["reforma tributaria","ibs","cbs","imposto seletivo","comitê gestor","comite gestor"]) || i.cat === "reforma" || i.cat === "cgibs") tags.push("reforma");
   if(i.cat === "judicial" || inclui(blob,["stf","stj","tribunal","tese","repercussão geral","repercussao geral"])) tags.push("judicial");
-  if(i.prazo || inclui(blob,["vence","prazo","até ","ate ","amanhã","amanha"])) tags.push("prazo");
+  if(deadlineFuturo(i.prazo)) tags.push("prazo");
   if(tags.length || inclui(blob,["simples nacional","mei","empresas","contabilidade","contábil","contabil","governança","governanca"])) tags.push("oportunidade");
   const score = (i.score||0) + tags.length*5 + (tags.includes("prazo")?18:0) + (tags.includes("caixa")?12:0) + (tags.includes("risco")?10:0) + (tags.includes("reforma")?8:0);
   const prioridade = score >= 55 || tags.includes("prazo") ? "alta" : (score >= 32 || tags.includes("caixa") || tags.includes("risco") ? "media" : "baixa");
@@ -920,7 +1044,7 @@ function renderExecutive(){
   const nivel = r.altas.length ? "Alta" : (r.top.some(i=>i.prioridade==="media") ? "Média" : "Baixa");
   $("#execPriority").textContent = `prioridade ${nivel}`;
   $("#execPriority").className = "pill " + (nivel === "Alta" ? "p-off" : nivel === "Média" ? "p-wait" : "p-ok");
-  const ul = $("#execMudou"); ul.innerHTML = "";
+  const ul = $("#execMudou"); ul.replaceChildren();
   r.top.forEach(i => ul.appendChild(el("li", null, i.titulo)));
   $("#execAtencao").textContent = r.altas[0] ? r.altas[0].acaoRecomendada : "Monitorar os itens de média prioridade e confirmar novidades nas fontes oficiais.";
   $("#execImpacto").textContent = `${r.reforma} itens de Reforma Tributária, ${r.obrig} ligados a prazos/obrigações e ${r.caixa} com efeito em caixa ou créditos.`;
@@ -1046,7 +1170,7 @@ Fonte: ${i.url}
 
 function renderModalTabs(){
   const box = $("#modalTabs"); if(!box) return;
-  box.innerHTML = "";
+  box.replaceChildren();
   MODAL_FORMATS.forEach(([tipo,label])=>{
     const b = el("button", "modal-tab"+(tipo===modalTipo?" on":""), label);
     b.type = "button";
@@ -1094,7 +1218,7 @@ function prioridadeItem(i){
   const blob = norm(`${i.titulo} ${i.resumo} ${i.fonte} ${i.cat}`);
 
   if((prazo !== null && prazo >= 0 && prazo <= 15) || score >= 55 || i.novo ||
-     /(vence|prazo|urgente|carf|stf|repercussao geral|autuacao|transacao tributaria|obrigacao acessoria|reforma tributaria|ibs|cbs|split payment)/.test(blob)){
+     /(carf|stf|repercussao geral|autuacao|transacao tributaria|obrigacao acessoria|reforma tributaria|ibs|cbs|split payment)/.test(blob)){
     return "alta";
   }
   if((prazo !== null && prazo >= 0 && prazo <= 45) || score >= 32 ||
@@ -1126,7 +1250,7 @@ function renderKPIs(){
   const total   = state.itens.length;
   const fasePct = progressoTransicao2026();
 
-  $("#kpis").innerHTML = "";
+  $("#kpis").replaceChildren();
   const cards = [
     { cls:"amber", b:"Fase da reforma", v:`${fasePct}%`,
       s:"Progresso real de 2026, ano de teste do IBS/CBS e ajuste de leiautes.",
@@ -1139,7 +1263,13 @@ function renderKPIs(){
       bar:100 },
     { cls:"blue", b:"Última varredura",
       v: state.ultima ? state.ultima.toLocaleTimeString("pt-BR") : "--:--:--",
-      s: state.online ? `Conexão ativa · ${state.bytes} bytes recebidos.` : "Modo instantâneo: leitura externa bloqueada pelo navegador.",
+      s: state.collectorDegraded
+        ? "Saúde crítica degradada: o painel não considera a coleta confiável."
+        : (state.collectorPartial
+          ? "Coleta parcial: uma ou mais fontes apresentaram falhas; consulte o diagnóstico."
+          : state.feedHistorico
+          ? "Última coleta saudável preservada; aguardando atualização das fontes."
+          : (state.online ? `Conexão ativa · ${state.bytes} bytes recebidos.` : "Leitura externa indisponível no navegador.")),
       bar: state.ultima ? 100 : 0 }
   ];
   cards.forEach(c=>{
@@ -1211,10 +1341,10 @@ function counts(){
 
 function renderChips(){
   const c = counts();
-  const box = $("#chips"); box.innerHTML = "";
+  const box = $("#chips"); box.replaceChildren();
   const mk = (key,label,n) => {
-    const b = el("button","chip"+(state.cat===key?" on":""),
-      `${label}<span class="n">${n}</span>`);
+    const b = el("button","chip"+(state.cat===key?" on":""), label);
+    b.appendChild(el("span", "n", n));
     b.type = "button";
     b.disabled = n === 0 && state.cat !== key;
     b.onclick = () => { state.cat = key; refreshViews(); };
@@ -1257,7 +1387,11 @@ function popularFontesFiltro(){
   if(!sel) return;
   const atual = sel.value || state.fonte;
   const fontes = uniq([...FONTES.filter(f => f.n).map(f => f.n), ...state.itens.map(i => i.fonte).filter(Boolean)]).sort((a,b)=>a.localeCompare(b,"pt-BR"));
-  sel.innerHTML = '<option value="todas">Todas</option>';
+  sel.replaceChildren();
+  const todas = document.createElement("option");
+  todas.value = "todas";
+  todas.textContent = "Todas";
+  sel.appendChild(todas);
   fontes.forEach(f => {
     const opt = document.createElement("option");
     opt.value = norm(f);
@@ -1283,7 +1417,7 @@ function filtrados(){
 
 function renderFeed(){
   const arr = filtrados();
-  const ul = $("#feed"); ul.innerHTML = "";
+  const ul = $("#feed"); ul.replaceChildren();
   renderFilterSummary(arr);
 
   if(!arr.length){
@@ -1305,18 +1439,25 @@ function renderFeed(){
     li.appendChild(meta);
 
     const h = el("h3");
-    const a = el("a", null, i.titulo);
-    a.href = i.url; a.target = "_blank"; a.rel = "noopener noreferrer";
-    h.appendChild(a);
+    if(urlExternaSegura(i.url)){
+      const a = el("a", null, i.titulo);
+      a.href = i.url; a.target = "_blank"; a.rel = "noopener noreferrer";
+      h.appendChild(a);
+    }else{
+      h.textContent = i.titulo;
+    }
     li.appendChild(h);
     li.appendChild(el("p", null, i.resumo));
     const tags = el("div","impact-tags");
     (i.impactos||[]).slice(0,5).forEach(k => tags.appendChild(el("span","impact-tag", IMPACT_LABELS[k] || k)));
     li.appendChild(tags);
     const strategic = el("div","strategic");
-    strategic.appendChild(el("div", null, `<b>Por que importa</b><span>${i.porqueImporta}</span>`));
-    strategic.appendChild(el("div", null, `<b>Quem afeta</b><span>${i.quemAfeta}</span>`));
-    strategic.appendChild(el("div", null, `<b>Ação recomendada</b><span>${i.acaoRecomendada}</span>`));
+    [["Por que importa",i.porqueImporta],["Quem afeta",i.quemAfeta],["Ação recomendada",i.acaoRecomendada]].forEach(([rotulo,valor]) => {
+      const linha = el("div");
+      linha.appendChild(el("b", null, rotulo));
+      linha.appendChild(el("span", null, valor));
+      strategic.appendChild(linha);
+    });
     li.appendChild(strategic);
     const actions = el("div","content-actions");
     [["linkedin","Gerar post"],["carrossel","Carrossel"],["reels","Reels"],["whatsapp","WhatsApp"]].forEach(([tipo,label])=>{
@@ -1329,9 +1470,11 @@ function renderFeed(){
 
     const src = el("div","i-src");
     src.appendChild(el("span", null, "Fonte: "+i.fonte));
-    const lk = el("a", null, "abrir original ↗");
-    lk.href = i.url; lk.target = "_blank"; lk.rel = "noopener noreferrer";
-    src.appendChild(lk);
+    if(urlExternaSegura(i.url)){
+      const lk = el("a", null, "abrir original ↗");
+      lk.href = i.url; lk.target = "_blank"; lk.rel = "noopener noreferrer";
+      src.appendChild(lk);
+    }
     li.appendChild(src);
     ul.appendChild(li);
   });
@@ -1341,7 +1484,7 @@ function renderFeed(){
    SIDEBAR
    ========================================================= */
 function renderPrazos(){
-  const box = $("#prazos"); box.innerHTML = "";
+  const box = $("#prazos"); box.replaceChildren();
   const arr = PRAZOS.slice().sort((a,b)=>diffDias(a.data)-diffDias(b.data));
   const abertos = arr.filter(p => diffDias(p.data) >= 0);
   $("#prazoCount").textContent = `${abertos.length} em aberto`;
@@ -1365,7 +1508,7 @@ function renderPrazos(){
 
 function renderPrazoTimeline(arr){
   const box = $("#prazoTimeline"); if(!box) return;
-  box.innerHTML = "";
+  box.replaceChildren();
   box.appendChild(el("div","timeline-line"));
   arr.filter(p => diffDias(p.data) >= 0 && diffDias(p.data) <= 60).forEach(p => {
     const d = diffDias(p.data);
@@ -1382,7 +1525,7 @@ function renderPrazoTimeline(arr){
 }
 
 function renderFontes(){
-  const box = $("#fontes"); box.innerHTML = "";
+  const box = $("#fontes"); box.replaceChildren();
   FONTES.filter(f => f.n).forEach(f => {
     const row = el("div","src-row");
     const a = el("a","src-l");
@@ -1393,16 +1536,19 @@ function renderFontes(){
     txt.appendChild(el("div","host", f.h));
     a.appendChild(txt);
     row.appendChild(a);
-    let cls = "p-off", label = "instantâneo";
+    const status = statusDaFonte(f);
+    let cls = "p-off", label = "sem diagnóstico";
     if(state.varrendo)    { cls = "p-wait"; label = "varrendo…"; }
-    else if(state.online) { cls = "p-ok";   label = "conectada"; }
+    else if(status && status.ok === false) { cls = "p-off"; label = "falha"; }
+    else if(status && status.detailFailureCount > 0) { cls = "p-wait"; label = "parcial"; }
+    else if(status && status.ok === true) { cls = "p-ok"; label = "conectada"; }
     row.appendChild(el("span","pill "+cls, label));
     box.appendChild(row);
   });
 }
 
 function renderFontesCatalogo(){
-  const box = $("#catalogo"); if(!box) return; box.innerHTML = "";
+  const box = $("#catalogo"); if(!box) return; box.replaceChildren();
   FONTES.forEach(f => {
     if(f.g){ box.appendChild(el("div","src-grp", f.g)); return; }
     const row = el("div","src-row");
@@ -1433,7 +1579,9 @@ function chartReady(id){
   if(!canvas) return null;
   if(window.Chart) return canvas;
   const body = canvas.parentElement;
-  if(body && !body.querySelector(".chart-empty")) body.innerHTML = '<div class="chart-empty">Gráfico indisponível: Chart.js não carregou.</div>';
+  if(body && !body.querySelector(".chart-empty")) {
+    body.replaceChildren(el("div", "chart-empty", "Gráfico indisponível: Chart.js não carregou."));
+  }
   return null;
 }
 function chartOptions(extra={}){
@@ -1509,7 +1657,10 @@ function refreshViews(){
 function log(msg, tone){
   const box = $("#log");
   const t = new Date().toLocaleTimeString("pt-BR");
-  const line = el("div", null, `<i>${t}</i> ${tone === "ok" ? "<b>"+msg+"</b>" : tone === "wait" ? "<u>"+msg+"</u>" : msg}`);
+  const line = el("div");
+  line.appendChild(el("i", null, t));
+  line.appendChild(document.createTextNode(" "));
+  line.appendChild(el(tone === "ok" ? "b" : tone === "wait" ? "u" : "span", null, msg));
   box.appendChild(line);
   box.scrollTop = box.scrollHeight;
   while(box.children.length > 40) box.removeChild(box.firstChild);
@@ -1545,6 +1696,7 @@ const ALVOS = [
   "https://www.serpro.gov.br/menu/noticias/noticias-2026",
   "https://valor.globo.com/legislacao/"
 ];
+const MAX_SCAN_BYTES = 500_000;
 
 async function tentar(url){
   for(const p of PROXIES){
@@ -1554,7 +1706,23 @@ async function tentar(url){
       const r = await fetch(p(url), { signal: ctl.signal, redirect:"follow" });
       clearTimeout(to);
       if(!r.ok) continue;
-      const txt = await r.text();
+      if(!r.body || typeof r.body.getReader !== "function") continue;
+      const leitor = r.body.getReader();
+      const declarado = r.headers?.get("Content-Length");
+      if(declarado !== null && declarado !== undefined && (!/^\d+$/.test(declarado) || Number(declarado) > MAX_SCAN_BYTES)){
+        await leitor.cancel();
+        continue;
+      }
+      const decoder = new TextDecoder("utf-8", {fatal:true});
+      let total = 0, txt = "";
+      while(true){
+        const {done,value} = await leitor.read();
+        if(done) break;
+        total += value.byteLength;
+        if(total > MAX_SCAN_BYTES){ await leitor.cancel(); throw new RangeError("Varredura excede o limite de bytes"); }
+        txt += decoder.decode(value, {stream:true});
+      }
+      txt += decoder.decode();
       if(txt && txt.length > 800) return txt;
     }catch(e){ /* próximo espelho */ }
   }
@@ -1606,7 +1774,7 @@ async function scan(manual){
   renderFontes();
   log(manual ? "Varredura manual iniciada." : "Varredura automática iniciada.", "wait");
 
-  let bytes = 0, novos = 0, respondeu = false;
+  let bytes = 0, candidatos = 0, respondeu = false;
 
   for(const alvo of ALVOS){
     const txt = await tentar(alvo);
@@ -1615,25 +1783,11 @@ async function scan(manual){
     respondeu = true;
     bytes += txt.length;
     const achados = extrair(txt);
-    achados.forEach(a => {
-      const dup = state.itens.some(i => norm(i.titulo).slice(0,40) === norm(a.titulo).slice(0,40));
-      if(dup) return;
-      const cls = classificar(alvo, a.titulo);
-      state.itens.unshift(N({
-        data: a.data,
-        cat: cls.cat,
-        fonte: cls.nome,
-        titulo: a.titulo,
-        resumo: "Item capturado automaticamente na varredura das fontes públicas. Confirme o teor na publicação oficial antes de tomar decisões.",
-        url: alvo,
-        novo: true
-      }));
-      novos++;
-    });
+    candidatos += achados.length;
   }
 
   state.bytes = bytes;
-  state.online = respondeu;
+  state.online = respondeu && !state.collectorDegraded && !state.feedHistorico;
   state.varrendo = false;
   state.ultima = new Date();
   btn.classList.remove("spin");
@@ -1641,10 +1795,12 @@ async function scan(manual){
   setTimeout(()=>{ $("#scanFill").style.width = "0"; }, 900);
 
   const pill = $("#livePill");
-  pill.classList.toggle("off", !respondeu);
-  $("#liveTxt").textContent = respondeu ? "Ao vivo" : "Instantâneo";
+  pill.classList.toggle("off", state.collectorDegraded || state.feedHistorico || !respondeu);
+  $('#liveTxt').textContent = state.collectorDegraded
+    ? "Fontes críticas degradadas"
+    : (state.collectorPartial ? "Feed parcial" : (state.feedHistorico ? "Histórico possivelmente desatualizado" : (respondeu ? "Ao vivo" : "Sem conexão")));
 
-  if(respondeu) log(`Conexão estabelecida · ${bytes.toLocaleString("pt-BR")} bytes · ${novos} ${novos===1?"item novo":"itens novos"}.`, "ok");
+  if(respondeu) log(`Conexão estabelecida · ${bytes.toLocaleString("pt-BR")} bytes · ${candidatos} candidatos detectados e não incorporados sem validação do coletor.`, "ok");
   else {
     const referencia = state.feedAtualizadoEm
       ? `último feed automatizado de ${formatarDataBrasilia(state.feedAtualizadoEm)}`
@@ -1654,6 +1810,39 @@ async function scan(manual){
 
   renderKPIs(); renderExecutive(); refreshViews(); renderFontes(); renderFontesCatalogo();
 }
+
+/* =========================================================
+   SHELL DO PRODUTO · TEMA E NAVEGAÇÃO MOBILE
+   ========================================================= */
+const THEME_STORAGE_KEY = "radar-fiscal-theme";
+const themeToggle = document.getElementById("themeToggle");
+const themeValue = document.getElementById("themeValue");
+const navToggle = document.getElementById("navToggle");
+const navScrim = document.getElementById("navScrim");
+
+function storedTheme(){
+  try { return localStorage.getItem(THEME_STORAGE_KEY); } catch (_) { return null; }
+}
+function applyTheme(theme, persist=false){
+  const next = theme === "dark" ? "dark" : "light";
+  document.documentElement.dataset.theme = next;
+  if(themeValue) themeValue.textContent = next === "dark" ? "Escuro" : "Claro";
+  if(themeToggle) themeToggle.setAttribute("aria-pressed", String(next === "dark"));
+  if(persist){ try { localStorage.setItem(THEME_STORAGE_KEY, next); } catch (_) {} }
+}
+const preferredTheme = storedTheme() || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+applyTheme(preferredTheme);
+themeToggle?.addEventListener("click", () => applyTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark", true));
+
+function setNav(open){
+  document.body.classList.toggle("nav-open", open);
+  navToggle?.setAttribute("aria-expanded", String(open));
+}
+navToggle?.addEventListener("click", () => setNav(!document.body.classList.contains("nav-open")));
+navScrim?.addEventListener("click", () => setNav(false));
+document.querySelectorAll(".nav-link").forEach(link => link.addEventListener("click", () => setNav(false)));
+window.addEventListener("resize", () => { if(window.innerWidth > 900) setNav(false); });
+
 
 /* =========================================================
    EVENTOS
@@ -1676,50 +1865,201 @@ document.addEventListener("keydown", e => { if(e.key === "Escape") fecharModalCo
 
 
 /* ---------- DADOS GERADOS PELO COLETOR ---------- */
+const MAX_FEED_BYTES = 2_000_000;
+const MAX_FEED_ITEMS = 300;
+const MAX_SOURCE_STATUSES = 64;
+const FEED_MAX_AGE_MS = 2 * 60 * 60 * 1000;
+const FEED_FUTURE_TOLERANCE_MS = 5 * 60 * 1000;
+// Itens ativos usam publishedAt, nunca updatedAt/collectedAt, e expiram em 90 dias.
+const ACTIVE_ITEM_MAX_AGE_MS = 90 * 24 * 60 * 60 * 1000;
+
+function urlExternaSegura(valor){
+  const texto = typeof valor === 'string' ? valor.trim() : '';
+  const base = globalThis.location && globalThis.location.href ? globalThis.location.href : 'https://invalid.local/';
+  const valida = texto !== '' && URL.canParse(texto, base);
+  const protocolo = valida ? new URL(texto, base).protocol : '';
+  return valida && protocolo === 'https:';
+}
+
+function validarItemFeed(item, agora=Date.now()){
+  const objetoValido = item !== null && typeof item === 'object' && !Array.isArray(item);
+  const limites = {title:220,url:2048,source:160,publishedAt:40,collectedAt:40,publicationDateEvidence:64,summary:360,category:64,deadline:40,priority:32,prioridade:32,whoAffected:1000,quemAfeta:1000,recommendedAction:1000,acaoRecomendada:1000,whyItMatters:1000,porqueImporta:1000};
+  const stringsObrigatorias = objetoValido && ['title','url','source','publishedAt','collectedAt','publicationDateEvidence'].every(campo => typeof item[campo] === 'string' && item[campo].trim() !== '' && item[campo].length <= limites[campo]);
+  const isoComFuso = valor => typeof valor === 'string' && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/.test(valor) && Number.isFinite(Date.parse(valor));
+  const publicados = stringsObrigatorias ? Date.parse(item.publishedAt) : NaN;
+  const coletados = stringsObrigatorias ? Date.parse(item.collectedAt) : NaN;
+  const textosOpcionais = ['summary','category','deadline','priority','prioridade','whoAffected','quemAfeta','recommendedAction','acaoRecomendada','whyItMatters','porqueImporta'];
+  const numerosOpcionais = ['score','opportunityScore'];
+  const camposOpcionaisValidos = objetoValido && textosOpcionais.every(campo => item[campo] === undefined || typeof item[campo] === 'string' && item[campo].length <= limites[campo]) && numerosOpcionais.every(campo => item[campo] === undefined || typeof item[campo] === 'number' && Number.isFinite(item[campo]));
+  const impactosValidos = objetoValido && Array.isArray(item.impactTags) && item.impactTags.length <= 20 && item.impactTags.every(tag => typeof tag === 'string' && tag.length <= 64);
+  const valido = stringsObrigatorias && urlExternaSegura(item.url) && isoComFuso(item.publishedAt) && isoComFuso(item.collectedAt) && publicados <= coletados && publicados <= agora && coletados <= agora && agora - publicados <= ACTIVE_ITEM_MAX_AGE_MS && camposOpcionaisValidos && impactosValidos;
+  if(!valido) return null;
+  const base = globalThis.location && globalThis.location.href ? globalThis.location.href : 'https://invalid.local/';
+  return {...item, url:new URL(item.url, base).href};
+}
+
+function normalizarNomeFonte(valor){
+  return typeof valor === 'string' ? valor.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,' ').trim() : '';
+}
+
+function sanitizarStatusFontes(payload){
+  const candidatos = Array.isArray(payload && payload.sourceStats) ? payload.sourceStats : (Array.isArray(payload && payload.sources) ? payload.sources : []);
+  return candidatos.slice(0, MAX_SOURCE_STATUSES).map(item => {
+    if(item === null || typeof item !== 'object' || Array.isArray(item) || typeof item.ok !== 'boolean') return null;
+    const source = typeof item.source === 'string' && item.source.trim() !== '' && item.source.length <= 160 ? item.source.trim() : '';
+    const base = globalThis.location && globalThis.location.href ? globalThis.location.href : 'https://invalid.local/';
+    const url = typeof item.url === 'string' && item.url.length <= 2048 && urlExternaSegura(item.url) ? new URL(item.url, base).href : '';
+    if(!source && !url) return null;
+    const detailFailureCount = Number.isSafeInteger(item.detailFailureCount) && item.detailFailureCount >= 0 && item.detailFailureCount <= 10_000 ? item.detailFailureCount : 0;
+    return {source,url,ok:item.ok,detailFailureCount};
+  }).filter(Boolean);
+}
+
+function statusDaFonte(fonte){
+  const nomes = new Set(
+    [fonte.n, ...(Array.isArray(fonte.a) ? fonte.a : [])]
+      .map(normalizarNomeFonte)
+      .filter(Boolean)
+  );
+  const correspondentes = state.sourceStatuses.filter(status =>
+    nomes.has(normalizarNomeFonte(status.source))
+  );
+  if(correspondentes.length === 0) return null;
+  if(correspondentes.some(status => status.ok === false)){
+    return {ok:false, detailFailureCount:0};
+  }
+  const detailFailureCount = correspondentes.reduce(
+    (total,status) => total + status.detailFailureCount,
+    0
+  );
+  if(detailFailureCount > 0) return {ok:true, detailFailureCount};
+  if(correspondentes.every(status => status.ok === true)){
+    return {ok:true, detailFailureCount:0};
+  }
+  return null;
+}
+
+async function lerRespostaLimitada(response, limite){
+  const declarado = response.headers.get('Content-Length');
+  if(declarado !== null && (!/^\d+$/.test(declarado) || Number(declarado) > limite)) throw new RangeError('Feed excede o limite de bytes');
+  if(!response.body || typeof response.body.getReader !== 'function') throw new TypeError('Streaming de resposta indisponível');
+  const leitor = response.body.getReader();
+  const decoder = new TextDecoder('utf-8', {fatal:true});
+  let total = 0, texto = '';
+  while(true){
+    const {done,value} = await leitor.read();
+    if(done) break;
+    total += value.byteLength;
+    if(total > limite){ if(leitor.cancel) await leitor.cancel(); throw new RangeError('Feed excede o limite de bytes'); }
+    texto += decoder.decode(value, {stream:true});
+  }
+  return texto + decoder.decode();
+}
+
+function avaliarPayloadFeed(payload, agora=Date.now()){
+  const statusDeclarado = payload && payload.health && payload.health.status;
+  const temFalhas = Array.isArray(payload && payload.sourcesFailed) && payload.sourcesFailed.length > 0;
+  const status = statusDeclarado === 'healthy' && temFalhas ? 'partial' : statusDeclarado;
+  const saudeValida = status === 'healthy' || status === 'partial';
+  const valor = payload && payload.updatedAt;
+  const formatoValido = typeof valor === 'string' && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/.test(valor);
+  const instante = formatoValido ? Date.parse(valor) : NaN;
+  const dataValida = Number.isFinite(instante);
+  const futura = dataValida && instante > agora + FEED_FUTURE_TOLERANCE_MS;
+  const obsoleto = dataValida && agora - instante > FEED_MAX_AGE_MS;
+  const usavel = saudeValida && dataValida && !futura;
+  return {aceito:usavel && !obsoleto,historico:usavel && obsoleto,usavel,saudeValida,dataValida,futura,obsoleto,instante,status};
+}
+
 async function carregarFeedPublico(){
   try{
     const r = await fetch('data/news.json?ts=' + Date.now(), { cache:'no-store' });
     if(!r.ok) return;
-    const payload = await r.json();
-    const externos = Array.isArray(payload.items) ? payload.items : [];
-    externos.forEach(item => {
-      if(!item || !item.title || !item.url) return;
+    const texto = await lerRespostaLimitada(r, MAX_FEED_BYTES);
+    const payload = JSON.parse(texto);
+    const feed = avaliarPayloadFeed(payload);
+    const payloadHealthy = feed.status === 'healthy';
+    const payloadPartial = feed.status === 'partial';
+    const updatedAt = feed.dataValida ? new Date(feed.instante) : new Date(NaN);
+    const feedHistorico = feed.historico;
+    state.collectorDegraded = !feed.usavel;
+    state.collectorPartial = payloadPartial && feed.aceito;
+    state.feedHistorico = feedHistorico;
+    state.sourceStatuses = feed.aceito ? sanitizarStatusFontes(payload) : [];
+    const evidenceAllowed = new Set([
+      'feed:pubdate','feed:published','feed:date',
+      'html:time[datetime]','html:time','html:configured-regex',
+      'html:detail:configured-regex','dou:pubDate',
+      'jornal-mg-api:dataPublicacao'
+    ]);
+    const itensPayload = feed.usavel && Array.isArray(payload.items) ? payload.items.slice(0, MAX_FEED_ITEMS) : [];
+    const externos = payloadHealthy ? itensPayload : [];
+    const itensParciais = payloadPartial ? itensPayload : [];
+    const itensAceitos = [...externos, ...itensParciais].map(validarItemFeed).filter(Boolean);
+    itensAceitos.forEach(item => {
+      if(!item || !item.title || !item.url || !item.publishedAt || !item.publicationDateEvidence || !item.collectedAt) return;
+      if(!evidenceAllowed.has(item.publicationDateEvidence)) return;
       const dup = state.itens.some(i => i.url === item.url || norm(i.titulo).slice(0,50) === norm(item.title).slice(0,50));
       if(dup) return;
       const cat = item.category || 'receita';
+      const deadline = deadlineFuturo(item.deadline) ? item.deadline : null;
+      const rawImpacts = item.impactTags || item.impactTypes || item.impactos || [];
+      const staleUrgency = rawImpacts.includes('prazo') && !deadline;
+      const impactos = rawImpacts.filter(tag => tag !== 'prazo' || deadline);
+      const priority = staleUrgency ? null : (item.priority || item.prioridade || null);
       state.itens.unshift(N({
-        data: (item.publishedAt || '').slice(0,10) || new Date().toISOString().slice(0,10),
+        data: item.publishedAt.slice(0,10),
         cat: CAT[cat] ? cat : 'receita',
         fonte: item.source || 'Fonte monitorada',
         titulo: item.title,
         resumo: item.summary || 'Publicação coletada automaticamente. Confirme o teor na fonte oficial.',
         url: item.url,
+        prazo: deadline,
         novo: false,
         score: item.score || 0,
-        priority: item.priority || item.prioridade || null,
-        prioridade: item.priority || item.prioridade || null,
-        impactos: item.impactTags || item.impactTypes || item.impactos || [],
-        quemAfeta: item.whoAffected || item.quemAfeta || null,
-        acaoRecomendada: item.recommendedAction || item.acaoRecomendada || null,
-        porqueImporta: item.whyItMatters || item.porqueImporta || null,
+        priority,
+        prioridade: priority,
+        impactos,
+        quemAfeta: staleUrgency ? null : (item.whoAffected || item.quemAfeta || null),
+        acaoRecomendada: staleUrgency ? null : (item.recommendedAction || item.acaoRecomendada || null),
+        porqueImporta: staleUrgency ? null : (item.whyItMatters || item.porqueImporta || null),
         oportunidadeScore: item.opportunityScore || 0
       }));
     });
-    if(payload.updatedAt){
-      state.feedAtualizadoEm = new Date(payload.updatedAt);
+    if(feed.usavel){
+      state.feedAtualizadoEm = updatedAt;
       state.ultima = state.feedAtualizadoEm;
-      state.online = true;
+      state.online = feed.aceito;
       atualizarRodapeFeed(state.feedAtualizadoEm);
-      $('#livePill').classList.remove('off');
-      $('#liveTxt').textContent = 'Feed atualizado';
-      log(`Feed diário carregado · ${externos.length} itens disponíveis.`, 'ok');
-      renderKPIs(); renderExecutive(); refreshViews();
+      $('#livePill').classList.toggle('off', !feed.aceito);
+      $('#liveTxt').textContent = feedHistorico ? 'Histórico possivelmente desatualizado' : (payloadPartial ? 'Feed parcial' : 'Feed atualizado');
+      if(feedHistorico){
+        $('#feedUpdatedAt').textContent = `Fallback histórico possivelmente desatualizado. Última coleta saudável: ${formatarDataBrasilia(updatedAt)} (horário de Brasília).`;
+        log(`Exibindo fallback histórico da última coleta saudável · ${payloadPartial ? itensParciais.length : externos.length} itens disponíveis.`, 'off');
+      }else if(payloadPartial){
+        $('#livePill').classList.add('off');
+        $('#feedUpdatedAt').textContent = 'Feed publicado com resultados válidos; uma ou mais fontes apresentaram falhas. Consulte o diagnóstico.';
+        log(`Feed parcial validado · ${itensAceitos.length} itens disponíveis; consulte a auditoria da coleta.`, 'wait');
+      }else{
+        log(`Feed diário validado · ${externos.length} itens disponíveis.`, 'ok');
+      }
     }else{
-      $('#feedUpdatedAt').textContent = 'Feed automatizado sem data de atualização. Exibindo o último conjunto de dados disponível.';
+      state.online = false;
+      $('#livePill').classList.add('off');
+      const feedDegradado = feed.status === 'degraded';
+      $('#liveTxt').textContent = feedDegradado ? 'Feed degradado' : 'Feed não validado';
+      $('#feedUpdatedAt').textContent = feedDegradado
+        ? 'Coleta degradada por falha crítica; o payload atual foi colocado em quarentena.'
+        : 'Feed sem saúde validada ou data válida. Itens do payload foram colocados em quarentena.';
+      log(feedDegradado ? 'Feed degradado: há falha crítica registrada na coleta.' : 'Feed rejeitado: a saúde não é healthy/partial ou falta data de atualização válida.', 'off');
     }
+    renderKPIs(); renderExecutive(); refreshViews(); renderFontes();
   }catch(e){
-    $('#feedUpdatedAt').textContent = 'Feed automatizado indisponível. Exibindo o instantâneo local de contingência de 14/09/2026.';
-    log('Feed diário indisponível. Mantendo o instantâneo local.', 'off');
+    state.collectorDegraded = true;
+    state.online = false;
+    state.sourceStatuses = [];
+    $('#feedUpdatedAt').textContent = 'Feed automatizado indisponível. Nenhum dado sem validação será exibido.';
+    log('Feed diário indisponível. Dados legados permanecem em quarentena.', 'off');
   }
 }
 
