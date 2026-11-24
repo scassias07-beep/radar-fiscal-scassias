@@ -36,6 +36,9 @@ jobs:
 
   publicar:
     needs: atualizar
+    # Publica a main após falha de coleta, usando o último data/news.json saudável,
+    # mas não inicia a publicação quando o workflow tiver sido cancelado.
+    if: ${{ !cancelled() }}
     runs-on: ubuntu-latest
     environment:
       name: github-pages
