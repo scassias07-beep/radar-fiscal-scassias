@@ -14,11 +14,13 @@ import json
 import re
 import socket
 import sys
+import time
 import unicodedata
 from datetime import datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
+from http.client import IncompleteRead, RemoteDisconnected
 from pathlib import Path
-from urllib.error import HTTPError
+from urllib.error import HTTPError, URLError
 from urllib.parse import parse_qsl, urlencode, urljoin, urlsplit, urlunsplit
 from urllib.request import HTTPRedirectHandler, HTTPSHandler, Request, build_opener, urlopen
 import xml.etree.ElementTree as ET
@@ -30,6 +32,11 @@ OUTPUT = ROOT / "data" / "news.json"
 MAX_ITEMS = 300
 PER_SOURCE_LIMIT = 35
 TIMEOUT = 25
+DEFAULT_RETRY_ATTEMPTS = 3
+DEFAULT_RETRY_DELAY = 1.0
+MAX_RETRY_ATTEMPTS = 5
+MAX_RETRY_DELAY = 10.0
+RETRYABLE_HTTP_STATUS = {408, 425, 429, 500, 502, 503, 504}
 # Política da coleta ativa: somente publicações comprovadas dos últimos 90 dias.
 # A janela usa publishedAt (nunca collectedAt/updatedAt), portanto uma nova coleta
 # não transforma conteúdo antigo em notícia atual.
@@ -243,6 +250,76 @@ def _open_bearer_request(
             response.close()
         raise
     return response
+
+
+def _is_transient_download_error(error: Exception) -> bool:
+    """Aceita somente falhas de transporte temporárias; TLS/configuração falham fechado."""
+    if isinstance(error, HTTPError):
+        return error.code in RETRYABLE_HTTP_STATUS
+    transient = (
+        TimeoutError,
+        ConnectionResetError,
+        ConnectionAbortedError,
+        BrokenPipeError,
+        IncompleteRead,
+        RemoteDisconnected,
+        socket.timeout,
+    )
+    if isinstance(error, transient):
+        return True
+    if isinstance(error, URLError):
+        return isinstance(error.reason, transient)
+    return False
+
+
+def _retry_policy(source: dict) -> tuple[int, float]:
+    attempts = max(
+        1,
+        min(int(source.get("retryAttempts", DEFAULT_RETRY_ATTEMPTS)), MAX_RETRY_ATTEMPTS),
+    )
+    delay = float(source.get("retryDelay", DEFAULT_RETRY_DELAY))
+    if delay < 0 or delay != delay or delay == float("inf"):
+        raise ValueError("retryDelay deve ser um número finito e não negativo")
+    return attempts, min(delay, MAX_RETRY_DELAY)
+
+
+def _download_with_retry(operation, source: dict) -> bytes:
+    attempts, retry_delay = _retry_policy(source)
+    for attempt in range(attempts):
+        try:
+            return operation()
+        except Exception as error:
+            if attempt + 1 >= attempts or not _is_transient_download_error(error):
+                raise
+            time.sleep(min(retry_delay * (2 ** attempt), MAX_RETRY_DELAY))
+    raise RuntimeError("política de tentativas inválida")
+
+
+def fetch_public_bytes(request: Request, *, source: dict, max_bytes: int) -> bytes:
+    """Repete abertura, validações SSRF e leitura limitada como uma operação única."""
+    def download() -> bytes:
+        with open_public_request(request, source=source) as response:
+            return read_response_limited(response, max_bytes)
+
+    return _download_with_retry(download, source)
+
+
+def fetch_bearer_bytes(request: Request, *, source: dict, max_bytes: int) -> bytes:
+    """Repete download bearer sem permitir redirect da credencial."""
+    allowed_hosts, allowed_ports = _network_policy(source)
+    context = ssl_context_for_source(source)
+
+    def download() -> bytes:
+        with _open_bearer_request(
+            request,
+            timeout=int(source.get("timeout", TIMEOUT)),
+            context=context,
+            allowed_hosts=allowed_hosts,
+            allowed_ports=allowed_ports,
+        ) as response:
+            return read_response_limited(response, max_bytes)
+
+    return _download_with_retry(download, source)
 
 
 def ssl_context_for_source(source: dict) -> ssl.SSLContext:
@@ -653,7 +730,6 @@ def parse_jornal_mg_results(
 def collect_jornal_mg(source: dict, now: datetime | None = None) -> list[dict]:
     """Autentica anonimamente e pesquisa termos fiscais na API usada pelo portal oficial."""
     now = now or datetime.now(timezone.utc)
-    context = ssl_context_for_source(source)
     base_api = urljoin(source["url"], "api/v1/")
     common_headers = {
         "User-Agent": "RadarFiscal/2.0 (monitoramento fiscal de fonte publica)",
@@ -667,10 +743,11 @@ def collect_jornal_mg(source: dict, now: datetime | None = None) -> list[dict]:
         method="POST",
     )
     auth_max_bytes = int(source.get("authMaxBytes", DEFAULT_AUTH_MAX_BYTES))
-    with open_public_request(auth_request, source=source) as response:
-        auth_payload = json.loads(
-            read_response_limited(response, auth_max_bytes).decode("utf-8")
-        )
+    auth_payload = json.loads(
+        fetch_public_bytes(
+            auth_request, source=source, max_bytes=auth_max_bytes
+        ).decode("utf-8")
+    )
     token = auth_payload.get("dados") if isinstance(auth_payload, dict) else None
     if not isinstance(token, str) or not token:
         raise ValueError("Autenticação anônima do Jornal MG não retornou token")
@@ -697,16 +774,10 @@ def collect_jornal_mg(source: dict, now: datetime | None = None) -> list[dict]:
                 urljoin(base_api, "Pesquisa/PesquisarJornaisPaginados") + "?" + query,
                 headers={**common_headers, "Authorization": f"Bearer {token}"},
             )
-            allowed_hosts, allowed_ports = _network_policy(source)
-            with _open_bearer_request(
-                request,
-                timeout=int(source.get("timeout", TIMEOUT)),
-                context=context,
-                allowed_hosts=allowed_hosts,
-                allowed_ports=allowed_ports,
-            ) as response:
-                max_bytes = int(source.get("maxBytes", DEFAULT_API_MAX_BYTES))
-                raw = read_response_limited(response, max_bytes)
+            max_bytes = int(source.get("maxBytes", DEFAULT_API_MAX_BYTES))
+            raw = fetch_bearer_bytes(
+                request, source=source, max_bytes=max_bytes
+            )
             payload = json.loads(raw.decode("utf-8"))
             found = parse_jornal_mg_results(raw, source, search_term, collected_at=now)
             for item in found:
@@ -938,8 +1009,7 @@ def _fetch_detail(url: str, source: dict) -> bytes:
         },
     )
     detail_max_bytes = int(source.get("detailMaxBytes", DEFAULT_DETAIL_MAX_BYTES))
-    with open_public_request(req, source=source) as response:
-        return read_response_limited(response, detail_max_bytes)
+    return fetch_public_bytes(req, source=source, max_bytes=detail_max_bytes)
 
 
 def _confaz_act_date(title: str) -> datetime | None:
@@ -1317,8 +1387,7 @@ def main():
                     },
                 )
                 max_bytes = int(source.get("maxBytes", DEFAULT_MAX_BYTES))
-                with open_public_request(req, source=source) as response:
-                    raw = read_response_limited(response, max_bytes)
+                raw = fetch_public_bytes(req, source=source, max_bytes=max_bytes)
                 parser_recognized = recognizes_source_document(raw, source)
                 found = parse_source_document(
                     raw,

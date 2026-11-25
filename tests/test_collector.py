@@ -1043,6 +1043,20 @@ class _ChunkedResponse:
     def geturl(self):
         return self._url
 
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc, traceback):
+        return False
+
+    def close(self):
+        pass
+
+
+class _FailingReadResponse(_ChunkedResponse):
+    def read(self, limit=-1):
+        raise ConnectionResetError(104, "Connection reset by peer")
+
 
 def test_bounded_network_read_detects_declared_and_streamed_overflow():
     with pytest.raises(collect.ResponseTooLarge, match="limite"):
@@ -1052,12 +1066,12 @@ def test_bounded_network_read_detects_declared_and_streamed_overflow():
     assert collect.read_response_limited(_ChunkedResponse(b"x" * 10), 10) == b"x" * 10
 
 
-def test_all_collector_network_reads_use_explicit_limits():
+def test_all_collector_network_reads_use_limited_retry_helpers():
     source = (collect.ROOT / "collector" / "collect.py").read_text(encoding="utf-8")
     assert ".read()" not in source
-    assert "read_response_limited(response, auth_max_bytes)" in source
-    assert "read_response_limited(response, max_bytes)" in source
-    assert "read_response_limited(response, detail_max_bytes)" in source
+    assert source.count("fetch_public_bytes(") >= 4
+    assert source.count("fetch_bearer_bytes(") >= 2
+    assert "return read_response_limited(response, max_bytes)" in source
 
 
 @pytest.mark.parametrize("url", [
@@ -1091,6 +1105,122 @@ def test_redirect_handler_validates_every_hop_and_final_url(monkeypatch):
     monkeypatch.setattr(collect, "_open_with_validated_redirects", lambda *args, **kwargs: response)
     with pytest.raises(ValueError, match="host"):
         collect.open_public_request(request, source=SOURCE)
+
+
+def test_public_download_retries_full_operation_after_body_reset(monkeypatch):
+    responses = [
+        _FailingReadResponse(b"", final_url=SOURCE["url"]),
+        _ChunkedResponse(b"ok", final_url=SOURCE["url"]),
+    ]
+    attempts = []
+    delays = []
+    dns_validations = []
+
+    def fake_dns(host, port, type=0):
+        dns_validations.append((host, port))
+        return [
+            (socket.AF_INET, socket.SOCK_STREAM, 6, "", ("93.184.216.34", port))
+        ]
+
+    def flaky_open(*args, **kwargs):
+        attempts.append((args, kwargs))
+        return responses.pop(0)
+
+    monkeypatch.setattr(collect.socket, "getaddrinfo", fake_dns)
+    monkeypatch.setattr(collect, "_open_with_validated_redirects", flaky_open)
+    monkeypatch.setattr(collect.time, "sleep", delays.append)
+
+    assert collect.fetch_public_bytes(
+        collect.Request(SOURCE["url"]),
+        source={**SOURCE, "retryAttempts": 3, "retryDelay": 0.25},
+        max_bytes=10,
+    ) == b"ok"
+    assert len(attempts) == 2
+    assert len(dns_validations) == 4  # URL inicial e final em cada tentativa.
+    assert delays == [0.25]
+
+
+def test_public_download_does_not_retry_permanent_http_or_tls_error(monkeypatch):
+    import ssl
+    from email.message import Message
+
+    failures = [
+        collect.HTTPError(SOURCE["url"], 404, "Not Found", Message(), None),
+        collect.URLError(ssl.SSLCertVerificationError("certificate rejected")),
+    ]
+    for failure in failures:
+        attempts = []
+
+        def permanent_failure(*args, **kwargs):
+            attempts.append((args, kwargs))
+            raise failure
+
+        monkeypatch.setattr(collect, "open_public_request", permanent_failure)
+        monkeypatch.setattr(
+            collect.time,
+            "sleep",
+            lambda _seconds: pytest.fail("permanent failure must not be retried"),
+        )
+        with pytest.raises(type(failure)):
+            collect.fetch_public_bytes(
+                collect.Request(SOURCE["url"]),
+                source={**SOURCE, "retryAttempts": 3},
+                max_bytes=10,
+            )
+        assert len(attempts) == 1
+
+
+def test_bearer_download_retries_body_reset_without_redirecting_token(monkeypatch):
+    responses = [
+        _FailingReadResponse(b"", final_url=SOURCE["url"]),
+        _ChunkedResponse(b"json", final_url=SOURCE["url"]),
+    ]
+    attempts = []
+    monkeypatch.setattr(
+        collect,
+        "_open_bearer_request",
+        lambda *args, **kwargs: (attempts.append(kwargs) or responses.pop(0)),
+    )
+    monkeypatch.setattr(collect.time, "sleep", lambda _seconds: None)
+
+    request = collect.Request(
+        SOURCE["url"], headers={"Authorization": "Bearer secret"}
+    )
+    assert collect.fetch_bearer_bytes(
+        request,
+        source={**SOURCE, "retryAttempts": 3, "retryDelay": 0},
+        max_bytes=10,
+    ) == b"json"
+    assert len(attempts) == 2
+
+
+def test_retry_policy_caps_attempts_and_each_backoff(monkeypatch):
+    attempts = []
+    delays = []
+
+    def always_reset():
+        attempts.append(True)
+        raise ConnectionResetError(104, "Connection reset by peer")
+
+    monkeypatch.setattr(collect.time, "sleep", delays.append)
+    with pytest.raises(ConnectionResetError):
+        collect._download_with_retry(
+            always_reset, {"retryAttempts": 99, "retryDelay": 999}
+        )
+
+    assert len(attempts) == collect.MAX_RETRY_ATTEMPTS
+    assert delays == [collect.MAX_RETRY_DELAY] * (collect.MAX_RETRY_ATTEMPTS - 1)
+
+
+def test_pages_deploy_retries_artifact_visibility_race():
+    workflow = (
+        collect.ROOT / ".github" / "workflows" / "atualizar-noticias.yml"
+    ).read_text(encoding="utf-8")
+
+    assert workflow.count("uses: actions/deploy-pages@v4") == 2
+    assert "continue-on-error: true" in workflow
+    assert "steps.deploy_attempt_1.outcome == 'failure'" in workflow
+    assert "sleep 5" in workflow
 
 
 def _frontend_function(name):
