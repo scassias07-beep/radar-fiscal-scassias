@@ -42,7 +42,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: ${{ steps.deployment.outputs.page_url || steps.deploy_attempt_1.outputs.page_url }}
     steps:
       - name: Baixar a versão mais recente
         uses: actions/checkout@v4
@@ -64,6 +64,16 @@ jobs:
         with:
           path: _site
 
-      - name: Publicar no GitHub Pages
+      - name: Publicar no GitHub Pages (tentativa 1)
+        id: deploy_attempt_1
+        continue-on-error: true
+        uses: actions/deploy-pages@v4
+
+      - name: Aguardar propagação do artefato
+        if: ${{ steps.deploy_attempt_1.outcome == 'failure' }}
+        run: sleep 5
+
+      - name: Publicar no GitHub Pages (tentativa 2)
+        if: ${{ steps.deploy_attempt_1.outcome == 'failure' }}
         id: deployment
         uses: actions/deploy-pages@v4
