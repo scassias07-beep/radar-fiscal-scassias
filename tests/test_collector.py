@@ -1221,6 +1221,9 @@ def test_pages_deploy_retries_artifact_visibility_race():
     assert "continue-on-error: true" in workflow
     assert "steps.deploy_attempt_1.outcome == 'failure'" in workflow
     assert "sleep 5" in workflow
+    assert "push:" in workflow and "- data/news.json" in workflow
+    assert "github.event_name != 'push'" in workflow
+    assert "always() && !cancelled()" in workflow
 
 
 def _frontend_function(name):
