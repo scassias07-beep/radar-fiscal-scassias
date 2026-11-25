@@ -4,6 +4,11 @@ on:
   schedule:
     - cron: '17 * * * *'
   workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - data/news.json
 
 permissions:
   contents: write
@@ -16,6 +21,9 @@ concurrency:
 
 jobs:
   atualizar:
+    # Um push de data/news.json já contém snapshot saudável coletado externamente;
+    # nesse caso, apenas o job de publicação deve rodar.
+    if: ${{ github.event_name != 'push' }}
     runs-on: ubuntu-latest
     steps:
       - name: Baixar o projeto
@@ -36,9 +44,9 @@ jobs:
 
   publicar:
     needs: atualizar
-    # Publica a main após falha de coleta, usando o último data/news.json saudável,
+    # Publica a main após falha ou skip da coleta, usando o último snapshot saudável,
     # mas não inicia a publicação quando o workflow tiver sido cancelado.
-    if: ${{ !cancelled() }}
+    if: ${{ always() && !cancelled() }}
     runs-on: ubuntu-latest
     environment:
       name: github-pages
